@@ -64,3 +64,7 @@ If the user asks to modify MegaMek/MekHQ:
 - `Confirmed locally`: Gradle wrapper execution is currently blocked by generated daemon JVM settings that request toolchain 17 without a local JDK 17 or configured toolchain download.
 
 Do not claim a source build or test passed until the relevant Gradle command has actually run successfully.
+
+## Current Source Findings
+
+- `Confirmed from source`: MekHQ's manual tabletop-result path exports scenario setup MULs as ordinary `<unit>` files, but imports battle results as a MegaMek battle-record `<record>` MUL. See `TABLETOP_RESULT_MUL_WORKFLOW.md` for the source-confirmed flow through `BriefingTab`, `MekHQ.resolveScenario`, `ChooseMulFilesDialog`, `ResolveScenarioTracker`, `EntityListFile`, and `MULParser`.

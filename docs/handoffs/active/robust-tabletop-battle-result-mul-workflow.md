@@ -49,7 +49,9 @@ Source references already identified:
 - `#7`: Investigate MekHQ and BattleTech salvage rules.
   - Handoff: `docs/handoffs/active/investigate-salvage-rules.md`
 - `#8`: Confirm battle-record MUL source workflow for tabletop result import.
-  - Handoff: `docs/handoffs/active/confirm-battle-record-mul-source-workflow.md`
+  - Status: Completed on `2026-06-18`.
+  - Findings: `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`
+  - Handoff: `docs/handoffs/archive/confirm-battle-record-mul-source-workflow.md`
 - `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
   - Handoff: `docs/handoffs/active/define-tabletop-result-input-schema.md`
 - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
@@ -61,7 +63,9 @@ Source references already identified:
 - `#13`: Verify and document tabletop result entry workflow for MekHQ.
   - Handoff: `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`
 
-Recommended sequence: start with `#8`, run `#7` before or alongside `#9`, then proceed through `#10`, `#11`, `#12`, and `#13`.
+Recommended sequence: `#8` is complete. Run `#7` before or alongside `#9`, then proceed through `#10`, `#11`, `#12`, and `#13`.
+
+Source workflow confirmation from `#8`: MekHQ exports scenario setup MULs as ordinary `<unit>` files, but imports manual battle results through a battle-record `<record>` MUL with `survivors`, `allies`, `salvage`, `retreated`, `devastated`, and `kills` sections. Friendly campaign unit matching depends on entity `externalId` values matching campaign `Unit` UUIDs; personnel matching depends on crew external ids matching `Person` UUIDs.
 
 ## Files And Areas
 

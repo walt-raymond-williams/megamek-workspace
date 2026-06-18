@@ -134,13 +134,13 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: Local MegaMek/MekHQ source and install are present under `external/`; source build/test commands are currently blocked by the Java 17 Gradle daemon/toolchain issue, so early work may need to run against installed jars or focus on source-reading and UI/manual verification.
 - Child issues:
   - `#7`: Investigate MekHQ and BattleTech salvage rules.
-  - `#8`: Confirm battle-record MUL source workflow for tabletop result import.
+  - `#8`: Confirm battle-record MUL source workflow for tabletop result import. Completed on `2026-06-18`; source findings are in `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`.
   - `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
   - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
   - `#11`: Choose MUL generation strategy for tabletop result workflow.
   - `#12`: Implement robust tabletop battle-record MUL generator.
   - `#13`: Verify and document tabletop result entry workflow for MekHQ.
-- Recommended sequence: Start with source workflow confirmation `#8`, run salvage research `#7` before or alongside schema work `#9`, then validate a minimal round trip `#10`, choose generation strategy `#11`, implement `#12`, and finish with UI/manual documentation `#13`.
+- Recommended sequence: Source workflow confirmation `#8` is complete. Next run salvage research `#7` before or alongside schema work `#9`, then validate a minimal round trip `#10`, choose generation strategy `#11`, implement `#12`, and finish with UI/manual documentation `#13`.
 - Branch/tracking recommendation: Do not create an integration branch during decomposition. Re-evaluate in `#11`; if implementation will touch source or span multiple commits, create `codex/tabletop-result-mul-dev` and a compact feature tracking doc before `#12`.
 - Open questions: Should the robust generator be a standalone Java helper using installed MegaMek/MekHQ jars, a MekHQ source change, or a workspace script that invokes MegaMek classes? What minimum tabletop result schema is needed for armor/internal damage, crits, ammo, ejections, retreats, kills, salvage, and battlefield control? Which validations can run automatically before MekHQ import?
 

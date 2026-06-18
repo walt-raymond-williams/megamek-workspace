@@ -25,9 +25,9 @@ Read these first:
 
 ## Expected Output
 
-- Source-grounded workflow notes in `docs/current/SOURCE_CODE_GUIDE.md` or a focused `docs/current/` note.
-- Confirmed classes, methods, and data flow for scenario export, manual resolution, battle-record MUL parsing, campaign unit matching, personnel/casualty handling, salvage, and scenario status.
-- Updates to the epic handoff if source confirmation changes the issue sequence.
+- Completed on `2026-06-18`: source-grounded workflow notes were added in `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`, with a pointer from `docs/current/SOURCE_CODE_GUIDE.md`.
+- Completed on `2026-06-18`: confirmed classes, methods, and data flow for scenario export, manual resolution, battle-record MUL parsing, campaign unit matching, personnel/casualty handling, salvage, and scenario status.
+- Completed on `2026-06-18`: roadmap sequencing was updated to recommend issue `#7` next.
 
 ## Files And Areas
 
@@ -57,11 +57,11 @@ rg -n "ELE_SURVIVORS|ELE_SALVAGE|ELE_RETREATED|ELE_DEVASTATED|ELE_KILLS|saveTo\(
 
 ## Acceptance Criteria
 
-- Source references are cited with file paths and method/class names.
-- The documented flow covers export, manual result selection, MUL parsing, entity-to-campaign mapping, personnel/casualty handling, salvage, and scenario status.
-- Unconfirmed behavior is clearly labeled as inferred or unresolved.
+- Completed: source references are cited with file paths and method/class names.
+- Completed: the documented flow covers export, manual result selection, MUL parsing, entity-to-campaign mapping, personnel/casualty handling, salvage, and scenario status.
+- Completed: unconfirmed behavior is clearly labeled as inferred or unresolved.
 
 ## Open Questions
 
-- Which battle-record MUL fields does MekHQ consume directly versus compute after scenario resolution?
-- Which fields are required for a minimal tabletop result import?
+- Deferred to `#10`: validate the exact minimal XML needed for a generated battle-record MUL with a real or generated round trip.
+- Deferred to `#9`: define the minimum tabletop result input schema using the confirmed battle-record sections and external-id requirements.
