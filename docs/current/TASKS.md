@@ -36,12 +36,7 @@ Use this shape for active and queued work:
 
 ## Now
 
-1. Decompose robust tabletop battle result MUL workflow epic.
-   - Status: `In progress`
-   - Owner: `Mixed`
-   - Goal: Split the epic for generating battle-record MULs from tabletop results into child issues.
-   - Output: Child GitHub issues, updated roadmap/task tracking, and durable design notes if architecture decisions are confirmed.
-   - Notes: GitHub issue `#6`; child issues `#7` through `#13`; roadmap entry `Epic: Robust tabletop battle result MUL workflow`; active handoff `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`. Decomposition issues are created; next execution should start with source workflow confirmation issue `#8`.
+No active task.
 
 ## Next
 
@@ -99,6 +94,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-18`: Decomposed GitHub issue `#6` into child issues `#7` through `#13`, updated the roadmap and active handoffs, and recommended starting execution with source workflow confirmation issue `#8`. Commit `019367c`.
 - `2026-06-18`: Made the GitHub repository public and clarified that this repo is the one canonical working/public artifact, not a staging repo for a separate template repo.
 - `2026-06-18`: Completed GitHub issue `#1` by splitting reusable AI-ready workflow guidance into `AI_READY_PROJECT_WORKFLOW.md` and MegaMek/MekHQ-specific assumptions into `MEGAMEK_PROJECT_PROFILE.md`, with front-door links from `AGENTS.md`, `README.md`, and `WORKSPACE.md`.
 - `2026-06-18`: Completed GitHub issue `#5` by comparing against Sunny Town HQ and updating this repo's workflow docs with epic, feature-tracking, PR-readiness, open-PR, and human-review patterns.
