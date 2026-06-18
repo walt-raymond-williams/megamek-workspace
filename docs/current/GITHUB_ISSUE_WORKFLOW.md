@@ -8,6 +8,21 @@ Use this workflow when turning roadmap items into GitHub Issues for execution, d
 - GitHub Issues are trackable execution units created from roadmap entries.
 - `docs/current/TASKS.md` tracks immediate local work and should point back to the roadmap when planning details live there.
 - Handoff documents give agents enough context to work from an issue without rediscovering the whole repo.
+- Active handoff documents live in `docs/handoffs/active/`.
+- Completed handoff documents move to `docs/handoffs/archive/` after the issue is done, committed, and any merge or close-out work is complete.
+
+## Handoff Lifecycle
+
+Use one handoff document per agent-executed GitHub issue.
+
+1. Create the handoff from `docs/templates/AGENT_HANDOFF.md` under `docs/handoffs/active/`.
+2. Link the handoff path from the GitHub issue body.
+3. Link the GitHub issue number from the handoff.
+4. Keep architectural or durable process findings in `docs/current/`, not only in the handoff.
+5. When the issue is complete, move the handoff to `docs/handoffs/archive/`.
+6. Update `ROADMAP.md`, `TASKS.md`, and any affected current docs before committing the close-out change.
+
+Handoffs are execution context. `docs/current/` remains the live source for durable architecture, workflow, source, and campaign knowledge.
 
 ## Before Creating Issues
 
@@ -78,8 +93,9 @@ When an issue is done:
 1. Update the roadmap entry to `Done`.
 2. Record the issue number and commit hash if useful.
 3. Update or remove stale downstream roadmap assumptions.
-4. Move completed local work in `TASKS.md` to `Done`.
-5. Commit documentation updates.
+4. Move the issue handoff from `docs/handoffs/active/` to `docs/handoffs/archive/`.
+5. Move completed local work in `TASKS.md` to `Done`.
+6. Commit documentation updates.
 
 ## Current Local State
 
@@ -87,3 +103,5 @@ When an issue is done:
 - `Confirmed locally`: GitHub CLI is authenticated as `walt-raymond-williams`.
 - `Confirmed locally`: `origin` points to `https://github.com/walt-raymond-williams/megamek-workspace.git`.
 - `Confirmed locally`: `master` tracks `origin/master`.
+- `Confirmed locally`: GitHub label `agent-task` exists.
+- `Confirmed locally`: Active agent issues `#1` through `#4` were created from `ROADMAP.md` on `2026-06-18`.

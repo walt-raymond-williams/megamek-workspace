@@ -21,6 +21,8 @@ Primary outcomes:
 - `ROADMAP.md`: repository-owned roadmap and issue-candidate source of truth.
 - `GITHUB_ISSUE_WORKFLOW.md`: process for creating GitHub Issues and agent handoffs from roadmap entries.
 - `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
+- `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
+- `docs/handoffs/archive/`: completed issue handoff documents after close-out.
 - `ACTIVE_CAMPAIGN.md`: current campaign save, identity, contract, enabled systems, priorities, and unknowns.
 - `KNOWN_COMMANDS.md`: repeatable commands for verification, launch, source search, and safe inspection.
 - `SOURCE_CHANGE_WORKFLOW.md`: source modification, build/test, dirty-worktree, and documentation follow-through process.

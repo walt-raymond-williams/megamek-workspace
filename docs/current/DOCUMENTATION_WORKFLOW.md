@@ -10,6 +10,8 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `docs/current/ROADMAP.md`: repository-owned planning source, roadmap, issue candidates, and sequencing notes.
 - `docs/current/GITHUB_ISSUE_WORKFLOW.md`: process for turning roadmap entries into GitHub Issues and agent handoff documents.
 - `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recently completed work.
+- `docs/handoffs/active/`: per-issue handoff documents for open agent-executed GitHub Issues.
+- `docs/handoffs/archive/`: completed handoff documents after issues are done and close-out docs are committed.
 - `docs/templates/`: reusable report formats and briefing structures.
 - `campaigns/`: local campaign inputs and deliberate campaign snapshots.
 - `analysis/`: generated extracts, scratch work, and temporary parsing output.
@@ -38,6 +40,7 @@ Do not record every temporary observation. Record discoveries that are likely to
 - Use `ROADMAP.md` for durable planning, issue candidates, sequencing decisions, and handoff notes that may guide future GitHub Issues.
 - Use `GITHUB_ISSUE_WORKFLOW.md` for the process of creating GitHub Issues and agent handoffs from roadmap entries.
 - Use `TASKS.md` for active work, near-term queue, backlog, blocked items, and recently completed work.
+- Use `docs/handoffs/active/` for issue-specific execution context and move completed handoffs to `docs/handoffs/archive/`.
 - Use `KNOWN_COMMANDS.md` for commands that are safe, repeatable, and useful across sessions.
 - Use `SOURCE_CHANGE_WORKFLOW.md` for source modification, build/test, dirty-worktree, and documentation follow-through rules.
 - Use `SAVE_FORMAT_NOTES.md` for confirmed or suspected MekHQ save structure, field meanings, and source references.

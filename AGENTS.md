@@ -31,6 +31,8 @@ When an agent makes repository changes, it should leave them in a coherent commi
 - Documentation updates must follow `docs/current/DOCUMENTATION_WORKFLOW.md`.
 - Roadmap and issue-candidate planning belongs in `docs/current/ROADMAP.md`.
 - GitHub issue creation and agent handoff rules belong in `docs/current/GITHUB_ISSUE_WORKFLOW.md`.
+- Open issue handoffs belong in `docs/handoffs/active/`.
+- Completed issue handoffs belong in `docs/handoffs/archive/` after issue close-out.
 - Active work tracking belongs in `docs/current/TASKS.md`.
 - Current campaign context belongs in `docs/current/ACTIVE_CAMPAIGN.md` once a campaign is identified.
 - Repeatable commands belong in `docs/current/KNOWN_COMMANDS.md`.
@@ -58,6 +60,8 @@ Roadmap posture:
 - Keep `docs/current/ROADMAP.md` as the durable planning source.
 - Create GitHub Issues gradually from roadmap entries when work is ready for execution or external discussion.
 - Use `docs/templates/AGENT_HANDOFF.md` for work that another agent should be able to pick up from the issue.
+- Use one handoff file per agent-executed issue under `docs/handoffs/active/`, then move it to `docs/handoffs/archive/` after the issue is done.
+- Keep durable architecture, workflow, source, and campaign knowledge in `docs/current/`; do not leave it only in an issue handoff.
 - After creating or completing an issue, update the roadmap and commit the tracking change.
 
 ## Core Workflow
