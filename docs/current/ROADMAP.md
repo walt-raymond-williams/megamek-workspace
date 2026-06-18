@@ -173,16 +173,21 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Control MekHQ player and OPFOR mech rosters
 
-- Status: `Issue created`
+- Status: `In progress`
 - Priority: `High`
 - Issue: `#14`
 - Owner: `Mixed`
 - Goal: Figure out the best workflow for setting and controlling MekHQ campaign rosters for a parent-run tabletop campaign, including both the player's mercenary company roster and generated opposition forces.
 - Why it matters: The user wants to manage the campaign and narration for his son while using actual physical BattleTech miniatures. MekHQ should remain the campaign authority, but the player starting roster and OPFOR generation need to align with the units available at the table.
-- Expected output: A source- and UI-grounded recommendation for roster control, followed by child issues for any useful implementation or tooling. Possible outputs include an in-game player-roster workflow, an OPFOR editing/regeneration workflow, custom RAT prototype notes, a miniature-pool roster format, and a decision on whether a workspace tool or MekHQ source change is justified.
-- Handoff notes: This is an epic, not a direct implementation task. Active epic handoff: `docs/handoffs/active/mech-roster-control-epic.md`. Feature tracking snapshot: `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`.
+- Expected output: Source- and UI-grounded recommendation for roster control, followed by child issues for useful implementation or tooling. Initial discovery is recorded in `docs/current/MECH_ROSTER_CONTROL_WORKFLOWS.md`.
+- Handoff notes: This is an epic, not a direct implementation task. Active epic handoff: `docs/handoffs/active/mech-roster-control-epic.md`. Feature tracking snapshot: `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`. Discovery on `2026-06-18` found a no-source-change first workflow: copy/save the quickstart, use GM unit add/remove for player roster changes, use scenario edit/regenerate or fixed OPFOR MULs for physical-miniature OPFOR control, and defer custom RATs until the physical miniature list exists.
 - Dependencies: Local MekHQ install and source are available under `external/`. Source build/test commands remain blocked by the Java 17 Gradle daemon/toolchain issue. The user's physical miniature list is needed before final OPFOR restrictions or custom RATs can be built.
-- Recommended sequence: Start with source/UI discovery for player roster changes and OPFOR generation, then decide whether to create child issues for custom RATs, a miniature-pool data model, a save-safe roster import helper, or MekHQ source changes.
+- Recommended sequence: Next verify the quickstart roster replacement workflow in a disposable save, then define the physical miniature roster data model, prototype fixed OPFOR MUL pools, and only then decide whether custom RATs or workspace tooling are worth the extra complexity.
+- Child issues:
+  - `#17`: Verify quickstart roster replacement workflow.
+  - `#18`: Define physical-miniature roster data model.
+  - `#19`: Prototype fixed OPFOR MUL pools.
+  - `#20`: Decide custom RAT strategy for physical-miniature OPFOR.
 - Open questions: Which exact miniatures and variants should be considered legal for the player and OPFOR pools? Is it acceptable for MekHQ to generate a scenario and then have the GM substitute close-BV physical units manually, or should generation itself be constrained? Should any tooling live in this workspace, in MekHQ source, or as data-only custom RAT files?
 
 ### Epic: Investigate photo-assisted record sheet parsing

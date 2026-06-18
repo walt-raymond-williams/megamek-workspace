@@ -18,6 +18,7 @@ Read these first:
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
 - `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`
+- `docs/current/MECH_ROSTER_CONTROL_WORKFLOWS.md`
 - `docs/current/MEGAMEK_PROJECT_PROFILE.md`
 - `docs/current/SAVE_FORMAT_NOTES.md`
 - `docs/current/SOURCE_CODE_GUIDE.md`
@@ -32,10 +33,9 @@ Useful installed docs:
 
 ## Expected Output
 
-- Source- and UI-grounded discovery notes under `docs/current/`.
-- A recommendation for the simplest reliable workflow to alter the player roster in a copied quickstart campaign.
-- A recommendation for OPFOR control: manual substitution, scenario editing, custom RATs, generated data packs, a workspace tool, or MekHQ source changes.
-- Child GitHub issues and handoffs only after discovery identifies useful bounded work.
+- Child GitHub issues and handoffs for the bounded next slices identified in `MECH_ROSTER_CONTROL_WORKFLOWS.md`.
+- Verification of the simplest reliable workflow to alter the player roster in a copied quickstart campaign.
+- Follow-up OPFOR control work: manual substitution, fixed OPFOR MULs, custom RATs, generated data packs, a workspace tool, or MekHQ source changes only if existing workflows prove insufficient.
 
 ## Files And Areas
 
@@ -77,7 +77,7 @@ rg -n "custom random assignment|ratdata|RAT configuration|scaled BV" external/in
 ## Acceptance Criteria
 
 - The epic is represented in GitHub, `ROADMAP.md`, and `MECH_ROSTER_CONTROL_TRACKING.md`.
-- Discovery distinguishes confirmed UI behavior, source-confirmed behavior, installed-doc behavior, and inference.
+- Discovery distinguishes confirmed UI behavior, source-confirmed behavior, installed-doc behavior, and inference. Initial discovery is complete in `docs/current/MECH_ROSTER_CONTROL_WORKFLOWS.md`.
 - The next agent can start discovery without rereading this conversation.
 - Any proposed tool or source change explains why existing MekHQ UI, scenario editing, or custom RAT data is insufficient.
 
