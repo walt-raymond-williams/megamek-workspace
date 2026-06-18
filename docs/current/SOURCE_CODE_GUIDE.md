@@ -29,6 +29,8 @@ Use source when answering:
 - whether command-line, import/export, or automation hooks exist
 - what source change would be needed to expose better campaign control
 
+For source modification, follow `SOURCE_CHANGE_WORKFLOW.md`. For local commands, use `KNOWN_COMMANDS.md`.
+
 ## Search Patterns
 
 Start broad, then narrow:
@@ -50,6 +52,15 @@ If the user asks to modify MegaMek/MekHQ:
 
 1. Work in the appropriate source repo under `C:\Users\waltr\Documents\megamek-workspace\external\src`.
 2. Check `git status --short --branch` before edits.
-3. Keep this workspace for notes, plans, campaign reports, and durable discoveries.
-4. Verify with the source repo's own build/test workflow.
-5. If the change affects campaign control, update this workspace's current docs.
+3. Follow `SOURCE_CHANGE_WORKFLOW.md`.
+4. Keep this workspace for notes, plans, campaign reports, and durable discoveries.
+5. Verify with the source repo's own build/test workflow, using `KNOWN_COMMANDS.md` for current commands and blockers.
+6. If the change affects campaign control, update this workspace's current docs.
+
+## Current Build Notes
+
+- `Confirmed from source`: the four local source repos use Gradle wrappers.
+- `Confirmed from source`: project build files configure Java toolchain 21.
+- `Confirmed locally`: Gradle wrapper execution is currently blocked by generated daemon JVM settings that request toolchain 17 without a local JDK 17 or configured toolchain download.
+
+Do not claim a source build or test passed until the relevant Gradle command has actually run successfully.

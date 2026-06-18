@@ -34,6 +34,7 @@ Do not record every temporary observation. Record discoveries that are likely to
 - Use `ACTIVE_CAMPAIGN.md` for the current campaign file, identity, enabled systems, priorities, and unresolved campaign-specific questions.
 - Use `TASKS.md` for active work, near-term queue, backlog, blocked items, and recently completed work.
 - Use `KNOWN_COMMANDS.md` for commands that are safe, repeatable, and useful across sessions.
+- Use `SOURCE_CHANGE_WORKFLOW.md` for source modification, build/test, dirty-worktree, and documentation follow-through rules.
 - Use `SAVE_FORMAT_NOTES.md` for confirmed or suspected MekHQ save structure, field meanings, and source references.
 - Use `DATA_MAP.md` for local data locations and durable format references.
 - Use `SOURCE_CODE_GUIDE.md` for source search strategy and important source entry points.

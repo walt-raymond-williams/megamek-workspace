@@ -19,6 +19,7 @@ Primary outcomes:
 - `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
 - `ACTIVE_CAMPAIGN.md`: current campaign save, identity, contract, enabled systems, priorities, and unknowns.
 - `KNOWN_COMMANDS.md`: repeatable commands for verification, launch, source search, and safe inspection.
+- `SOURCE_CHANGE_WORKFLOW.md`: source modification, build/test, dirty-worktree, and documentation follow-through process.
 - `SAVE_FORMAT_NOTES.md`: MekHQ campaign save structure, evidence labels, field meanings, and source references.
 - `DATA_MAP.md`: local data locations and file formats.
 - `SOURCE_CODE_GUIDE.md`: source inspection strategy.
@@ -58,4 +59,5 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 5. Produce the first campaign status report from the active sample campaign.
 6. Map the fields MekHQ uses for forces, personnel, units, repair state, finances, contracts, and scenarios.
 7. Map the source classes that load/save campaigns and perform common campaign actions.
-8. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.
+8. Resolve or document the Gradle daemon Java 17 blocker before relying on source build/test verification.
+9. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.

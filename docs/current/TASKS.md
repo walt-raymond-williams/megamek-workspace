@@ -12,6 +12,28 @@ This is the lightweight task board for the MegaMek workspace. Keep it current wh
 
 Keep task titles short. Add enough context that a future agent can resume without rereading the whole chat.
 
+## Task Entry Format
+
+Use this shape for active and queued work:
+
+```markdown
+1. Task title.
+   - Status: `Not started` | `In progress` | `Blocked` | `Done`
+   - Owner: `Codex` | `User` | `Mixed`
+   - Goal:
+   - Output:
+   - Notes:
+```
+
+## Transition Rules
+
+- Before starting a queued task, move it from `Next` to `Now`.
+- Keep `Now` small; one active task is preferred unless tasks are genuinely parallel.
+- When a task finishes, move it to `Done` with the date and relevant commit if available.
+- When a task blocks, move it to `Blocked` with the exact blocker and the next needed input or condition.
+- If task scope changes, update the task immediately instead of leaving stale intent in the board.
+- Commit task-board updates with the related documentation or implementation work when reasonable.
+
 ## Now
 
 - None.
@@ -39,10 +61,16 @@ Keep task titles short. Add enough context that a future agent can resume withou
 
 ## Blocked
 
-- None.
+1. Verify Gradle build/test commands in local source repos.
+   - Status: `Blocked`
+   - Owner: `Mixed`
+   - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
+   - Output: Mark source build/test commands as verified in `KNOWN_COMMANDS.md`.
+   - Notes: Current shell resolves Java 8, JDK 21 is installed separately, and Gradle wrapper execution fails because `gradle/gradle-daemon-jvm.properties` requests daemon `toolchainVersion=17` with no local JDK 17/toolchain download configured.
 
 ## Done
 
+- `2026-06-18`: Added `SOURCE_CHANGE_WORKFLOW.md`, tightened task-board transition rules, and documented current source build/test commands and Gradle blocker.
 - `2026-06-18`: Added lightweight task tracking in `TASKS.md` and made it part of the documentation workflow.
 - `2026-06-18`: Marked `The Learning Ropes.cpnx.gz` as the active practice campaign in `ACTIVE_CAMPAIGN.md`.
 - `2026-06-18`: Established the initial workspace documentation baseline in commit `e858543`.

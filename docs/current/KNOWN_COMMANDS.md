@@ -21,7 +21,21 @@ Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab'
 Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data'
 ```
 
-Expected Java major version: `21`.
+Expected Java major version for running the installed suite: `21`.
+
+Current local note:
+
+- `Confirmed locally`: `java -version` and `javac -version` currently resolve to Java 8 from the shell.
+- `Confirmed locally`: JDK 21 exists at `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
+
+Use this in a PowerShell session when a command needs JDK 21 first on `PATH`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+java -version
+javac -version
+```
 
 ## Launch Installed Suite
 
@@ -67,6 +81,75 @@ rg "MULParser|MtfFile|BLKFile|ScenarioLoader" C:\Users\waltr\Documents\megamek-w
 ```
 
 When a source search answers a durable question, update the relevant `docs/current/` file with the file or class reference.
+
+## Source Repo Status
+
+Check all source repo worktrees before source investigation or edits:
+
+```powershell
+git -C C:\Users\waltr\Documents\megamek-workspace\external\src\megamek status --short --branch
+git -C C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq status --short --branch
+git -C C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab status --short --branch
+git -C C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data status --short --branch
+```
+
+Last observed state on `2026-06-18`:
+
+- `Confirmed locally`: all four source repos were clean on `main...origin/main`.
+
+## Source Repo Build And Test
+
+The source repos are Gradle-wrapper projects.
+
+Current blocker:
+
+- `Confirmed from source`: `megamek`, `mekhq`, `megameklab`, and `mm-data` build files configure Java toolchain 21.
+- `Confirmed from source`: each repo contains `gradle\gradle-daemon-jvm.properties` with `toolchainVersion=17`.
+- `Confirmed locally`: running `.\gradlew.bat tasks --all` currently fails because Gradle cannot resolve/download daemon toolchain 17 on this Windows machine.
+
+Commands below are intended commands based on local Gradle build files. Treat them as `Blocked` until the Java 17 daemon issue is resolved and the command is rerun successfully.
+
+MegaMek:
+
+```powershell
+cd C:\Users\waltr\Documents\megamek-workspace\external\src\megamek
+.\gradlew.bat :megamek:test
+.\gradlew.bat :megamek:easyTest
+.\gradlew.bat :megamek:run
+.\gradlew.bat :megamek:distZip
+```
+
+MekHQ:
+
+```powershell
+cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
+.\gradlew.bat :MekHQ:test
+.\gradlew.bat :MekHQ:testAll
+.\gradlew.bat :MekHQ:run
+.\gradlew.bat :MekHQ:distZip
+```
+
+MegaMekLab:
+
+```powershell
+cd C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab
+.\gradlew.bat :megameklab:test
+.\gradlew.bat :megameklab:testAll
+.\gradlew.bat :megameklab:run
+.\gradlew.bat :megameklab:distZip
+```
+
+mm-data:
+
+```powershell
+cd C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data
+.\gradlew.bat check
+.\gradlew.bat stageFiles
+.\gradlew.bat stageMMFiles
+.\gradlew.bat stageMMLFiles
+```
+
+After a command succeeds locally, update this section from `Blocked` to `Verified` for that command and record the date.
 
 ## Check Logs
 

@@ -21,6 +21,7 @@ Be practical, explicit, and honest about uncertainty. If a rule, file format, UI
 - Active work tracking belongs in `docs/current/TASKS.md`.
 - Current campaign context belongs in `docs/current/ACTIVE_CAMPAIGN.md` once a campaign is identified.
 - Repeatable commands belong in `docs/current/KNOWN_COMMANDS.md`.
+- Source modifications must follow `docs/current/SOURCE_CHANGE_WORKFLOW.md`.
 - MekHQ campaign save structure belongs in `docs/current/SAVE_FORMAT_NOTES.md`.
 - Repeatable report formats live in `docs/templates/`.
 - Local campaign inputs belong under `campaigns/`.
@@ -105,9 +106,11 @@ If code changes become the task, keep source changes in the source checkout, not
 Before modifying source:
 
 1. Check git status in the target source repo.
-2. Read nearby code and existing tests.
-3. Keep changes narrowly scoped.
-4. Record the reason and verification in this workspace when it teaches us something durable about controlling the campaign.
+2. Read `docs/current/SOURCE_CHANGE_WORKFLOW.md`.
+3. Read nearby code and existing tests.
+4. Keep changes narrowly scoped.
+5. Verify with the relevant command in `docs/current/KNOWN_COMMANDS.md`, or record the exact blocker.
+6. Record the reason and verification in this workspace when it teaches us something durable about controlling the campaign.
 
 ## Verification
 

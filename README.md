@@ -64,6 +64,7 @@ Start here when orienting a new session:
 - `docs/current/ACTIVE_CAMPAIGN.md`: active campaign save, identity, contract, enabled systems, priorities, and open questions.
 - `docs/current/DOCUMENTATION_WORKFLOW.md`: required process for keeping durable notes current.
 - `docs/current/KNOWN_COMMANDS.md`: repeatable local commands for verification, launching, source search, and safe save inspection.
+- `docs/current/SOURCE_CHANGE_WORKFLOW.md`: source modification, build/test, dirty-worktree, and documentation follow-through process.
 - `docs/current/SAVE_FORMAT_NOTES.md`: confirmed and suspected MekHQ save-format knowledge.
 - `docs/current/DATA_MAP.md`: local data locations and file format references.
 - `docs/current/SOURCE_CODE_GUIDE.md`: source inspection strategy and important source areas.
