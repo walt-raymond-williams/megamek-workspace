@@ -10,6 +10,35 @@ Use this workflow when turning roadmap items into GitHub Issues for execution, d
 - Handoff documents give agents enough context to work from an issue without rediscovering the whole repo.
 - Active handoff documents live in `docs/handoffs/active/`.
 - Completed handoff documents move to `docs/handoffs/archive/` after the issue is done, committed, and any merge or close-out work is complete.
+- Feature tracking documents are optional compact state snapshots for multi-issue branches; create them only when the roadmap plus handoffs are not enough.
+
+## Comparison With Sunny Town HQ
+
+`Confirmed locally`: Sunny Town HQ at `C:\Users\waltr\Documents\New project` uses GitHub Issues as execution state, Markdown docs for durable planning, feature integration branches for multi-ticket slices, per-issue handoffs, PR-readiness review issues, PR-opening handoffs, and human-gated merges to `main`.
+
+Adopt these patterns here:
+
+- Use epic issues for broad outcomes, then split them into discovery, roadmap, child issues, and handoffs.
+- Use feature tracking docs when a workstream has multiple dependent issues, an integration branch, sequential agent handoffs, or a human-gated integrated review.
+- Treat PR-readiness review as its own issue for broad branches before opening the final PR.
+- Treat PR opening as a small tracked task when a branch has many completed issues and needs a careful PR body.
+- Keep GitHub Issues as execution history and `docs/current/` as durable project memory.
+
+Do not copy Sunny Town HQ's exact top-level tracking-doc layout by default. This repo's standard remains `docs/current/ROADMAP.md` plus `docs/handoffs/active/` and `docs/handoffs/archive/`. Add a focused `docs/current/<FEATURE>_TRACKING.md` only when the workstream is large enough to need branch/issue snapshot recovery.
+
+## Epic Issues
+
+Use a GitHub issue with an epic label or clear `Epic:` title for broad outcomes that are too large for one agent implementation pass.
+
+Epic issues should not be assigned as direct coding tasks. Use this sequence:
+
+1. Create or select the epic issue.
+2. Create a discovery or planning note under `docs/current/` when the current docs do not already cover the shape of the work.
+3. Audit current docs, source, and local constraints.
+4. Split the epic into child issues with acceptance criteria, implementation notes, dependencies, blockers, and verification.
+5. Create a feature integration branch if the child issues must land together before `master`.
+6. Create a feature tracking doc if the branch needs compact state recovery.
+7. Move durable decisions into the appropriate `docs/current/` file before closing the epic.
 
 ## Handoff Lifecycle
 
@@ -36,6 +65,84 @@ For broad multi-ticket features or redesigns, use a feature integration branch i
 - The final PR from the integration branch to `master` should reference completed issues with `Refs #123` or `Closes #123` as appropriate.
 
 This pattern is based on the confirmed local Sunny Town HQ workflow in `C:\Users\waltr\Documents\New project`.
+
+## Feature Tracking Docs
+
+Create a feature tracking doc when work has any of these traits:
+
+- multiple dependent GitHub issues
+- a feature integration branch
+- sequential agent handoffs
+- important product, workflow, or architecture context that must survive compaction
+- a completed slice that should not merge to `master` until human review
+
+Recommended path:
+
+```text
+docs/current/<FEATURE_NAME>_TRACKING.md
+```
+
+Use this compact shape:
+
+```markdown
+# <Feature Name> Tracking
+
+## Purpose
+
+GitHub Issues are the execution source of truth. This file is the compact local recovery snapshot for branch state, issue state, next management step, and handoff paths.
+
+## Integration Branch
+
+- Branch: `codex/<feature-name>-dev`
+- Base: `master`
+- Human review required before merge: `Yes`
+
+## Issue Snapshot
+
+- Last refreshed: `<YYYY-MM-DD>`
+- Closed:
+- Open:
+- Blocked:
+
+## Recommended Next Step
+
+- Issue:
+- Why next:
+- Handoff:
+
+## Verification State
+
+- Commands passed:
+- Manual checks:
+- Known blockers:
+
+## Related Docs
+
+- `docs/current/ROADMAP.md`
+- `docs/handoffs/active/<handoff>.md`
+```
+
+Keep tracking docs short. They are management state, not a replacement for roadmap entries, issue bodies, handoffs, or durable current-state docs.
+
+## PR Readiness And Open PR Handoffs
+
+Use a PR-readiness issue before opening a final PR when an integration branch contains multiple completed issues, meaningful documentation changes, or behavior that needs end-to-end human review.
+
+A PR-readiness issue should answer:
+
+- Is the integrated branch correct enough to open a PR?
+- Are there blocking bugs or documentation gaps?
+- Are completed handoffs or planning notes misleading compared with the implemented state?
+- What verification ran, and what remains manual or blocked?
+- Is the recommendation `ready to open PR`, `needs fixes`, or `split/follow-up first`?
+
+Use an open-PR issue or handoff when the PR body needs careful assembly from many child issues. The PR body should include:
+
+- summary of the integrated slice
+- `Closes #...` for completed child issues and `Refs #...` for related epics
+- verification commands and manual smoke results
+- known non-blocking follow-ups or blockers
+- a clear request for human review before merge to `master`
 
 ## Before Creating Issues
 
@@ -107,8 +214,9 @@ When an issue is done:
 2. Record the issue number and commit hash if useful.
 3. Update or remove stale downstream roadmap assumptions.
 4. Move the issue handoff from `docs/handoffs/active/` to `docs/handoffs/archive/`.
-5. Move completed local work in `TASKS.md` to `Done`.
-6. Commit documentation updates.
+5. Update the feature tracking doc if the issue belongs to a tracked multi-issue branch.
+6. Move completed local work in `TASKS.md` to `Done`.
+7. Commit documentation updates.
 
 ## Current Local State
 
@@ -119,4 +227,4 @@ When an issue is done:
 - `Confirmed locally`: GitHub label `agent-task` exists.
 - `Confirmed locally`: Active agent issues `#1` through `#4` were created from `ROADMAP.md` on `2026-06-18`.
 - `Confirmed locally`: Sunny Town HQ reference repo exists at `C:\Users\waltr\Documents\New project`, remote `https://github.com/walt-raymond-williams/sunny-town-hq.git`.
-- `Confirmed locally`: Issue `#5` tracks the workflow comparison against Sunny Town HQ.
+- `Confirmed locally`: Issue `#5` completed the workflow comparison against Sunny Town HQ on `2026-06-18`; the adopted patterns are recorded above.

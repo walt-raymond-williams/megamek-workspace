@@ -36,12 +36,7 @@ Use this shape for active and queued work:
 
 ## Now
 
-1. Compare workflow against Sunny Town HQ.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Compare this repo's AI workflow, roadmap, handoff, issue, feature-branch, and PR-review process against Sunny Town HQ.
-   - Output: Updated workflow docs and a recommendation on which Sunny Town HQ patterns should become standard here.
-   - Notes: GitHub issue `#5`; active handoff `docs/handoffs/active/compare-sunny-town-hq-workflow.md`. Local Sunny Town HQ checkout confirmed at `C:\Users\waltr\Documents\New project`; remote `https://github.com/walt-raymond-williams/sunny-town-hq.git`. Inspect only; do not modify that repo.
+No active task.
 
 ## Next
 
@@ -99,6 +94,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-18`: Completed GitHub issue `#5` by comparing against Sunny Town HQ and updating this repo's workflow docs with epic, feature-tracking, PR-readiness, open-PR, and human-review patterns.
 - `2026-06-18`: Established roadmap-driven GitHub issue tracking with active/archive handoff lifecycle, created the `agent-task` GitHub label, created issues `#1` through `#4`, and added active handoff documents for each issue.
 - `2026-06-18`: Added `SOURCE_CHANGE_WORKFLOW.md`, tightened task-board transition rules, and documented current source build/test commands and Gradle blocker.
 - `2026-06-18`: Added lightweight task tracking in `TASKS.md` and made it part of the documentation workflow.

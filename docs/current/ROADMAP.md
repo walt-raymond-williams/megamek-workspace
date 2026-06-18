@@ -71,16 +71,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Compare workflow against Sunny Town HQ
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#5`
 - Owner: `Codex`
 - Goal: Compare this repo's AI workflow, roadmap, handoff, issue, branch, and PR-review process against Sunny Town HQ and import useful patterns.
 - Why it matters: Sunny Town HQ already contains a working agentic workflow for epics, feature integration branches, per-issue handoffs, PR readiness review, and human-gated merges to main.
 - Expected output: Updated workflow docs, roadmap/task changes, and a recommendation on which Sunny Town HQ patterns should become standard here.
-- Handoff notes: Reference repo confirmed locally at `C:\Users\waltr\Documents\New project`; GitHub remote is `https://github.com/walt-raymond-williams/sunny-town-hq.git`. Compare `AGENTS.md`, `docs/GITHUB_TRACKING_DOC_GUIDE.md`, `docs/EPIC_BACKLOG.md`, PR-readiness handoffs, and open-PR handoffs. Active handoff: `docs/handoffs/active/compare-sunny-town-hq-workflow.md`.
+- Handoff notes: Completed by adopting Sunny Town HQ's useful patterns without copying its exact layout: epic issues for broad outcomes, optional feature tracking docs for multi-issue integration branches, PR-readiness review issues, open-PR handoffs for complex branch PRs, and explicit human review before merge to `master`. Archived handoff: `docs/handoffs/archive/compare-sunny-town-hq-workflow.md`.
 - Dependencies: Local Sunny Town HQ checkout is present but has its own dirty worktree; inspect only, do not modify it.
-- Open questions: Should this repo adopt Sunny Town's exact tracking-doc shape or keep the current `docs/current/ROADMAP.md` plus `docs/handoffs/` layout?
+- Open questions: None for issue `#5`; future broad workstreams should decide case-by-case whether they need a feature tracking doc.
 
 ### Inspect demo campaign save
 

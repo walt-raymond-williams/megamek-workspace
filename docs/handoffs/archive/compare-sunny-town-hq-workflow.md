@@ -37,10 +37,10 @@ Read these in Sunny Town HQ:
 
 ## Expected Output
 
-- A concise comparison of this repo's workflow versus Sunny Town HQ.
-- Updates to `docs/current/GITHUB_ISSUE_WORKFLOW.md`, `AGENTS.md`, and related docs if Sunny Town patterns should be adopted.
-- A recommendation on tracking docs: exact Sunny Town style versus this repo's `ROADMAP.md` plus `docs/handoffs/` layout.
-- Roadmap and task-board updates.
+- Completed on `2026-06-18`.
+- Adopted useful Sunny Town HQ patterns in `docs/current/GITHUB_ISSUE_WORKFLOW.md`, `AGENTS.md`, and related current docs.
+- Recommendation recorded: keep this repo's `docs/current/ROADMAP.md` plus `docs/handoffs/` layout as the default; add focused `docs/current/<FEATURE>_TRACKING.md` files only for multi-issue integration branches that need compact recovery state.
+- Roadmap and task-board updates completed.
 
 ## Files And Areas
 

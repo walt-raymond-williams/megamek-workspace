@@ -59,8 +59,10 @@ Roadmap posture:
 
 - Keep `docs/current/ROADMAP.md` as the durable planning source.
 - Create GitHub Issues gradually from roadmap entries when work is ready for execution or external discussion.
+- Use epic issues for broad outcomes that need discovery and child issues; do not assign an agent to implement an epic directly.
 - Use `docs/templates/AGENT_HANDOFF.md` for work that another agent should be able to pick up from the issue.
 - Use one handoff file per agent-executed issue under `docs/handoffs/active/`, then move it to `docs/handoffs/archive/` after the issue is done.
+- For multi-issue workstreams or feature integration branches, keep a compact feature tracking doc under `docs/current/` that records branch, issue state, next management step, and handoff paths.
 - Keep durable architecture, workflow, source, and campaign knowledge in `docs/current/`; do not leave it only in an issue handoff.
 - After creating or completing an issue, update the roadmap and commit the tracking change.
 
@@ -70,7 +72,8 @@ Branch and merge posture:
 - Name feature integration branches with the `codex/` prefix, for example `codex/ai-workflow-demo-dev`.
 - Agents may complete issues on the integration branch or on smaller branches that merge into the integration branch.
 - Keep `master` stable. A human should review and approve the integrated feature branch before it is merged into `master`.
-- Final PRs into `master` should reference completed issues and include verification notes or explicit blockers.
+- Before opening a final PR into `master`, create or complete a PR-readiness review issue when the branch contains multiple completed issues or meaningful workflow/product changes.
+- Final PRs into `master` should reference completed issues, summarize verification, identify known blockers or follow-ups, and state the human review request clearly.
 
 ## Core Workflow
 
