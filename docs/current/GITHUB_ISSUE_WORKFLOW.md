@@ -50,6 +50,7 @@ Use one handoff document per agent-executed GitHub issue.
 4. Keep architectural or durable process findings in `docs/current/`, not only in the handoff.
 5. When the issue is complete, move the handoff to `docs/handoffs/archive/`.
 6. Update `ROADMAP.md`, `TASKS.md`, and any affected current docs before committing the close-out change.
+7. Push the close-out commit to GitHub before closing the issue or telling the user the task is complete.
 
 Handoffs are execution context. `docs/current/` remains the live source for durable architecture, workflow, source, and campaign knowledge.
 
@@ -192,6 +193,7 @@ After creating the issue:
    - `Issue: #<number>`
 2. If work starts immediately, move or reference it in `TASKS.md`.
 3. Commit the roadmap and task-board update.
+4. Push the commit to GitHub so the issue and repository state match.
 
 ## Agent Handoff
 
@@ -217,6 +219,11 @@ When an issue is done:
 5. Update the feature tracking doc if the issue belongs to a tracked multi-issue branch.
 6. Move completed local work in `TASKS.md` to `Done`.
 7. Commit documentation updates.
+8. Push the commit to the tracked GitHub branch.
+9. Confirm `git status --short --branch` does not show the branch ahead of upstream.
+10. Close or comment on the GitHub issue with the pushed commit hash and verification results.
+
+Do not close a GitHub issue based only on a local commit. A task is not fully closed out until the relevant commit has been pushed and GitHub has the close-out note, issue state, or PR state that references it.
 
 ## Current Local State
 

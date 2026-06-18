@@ -77,6 +77,9 @@ When a conclusion relies on source code, cite the class or file path. When a con
 7. If the change affects agent behavior, update `AGENTS.md`.
 8. If the change affects human onboarding, update `README.md`.
 9. Run a consistency pass before committing.
+10. Commit the documentation update.
+11. Push the commit to GitHub unless the user explicitly asked not to push.
+12. Confirm the branch is not ahead of upstream before reporting the task complete.
 
 ## Consistency Pass
 
@@ -98,10 +101,19 @@ git status --short
 
 ## Commit Posture
 
-Documentation commits should be small enough to explain. A good commit message describes the operational improvement, for example:
+Documentation commits should be small enough to explain and should be pushed to GitHub before close-out. A good commit message describes the operational improvement, for example:
 
 ```text
 Establish MegaMek campaign workspace documentation
 ```
 
 Do not commit ignored local payload, temporary extracts, or raw campaign saves unless the user explicitly asks for a campaign snapshot.
+
+After committing, run:
+
+```powershell
+git push
+git status --short --branch
+```
+
+If push fails, record the blocker in the final response and leave the local branch state explicit.

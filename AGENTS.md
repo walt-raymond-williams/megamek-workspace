@@ -16,12 +16,14 @@ Be practical, explicit, and honest about uncertainty. If a rule, file format, UI
 
 ## Commit Discipline
 
-When an agent makes repository changes, it should leave them in a coherent commit before ending the task unless the user explicitly says not to commit.
+When an agent makes repository changes, it should leave them in a coherent commit and push that commit to GitHub before ending the task unless the user explicitly says not to commit or not to push.
 
 - Check `git status --short` before staging.
 - Stage only files that belong to the completed work.
 - Do not include unrelated user changes unless the user explicitly asks.
 - Prefer small, reviewable commits with plain commit messages.
+- Push completed commits to the tracked GitHub branch before closing the related task or issue.
+- After pushing, confirm `git status --short --branch` no longer shows the branch ahead of its upstream.
 - If a later issue appears, the commit should be easy to inspect, edit, revert, or replace.
 - If verification cannot run, record the blocker in the final response and, when durable, in `docs/current/`.
 
@@ -64,7 +66,7 @@ Roadmap posture:
 - Use one handoff file per agent-executed issue under `docs/handoffs/active/`, then move it to `docs/handoffs/archive/` after the issue is done.
 - For multi-issue workstreams or feature integration branches, keep a compact feature tracking doc under `docs/current/` that records branch, issue state, next management step, and handoff paths.
 - Keep durable architecture, workflow, source, and campaign knowledge in `docs/current/`; do not leave it only in an issue handoff.
-- After creating or completing an issue, update the roadmap and commit the tracking change.
+- After creating or completing an issue, update the roadmap, commit the tracking change, push it to GitHub, and confirm the remote issue or PR points at the pushed commit.
 
 Branch and merge posture:
 
