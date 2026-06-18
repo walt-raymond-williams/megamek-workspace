@@ -36,7 +36,12 @@ Use this shape for active and queued work:
 
 ## Now
 
-- None.
+1. Create help-file usage guidance for agents.
+   - Status: `In progress`
+   - Owner: `Codex`
+   - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, and installed documentation when answering campaign, scenario, rules, workflow, or source-behavior questions.
+   - Output: A durable workflow note or skill-style guide under `docs/current/` that tells agents where the useful help files live, when to consult them, how to prioritize source/docs/campaign data, and how to cite uncertainty.
+   - Notes: Initial research found high-value sources in `external/installs/MekHQ-0.51.00/docs`, `external/src/mekhq/MekHQ/docs`, `external/src/mekhq/MekHQ/resources/mekhq/resources/GlossaryEntry.properties`, `external/src/mekhq/MekHQ/src/mekhq/campaign/utilities/glossary/DocumentationEntry.java`, and `external/src/megamek/megamek/docs`. PDFs are valuable but need extraction tooling; plain text, Markdown, HTML, Java, and properties files are immediately searchable.
 
 ## Next
 
@@ -54,6 +59,12 @@ Use this shape for active and queued work:
 
 ## Backlog
 
+- Create private GitHub repo and migrate work tracking to GitHub Issues.
+  - Status: `Not started`
+  - Owner: `Mixed`
+  - Goal: Use GitHub Issues/Projects for epics, backlog, active work, roadmaps, requirements, and agent-managed task execution instead of expanding the local markdown board.
+  - Output: Private GitHub repo, issue labels/templates, initial epics/issues, documented GitHub workflow, and a simplified `TASKS.md` that points to GitHub as the primary tracker.
+  - Notes: Before designing this, inspect the Sunnytown HQ project as the reference pattern because it already uses GitHub issues, roadmaps, requirements, and agent-managed task tracking/work execution.
 - Decide a report naming convention for campaign reports.
 - Decide whether generated parser outputs should live under `analysis/generated/` by campaign name.
 - Build a repeatable campaign summary extraction script after save structure is confirmed.
