@@ -20,8 +20,8 @@ Read these first:
 - `docs/current/MEGAMEK_PROJECT_PROFILE.md`
 - `docs/current/KNOWN_COMMANDS.md`
 - `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
-- `docs/handoffs/active/confirm-battle-record-mul-source-workflow.md`
-- `docs/handoffs/active/define-tabletop-result-input-schema.md`
+- `docs/handoffs/archive/confirm-battle-record-mul-source-workflow.md`
+- `docs/handoffs/archive/define-tabletop-result-input-schema.md`
 
 ## Expected Output
 

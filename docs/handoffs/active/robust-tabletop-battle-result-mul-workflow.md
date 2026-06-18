@@ -57,7 +57,9 @@ Source references already identified:
   - Findings: `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`
   - Handoff: `docs/handoffs/archive/confirm-battle-record-mul-source-workflow.md`
 - `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
-  - Handoff: `docs/handoffs/active/define-tabletop-result-input-schema.md`
+  - Status: Completed on `2026-06-18`.
+  - Findings: `docs/current/TABLETOP_RESULT_INPUT_SCHEMA.md`
+  - Handoff: `docs/handoffs/archive/define-tabletop-result-input-schema.md`
 - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
   - Handoff: `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`
 - `#11`: Choose MUL generation strategy for tabletop result workflow.
@@ -67,13 +69,13 @@ Source references already identified:
 - `#13`: Verify and document tabletop result entry workflow for MekHQ.
   - Handoff: `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`
 
-Recommended sequence: `#8` and `#7` are complete. Start `#9` next, then proceed through `#10` and `#11`. Issue `#11` must explicitly decide whether `#12` should proceed, shrink to a documentation/helper task, or be closed as unnecessary because MekHQ's built-in workflow is sufficient. Finish with `#13` UI/manual documentation.
+Recommended sequence: `#8`, `#7`, and `#9` are complete. Start `#10` next, then proceed through `#11`. Issue `#11` must explicitly decide whether `#12` should proceed, shrink to a documentation/helper task, or be closed as unnecessary because MekHQ's built-in workflow is sufficient. Finish with `#13` UI/manual documentation.
 
 Source workflow confirmation from `#8`: MekHQ exports scenario setup MULs as ordinary `<unit>` files, but imports manual battle results through a battle-record `<record>` MUL with `survivors`, `allies`, `salvage`, `retreated`, `devastated`, and `kills` sections. Friendly campaign unit matching depends on entity `externalId` values matching campaign `Unit` UUIDs; personnel matching depends on crew external ids matching `Person` UUIDs.
 
 Salvage confirmation from `#7`: MekHQ creates salvage candidates from result sections plus the Resolve Scenario battlefield-control choice. Contract salvage allocation, salvage exchange, BLC, and CamOps recovery are calculated during MekHQ resolution, not encoded directly in the MUL. Future schema work should record unit result state and damage accurately, but leave battlefield control and final salvage allocation to MekHQ/operator workflow.
 
-Built-in workflow consideration: the user explicitly wants to preserve the possibility that MekHQ's existing import/manual update flow is enough. `#9` should describe the information that must be captured from tabletop play regardless of whether it is entered by hand, used to edit an exported file, or fed to a generator. `#10` should test the built-in path before custom generation is assumed.
+Built-in workflow consideration: the user explicitly wants to preserve the possibility that MekHQ's existing import/manual update flow is enough. `#9` described the information that must be captured from tabletop play regardless of whether it is entered by hand, used to edit an exported file, or fed to a generator. `#10` should test the built-in path before custom generation is assumed.
 
 ## Files And Areas
 

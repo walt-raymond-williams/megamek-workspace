@@ -47,19 +47,19 @@ No active task.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Run MekHQ campaign exploration live-assist shakedown.
+2. Prototype battle-record MUL round-trip validation.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Prove that a generated or minimally edited battle-record MUL can be imported through MekHQ Resolve Manually and produces expected campaign-facing effects on disposable data.
+   - Output: Documented round-trip procedure, expected/observed effects, and notes on automated versus manual validation.
+   - Notes: GitHub issue `#10`; child of epic `#6`; active handoff `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`; follows completed schema issue `#9`.
+
+3. Run MekHQ campaign exploration live-assist shakedown.
    - Status: `Not started`
    - Owner: `Mixed`
    - Goal: Start MekHQ and Codex together, then follow `CAMPAIGN_EXPLORATION_PLAN.md` while the user manually operates MekHQ and Codex records findings.
    - Output: Live-session notes and durable updates to current docs about campaign creation, first contract flow, travel, owned Leopard transport, aerospace transit scenario handling, repairs, salvage, finances, and open source follow-ups.
    - Notes: GitHub issue `#16`; active handoff `docs/handoffs/active/run-mekhq-campaign-exploration.md`; use a disposable exploration save unless the user explicitly selects another save.
-
-3. Define tabletop battle result input schema for MekHQ MUL generation.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Define the minimum tabletop result information needed for MekHQ's built-in manual/import workflow, with custom generation treated as optional until strategy issue `#11`.
-   - Output: Durable schema/design notes under `docs/current/` and updates to epic `#6` tracking.
-   - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`; discovery should remain useful even if final workflow uses built-in MekHQ UI/import only.
 
 4. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
@@ -116,12 +116,13 @@ No active task.
 
 ## Done
 
+- `2026-06-18`: Completed GitHub issue `#9` by defining the tabletop result input schema in `TABLETOP_RESULT_INPUT_SCHEMA.md`, separating first-session manual capture fields from optional future generator fields, and linking the schema from the tabletop result MUL workflow. Recommended next tabletop-result task is issue `#10`, prototype battle-record MUL round-trip validation.
 - `2026-06-18`: Completed GitHub issue `#19` by documenting the custom RAT strategy in `CUSTOM_RAT_STRATEGY.md`. Recommendation: do not build custom RATs yet; use fixed OPFOR setup-MUL pools first, and revisit custom classic RATs or modern force-generator data only after confirmed inventory and fixed-pool play show a real need. Remaining roster-control child `#17` is blocked pending live MekHQ UI validation.
 - `2026-06-18`: Completed GitHub issue `#18` by documenting the fixed OPFOR setup-MUL pool workflow in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`, adding `docs/templates/OPFOR_MUL_POOL_MANIFEST.csv`, and locally verifying placeholder MUL generation plus parser round trip with installed MekHQ/MegaMek jars. Raw placeholder MUL output remains ignored under `analysis/tmp/`; real inventory MULs need the user's confirmed miniature list. This fed the custom RAT strategy decision completed in issue `#19`; issue `#17` remains blocked pending live MekHQ UI validation.
 - `2026-06-18`: Completed GitHub issue `#20` by defining the physical-miniature roster model in `PHYSICAL_MINIATURE_ROSTER_MODEL.md`, adding `docs/templates/PHYSICAL_MINIATURE_ROSTER.csv`, and archiving the handoff. This fed the fixed OPFOR MUL pool prototype completed in issue `#18`; issue `#17` remains blocked pending live MekHQ UI validation.
 - `2026-06-18`: Completed source/docs discovery for GitHub issue `#14` by documenting MekHQ player roster and OPFOR control workflows in `MECH_ROSTER_CONTROL_WORKFLOWS.md`, then created child issues `#17` through `#20` for disposable-save quickstart roster replacement verification, physical-miniature roster data modeling, fixed OPFOR MUL pool prototyping, and a later custom RAT decision.
 - `2026-06-18`: Added `CAMPAIGN_EXPLORATION_PLAN.md` to track the first hands-on MekHQ shakedown campaign, including new campaign creation, first contract flow, owned Leopard transport, two aerospace fighters, and a human-controlled transit aerospace scenario concept.
-- `2026-06-18`: Completed GitHub issue `#7` by tracing MekHQ salvage behavior through manual scenario resolution, contract salvage terms, BLC, salvage exchange, and CamOps salvage. Findings are in `SALVAGE_RULES_NOTES.md`. Recommended next epic task is schema issue `#9`.
+- `2026-06-18`: Completed GitHub issue `#7` by tracing MekHQ salvage behavior through manual scenario resolution, contract salvage terms, BLC, salvage exchange, and CamOps salvage. Findings are in `SALVAGE_RULES_NOTES.md`. This fed the schema issue `#9` and next round-trip validation issue `#10`.
 - `2026-06-18`: Completed GitHub issue `#8` by confirming MekHQ's battle-record MUL source workflow for tabletop result import, documenting the flow in `TABLETOP_RESULT_MUL_WORKFLOW.md`, and archiving the handoff. Recommended next epic task is salvage rules issue `#7`.
 - `2026-06-18`: Decomposed GitHub issue `#6` into child issues `#7` through `#13`, updated the roadmap and active handoffs, and recommended starting execution with source workflow confirmation issue `#8`. Commit `019367c`.
 - `2026-06-18`: Made the GitHub repository public and clarified that this repo is the one canonical working/public artifact, not a staging repo for a separate template repo.

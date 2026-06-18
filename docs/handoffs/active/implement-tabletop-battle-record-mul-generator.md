@@ -23,7 +23,7 @@ Read these first:
 - `docs/current/KNOWN_COMMANDS.md`
 - `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
 - `docs/handoffs/active/choose-tabletop-result-mul-generation-strategy.md`
-- `docs/handoffs/active/define-tabletop-result-input-schema.md`
+- `docs/handoffs/archive/define-tabletop-result-input-schema.md`
 - `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`
 
 ## Expected Output

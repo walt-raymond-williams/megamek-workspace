@@ -125,7 +125,7 @@ Open issue: issue `#7` still needs to document the salvage rules and options in 
 
 ## Guidance For Child Issues
 
-- `#9` schema design should model battle-record sections explicitly, not just "damage fields" on exported setup MULs.
+- `#9` schema design is complete in `TABLETOP_RESULT_INPUT_SCHEMA.md`; it models table-captured result facts separately from future battle-record MUL generation fields.
 - `#10` round-trip validation should compare a generated `<record>` file against MekHQ import behavior, especially friendly unit matching, crew hits/ejection, salvage, retreated units, devastated units, and kill credit.
 - `#11` generation strategy should prefer using MegaMek/MekHQ serialization APIs or generated entities over hand-written XML where possible, because entity XML is broad and source-owned.
 - `#12` implementation must preserve entity and crew external ids.

@@ -12,6 +12,15 @@ Define the minimum practical tabletop result/input schema needed to get hand-pla
 
 Current posture: this is discovery, not a commitment to custom implementation. Keep the schema focused on the information the tabletop player/GM must capture and on how that information maps to MekHQ's built-in resolution workflow.
 
+## Outcome
+
+Completed on `2026-06-18`.
+
+- Added `docs/current/TABLETOP_RESULT_INPUT_SCHEMA.md`.
+- Separated minimum first-campaign manual capture fields from optional future generator fields.
+- Included scenario fields, unit result buckets, damage fields, personnel/ejection fields, kill credit, examples, and issue `#10` validation recommendations.
+- Updated roadmap, task board, and tabletop MUL workflow links.
+
 ## Required Context
 
 Read these first:

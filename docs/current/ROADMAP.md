@@ -148,12 +148,12 @@ Use this shape for entries that may become GitHub issues:
 - Child issues:
   - `#7`: Investigate MekHQ and BattleTech salvage rules. Completed on `2026-06-18`; source findings are in `docs/current/SALVAGE_RULES_NOTES.md`.
   - `#8`: Confirm battle-record MUL source workflow for tabletop result import. Completed on `2026-06-18`; source findings are in `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`.
-  - `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
+  - `#9`: Define tabletop battle result input schema for MekHQ MUL generation. Completed on `2026-06-18`; schema is in `docs/current/TABLETOP_RESULT_INPUT_SCHEMA.md`.
   - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
   - `#11`: Choose MUL generation strategy for tabletop result workflow.
   - `#12`: Implement robust tabletop battle-record MUL generator.
   - `#13`: Verify and document tabletop result entry workflow for MekHQ.
-- Recommended sequence: Source workflow confirmation `#8` and salvage research `#7` are complete. Next define the result/input schema in `#9`, then validate a minimal built-in workflow round trip in `#10`, choose strategy in `#11`, decide whether implementation `#12` is still needed, and finish with UI/manual documentation `#13`.
+- Recommended sequence: Source workflow confirmation `#8`, salvage research `#7`, and input schema `#9` are complete. Next validate a minimal built-in workflow round trip in `#10`, choose strategy in `#11`, decide whether implementation `#12` is still needed, and finish with UI/manual documentation `#13`.
 - Branch/tracking recommendation: Do not create an integration branch during discovery. Re-evaluate in `#11`; only create `codex/tabletop-result-mul-dev` and a compact feature tracking doc if `#11` confirms custom implementation is needed.
 - Implementation posture: `#9` and `#10` are learning/discovery work that remain useful even if the final answer is "use MekHQ's built-in Resolve Manually/import workflow and document it." Do not treat `#12` as mandatory until `#11` compares the built-in workflow against custom generation or tooling.
 - Open questions: Can MekHQ's built-in manual result-entry/import workflow satisfy the user's tabletop needs without custom code? If not, should the helper be a standalone Java tool using installed MegaMek/MekHQ jars, a MekHQ source feature, or a workspace script that invokes MegaMek classes? What minimum tabletop result schema is needed for armor/internal damage, crits, ammo, ejections, retreats, kills, salvage, and battlefield control? Which validations can run automatically before MekHQ import?

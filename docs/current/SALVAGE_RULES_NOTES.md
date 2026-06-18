@@ -188,8 +188,8 @@ The generator should not decide:
 
 Design consequences for child issues:
 
-- `#9` should include a clear result-state field for each unit that maps to `survivors`, `salvage`, `retreated`, or `devastated`.
-- `#9` should keep battlefield control outside the MUL schema or mark it as an operator instruction for MekHQ's prompt.
+- `#9` completed `TABLETOP_RESULT_INPUT_SCHEMA.md`, including a clear result-state field for each unit that maps to `survivors`, `salvage`, `retreated`, or `devastated`.
+- `#9` keeps battlefield control outside the MUL schema and marks it as an operator instruction for MekHQ's prompt.
 - `#10` should validate at least four cases: player controls field and keeps enemy salvage; player yields field and loses friendly wrecks; enemy unit retreats and is not salvage; enemy unit is devastated and does not become normal salvage.
 - `#13` should document that CamOps salvage requires pre-scenario salvage-team assignment before the battle starts or auto-resolves.
 
