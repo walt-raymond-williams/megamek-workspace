@@ -13,14 +13,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 ## Issue Snapshot
 
 - Last refreshed: `2026-06-18`
-- Closed: `#18`.
-- Open: `#14` Epic: Control MekHQ player and OPFOR mech rosters; child issues `#17`, `#19`, and `#20`.
+- Closed: `#20`.
+- Open: `#14` Epic: Control MekHQ player and OPFOR mech rosters; child issues `#17`, `#18`, and `#19`.
 - Blocked: Full completion of `#17` needs a live MekHQ UI pass; final constrained roster work needs the user's physical miniature list.
 
 ## Recommended Next Step
 
-- Issue: `#19`
-- Why next: `#17` is blocked on live UI, and `#18` is complete. Prototype fixed OPFOR MUL pools next so physical-miniature OPFOR control has a concrete data/output path before deciding on custom RATs.
+- Issue: `#18`
+- Why next: `#17` is blocked on live UI, and `#20` is complete. Prototype fixed OPFOR MUL pools next so physical-miniature OPFOR control has a concrete data/output path before deciding on custom RATs.
 - Handoff: `docs/handoffs/active/prototype-fixed-opfor-mul-pools.md`
 
 ## Verification State

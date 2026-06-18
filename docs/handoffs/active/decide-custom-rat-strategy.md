@@ -2,7 +2,7 @@
 
 ## Issue
 
-- GitHub issue: `#20`
+- GitHub issue: `#19`
 - Roadmap entry: `Epic: Control MekHQ player and OPFOR mech rosters`
 - Priority: `Medium`
 

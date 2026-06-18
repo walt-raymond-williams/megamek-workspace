@@ -185,9 +185,9 @@ Use this shape for entries that may become GitHub issues:
 - Recommended sequence: Next verify the quickstart roster replacement workflow in a disposable save, then define the physical miniature roster data model, prototype fixed OPFOR MUL pools, and only then decide whether custom RATs or workspace tooling are worth the extra complexity.
   - Child issues:
     - `#17`: Verify quickstart roster replacement workflow. Blocked on live MekHQ UI pass after source/safe-copy verification.
-    - `#18`: Define physical-miniature roster data model. Completed on `2026-06-18`; findings are in `docs/current/PHYSICAL_MINIATURE_ROSTER_MODEL.md`.
-    - `#19`: Prototype fixed OPFOR MUL pools.
-    - `#20`: Decide custom RAT strategy for physical-miniature OPFOR.
+    - `#18`: Prototype fixed OPFOR MUL pools.
+    - `#19`: Decide custom RAT strategy for physical-miniature OPFOR.
+    - `#20`: Define physical-miniature roster data model. Completed on `2026-06-18`; findings are in `docs/current/PHYSICAL_MINIATURE_ROSTER_MODEL.md`.
 - Open questions: Which exact miniatures and variants should be considered legal for the player and OPFOR pools? Is it acceptable for MekHQ to generate a scenario and then have the GM substitute close-BV physical units manually, or should generation itself be constrained? Should any tooling live in this workspace, in MekHQ source, or as data-only custom RAT files?
 
 ### Epic: Investigate photo-assisted record sheet parsing

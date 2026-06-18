@@ -1,6 +1,6 @@
 # Physical Miniature Roster Model
 
-This note defines the physical-miniature roster data model for GitHub issue `#18`. It is for tracking the user's real BattleTech miniatures so MekHQ player roster choices, OPFOR substitution, fixed OPFOR MUL pools, and possible custom RATs can all use the same inventory source.
+This note defines the physical-miniature roster data model for GitHub issue `#20`. It is for tracking the user's real BattleTech miniatures so MekHQ player roster choices, OPFOR substitution, fixed OPFOR MUL pools, and possible custom RATs can all use the same inventory source.
 
 Evidence labels follow `DOCUMENTATION_WORKFLOW.md`.
 
@@ -108,7 +108,7 @@ Use rows where:
 - `mekhq_lookup_name` maps to a MegaMek unit
 - `bv` is known or can be checked in MegaMek/MekHQ
 
-Later issue `#19` can group rows into MUL pools by BV band, force role, faction flavor, and weight class.
+Later issue `#18` can group rows into MUL pools by BV band, force role, faction flavor, and weight class.
 
 ### Custom RATs
 
@@ -117,7 +117,7 @@ Use rows where:
 - `opfor_use = yes`
 - `unit_type`, `weight_class`, `tech_base`, `era_start_year`, and faction tags are populated enough to map into RAT metadata
 
-Later issue `#20` should decide whether this is worth the overhead. For a small physical collection, fixed MULs and manual substitution may remain better.
+Later issue `#19` should decide whether this is worth the overhead. For a small physical collection, fixed MULs and manual substitution may remain better.
 
 ## Validation Rules
 
