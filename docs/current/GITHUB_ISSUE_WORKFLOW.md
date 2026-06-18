@@ -84,4 +84,6 @@ When an issue is done:
 ## Current Local State
 
 - `Confirmed locally`: GitHub CLI exists at `C:\Program Files\GitHub CLI\gh.exe`.
-- `Confirmed locally`: no Git remote was configured when this workflow was written on `2026-06-18`.
+- `Confirmed locally`: GitHub CLI is authenticated as `walt-raymond-williams`.
+- `Confirmed locally`: `origin` points to `https://github.com/walt-raymond-williams/megamek-workspace.git`.
+- `Confirmed locally`: `master` tracks `origin/master`.

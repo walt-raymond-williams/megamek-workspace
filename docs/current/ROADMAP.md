@@ -52,9 +52,9 @@ Use this shape for entries that may become GitHub issues:
 - Goal: Make `ROADMAP.md` the planning source that guides GitHub issue creation and agent handoffs.
 - Why it matters: The repo needs trackable execution without losing flexible long-term planning in a versioned file.
 - Expected output: GitHub issue workflow, issue/handoff templates, documented commands or blockers for creating issues, and a first issue created when remote/auth setup is ready.
-- Handoff notes: Start with `docs/current/GITHUB_ISSUE_WORKFLOW.md` and `docs/templates/AGENT_HANDOFF.md`. Check whether a Git remote exists and whether `gh auth status` works before creating issues.
-- Dependencies: GitHub remote and authenticated `gh` session.
-- Open questions: Which GitHub repo should receive the issues? Should GitHub Projects be used immediately or after the first issue set exists?
+- Handoff notes: Start with `docs/current/GITHUB_ISSUE_WORKFLOW.md` and `docs/templates/AGENT_HANDOFF.md`. The GitHub repo exists at `https://github.com/walt-raymond-williams/megamek-workspace`.
+- Dependencies: None for issue creation; GitHub remote and authenticated `gh` session are confirmed locally.
+- Open questions: Should GitHub Projects be used immediately or after the first issue set exists?
 
 ### Split generic AI-ready workflow from MegaMek profile
 

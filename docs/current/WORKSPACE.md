@@ -54,6 +54,14 @@ Still potentially useful later:
 
 Use source inspection heavily. When the user asks how to control the campaign, automate a step, interpret a saved field, or change behavior, search the source before relying on memory.
 
+## GitHub Repository
+
+- Remote: `https://github.com/walt-raymond-williams/megamek-workspace`
+- Origin URL: `https://github.com/walt-raymond-williams/megamek-workspace.git`
+- Visibility: `Private`
+- Branch: `master` tracks `origin/master`
+- Evidence: `Confirmed locally` after `gh repo create` and push on `2026-06-18`.
+
 ## Immediate Next Milestones
 
 1. Keep `ROADMAP.md` as the durable planning source and issue-candidate list.
