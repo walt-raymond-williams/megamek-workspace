@@ -25,6 +25,7 @@ Primary outcomes:
 - `ROADMAP.md`: repository-owned roadmap and issue-candidate source of truth.
 - `GITHUB_ISSUE_WORKFLOW.md`: process for creating GitHub Issues and agent handoffs from roadmap entries.
 - `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
+- `CAMPAIGN_EXPLORATION_PLAN.md`: first hands-on MekHQ exploration plan, including new-campaign setup, first contract flow, owned transport, and the planned human-controlled aerospace transit scenario.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
 - `docs/handoffs/archive/`: completed issue handoff documents after close-out.
