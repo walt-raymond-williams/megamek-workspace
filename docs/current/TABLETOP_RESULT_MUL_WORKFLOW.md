@@ -76,6 +76,8 @@ Result-section meaning in MekHQ import:
 
 Open validation need: the exact minimal XML emitted for each entity should be validated in issue `#10` with a real or generated round trip, because entity damage, ammo, crit, crew, transport, and ejection details are serialized throughout `EntityListFile.writeEntityList(...)`.
 
+Issue `#10` partial validation: `BATTLE_RECORD_MUL_ROUND_TRIP_VALIDATION.md` confirms locally that a generated `<record>` file using `EntityListFile.writeEntityList(...)` round-trips through `MULParser` with `survivors`, `salvage`, `retreated`, `devastated`, `kills`, entity external ids, crew external ids, and crew hits preserved. The remaining unvalidated step is live MekHQ Resolve Manually import into a disposable campaign.
+
 ## Campaign Mapping
 
 `Confirmed from source`: [GameThread.java](../../external/src/mekhq/MekHQ/src/mekhq/GameThread.java) sets each campaign unit entity's external id before sending it to MegaMek:
@@ -127,6 +129,7 @@ Open issue: issue `#7` still needs to document the salvage rules and options in 
 
 - `#9` schema design is complete in `TABLETOP_RESULT_INPUT_SCHEMA.md`; it models table-captured result facts separately from future battle-record MUL generation fields.
 - `#10` round-trip validation should compare a generated `<record>` file against MekHQ import behavior, especially friendly unit matching, crew hits/ejection, salvage, retreated units, devastated units, and kill credit.
+- `#10` has completed the installed-jar writer/parser part of that validation in `BATTLE_RECORD_MUL_ROUND_TRIP_VALIDATION.md`; live campaign import remains blocked on UI automation or user-operated validation.
 - `#11` generation strategy should prefer using MegaMek/MekHQ serialization APIs or generated entities over hand-written XML where possible, because entity XML is broad and source-owned.
 - `#12` implementation must preserve entity and crew external ids.
 - `#13` manual verification should include Resolve Manually with a selected battle-record MUL, wizard review, scenario status selection, salvage dialogs, and post-closeout campaign inspection.
