@@ -1,0 +1,128 @@
+# AGENTS.md
+
+## Project Posture
+
+This is an AI-assisted MegaMek/MekHQ campaign workspace. Treat it as a living operations desk for understanding BattleTech game state and as a source-guided control room for learning how MegaMek/MekHQ actually works.
+
+The main job is to help the user understand and run a MekHQ campaign:
+
+- inspect campaign, unit, scenario, personnel, logistics, finance, and repair data
+- explain what the data means in BattleTech and MekHQ terms
+- inspect source code to understand file formats, workflows, buttons, automation hooks, and mechanics
+- identify risks, opportunities, and next actions
+- preserve discoveries so the next Codex session starts with better context
+
+Be practical, explicit, and honest about uncertainty. If a rule, file format, UI behavior, or game mechanic is inferred rather than confirmed from local data/docs/source, say so.
+
+## Workspace Shape
+
+- Current-state knowledge lives in `docs/current/`.
+- Documentation updates must follow `docs/current/DOCUMENTATION_WORKFLOW.md`.
+- Current campaign context belongs in `docs/current/ACTIVE_CAMPAIGN.md` once a campaign is identified.
+- Repeatable commands belong in `docs/current/KNOWN_COMMANDS.md`.
+- MekHQ campaign save structure belongs in `docs/current/SAVE_FORMAT_NOTES.md`.
+- Repeatable report formats live in `docs/templates/`.
+- Local campaign inputs belong under `campaigns/`.
+- Temporary/generated extracts belong under `analysis/`.
+- Source checkouts live inside this workspace at `external\src`.
+- Installed playable suite lives inside this workspace at `external\installs\MekHQ-0.51.00`.
+- Release archives live inside this workspace at `external\downloads`.
+- `external/` is ignored by the workspace repo. Treat it as local payload, not workspace documentation.
+
+Known source checkouts:
+
+- `C:\Users\waltr\Documents\megamek-workspace\external\src\megamek`
+- `C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq`
+- `C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab`
+- `C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data`
+
+When docs disagree, prefer `docs/current/` over older notes.
+
+## Core Workflow
+
+For campaign or scenario interpretation:
+
+1. Identify the exact input files and their versions.
+2. Check `docs/current/ACTIVE_CAMPAIGN.md` for known current campaign context.
+3. Inspect structure before interpreting. For compressed campaign files, extract to `analysis/tmp/` or read from a temporary location.
+4. Build a small factual summary first: date, faction/unit, active contract, force composition, personnel, finances, repairs, location, pending scenarios, and alerts.
+5. Interpret the situation through BattleTech/MekHQ concepts: tonnage, tech base, BV, armor/internal damage, heat, ammo, pilot skills, morale, fatigue, maintenance burden, transport, supply, and contract obligations.
+6. Separate facts, inferences, and recommendations.
+7. Save durable discoveries in `docs/current/` when they improve future work.
+
+For questions about how MekHQ or MegaMek behaves, inspect source before giving a confident answer. Use `rg` heavily in the source checkouts and cite the relevant class/file in the response when it materially supports the conclusion.
+
+## BattleTech Rules Posture
+
+BattleTech has many rule layers and optional systems. Do not pretend all tables and edge cases are known from memory.
+
+- Prefer local MegaMek/MekHQ docs, source code, and campaign data when explaining how this install behaves.
+- Use official or primary sources when browsing is necessary.
+- Do not reproduce large copyrighted rulebook passages. Summarize mechanics and cite source context when possible.
+- Ask the user which ruleset or optional systems they are using when it changes the answer materially.
+
+## Data Handling
+
+Campaign files can contain the user's active campaign state. Treat them as precious.
+
+- Do not overwrite campaign saves.
+- Do not move or delete campaign files unless explicitly asked.
+- Work on copies under `analysis/tmp/` when experimenting.
+- Keep raw saves untracked unless the user explicitly wants a snapshot committed.
+- Prefer structured parsing over ad hoc string matching once the format is understood.
+
+## Interpretation Style
+
+A useful campaign answer should usually include:
+
+- what is happening now
+- why it matters mechanically
+- what choices the player has
+- what risks are hidden or easy to miss
+- what the agent is uncertain about
+
+Use concise tactical language. The user wants a campaign aide, not a wall of encyclopedia text.
+
+## Source Code Role
+
+Source code is a first-class reference for this workspace. The user expects agents to inspect it often to understand how to control, interact with, automate, and possibly modify MegaMek/MekHQ.
+
+Read source when it answers questions like:
+
+- how MekHQ stores a campaign value
+- how scenario generation computes an outcome
+- how repair, maintenance, fatigue, market, or contract logic works
+- what a file format field means
+- how the UI triggers an action
+- where an import/export feature lives
+- whether a command-line or automation path exists
+- what would need to change to alter behavior
+
+If code changes become the task, keep source changes in the source checkout, not this workspace. This workspace should hold investigation notes, plans, and campaign-facing analysis.
+
+Before modifying source:
+
+1. Check git status in the target source repo.
+2. Read nearby code and existing tests.
+3. Keep changes narrowly scoped.
+4. Record the reason and verification in this workspace when it teaches us something durable about controlling the campaign.
+
+## Verification
+
+Useful local checks:
+
+```powershell
+java -version
+javac -version
+Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\MekHQ.exe'
+Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\megamek'
+Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq'
+Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab'
+Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data'
+```
+
+For parsing work, verify by comparing extracted summaries against MekHQ's UI or known campaign facts.
+
+## Learning Loop
+
+When a campaign file field, scenario field, or MekHQ mechanic becomes clear, add a compact note to `docs/current/` using the evidence labels in `docs/current/DOCUMENTATION_WORKFLOW.md`. Future agents should inherit hard-won understanding instead of rediscovering it.

@@ -1,0 +1,28 @@
+# Local installs, source checkouts, and downloads
+external/
+downloads/
+release-installs/
+*.zip
+*.tar.gz
+*.7z
+
+# Runtime noise
+logs/
+*.log
+*.log.gz
+
+# Campaign saves can contain active campaign state. Keep them local unless
+# the user explicitly asks to snapshot one into version control.
+campaigns/raw/
+*.cpnx
+*.cpnx.gz
+
+# Generated analysis output
+analysis/tmp/
+analysis/generated/
+
+# OS/editor noise
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
