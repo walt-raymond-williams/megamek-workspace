@@ -120,3 +120,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`. Active handoff: `docs/handoffs/active/create-help-file-usage-guidance.md`.
 - Dependencies: PDF extraction tooling would improve coverage but is not required for text, Markdown, HTML, Java, and properties files.
 - Open questions: Should this become a reusable project-profile pattern?
+
+### Epic: Robust tabletop battle result MUL workflow
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#6`
+- Owner: `Mixed`
+- Goal: Design and eventually build a robust workflow for using MekHQ to generate scenarios, playing the battle by hand on tabletop, and feeding accurate results back into MekHQ through a generated battle-record MUL.
+- Why it matters: The user wants MekHQ to remain the campaign authority while resolving tactical battles with physical BattleTech play. A robust result-entry path would reduce manual campaign edits, preserve MekHQ repair/salvage/personnel logic, and make tabletop play practical inside this workspace.
+- Expected output: A decomposed multi-issue workstream covering source investigation, result schema design, prototype round-trip tests, a Java/MegaMek-backed battle-record MUL generator, documentation, and validation against MekHQ's Resolve Manually workflow.
+- Handoff notes: This is an epic, not a direct implementation task. First agent should decompose it into child issues and preserve confirmed source findings. Active handoff: `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`.
+- Dependencies: Local MegaMek/MekHQ source and install are present under `external/`; source build/test commands are currently blocked by the Java 17 Gradle daemon/toolchain issue, so early work may need to run against installed jars or focus on source-reading and UI/manual verification.
+- Open questions: Should the robust generator be a standalone Java helper, a MekHQ source change, or a workspace script that invokes MegaMek classes? What minimum tabletop result schema is needed for armor/internal damage, crits, ammo, ejections, retreats, kills, salvage, and battlefield control? Should this workstream use a feature integration branch and a tracking doc after decomposition?

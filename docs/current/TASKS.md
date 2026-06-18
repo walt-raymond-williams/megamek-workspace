@@ -69,6 +69,13 @@ No active task.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
+6. Decompose robust tabletop battle result MUL workflow epic.
+   - Status: `Not started`
+   - Owner: `Mixed`
+   - Goal: Split the epic for generating battle-record MULs from tabletop results into child issues.
+   - Output: Child GitHub issues, updated roadmap/task tracking, and durable design notes if architecture decisions are confirmed.
+   - Notes: GitHub issue `#6`; roadmap entry `Epic: Robust tabletop battle result MUL workflow`; active handoff `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`.
+
 ## Backlog
 
 - Decide a report naming convention for campaign reports.
