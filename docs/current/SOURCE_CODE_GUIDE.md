@@ -68,3 +68,4 @@ Do not claim a source build or test passed until the relevant Gradle command has
 ## Current Source Findings
 
 - `Confirmed from source`: MekHQ's manual tabletop-result path exports scenario setup MULs as ordinary `<unit>` files, but imports battle results as a MegaMek battle-record `<record>` MUL. See `TABLETOP_RESULT_MUL_WORKFLOW.md` for the source-confirmed flow through `BriefingTab`, `MekHQ.resolveScenario`, `ChooseMulFilesDialog`, `ResolveScenarioTracker`, `EntityListFile`, and `MULParser`.
+- `Confirmed from source`: MekHQ salvage is resolved from battle-record result sections, battlefield-control choice, Resolve Scenario wizard choices, contract salvage terms, and optional CamOps salvage settings. See `SALVAGE_RULES_NOTES.md` for the source-confirmed flow through `ResolveScenarioTracker`, `ResolveScenarioWizardDialog`, `Contract`, `AtBContract`, `SalvagePostScenarioPicker`, `CamOpsSalvageUtilities`, and `Unit#canSalvage`.

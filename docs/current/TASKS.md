@@ -47,12 +47,12 @@ No active task.
    - Output: Discovery notes and child-issue recommendations for epic `#14`.
    - Notes: GitHub issue `#14`; active handoff `docs/handoffs/active/mech-roster-control-epic.md`; tracking doc `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`.
 
-2. Investigate MekHQ and BattleTech salvage rules.
+2. Define tabletop battle result input schema for MekHQ MUL generation.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Confirm how MekHQ decides salvage eligibility and compare it against relevant BattleTech campaign salvage rules.
-   - Output: Durable salvage notes under `docs/current/` and implications for tabletop result MUL generation.
-   - Notes: GitHub issue `#7`; child of epic `#6`; active handoff `docs/handoffs/active/investigate-salvage-rules.md`; recommended next for epic `#6` after completing issue `#8`.
+   - Goal: Define the minimum tabletop result input schema needed to generate MekHQ battle-record MULs.
+   - Output: Durable schema/design notes under `docs/current/` and updates to epic `#6` tracking.
+   - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`.
 
 3. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
@@ -101,6 +101,7 @@ No active task.
 
 ## Done
 
+- `2026-06-18`: Completed GitHub issue `#7` by tracing MekHQ salvage behavior through manual scenario resolution, contract salvage terms, BLC, salvage exchange, and CamOps salvage. Findings are in `SALVAGE_RULES_NOTES.md`. Recommended next epic task is schema issue `#9`.
 - `2026-06-18`: Completed GitHub issue `#8` by confirming MekHQ's battle-record MUL source workflow for tabletop result import, documenting the flow in `TABLETOP_RESULT_MUL_WORKFLOW.md`, and archiving the handoff. Recommended next epic task is salvage rules issue `#7`.
 - `2026-06-18`: Decomposed GitHub issue `#6` into child issues `#7` through `#13`, updated the roadmap and active handoffs, and recommended starting execution with source workflow confirmation issue `#8`. Commit `019367c`.
 - `2026-06-18`: Made the GitHub repository public and clarified that this repo is the one canonical working/public artifact, not a staging repo for a separate template repo.

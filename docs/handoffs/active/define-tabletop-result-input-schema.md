@@ -19,9 +19,9 @@ Read these first:
 - `docs/current/TASKS.md`
 - `docs/current/MEGAMEK_PROJECT_PROFILE.md`
 - `docs/current/SOURCE_CODE_GUIDE.md`
+- `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`
+- `docs/current/SALVAGE_RULES_NOTES.md`
 - `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
-- `docs/handoffs/active/confirm-battle-record-mul-source-workflow.md`
-- `docs/handoffs/active/investigate-salvage-rules.md`
 
 ## Expected Output
 

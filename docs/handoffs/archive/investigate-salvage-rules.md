@@ -39,14 +39,14 @@ Source areas to inspect:
 
 ## Expected Output
 
-- A durable note under `docs/current/`, probably `docs/current/SALVAGE_RULES_NOTES.md`.
-- A short player-facing summary of:
+- Completed on `2026-06-18`: added durable notes in `docs/current/SALVAGE_RULES_NOTES.md`.
+- Completed on `2026-06-18`: added a short player-facing summary of:
   - what creates salvage candidates
   - how battlefield control matters
   - how contract salvage percentages or salvage exchange matter
   - how MekHQ handles enemy wrecks, player wrecks, devastated units, retreated units, loot, and CamOps salvage
   - what the tabletop result MUL generator must record versus what MekHQ calculates during resolution
-- GitHub issue comments or close-out notes identifying exact source files and rule references used.
+- Completed on `2026-06-18`: issue close-out should point to commit and source notes.
 
 ## Files And Areas
 
@@ -85,11 +85,11 @@ rg -n "isUseCamOpsSalvage|resolveSalvage|SalvagePostScenarioPicker|CamOpsSalvage
 
 ## Acceptance Criteria
 
-- MekHQ salvage flow is traced from manual scenario resolution through post-scenario processing.
-- The note identifies what result-MUL sections influence salvage: `salvage`, `retreated`, `devastated`, `survivors`, and battlefield-control choice.
-- The note explains how contract terms, battle loss compensation, salvage exchange, CamOps salvage, and optional campaign settings affect outcomes.
-- The note compares MekHQ behavior against the relevant BattleTech campaign salvage rules at a summarized level, with source/rule references and copyright-safe wording.
-- The issue lists implications for the robust tabletop battle-result MUL workflow.
+- Completed: MekHQ salvage flow is traced from manual scenario resolution through post-scenario processing.
+- Completed: the note identifies what result-MUL sections influence salvage: `salvage`, `retreated`, `devastated`, `survivors`, and battlefield-control choice.
+- Completed: the note explains how contract terms, battle loss compensation, salvage exchange, CamOps salvage, and optional campaign settings affect outcomes.
+- Completed with limitation: the note compares MekHQ behavior against Campaign Operations at a summarized level, using MekHQ source/UI text and the official Catalyst product page; detailed RAW comparison still needs user-provided rulebook/page references.
+- Completed: the note lists implications for the robust tabletop battle-result MUL workflow.
 
 ## Open Questions
 

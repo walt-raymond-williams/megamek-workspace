@@ -47,7 +47,9 @@ Source references already identified:
 ## Child Issues
 
 - `#7`: Investigate MekHQ and BattleTech salvage rules.
-  - Handoff: `docs/handoffs/active/investigate-salvage-rules.md`
+  - Status: Completed on `2026-06-18`.
+  - Findings: `docs/current/SALVAGE_RULES_NOTES.md`
+  - Handoff: `docs/handoffs/archive/investigate-salvage-rules.md`
 - `#8`: Confirm battle-record MUL source workflow for tabletop result import.
   - Status: Completed on `2026-06-18`.
   - Findings: `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`
@@ -63,9 +65,11 @@ Source references already identified:
 - `#13`: Verify and document tabletop result entry workflow for MekHQ.
   - Handoff: `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`
 
-Recommended sequence: `#8` is complete. Run `#7` before or alongside `#9`, then proceed through `#10`, `#11`, `#12`, and `#13`.
+Recommended sequence: `#8` and `#7` are complete. Start `#9` next, then proceed through `#10`, `#11`, `#12`, and `#13`.
 
 Source workflow confirmation from `#8`: MekHQ exports scenario setup MULs as ordinary `<unit>` files, but imports manual battle results through a battle-record `<record>` MUL with `survivors`, `allies`, `salvage`, `retreated`, `devastated`, and `kills` sections. Friendly campaign unit matching depends on entity `externalId` values matching campaign `Unit` UUIDs; personnel matching depends on crew external ids matching `Person` UUIDs.
+
+Salvage confirmation from `#7`: MekHQ creates salvage candidates from result sections plus the Resolve Scenario battlefield-control choice. Contract salvage allocation, salvage exchange, BLC, and CamOps recovery are calculated during MekHQ resolution, not encoded directly in the MUL. Future schema work should record unit result state and damage accurately, but leave battlefield control and final salvage allocation to MekHQ/operator workflow.
 
 ## Files And Areas
 

@@ -133,27 +133,27 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: This is an epic, not a direct implementation task. It has been decomposed into child issues `#7` through `#13`; implementation should proceed through those issues. Active epic handoff: `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`.
 - Dependencies: Local MegaMek/MekHQ source and install are present under `external/`; source build/test commands are currently blocked by the Java 17 Gradle daemon/toolchain issue, so early work may need to run against installed jars or focus on source-reading and UI/manual verification.
 - Child issues:
-  - `#7`: Investigate MekHQ and BattleTech salvage rules.
+  - `#7`: Investigate MekHQ and BattleTech salvage rules. Completed on `2026-06-18`; source findings are in `docs/current/SALVAGE_RULES_NOTES.md`.
   - `#8`: Confirm battle-record MUL source workflow for tabletop result import. Completed on `2026-06-18`; source findings are in `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`.
   - `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
   - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
   - `#11`: Choose MUL generation strategy for tabletop result workflow.
   - `#12`: Implement robust tabletop battle-record MUL generator.
   - `#13`: Verify and document tabletop result entry workflow for MekHQ.
-- Recommended sequence: Source workflow confirmation `#8` is complete. Next run salvage research `#7` before or alongside schema work `#9`, then validate a minimal round trip `#10`, choose generation strategy `#11`, implement `#12`, and finish with UI/manual documentation `#13`.
+- Recommended sequence: Source workflow confirmation `#8` and salvage research `#7` are complete. Next define the input schema in `#9`, then validate a minimal round trip `#10`, choose generation strategy `#11`, implement `#12`, and finish with UI/manual documentation `#13`.
 - Branch/tracking recommendation: Do not create an integration branch during decomposition. Re-evaluate in `#11`; if implementation will touch source or span multiple commits, create `codex/tabletop-result-mul-dev` and a compact feature tracking doc before `#12`.
 - Open questions: Should the robust generator be a standalone Java helper using installed MegaMek/MekHQ jars, a MekHQ source change, or a workspace script that invokes MegaMek classes? What minimum tabletop result schema is needed for armor/internal damage, crits, ammo, ejections, retreats, kills, salvage, and battlefield control? Which validations can run automatically before MekHQ import?
 
 ### Investigate MekHQ and BattleTech salvage rules
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#7`
 - Owner: `Codex`
 - Goal: Explain how MekHQ determines salvage eligibility, salvage rights, salvage exchange, battlefield control effects, contract salvage terms, and post-scenario salvage processing, then compare those behaviors against the relevant BattleTech campaign salvage rules at a high level.
 - Why it matters: The tabletop result MUL workflow must know what result data affects salvage and what MekHQ will calculate itself after manual scenario resolution.
-- Expected output: Source-grounded salvage behavior notes under `docs/current/`, a concise player-facing explanation of salvage decisions, and a list of implications for the robust tabletop result-entry workflow.
-- Handoff notes: Child issue of epic `#6`. Use source first, especially `ResolveScenarioTracker`, post-scenario handlers, contract classes, and CamOps salvage utilities. Active handoff: `docs/handoffs/active/investigate-salvage-rules.md`.
+- Expected output: Completed with `docs/current/SALVAGE_RULES_NOTES.md`, a source-grounded salvage behavior note with player-facing implications and tabletop result-MUL guidance.
+- Handoff notes: Completed on `2026-06-18`. Archived handoff: `docs/handoffs/archive/investigate-salvage-rules.md`.
 - Dependencies: Local source is available under `external/src`; official BattleTech rulebooks may need user-provided page references or official/primary public references. Do not reproduce large copyrighted rules text.
 - Open questions: Which optional MekHQ salvage systems are enabled in the active campaign? Which BattleTech campaign-rule source should be treated as authoritative for the user's table: Campaign Operations, Chaos Campaign, Mercenaries rules, or another source?
 
