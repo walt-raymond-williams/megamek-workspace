@@ -76,6 +76,13 @@ No active task.
    - Output: Child GitHub issues, updated roadmap/task tracking, and durable design notes if architecture decisions are confirmed.
    - Notes: GitHub issue `#6`; roadmap entry `Epic: Robust tabletop battle result MUL workflow`; active handoff `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`.
 
+7. Investigate MekHQ and BattleTech salvage rules.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Confirm how MekHQ decides salvage eligibility and compare it against relevant BattleTech campaign salvage rules.
+   - Output: Durable salvage notes under `docs/current/` and implications for tabletop result MUL generation.
+   - Notes: GitHub issue `#7`; child of epic `#6`; active handoff `docs/handoffs/active/investigate-salvage-rules.md`.
+
 ## Backlog
 
 - Decide a report naming convention for campaign reports.
