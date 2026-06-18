@@ -16,6 +16,8 @@ logs/
 campaigns/raw/
 *.cpnx
 *.cpnx.gz
+!campaigns/demo/
+!campaigns/demo/ai-ready-demo.cpnx.gz
 
 # Generated analysis output
 analysis/tmp/

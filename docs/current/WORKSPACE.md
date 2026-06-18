@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This workspace is the user's MegaMek/MekHQ campaign assistant. Its job is to make campaign data intelligible and actionable.
+This workspace is becoming an AI-ready project workflow demo, with MegaMek/MekHQ as the worked example. It should show how to make a complex existing project usable by agents through durable context, source-grounded investigation, requirements discovery, verified commands, and safe domain-data analysis.
 
 Primary outcomes:
 
@@ -12,6 +12,8 @@ Primary outcomes:
 - inspect source code to understand real behavior, UI actions, file formats, and automation points
 - support source modifications when they help campaign control or interpretation
 - gradually build a local BattleTech/MekHQ knowledge base
+- demonstrate a reusable agentic workflow that can be adapted to other existing codebases
+- preserve a versioned demo save for repeatable save-file and requirements-discovery examples
 
 ## Documentation Operating Model
 
@@ -53,11 +55,12 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 ## Immediate Next Milestones
 
 1. Maintain `TASKS.md` as the current work board.
-2. Use `The Learning Ropes.cpnx.gz` as the active practice campaign.
+2. Use `campaigns/demo/ai-ready-demo.cpnx.gz` as the active practice/demo campaign.
 3. Update `ACTIVE_CAMPAIGN.md` from save data after safe inspection.
 4. Learn how `.cpnx.gz` campaign files are structured and record findings in `SAVE_FORMAT_NOTES.md`.
-5. Produce the first campaign status report from the active sample campaign.
+5. Produce the first campaign status report from the active demo campaign.
 6. Map the fields MekHQ uses for forces, personnel, units, repair state, finances, contracts, and scenarios.
 7. Map the source classes that load/save campaigns and perform common campaign actions.
 8. Resolve or document the Gradle daemon Java 17 blocker before relying on source build/test verification.
 9. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.
+10. Split generic AI-ready workflow guidance from MegaMek-specific project profile details.

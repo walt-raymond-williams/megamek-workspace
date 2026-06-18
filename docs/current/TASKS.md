@@ -36,17 +36,17 @@ Use this shape for active and queued work:
 
 ## Now
 
-1. Create help-file usage guidance for agents.
+1. Turn this repo into an AI-ready project workflow demo.
    - Status: `In progress`
-   - Owner: `Codex`
-   - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, and installed documentation when answering campaign, scenario, rules, workflow, or source-behavior questions.
-   - Output: A durable workflow note or skill-style guide under `docs/current/` that tells agents where the useful help files live, when to consult them, how to prioritize source/docs/campaign data, and how to cite uncertainty.
-   - Notes: Initial research found high-value sources in `external/installs/MekHQ-0.51.00/docs`, `external/src/mekhq/MekHQ/docs`, `external/src/mekhq/MekHQ/resources/mekhq/resources/GlossaryEntry.properties`, `external/src/mekhq/MekHQ/src/mekhq/campaign/utilities/glossary/DocumentationEntry.java`, and `external/src/megamek/megamek/docs`. PDFs are valuable but need extraction tooling; plain text, Markdown, HTML, Java, and properties files are immediately searchable.
+   - Owner: `Mixed`
+   - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
+   - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Issues/Projects becomes the primary tracker.
+   - Notes: This supersedes the narrower private GitHub migration task. Keep the current repo as the demo/worked-example repo rather than starting over. Use `campaigns/demo/ai-ready-demo.cpnx.gz` as the versioned sample save for demonstrations. Keep external source checkouts configurable or locally discovered instead of requiring large cloned repos to live inside this workspace.
 
 ## Next
 
 1. Inspect the active campaign save without modifying it.
-   - Goal: Extract a factual campaign snapshot from `The Learning Ropes.cpnx.gz`.
+   - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
 
 2. Identify MekHQ save/load source classes.
@@ -59,12 +59,12 @@ Use this shape for active and queued work:
 
 ## Backlog
 
-- Create private GitHub repo and migrate work tracking to GitHub Issues.
-  - Status: `Not started`
-  - Owner: `Mixed`
-  - Goal: Use GitHub Issues/Projects for epics, backlog, active work, roadmaps, requirements, and agent-managed task execution instead of expanding the local markdown board.
-  - Output: Private GitHub repo, issue labels/templates, initial epics/issues, documented GitHub workflow, and a simplified `TASKS.md` that points to GitHub as the primary tracker.
-  - Notes: Before designing this, inspect the Sunnytown HQ project as the reference pattern because it already uses GitHub issues, roadmaps, requirements, and agent-managed task tracking/work execution.
+- Create help-file usage guidance for agents.
+   - Status: `In progress`
+   - Owner: `Codex`
+   - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, and installed documentation when answering campaign, scenario, rules, workflow, or source-behavior questions.
+   - Output: A durable workflow note or skill-style guide under `docs/current/` that tells agents where the useful help files live, when to consult them, how to prioritize source/docs/campaign data, and how to cite uncertainty.
+   - Notes: Paused on `2026-06-18`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`. Initial research found high-value sources in `external/installs/MekHQ-0.51.00/docs`, `external/src/mekhq/MekHQ/docs`, `external/src/mekhq/MekHQ/resources/mekhq/resources/GlossaryEntry.properties`, `external/src/mekhq/MekHQ/src/mekhq/campaign/utilities/glossary/DocumentationEntry.java`, and `external/src/megamek/megamek/docs`. PDFs are valuable but need extraction tooling; plain text, Markdown, HTML, Java, and properties files are immediately searchable.
 - Decide a report naming convention for campaign reports.
 - Decide whether generated parser outputs should live under `analysis/generated/` by campaign name.
 - Build a repeatable campaign summary extraction script after save structure is confirmed.

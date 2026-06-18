@@ -4,10 +4,11 @@ This file is the fastest entry point for current campaign context. Update it whe
 
 ## Save File
 
-- Path: `C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\campaigns\The Learning Ropes.cpnx.gz`
+- Path: `C:\Users\waltr\Documents\megamek-workspace\campaigns\demo\ai-ready-demo.cpnx.gz`
+- Source copy: `C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\campaigns\The Learning Ropes.cpnx.gz`
 - MekHQ version: `0.51.00`
 - Last verified: `2026-06-18`
-- Evidence: `Confirmed by user`; file path existence confirmed locally; version previously observed from bundled sample save.
+- Evidence: `Confirmed by user`; demo copy created locally from the installed sample save; version previously observed from bundled sample save.
 
 ## Campaign Identity
 
@@ -38,18 +39,18 @@ This file is the fastest entry point for current campaign context. Update it whe
 
 ## Current Priorities
 
-1. Parse the active campaign save without modifying it.
+1. Parse the active demo campaign save without modifying it.
 2. Identify MekHQ save/load source classes.
-3. Produce the first campaign status report from `The Learning Ropes.cpnx.gz`.
+3. Produce the first campaign status report from `campaigns/demo/ai-ready-demo.cpnx.gz`.
 
 ## Open Questions
 
 - Which optional MekHQ campaign systems are enabled?
 - Which campaign identity fields should be treated as confirmed after save inspection?
-- Should reports for this campaign live under `campaigns/learning-ropes/reports/`?
+- Should reports for this campaign live under `campaigns/demo/reports/`?
 
 ## Update Rules
 
 - Do not guess campaign identity from memory. Mark unknowns until confirmed by save data, source behavior, local docs, or the user.
 - Record the evidence source for important changes.
-- Keep raw campaign saves untracked unless the user explicitly asks for a snapshot.
+- Keep raw campaign saves untracked unless the user explicitly asks for a snapshot. `campaigns/demo/ai-ready-demo.cpnx.gz` is the current intentional versioned demo fixture.
