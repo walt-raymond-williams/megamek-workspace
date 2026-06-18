@@ -63,11 +63,11 @@ Use this shape for entries that may become GitHub issues:
 - Issue: `#1`
 - Owner: `Mixed`
 - Goal: Separate reusable AI-ready workflow guidance from MegaMek/MekHQ-specific paths, source maps, save files, and rules posture.
-- Why it matters: The repo should serve as both a real MegaMek worked example and a reusable pattern for other projects.
+- Why it matters: The public repo should serve as both the real MegaMek worked example and the reusable pattern; there should not be a second repo to keep in sync unless the user explicitly asks for one.
 - Expected output: Generic workflow docs plus a MegaMek project profile that owns local assumptions and domain-specific guidance. Completed with `docs/current/AI_READY_PROJECT_WORKFLOW.md` and `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
 - Handoff notes: Completed by making the generic workflow visible without requiring MegaMek knowledge, keeping MegaMek domain guidance in a first-class project profile, and linking both from `AGENTS.md`, `README.md`, `WORKSPACE.md`, and workflow docs. Archived handoff: `docs/handoffs/archive/split-generic-ai-ready-workflow.md`.
 - Dependencies: None.
-- Open questions: None for issue `#1`; project profiles stay under `docs/current/` until a future multi-profile structure justifies more hierarchy.
+- Open questions: None for issue `#1`; keep this as one public canonical repo unless the user explicitly asks for a separate template or profile repository.
 
 ### Compare workflow against Sunny Town HQ
 

@@ -7,7 +7,7 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `AGENTS.md`: agent instructions, safety posture, project rules, and required workflows.
 - `README.md`: human quick start and workspace orientation.
 - `docs/current/`: current durable knowledge that should guide future sessions.
-- `docs/current/AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern for adapting this repo structure to other projects.
+- `docs/current/AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern demonstrated by this public working repo.
 - `docs/current/MEGAMEK_PROJECT_PROFILE.md`: MegaMek/MekHQ-specific local paths, data safety posture, source posture, and domain guidance.
 - `docs/current/ROADMAP.md`: repository-owned planning source, roadmap, issue candidates, and sequencing notes.
 - `docs/current/GITHUB_ISSUE_WORKFLOW.md`: process for turning roadmap entries into GitHub Issues and agent handoff documents.

@@ -1,6 +1,8 @@
 # AI-Ready Project Workflow
 
-This is the reusable workflow pattern this repository is demonstrating. It is intended for projects where agents need durable context, safe execution rules, source-grounded investigation, and clear handoffs across sessions.
+This is the reusable workflow pattern this public repository is demonstrating. It is intended for projects where agents need durable context, safe execution rules, source-grounded investigation, and clear handoffs across sessions.
+
+This repo is the canonical artifact. Do not split work into a separate template repository unless the user explicitly asks; improve the public working repo directly.
 
 ## Core Pattern
 
@@ -99,7 +101,7 @@ Do not call a task complete if the required close-out commit exists only locally
 
 ## Adaptation Checklist
 
-When applying this workflow to another project:
+When using this workflow as a reference for another project:
 
 1. Write a project profile before doing risky work.
 2. Identify protected local inputs and ignored payloads.

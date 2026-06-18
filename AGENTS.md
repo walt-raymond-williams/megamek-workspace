@@ -2,7 +2,7 @@
 
 ## Project Posture
 
-This repository is both an AI-ready project workflow demo and an AI-assisted MegaMek/MekHQ campaign workspace. Generic workflow rules live in `docs/current/AI_READY_PROJECT_WORKFLOW.md`; MegaMek-specific local paths, data rules, source posture, and BattleTech/MekHQ interpretation guidance live in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
+This public repository is both the canonical working repo and an AI-ready project workflow demo, with MegaMek/MekHQ campaign analysis as the active worked example. Generic workflow rules live in `docs/current/AI_READY_PROJECT_WORKFLOW.md`; MegaMek-specific local paths, data rules, source posture, and BattleTech/MekHQ interpretation guidance live in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
 
 Treat the MegaMek profile as the active domain profile for this repo: a living operations desk for understanding BattleTech game state and a source-guided control room for learning how MegaMek/MekHQ actually works.
 

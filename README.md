@@ -1,6 +1,6 @@
 # MegaMek AI-Ready Workspace
 
-This repository is an AI-ready project workflow demo with MegaMek/MekHQ campaign analysis as the worked example.
+This public repository is the canonical working repo for the AI-ready project workflow demo, with MegaMek/MekHQ campaign analysis as the worked example. The workspace and the public GitHub repo are the same project; there is no separate template repo to keep in sync.
 
 The reusable workflow pattern lives in `docs/current/AI_READY_PROJECT_WORKFLOW.md`. The MegaMek-specific project profile lives in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
 

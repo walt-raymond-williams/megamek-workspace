@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This workspace is an AI-ready project workflow demo, with MegaMek/MekHQ as the worked example. It shows how to make a complex existing project usable by agents through durable context, source-grounded investigation, requirements discovery, verified commands, and safe domain-data analysis.
+This public workspace is the canonical AI-ready project workflow demo, with MegaMek/MekHQ as the worked example. It shows how to make a complex existing project usable by agents through durable context, source-grounded investigation, requirements discovery, verified commands, and safe domain-data analysis. The local workspace and GitHub repo should stay aligned; do not maintain a second repo for the same work unless the user explicitly asks.
 
 The reusable workflow surface is `AI_READY_PROJECT_WORKFLOW.md`. The MegaMek-specific domain profile is `MEGAMEK_PROJECT_PROFILE.md`.
 
@@ -69,9 +69,9 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 
 - Remote: `https://github.com/walt-raymond-williams/megamek-workspace`
 - Origin URL: `https://github.com/walt-raymond-williams/megamek-workspace.git`
-- Visibility: `Private`
+- Visibility: `Public`
 - Branch: `master` tracks `origin/master`
-- Evidence: `Confirmed locally` after `gh repo create` and push on `2026-06-18`.
+- Evidence: `Confirmed locally` after changing visibility with GitHub CLI on `2026-06-18`.
 
 ## Immediate Next Milestones
 
