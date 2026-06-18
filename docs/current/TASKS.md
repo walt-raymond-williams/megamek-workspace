@@ -89,6 +89,7 @@ No active task.
 - Decide whether generated parser outputs should live under `analysis/generated/` by campaign name.
 - Build a repeatable campaign summary extraction script after save structure is confirmed.
 - Create source-reference notes for common MekHQ campaign actions and UI buttons.
+- Low-priority epic `#15`: investigate photo-assisted BattleTech record sheet parsing with OpenCV/template matching, OCR fallback for unit names, and preferred unit matching through MekHQ UUIDs, short IDs, QR codes, or printed labels.
 
 ## Blocked
 

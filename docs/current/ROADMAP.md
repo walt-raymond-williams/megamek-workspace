@@ -170,3 +170,16 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: Local MekHQ install and source are available under `external/`. Source build/test commands remain blocked by the Java 17 Gradle daemon/toolchain issue. The user's physical miniature list is needed before final OPFOR restrictions or custom RATs can be built.
 - Recommended sequence: Start with source/UI discovery for player roster changes and OPFOR generation, then decide whether to create child issues for custom RATs, a miniature-pool data model, a save-safe roster import helper, or MekHQ source changes.
 - Open questions: Which exact miniatures and variants should be considered legal for the player and OPFOR pools? Is it acceptable for MekHQ to generate a scenario and then have the GM substitute close-BV physical units manually, or should generation itself be constrained? Should any tooling live in this workspace, in MekHQ source, or as data-only custom RAT files?
+
+### Epic: Investigate photo-assisted record sheet parsing
+
+- Status: `Issue created`
+- Priority: `Low`
+- Issue: `#15`
+- Owner: `Mixed`
+- Goal: Track a low-priority exploratory idea for using photos of physical BattleTech record sheets to prefill tabletop battle result data for MekHQ result entry.
+- Why it matters: If tabletop play becomes regular, photo-assisted parsing could reduce the manual transcription burden for armor/internal pips, pilot hits, and critical-hit line-through marks. It should remain subordinate to the manual result schema and battle-record MUL workflow.
+- Expected output: If activated, a feasibility note or prototype comparing OpenCV/template matching, OCR, and modern vision models; a recommendation for unit identity through MekHQ UUIDs, short IDs, QR codes, printed labels, and OCR fallback; and a decision on whether this belongs in a web app, local helper, or later result-entry tool.
+- Handoff notes: No active implementation handoff yet. Keep this as backlog until the manual tabletop result schema and battle-record MUL generation workflow are further along.
+- Dependencies: Needs sample record sheet photos, known record sheet templates, and a physical-sheet identity strategy. Prefer MekHQ/MUL external IDs, generated short IDs, QR codes, or printed labels over OCR-only matching.
+- Open questions: Which record sheet formats should be supported first? Can the tabletop packet include printed IDs or QR codes tied to MekHQ UUIDs? How consistent will marking style be for filled pips, critical-hit line-through marks, and pilot hits? What confidence/review UI is needed before generated results are trusted?
