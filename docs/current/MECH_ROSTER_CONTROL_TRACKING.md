@@ -14,20 +14,20 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 - Last refreshed: `2026-06-18`
 - Closed: `#18`, `#19`, and `#20`.
-- Open: `#14` Epic: Control MekHQ player and OPFOR mech rosters; child issue `#17`.
-- Blocked: Full completion of `#17` needs a live MekHQ UI pass; final constrained roster work needs the user's physical miniature list.
+- Open: `#14` Epic: Control MekHQ player and OPFOR mech rosters; child issue `#17`; user-owned unblocker issue `#21`.
+- Blocked: Full completion of `#17` needs the user-operated live MekHQ UI pass tracked by `#21`; final constrained roster work needs the user's physical miniature list.
 
 ## Recommended Next Step
 
-- Issue: `#17` when live UI is available; otherwise leave roster-control execution and return to the broader task queue.
-- Why next: `#18`, `#19`, and `#20` are complete. The remaining roster-control child is blocked on user-operated MekHQ validation.
-- Handoff: `docs/handoffs/active/verify-quickstart-roster-replacement.md`
+- Issue: `#21`
+- Why next: `#18`, `#19`, and `#20` are complete. The remaining roster-control child `#17` is blocked until the user performs and reports the live MekHQ validation.
+- Handoff: `docs/handoffs/active/user-quickstart-roster-ui-validation.md`
 
 ## Verification State
 
 - Commands passed: GitHub issue `#14` created with labels `epic` and `enhancement`; child issues `#17` through `#20` created with labels `agent-task` and `enhancement`; `docs/templates/PHYSICAL_MINIATURE_ROSTER.csv` parsed successfully with `Import-Csv`; issue `#18` generated a local placeholder fixed OPFOR setup MUL with installed jars and parsed it back with `MULParser` as three entities.
 - Manual checks: Source/docs inspection confirmed the New Player Quickstart loads `campaigns/The Learning Ropes.cpnx.gz`, GM add/remove is safer than save surgery for player roster control, scenario edit can regenerate bot forces, bot formations can be edited or loaded from fixed setup MULs, installed docs describe custom AtB RAT metadata under `data/universe/ratdata`, and MekHQ's current unit generator path uses the modern `RATGeneratorConnector` over `data/forcegenerator`. Issue `#17` also confirmed the installed MekHQ executable and a disposable quickstart save copy.
-- Known blockers: Local source build/test verification remains blocked by the Java 17 Gradle daemon/toolchain issue documented in `docs/current/TASKS.md`. Live UI automation for `#17` is blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`.
+- Known blockers: Local source build/test verification remains blocked by the Java 17 Gradle daemon/toolchain issue documented in `docs/current/TASKS.md`. Live UI automation for `#17` is blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`; manual user validation is now tracked as `#21`.
 
 ## Related Docs
 
@@ -41,6 +41,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/TABLETOP_RESULT_MUL_WORKFLOW.md`
 - `docs/handoffs/active/mech-roster-control-epic.md`
 - `docs/handoffs/active/verify-quickstart-roster-replacement.md`
+- `docs/handoffs/active/user-quickstart-roster-ui-validation.md`
 - `docs/handoffs/archive/define-physical-miniature-roster-model.md`
 - `docs/handoffs/archive/prototype-fixed-opfor-mul-pools.md`
 - `docs/handoffs/archive/decide-custom-rat-strategy.md`

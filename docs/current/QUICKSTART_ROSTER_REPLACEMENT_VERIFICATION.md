@@ -11,7 +11,7 @@ Evidence labels follow `DOCUMENTATION_WORKFLOW.md`.
 - `Confirmed locally`: a disposable copy was created at `analysis/tmp/issue-17-roster-test-The Learning Ropes.cpnx.gz`.
 - `Confirmed from save`: the disposable copy decompresses as campaign XML with root `<campaign version="0.51.00">`, name `The Learning Ropes`, date `3025-04-08`, and faction `MERC`.
 - `Confirmed from source`: the UI and campaign code paths for GM add/remove are present and coherent.
-- `Blocked`: live UI click-through was not completed because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. The remaining validation requires the user to operate MekHQ manually or the Windows helper to become available.
+- `Blocked`: live UI click-through was not completed because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. The remaining user-operated validation is tracked by GitHub issue `#21` and checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`.
 
 ## Verified Source Path
 
@@ -58,7 +58,7 @@ Use this workflow for a disposable verification run or for the user-facing campa
 
 `Unknown`: the exact unit to add/remove for a meaningful player-roster test. Use placeholder units only for workflow validation; use the user's physical miniature list for a real campaign setup.
 
-`Blocked`: this issue's full acceptance criteria require a live UI pass showing at least one unit added and one unit removed in a copied save. Source and save safety are confirmed, but the click-through itself remains pending.
+`Blocked`: this issue's full acceptance criteria require a live UI pass showing at least one unit added and one unit removed in a copied save. Source and save safety are confirmed, but the click-through itself remains pending. The user-owned unblocker is issue `#21`.
 
 ## Recommendation
 

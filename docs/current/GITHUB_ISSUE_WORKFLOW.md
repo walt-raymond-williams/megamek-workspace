@@ -169,6 +169,8 @@ gh auth status
 
 Create issues gradually. Do not file every future roadmap item at once if later discoveries may change the work.
 
+Use the `user-task` label for work the user must perform directly, such as live UI validation, providing campaign input, or confirming physical inventory. User tasks should still have clear acceptance criteria and should be linked from any blocked agent issue they unblock.
+
 Recommended issue body structure:
 
 ```markdown
@@ -233,6 +235,7 @@ Do not close a GitHub issue based only on a local commit. A task is not fully cl
 - `Confirmed locally`: `origin` points to `https://github.com/walt-raymond-williams/megamek-workspace.git`.
 - `Confirmed locally`: `master` tracks `origin/master`.
 - `Confirmed locally`: GitHub label `agent-task` exists.
+- `Confirmed locally`: GitHub label `user-task` exists for user-operated validation or input work.
 - `Confirmed locally`: Active agent issues `#1` through `#4` were created from `ROADMAP.md` on `2026-06-18`.
 - `Confirmed locally`: Sunny Town HQ reference repo exists at `C:\Users\waltr\Documents\New project`, remote `https://github.com/walt-raymond-williams/sunny-town-hq.git`.
 - `Confirmed locally`: Issue `#5` completed the workflow comparison against Sunny Town HQ on `2026-06-18`; the adopted patterns are recorded above.

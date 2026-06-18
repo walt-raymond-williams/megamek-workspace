@@ -40,46 +40,53 @@ No active task.
 
 ## Next
 
-1. Run MekHQ campaign exploration live-assist shakedown.
+1. Run MekHQ quickstart roster UI validation.
+   - Status: `Not started`
+   - Owner: `User`
+   - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
+   - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
+   - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
+
+2. Run MekHQ campaign exploration live-assist shakedown.
    - Status: `Not started`
    - Owner: `Mixed`
    - Goal: Start MekHQ and Codex together, then follow `CAMPAIGN_EXPLORATION_PLAN.md` while the user manually operates MekHQ and Codex records findings.
    - Output: Live-session notes and durable updates to current docs about campaign creation, first contract flow, travel, owned Leopard transport, aerospace transit scenario handling, repairs, salvage, finances, and open source follow-ups.
    - Notes: GitHub issue `#16`; active handoff `docs/handoffs/active/run-mekhq-campaign-exploration.md`; use a disposable exploration save unless the user explicitly selects another save.
 
-2. Define tabletop battle result input schema for MekHQ MUL generation.
+3. Define tabletop battle result input schema for MekHQ MUL generation.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Define the minimum tabletop result information needed for MekHQ's built-in manual/import workflow, with custom generation treated as optional until strategy issue `#11`.
    - Output: Durable schema/design notes under `docs/current/` and updates to epic `#6` tracking.
    - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`; discovery should remain useful even if final workflow uses built-in MekHQ UI/import only.
 
-3. Inspect the active demo campaign save without modifying it.
+4. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-4. Identify MekHQ save/load source classes.
+5. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-5. Create help-file usage guidance for agents.
+6. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-6. Turn this repo into an AI-ready project workflow demo.
+7. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-7. Produce the first campaign status report.
+8. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
@@ -98,7 +105,7 @@ No active task.
    - Owner: `Mixed`
    - Goal: Verify the no-source-change workflow for replacing the New Player Quickstart roster in a disposable campaign save.
    - Output: `QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md` has source-confirmed steps, safe-copy verification, and the remaining UI validation gap.
-   - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; live UI click-through remains blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. Finish with a user-operated MekHQ pass or a working Windows automation helper.
+   - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; live UI click-through remains blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. User-owned unblocker is issue `#21` with checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`.
 
 2. Verify Gradle build/test commands in local source repos.
    - Status: `Blocked`
