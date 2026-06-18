@@ -85,7 +85,9 @@ This is the simplest no-source-change path for "we only own these minis tonight.
 
 `Confirmed from source`: scenario templates can generate forces by methods including fixed MUL and BV-scaled generation. `AtBDynamicScenarioFactory.generateFixedForce(...)` loads a fixed MUL from `MHQConstants.STRAT_CON_MUL_FILES_DIRECTORY`; `generateForce(...)` uses scenario force templates, contract faction/skill/quality, campaign difficulty, weather/planetary restrictions, unit type, roles, and BV/unit-count budgets.
 
-Use custom RATs or fixed-MUL scenario templates only after the physical miniature list exists. Until then, manual substitution is lower risk and much faster.
+`Confirmed from source`: the current MekHQ unit-generator connector uses the modern `RATGenerator` data path under `data/forcegenerator`, while the classic text-RAT loader reads `.txt` and `.zip` tables from `data/rat`.
+
+Issue `#19` compared the options in `CUSTOM_RAT_STRATEGY.md`. Use fixed OPFOR MUL pools first. Revisit custom generation only after the physical miniature list exists and fixed-pool play proves too manual.
 
 ## Recommendation
 
@@ -93,7 +95,7 @@ For the first playable parent-run campaign, avoid source changes and avoid campa
 
 - Player roster: copy/save the quickstart campaign, use GM-mode Add GM to add exact player units, remove unwanted quickstart units through Hangar GM Mode, then manually assign pilots/TO&E/transport.
 - OPFOR: let StratCon generate scenarios, use `Regenerate Bot Forces` first, then manually edit bot formations or load fixed OPFOR MULs when physical-mini availability matters.
-- Later data tooling: once the user's miniature list is known, create a small roster data file and generate fixed OPFOR setup MULs first; consider custom RAT/ratdata entries only after fixed-pool play exposes a real need.
+- Later data tooling: once the user's miniature list is known, create a small roster data file and generate fixed OPFOR setup MULs first; issue `#19` recommends deferring custom RAT or force-generator data until fixed-pool play exposes a real need.
 
 ## Child-Issue Candidates
 
@@ -105,7 +107,8 @@ For the first playable parent-run campaign, avoid source changes and avoid campa
    - Status: completed on `2026-06-18`; workflow is in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`.
    - Acceptance: source-confirmed `CustomizeBotForceDialog` load/save behavior, added a pool manifest template, and locally verified placeholder MUL generation plus parser round trip with installed jars. Real inventory MULs remain pending the user's physical miniature list.
 4. Decide whether custom RATs are worth it.
-   - Acceptance: compare manual MUL substitution against custom `data/rat` plus `data/universe/ratdata` entries using the user's miniature list and one generated StratCon scenario.
+   - Status: completed on `2026-06-18`; recommendation is in `CUSTOM_RAT_STRATEGY.md`.
+   - Acceptance: compared manual substitution, fixed setup-MUL pools, classic custom RATs, modern force-generator data, workspace tooling, and source changes. No implementation issue is justified until confirmed inventory and fixed-pool play show a real need.
 
 ## Source References
 

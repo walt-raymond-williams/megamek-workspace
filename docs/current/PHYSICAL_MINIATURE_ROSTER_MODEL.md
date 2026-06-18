@@ -117,7 +117,7 @@ Use rows where:
 - `opfor_use = yes`
 - `unit_type`, `weight_class`, `tech_base`, `era_start_year`, and faction tags are populated enough to map into RAT metadata
 
-Later issue `#19` should decide whether this is worth the overhead. For a small physical collection, fixed MULs and manual substitution may remain better.
+Issue `#19` decided this is not worth the overhead yet. For a small physical collection, fixed MULs and manual substitution remain better until real play proves otherwise.
 
 ## Validation Rules
 

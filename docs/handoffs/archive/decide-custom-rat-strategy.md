@@ -10,6 +10,15 @@
 
 Decide whether custom RATs are worth using for physical-miniature OPFOR control, compared with manual regeneration and fixed OPFOR MUL substitution.
 
+## Outcome
+
+Completed on `2026-06-18`.
+
+- Added `docs/current/CUSTOM_RAT_STRATEGY.md`.
+- Recommended fixed OPFOR setup-MUL pools as the first physical-miniature OPFOR control path.
+- Deferred custom classic RATs, modern force-generator data, and MekHQ source changes until confirmed inventory and fixed-pool play show a real need.
+- Did not create child implementation issues because the prerequisite inventory and live-play need are not proven yet.
+
 ## Required Context
 
 Read these first:

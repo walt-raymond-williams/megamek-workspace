@@ -27,6 +27,7 @@ Primary outcomes:
 - `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
 - `CAMPAIGN_EXPLORATION_PLAN.md`: first hands-on MekHQ exploration plan, including new-campaign setup, first contract flow, owned transport, and the planned human-controlled aerospace transit scenario.
 - `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`: source-confirmed fixed OPFOR setup-MUL workflow for loading curated physical-miniature pools into MekHQ bot formations.
+- `CUSTOM_RAT_STRATEGY.md`: decision note comparing fixed OPFOR MUL pools, classic custom RATs, modern force-generator data, workspace tooling, and source changes.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
 - `docs/handoffs/archive/`: completed issue handoff documents after close-out.
