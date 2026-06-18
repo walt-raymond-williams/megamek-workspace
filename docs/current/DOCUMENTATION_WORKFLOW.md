@@ -7,6 +7,7 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `AGENTS.md`: agent instructions, safety posture, project rules, and required workflows.
 - `README.md`: human quick start and workspace orientation.
 - `docs/current/`: current durable knowledge that should guide future sessions.
+- `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recently completed work.
 - `docs/templates/`: reusable report formats and briefing structures.
 - `campaigns/`: local campaign inputs and deliberate campaign snapshots.
 - `analysis/`: generated extracts, scratch work, and temporary parsing output.
@@ -24,12 +25,14 @@ Update `docs/current/` when any of the following become clear:
 - a repeatable command, parser, extraction method, or verification step
 - a BattleTech or MekHQ mechanic that materially changes campaign advice
 - a known risk, open question, or assumption that future agents should not rediscover
+- a task starts, finishes, becomes blocked, or changes priority in a way future agents need to see
 
 Do not record every temporary observation. Record discoveries that are likely to matter again.
 
 ## Where Updates Go
 
 - Use `ACTIVE_CAMPAIGN.md` for the current campaign file, identity, enabled systems, priorities, and unresolved campaign-specific questions.
+- Use `TASKS.md` for active work, near-term queue, backlog, blocked items, and recently completed work.
 - Use `KNOWN_COMMANDS.md` for commands that are safe, repeatable, and useful across sessions.
 - Use `SAVE_FORMAT_NOTES.md` for confirmed or suspected MekHQ save structure, field meanings, and source references.
 - Use `DATA_MAP.md` for local data locations and durable format references.
@@ -57,11 +60,12 @@ When a conclusion relies on source code, cite the class or file path. When a con
 1. Identify the durable discovery.
 2. Choose the narrowest current doc that owns that fact.
 3. Add or update the note with an evidence label.
-4. Preserve uncertainty instead of smoothing it away.
-5. Remove or update stale contradictions in nearby docs.
-6. If the change affects agent behavior, update `AGENTS.md`.
-7. If the change affects human onboarding, update `README.md`.
-8. Run a consistency pass before committing.
+4. Update `TASKS.md` if work status changed.
+5. Preserve uncertainty instead of smoothing it away.
+6. Remove or update stale contradictions in nearby docs.
+7. If the change affects agent behavior, update `AGENTS.md`.
+8. If the change affects human onboarding, update `README.md`.
+9. Run a consistency pass before committing.
 
 ## Consistency Pass
 

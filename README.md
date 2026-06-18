@@ -60,6 +60,7 @@ Raw campaign saves are ignored by default. Add them deliberately when needed.
 Start here when orienting a new session:
 
 - `docs/current/WORKSPACE.md`: current workspace state, known install/source paths, and near-term milestones.
+- `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recent completions.
 - `docs/current/ACTIVE_CAMPAIGN.md`: active campaign save, identity, contract, enabled systems, priorities, and open questions.
 - `docs/current/DOCUMENTATION_WORKFLOW.md`: required process for keeping durable notes current.
 - `docs/current/KNOWN_COMMANDS.md`: repeatable local commands for verification, launching, source search, and safe save inspection.

@@ -4,10 +4,10 @@ This file is the fastest entry point for current campaign context. Update it whe
 
 ## Save File
 
-- Path: `Unknown`
-- MekHQ version: `Unknown`
-- Last verified: `Unknown`
-- Evidence: `Unknown`
+- Path: `C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\campaigns\The Learning Ropes.cpnx.gz`
+- MekHQ version: `0.51.00`
+- Last verified: `2026-06-18`
+- Evidence: `Confirmed by user`; file path existence confirmed locally; version previously observed from bundled sample save.
 
 ## Campaign Identity
 
@@ -38,15 +38,15 @@ This file is the fastest entry point for current campaign context. Update it whe
 
 ## Current Priorities
 
-1. Identify the active MekHQ campaign save location.
-2. Parse the active campaign save without modifying it.
-3. Produce the first campaign status report from real campaign data.
+1. Parse the active campaign save without modifying it.
+2. Identify MekHQ save/load source classes.
+3. Produce the first campaign status report from `The Learning Ropes.cpnx.gz`.
 
 ## Open Questions
 
-- Where does the user's active MekHQ campaign save live?
 - Which optional MekHQ campaign systems are enabled?
-- Which campaign facts should be treated as user-confirmed baseline context?
+- Which campaign identity fields should be treated as confirmed after save inspection?
+- Should reports for this campaign live under `campaigns/learning-ropes/reports/`?
 
 ## Update Rules
 

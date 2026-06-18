@@ -16,6 +16,7 @@ Primary outcomes:
 ## Documentation Operating Model
 
 - `DOCUMENTATION_WORKFLOW.md`: required process for updating durable notes.
+- `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
 - `ACTIVE_CAMPAIGN.md`: current campaign save, identity, contract, enabled systems, priorities, and unknowns.
 - `KNOWN_COMMANDS.md`: repeatable commands for verification, launch, source search, and safe inspection.
 - `SAVE_FORMAT_NOTES.md`: MekHQ campaign save structure, evidence labels, field meanings, and source references.
@@ -50,10 +51,11 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 
 ## Immediate Next Milestones
 
-1. Identify the active MekHQ campaign save location.
-2. Update `ACTIVE_CAMPAIGN.md` from save data or user-confirmed facts.
-3. Learn how `.cpnx.gz` campaign files are structured and record findings in `SAVE_FORMAT_NOTES.md`.
-4. Produce the first campaign status report from a real or sample campaign.
-5. Map the fields MekHQ uses for forces, personnel, units, repair state, finances, contracts, and scenarios.
-6. Map the source classes that load/save campaigns and perform common campaign actions.
-7. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.
+1. Maintain `TASKS.md` as the current work board.
+2. Use `The Learning Ropes.cpnx.gz` as the active practice campaign.
+3. Update `ACTIVE_CAMPAIGN.md` from save data after safe inspection.
+4. Learn how `.cpnx.gz` campaign files are structured and record findings in `SAVE_FORMAT_NOTES.md`.
+5. Produce the first campaign status report from the active sample campaign.
+6. Map the fields MekHQ uses for forces, personnel, units, repair state, finances, contracts, and scenarios.
+7. Map the source classes that load/save campaigns and perform common campaign actions.
+8. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.

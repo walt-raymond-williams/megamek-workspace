@@ -18,6 +18,7 @@ Be practical, explicit, and honest about uncertainty. If a rule, file format, UI
 
 - Current-state knowledge lives in `docs/current/`.
 - Documentation updates must follow `docs/current/DOCUMENTATION_WORKFLOW.md`.
+- Active work tracking belongs in `docs/current/TASKS.md`.
 - Current campaign context belongs in `docs/current/ACTIVE_CAMPAIGN.md` once a campaign is identified.
 - Repeatable commands belong in `docs/current/KNOWN_COMMANDS.md`.
 - MekHQ campaign save structure belongs in `docs/current/SAVE_FORMAT_NOTES.md`.
@@ -43,12 +44,13 @@ When docs disagree, prefer `docs/current/` over older notes.
 For campaign or scenario interpretation:
 
 1. Identify the exact input files and their versions.
-2. Check `docs/current/ACTIVE_CAMPAIGN.md` for known current campaign context.
-3. Inspect structure before interpreting. For compressed campaign files, extract to `analysis/tmp/` or read from a temporary location.
-4. Build a small factual summary first: date, faction/unit, active contract, force composition, personnel, finances, repairs, location, pending scenarios, and alerts.
-5. Interpret the situation through BattleTech/MekHQ concepts: tonnage, tech base, BV, armor/internal damage, heat, ammo, pilot skills, morale, fatigue, maintenance burden, transport, supply, and contract obligations.
-6. Separate facts, inferences, and recommendations.
-7. Save durable discoveries in `docs/current/` when they improve future work.
+2. Check `docs/current/TASKS.md` for current priorities.
+3. Check `docs/current/ACTIVE_CAMPAIGN.md` for known current campaign context.
+4. Inspect structure before interpreting. For compressed campaign files, extract to `analysis/tmp/` or read from a temporary location.
+5. Build a small factual summary first: date, faction/unit, active contract, force composition, personnel, finances, repairs, location, pending scenarios, and alerts.
+6. Interpret the situation through BattleTech/MekHQ concepts: tonnage, tech base, BV, armor/internal damage, heat, ammo, pilot skills, morale, fatigue, maintenance burden, transport, supply, and contract obligations.
+7. Separate facts, inferences, and recommendations.
+8. Save durable discoveries in `docs/current/` when they improve future work.
 
 For questions about how MekHQ or MegaMek behaves, inspect source before giving a confident answer. Use `rg` heavily in the source checkouts and cite the relevant class/file in the response when it materially supports the conclusion.
 
@@ -126,3 +128,5 @@ For parsing work, verify by comparing extracted summaries against MekHQ's UI or 
 ## Learning Loop
 
 When a campaign file field, scenario field, or MekHQ mechanic becomes clear, add a compact note to `docs/current/` using the evidence labels in `docs/current/DOCUMENTATION_WORKFLOW.md`. Future agents should inherit hard-won understanding instead of rediscovering it.
+
+When work starts, finishes, becomes blocked, or changes priority, update `docs/current/TASKS.md` so the next session can resume from the current board.
