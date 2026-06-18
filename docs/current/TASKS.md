@@ -36,26 +36,30 @@ Use this shape for active and queued work:
 
 ## Now
 
-1. Turn this repo into an AI-ready project workflow demo.
+1. Establish roadmap-driven GitHub issue tracking.
    - Status: `In progress`
    - Owner: `Mixed`
-   - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
-   - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Issues/Projects becomes the primary tracker.
-   - Notes: This supersedes the narrower private GitHub migration task. Keep the current repo as the demo/worked-example repo rather than starting over. Use `campaigns/demo/ai-ready-demo.cpnx.gz` as the versioned sample save for demonstrations. Keep external source checkouts configurable or locally discovered instead of requiring large cloned repos to live inside this workspace.
+   - Goal: Make `docs/current/ROADMAP.md` the tracked planning source that guides gradual GitHub issue creation and agent handoff documents.
+   - Output: Roadmap file, GitHub issue workflow, agent handoff template, and a first GitHub issue once remote/auth setup is available.
+   - Notes: GitHub Issues should be execution units created from roadmap entries when ready, not the only place long-term planning lives. Handoffs should let another agent start from the issue plus the handoff without rediscovering the full workspace.
 
 ## Next
 
-1. Inspect the active campaign save without modifying it.
+1. Turn this repo into an AI-ready project workflow demo.
+   - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
+   - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
+
+2. Inspect the active campaign save without modifying it.
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
 
-2. Identify MekHQ save/load source classes.
+3. Identify MekHQ save/load source classes.
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
 
-3. Produce the first campaign status report.
+4. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
-   - Output: A report under `campaigns/learning-ropes/reports/`.
+   - Output: A report under `campaigns/demo/reports/`.
 
 ## Backlog
 

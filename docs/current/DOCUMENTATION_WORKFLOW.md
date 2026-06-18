@@ -7,6 +7,8 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `AGENTS.md`: agent instructions, safety posture, project rules, and required workflows.
 - `README.md`: human quick start and workspace orientation.
 - `docs/current/`: current durable knowledge that should guide future sessions.
+- `docs/current/ROADMAP.md`: repository-owned planning source, roadmap, issue candidates, and sequencing notes.
+- `docs/current/GITHUB_ISSUE_WORKFLOW.md`: process for turning roadmap entries into GitHub Issues and agent handoff documents.
 - `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recently completed work.
 - `docs/templates/`: reusable report formats and briefing structures.
 - `campaigns/`: local campaign inputs and deliberate campaign snapshots.
@@ -20,6 +22,7 @@ Prefer one current source of truth for each fact. If a fact belongs in a more sp
 Update `docs/current/` when any of the following become clear:
 
 - the active campaign save path, campaign identity, contract, or enabled campaign systems
+- a roadmap entry, issue candidate, sequencing decision, or GitHub issue handoff changes
 - the meaning of a MekHQ campaign field, scenario field, unit field, or report value
 - the source class or method responsible for a campaign action or UI behavior
 - a repeatable command, parser, extraction method, or verification step
@@ -32,6 +35,8 @@ Do not record every temporary observation. Record discoveries that are likely to
 ## Where Updates Go
 
 - Use `ACTIVE_CAMPAIGN.md` for the current campaign file, identity, enabled systems, priorities, and unresolved campaign-specific questions.
+- Use `ROADMAP.md` for durable planning, issue candidates, sequencing decisions, and handoff notes that may guide future GitHub Issues.
+- Use `GITHUB_ISSUE_WORKFLOW.md` for the process of creating GitHub Issues and agent handoffs from roadmap entries.
 - Use `TASKS.md` for active work, near-term queue, backlog, blocked items, and recently completed work.
 - Use `KNOWN_COMMANDS.md` for commands that are safe, repeatable, and useful across sessions.
 - Use `SOURCE_CHANGE_WORKFLOW.md` for source modification, build/test, dirty-worktree, and documentation follow-through rules.
