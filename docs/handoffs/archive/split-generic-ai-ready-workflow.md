@@ -23,7 +23,7 @@ Read these first:
 
 ## Expected Output
 
-- A clear generic AI-ready workflow surface for reuse in other repositories.
+- A clear generic AI-ready workflow surface in this public canonical repository.
 - A MegaMek-specific project profile or equivalent location for local assumptions and domain guidance.
 - Updated links from `AGENTS.md`, `README.md`, and `docs/current/WORKSPACE.md` if structure changes.
 - Roadmap and task-board updates reflecting any follow-on work.
@@ -37,7 +37,8 @@ Likely files to read or edit:
 - `docs/current/WORKSPACE.md`
 - `docs/current/ROADMAP.md`
 - `docs/current/DOCUMENTATION_WORKFLOW.md`
-- Possible new project profile path, to be chosen during the work.
+- `docs/current/AI_READY_PROJECT_WORKFLOW.md`
+- `docs/current/MEGAMEK_PROJECT_PROFILE.md`
 
 ## Commands
 
@@ -62,7 +63,9 @@ rg "MegaMek|MekHQ|BattleTech|AI-ready|project profile" AGENTS.md README.md docs
 - Existing campaign-analysis and source-inspection workflows still point to the right docs.
 - `ROADMAP.md` and `TASKS.md` reflect the result and follow-on work.
 
-## Open Questions
+## Resolution
 
-- Should project profiles live under `projects/megamek/`, `docs/current/project-profiles/`, or another structure?
-- Should the generic workflow become the default top-level posture, with MegaMek as the first profile?
+- This remains one public canonical repo, not a private workspace plus a separate template repo.
+- The reusable workflow lives at `docs/current/AI_READY_PROJECT_WORKFLOW.md`.
+- The active MegaMek/MekHQ profile lives at `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
+- Project profiles stay under `docs/current/` unless the user explicitly asks for a different structure.

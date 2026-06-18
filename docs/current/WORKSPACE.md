@@ -14,12 +14,12 @@ Primary outcomes:
 - inspect source code to understand real behavior, UI actions, file formats, and automation points
 - support source modifications when they help campaign control or interpretation
 - gradually build a local BattleTech/MekHQ knowledge base
-- demonstrate a reusable agentic workflow that can be adapted to other existing codebases
+- demonstrate a reusable agentic workflow through this public canonical repo
 - preserve a versioned demo save for repeatable save-file and requirements-discovery examples
 
 ## Documentation Operating Model
 
-- `AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern for AI-ready repositories.
+- `AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern demonstrated by this public canonical repo.
 - `MEGAMEK_PROJECT_PROFILE.md`: MegaMek/MekHQ local assumptions, paths, data safety rules, source posture, and domain guidance.
 - `DOCUMENTATION_WORKFLOW.md`: required process for updating durable notes.
 - `ROADMAP.md`: repository-owned roadmap and issue-candidate source of truth.
@@ -86,4 +86,4 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 9. Map the source classes that load/save campaigns and perform common campaign actions.
 10. Resolve or document the Gradle daemon Java 17 blocker before relying on source build/test verification.
 11. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.
-12. Use the generic workflow and MegaMek project profile split as the model for future repo positioning work.
+12. Keep this public repo as the canonical working artifact while improving the generic workflow and MegaMek profile in place.

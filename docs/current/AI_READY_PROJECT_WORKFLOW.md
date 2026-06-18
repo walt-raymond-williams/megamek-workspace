@@ -99,9 +99,9 @@ When repository changes are made:
 
 Do not call a task complete if the required close-out commit exists only locally.
 
-## Adaptation Checklist
+## Reference Checklist
 
-When using this workflow as a reference for another project:
+When using this public repo as the living reference for the workflow:
 
 1. Write a project profile before doing risky work.
 2. Identify protected local inputs and ignored payloads.

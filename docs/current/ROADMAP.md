@@ -116,7 +116,7 @@ Use this shape for entries that may become GitHub issues:
 - Owner: `Codex`
 - Goal: Decide how agents should use local MegaMek/MekHQ help files, glossary resources, installed docs, and source code.
 - Why it matters: Help files are a safer user-facing reference for concepts, while source is needed for exact behavior.
-- Expected output: Durable workflow note or skill-style guide, linked from `WORKSPACE.md` or the future MegaMek project profile.
+- Expected output: Durable workflow note or skill-style guide, linked from `WORKSPACE.md` or the current MegaMek project profile.
 - Handoff notes: Resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`. Active handoff: `docs/handoffs/active/create-help-file-usage-guidance.md`.
 - Dependencies: PDF extraction tooling would improve coverage but is not required for text, Markdown, HTML, Java, and properties files.
 - Open questions: Should this become a reusable project-profile pattern?
