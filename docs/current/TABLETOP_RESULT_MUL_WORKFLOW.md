@@ -13,6 +13,7 @@ Evidence labels:
 - `Confirmed from source`: MekHQ's manual scenario resolution path imports a single battle-record MUL through `MekHQ.resolveScenario(Scenario)`, `ChooseMulFilesDialog`, and `ResolveScenarioTracker.processMulFiles()`.
 - `Confirmed from source`: the imported file is parsed by MegaMek's `MULParser`; MekHQ consumes the battle-record sections `survivors`, `allies`, `salvage`, `retreated`, `devastated`, and `kills`.
 - `Confirmed from source`: campaign player units are matched primarily by each entity's `externalId`, which must be the campaign `Unit` UUID. Crew/personnel matching uses crew-member `externalId` values that match MekHQ `Person` UUIDs.
+- `Confirmed by user`: during the `2026-06-18` MekHQ exploration shakedown, after resolving/ending a MegaMek-launched match, the UI offered a specific option to save a MUL.
 - `Inferred from source`: a robust tabletop result generator should not merely modify the setup `<unit>` MUL. It should generate a battle-record `<record>` MUL with the sections MegaMek writes after a game.
 
 ## Export Setup MULs
@@ -64,6 +65,8 @@ Relevant source:
 - `kills`
 
 `Confirmed from source`: [EntityListFile.java](../../external/src/megamek/megamek/src/megamek/common/units/EntityListFile.java) writes those same sections in `EntityListFile.saveTo(File, Client, Player)`, which is the MegaMek battle-record writer. The writer sorts in-game, retreated, graveyard, and devastated entities into the sections and records kill credit as `<kill killed="..." killer="..."/>`.
+
+`Confirmed by user`: the save-MUL option is exposed in the live MegaMek/MekHQ play flow after a match is resolved or ended. This needs one more UI pass to record the exact button/menu label and whether the saved file is a setup-style `<unit>` MUL, a battle-record `<record>` MUL, or a salvage-only artifact.
 
 Result-section meaning in MekHQ import:
 
