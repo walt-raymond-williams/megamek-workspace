@@ -1,0 +1,60 @@
+# Agent Handoff: Define Tabletop Result Input Schema
+
+## Issue
+
+- GitHub issue: `#9`
+- Roadmap entry: `Epic: Robust tabletop battle result MUL workflow`
+- Priority: `High`
+
+## Goal
+
+Define the minimum practical tabletop result schema needed to generate a MekHQ-compatible battle-record MUL from a hand-played BattleTech battle.
+
+## Required Context
+
+Read these first:
+
+- `AGENTS.md`
+- `docs/current/ROADMAP.md`
+- `docs/current/TASKS.md`
+- `docs/current/MEGAMEK_PROJECT_PROFILE.md`
+- `docs/current/SOURCE_CODE_GUIDE.md`
+- `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
+- `docs/handoffs/active/confirm-battle-record-mul-source-workflow.md`
+- `docs/handoffs/active/investigate-salvage-rules.md`
+
+## Expected Output
+
+- A durable schema/design note under `docs/current/`.
+- Required and optional fields for units, pilots/crew, armor/internal state, critical damage when needed, ammo state if relevant, destroyed/devastated/salvage/retreated outcomes, kills, battlefield control, and scenario outcome inputs.
+- Example result records for at least one simple player unit and one enemy/salvage candidate.
+
+## Files And Areas
+
+- `docs/current/`
+- `docs/current/SOURCE_CODE_GUIDE.md`
+- `docs/current/SAVE_FORMAT_NOTES.md`
+- `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
+
+## Commands
+
+```powershell
+git status --short --branch
+```
+
+## Constraints
+
+- Do not edit campaign saves.
+- Prefer source-confirmed fields over inferred MUL XML structure.
+- Separate required fields from optional or future fields.
+
+## Acceptance Criteria
+
+- The schema is implementable without editing campaign saves directly.
+- Required fields are separated from optional or future fields.
+- Unresolved edge cases are listed, especially ejections, prisoner/casualty states, salvage ownership, off-board retreat, and ammunition/critical state fidelity.
+
+## Open Questions
+
+- What is the smallest schema that supports the user's likely first campaign battles?
+- How much damage fidelity does MekHQ require for repair/salvage consequences?

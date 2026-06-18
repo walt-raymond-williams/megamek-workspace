@@ -8,7 +8,7 @@
 
 ## Goal
 
-Decompose the epic into actionable child issues for a robust workflow where MekHQ generates a scenario, the user plays the tactical battle by hand on the tabletop, and a generated battle-record MUL feeds accurate results back into MekHQ's manual scenario resolution.
+Coordinate the decomposed epic for a robust workflow where MekHQ generates a scenario, the user plays the tactical battle by hand on the tabletop, and a generated battle-record MUL feeds accurate results back into MekHQ's manual scenario resolution.
 
 ## Required Context
 
@@ -39,10 +39,29 @@ Source references already identified:
 
 ## Expected Output
 
-- Child GitHub issues for discovery, prototype, implementation, verification, and documentation.
-- Clear recommendation on whether the work should use a feature integration branch and feature tracking doc.
+- Child GitHub issues for discovery, prototype, implementation, verification, and documentation. Created issues: `#7` through `#13`.
+- Clear recommendation on whether the work should use a feature integration branch and feature tracking doc. Current recommendation: defer branch/tracking creation until strategy issue `#11`; create `codex/tabletop-result-mul-dev` before `#12` if implementation spans source changes or multiple commits.
 - A durable design note under `docs/current/` if decomposition confirms architecture or workflow decisions that future agents need.
 - Updated `ROADMAP.md` and `TASKS.md` reflecting the decomposed plan.
+
+## Child Issues
+
+- `#7`: Investigate MekHQ and BattleTech salvage rules.
+  - Handoff: `docs/handoffs/active/investigate-salvage-rules.md`
+- `#8`: Confirm battle-record MUL source workflow for tabletop result import.
+  - Handoff: `docs/handoffs/active/confirm-battle-record-mul-source-workflow.md`
+- `#9`: Define tabletop battle result input schema for MekHQ MUL generation.
+  - Handoff: `docs/handoffs/active/define-tabletop-result-input-schema.md`
+- `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
+  - Handoff: `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`
+- `#11`: Choose MUL generation strategy for tabletop result workflow.
+  - Handoff: `docs/handoffs/active/choose-tabletop-result-mul-generation-strategy.md`
+- `#12`: Implement robust tabletop battle-record MUL generator.
+  - Handoff: `docs/handoffs/active/implement-tabletop-battle-record-mul-generator.md`
+- `#13`: Verify and document tabletop result entry workflow for MekHQ.
+  - Handoff: `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`
+
+Recommended sequence: start with `#8`, run `#7` before or alongside `#9`, then proceed through `#10`, `#11`, `#12`, and `#13`.
 
 ## Files And Areas
 
@@ -84,8 +103,8 @@ Known blocker:
 
 ## Acceptance Criteria
 
-- The epic has been split into child issues with clear goals, dependencies, and verification expectations.
-- The child issue sequence covers at least source confirmation, minimal round-trip proof, result input schema, robust Java/MegaMek-backed MUL generation, manual/UI verification, and user-facing workflow documentation.
+- The epic has been split into child issues with clear goals, dependencies, and verification expectations. Completed with issues `#7` through `#13`.
+- The child issue sequence covers at least source confirmation, minimal round-trip proof, result input schema, robust Java/MegaMek-backed MUL generation, manual/UI verification, and user-facing workflow documentation. Covered by `#8`, `#10`, `#9`, `#11`/`#12`, and `#13`.
 - Roadmap and task-board entries point to the decomposed issue set.
 - Any durable source findings are recorded in `docs/current/`, not only in GitHub issues.
 
@@ -94,4 +113,4 @@ Known blocker:
 - Should the generator be a standalone Java helper using MegaMek/MekHQ jars, a MekHQ source feature, or a workspace script that invokes MegaMek classes?
 - What is the minimum tabletop result schema that covers the user's likely first campaign battles without overbuilding?
 - How should we validate generated battle-record MULs before loading them into MekHQ?
-- Should this use a feature integration branch such as `codex/tabletop-result-mul-dev` after decomposition?
+- Should this use a feature integration branch such as `codex/tabletop-result-mul-dev` before implementation issue `#12`?

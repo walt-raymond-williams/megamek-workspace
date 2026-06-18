@@ -36,7 +36,12 @@ Use this shape for active and queued work:
 
 ## Now
 
-No active task.
+1. Decompose robust tabletop battle result MUL workflow epic.
+   - Status: `In progress`
+   - Owner: `Mixed`
+   - Goal: Split the epic for generating battle-record MULs from tabletop results into child issues.
+   - Output: Child GitHub issues, updated roadmap/task tracking, and durable design notes if architecture decisions are confirmed.
+   - Notes: GitHub issue `#6`; child issues `#7` through `#13`; roadmap entry `Epic: Robust tabletop battle result MUL workflow`; active handoff `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`. Decomposition issues are created; next execution should start with source workflow confirmation issue `#8`.
 
 ## Next
 
@@ -69,14 +74,7 @@ No active task.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
-6. Decompose robust tabletop battle result MUL workflow epic.
-   - Status: `Not started`
-   - Owner: `Mixed`
-   - Goal: Split the epic for generating battle-record MULs from tabletop results into child issues.
-   - Output: Child GitHub issues, updated roadmap/task tracking, and durable design notes if architecture decisions are confirmed.
-   - Notes: GitHub issue `#6`; roadmap entry `Epic: Robust tabletop battle result MUL workflow`; active handoff `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`.
-
-7. Investigate MekHQ and BattleTech salvage rules.
+6. Investigate MekHQ and BattleTech salvage rules.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how MekHQ decides salvage eligibility and compare it against relevant BattleTech campaign salvage rules.
