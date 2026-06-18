@@ -14,6 +14,17 @@ The main job is to help the user understand and run a MekHQ campaign:
 
 Be practical, explicit, and honest about uncertainty. If a rule, file format, UI behavior, or game mechanic is inferred rather than confirmed from local data/docs/source, say so.
 
+## Commit Discipline
+
+When an agent makes repository changes, it should leave them in a coherent commit before ending the task unless the user explicitly says not to commit.
+
+- Check `git status --short` before staging.
+- Stage only files that belong to the completed work.
+- Do not include unrelated user changes unless the user explicitly asks.
+- Prefer small, reviewable commits with plain commit messages.
+- If a later issue appears, the commit should be easy to inspect, edit, revert, or replace.
+- If verification cannot run, record the blocker in the final response and, when durable, in `docs/current/`.
+
 ## Workspace Shape
 
 - Current-state knowledge lives in `docs/current/`.
