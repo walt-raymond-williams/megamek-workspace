@@ -36,6 +36,15 @@ Use this shape for active and queued work:
 
 ## Now
 
+1. Compare workflow against Sunny Town HQ.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Compare this repo's AI workflow, roadmap, handoff, issue, feature-branch, and PR-review process against Sunny Town HQ.
+   - Output: Updated workflow docs and a recommendation on which Sunny Town HQ patterns should become standard here.
+   - Notes: GitHub issue `#5`; active handoff `docs/handoffs/active/compare-sunny-town-hq-workflow.md`. Local Sunny Town HQ checkout confirmed at `C:\Users\waltr\Documents\New project`; remote `https://github.com/walt-raymond-williams/sunny-town-hq.git`. Inspect only; do not modify that repo.
+
+## Next
+
 1. Split generic AI-ready workflow from MegaMek profile.
    - Status: `Not started`
    - Owner: `Mixed`
@@ -43,34 +52,32 @@ Use this shape for active and queued work:
    - Output: Generic workflow docs plus a MegaMek project profile or equivalent structure.
    - Notes: GitHub issue `#1`; active handoff `docs/handoffs/active/split-generic-ai-ready-workflow.md`.
 
-## Next
-
-1. Inspect the active demo campaign save without modifying it.
+2. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-2. Identify MekHQ save/load source classes.
+3. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-3. Create help-file usage guidance for agents.
+4. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-4. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-5. Produce the first campaign status report.
+6. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 

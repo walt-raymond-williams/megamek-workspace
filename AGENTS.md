@@ -64,6 +64,14 @@ Roadmap posture:
 - Keep durable architecture, workflow, source, and campaign knowledge in `docs/current/`; do not leave it only in an issue handoff.
 - After creating or completing an issue, update the roadmap and commit the tracking change.
 
+Branch and merge posture:
+
+- For broad multi-ticket features, create a feature integration branch instead of merging partial work directly into `master`.
+- Name feature integration branches with the `codex/` prefix, for example `codex/ai-workflow-demo-dev`.
+- Agents may complete issues on the integration branch or on smaller branches that merge into the integration branch.
+- Keep `master` stable. A human should review and approve the integrated feature branch before it is merged into `master`.
+- Final PRs into `master` should reference completed issues and include verification notes or explicit blockers.
+
 ## Core Workflow
 
 For campaign or scenario interpretation:

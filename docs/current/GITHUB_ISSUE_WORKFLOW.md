@@ -24,6 +24,19 @@ Use one handoff document per agent-executed GitHub issue.
 
 Handoffs are execution context. `docs/current/` remains the live source for durable architecture, workflow, source, and campaign knowledge.
 
+## Feature Integration Branches
+
+For broad multi-ticket features or redesigns, use a feature integration branch instead of merging partial work directly into `master`.
+
+- Name feature integration branches with the `codex/` prefix, for example `codex/ai-workflow-demo-dev`.
+- Agents may complete individual GitHub issues on the integration branch or on smaller task branches that merge into the integration branch.
+- Close a GitHub issue when its work has landed in the feature integration branch and verification has been recorded.
+- Keep `master` stable until the feature slice is coherent and ready for human review.
+- Before merging an integration branch into `master`, a human should review the feature end to end, run or accept the agreed verification, and confirm `docs/current/` is accurate.
+- The final PR from the integration branch to `master` should reference completed issues with `Refs #123` or `Closes #123` as appropriate.
+
+This pattern is based on the confirmed local Sunny Town HQ workflow in `C:\Users\waltr\Documents\New project`.
+
 ## Before Creating Issues
 
 1. Check repository status:
@@ -105,3 +118,5 @@ When an issue is done:
 - `Confirmed locally`: `master` tracks `origin/master`.
 - `Confirmed locally`: GitHub label `agent-task` exists.
 - `Confirmed locally`: Active agent issues `#1` through `#4` were created from `ROADMAP.md` on `2026-06-18`.
+- `Confirmed locally`: Sunny Town HQ reference repo exists at `C:\Users\waltr\Documents\New project`, remote `https://github.com/walt-raymond-williams/sunny-town-hq.git`.
+- `Confirmed locally`: Issue `#5` tracks the workflow comparison against Sunny Town HQ.

@@ -69,6 +69,19 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: None.
 - Open questions: Should project profiles live under `projects/megamek/` or stay under `docs/current/` until the structure stabilizes?
 
+### Compare workflow against Sunny Town HQ
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#5`
+- Owner: `Codex`
+- Goal: Compare this repo's AI workflow, roadmap, handoff, issue, branch, and PR-review process against Sunny Town HQ and import useful patterns.
+- Why it matters: Sunny Town HQ already contains a working agentic workflow for epics, feature integration branches, per-issue handoffs, PR readiness review, and human-gated merges to main.
+- Expected output: Updated workflow docs, roadmap/task changes, and a recommendation on which Sunny Town HQ patterns should become standard here.
+- Handoff notes: Reference repo confirmed locally at `C:\Users\waltr\Documents\New project`; GitHub remote is `https://github.com/walt-raymond-williams/sunny-town-hq.git`. Compare `AGENTS.md`, `docs/GITHUB_TRACKING_DOC_GUIDE.md`, `docs/EPIC_BACKLOG.md`, PR-readiness handoffs, and open-PR handoffs. Active handoff: `docs/handoffs/active/compare-sunny-town-hq-workflow.md`.
+- Dependencies: Local Sunny Town HQ checkout is present but has its own dirty worktree; inspect only, do not modify it.
+- Open questions: Should this repo adopt Sunny Town's exact tracking-doc shape or keep the current `docs/current/ROADMAP.md` plus `docs/handoffs/` layout?
+
 ### Inspect demo campaign save
 
 - Status: `Issue created`
