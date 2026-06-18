@@ -26,6 +26,7 @@ Primary outcomes:
 - `GITHUB_ISSUE_WORKFLOW.md`: process for creating GitHub Issues and agent handoffs from roadmap entries.
 - `TASKS.md`: active work board, next queue, backlog, blocked items, and recent completions.
 - `CAMPAIGN_EXPLORATION_PLAN.md`: first hands-on MekHQ exploration plan, including new-campaign setup, first contract flow, owned transport, and the planned human-controlled aerospace transit scenario.
+- `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`: source-confirmed fixed OPFOR setup-MUL workflow for loading curated physical-miniature pools into MekHQ bot formations.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
 - `docs/handoffs/archive/`: completed issue handoff documents after close-out.

@@ -10,6 +10,15 @@
 
 Prototype fixed OPFOR MUL pools that can be loaded into MekHQ bot formations for physical-miniatures play.
 
+## Outcome
+
+Completed on `2026-06-18`.
+
+- Added `docs/current/FIXED_OPFOR_MUL_POOL_WORKFLOW.md`.
+- Added `docs/templates/OPFOR_MUL_POOL_MANIFEST.csv`.
+- Verified a local placeholder setup MUL can be generated with installed MekHQ/MegaMek jars through `EntityListFile.saveTo(...)` and parsed back with `MULParser`.
+- Did not commit the raw placeholder MUL because it is generated from full MegaMek unit definitions and does not represent confirmed user inventory.
+
 ## Required Context
 
 Read these first:

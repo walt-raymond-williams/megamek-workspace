@@ -108,7 +108,7 @@ Use rows where:
 - `mekhq_lookup_name` maps to a MegaMek unit
 - `bv` is known or can be checked in MegaMek/MekHQ
 
-Later issue `#18` can group rows into MUL pools by BV band, force role, faction flavor, and weight class.
+Issue `#18` documented how to group rows into fixed OPFOR setup-MUL pools by BV band, force role, faction flavor, and weight class. See `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`.
 
 ### Custom RATs
 

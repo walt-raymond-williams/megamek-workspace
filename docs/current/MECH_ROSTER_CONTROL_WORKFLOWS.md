@@ -74,7 +74,7 @@ Recommended physical-table workflow:
 
 1. Let MekHQ generate the scenario to establish mission, map, deployment, BV scale, and objectives.
 2. If the OPFOR is unsuitable, try `Regenerate Bot Forces`.
-3. If physical minis must be exact, edit the bot formation and load a curated MUL made from available tabletop units, or add/delete bot formations manually.
+3. If physical minis must be exact, edit the bot formation and load a curated setup MUL made from available tabletop units, or add/delete bot formations manually. The fixed-pool prototype workflow is in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`.
 4. Keep BV and role close to MekHQ's generated intent unless deliberately changing difficulty.
 
 This is the simplest no-source-change path for "we only own these minis tonight."
@@ -93,7 +93,7 @@ For the first playable parent-run campaign, avoid source changes and avoid campa
 
 - Player roster: copy/save the quickstart campaign, use GM-mode Add GM to add exact player units, remove unwanted quickstart units through Hangar GM Mode, then manually assign pilots/TO&E/transport.
 - OPFOR: let StratCon generate scenarios, use `Regenerate Bot Forces` first, then manually edit bot formations or load fixed OPFOR MULs when physical-mini availability matters.
-- Later data tooling: once the user's miniature list is known, create a small roster data file and generate either fixed OPFOR MULs or custom RAT/ratdata entries.
+- Later data tooling: once the user's miniature list is known, create a small roster data file and generate fixed OPFOR setup MULs first; consider custom RAT/ratdata entries only after fixed-pool play exposes a real need.
 
 ## Child-Issue Candidates
 
@@ -102,7 +102,8 @@ For the first playable parent-run campaign, avoid source changes and avoid campa
 2. Define the physical miniature roster data model.
    - Acceptance: a small CSV/Markdown/JSON schema records chassis, variant, quantity, faction/era notes, unit type, weight, BV if available, and whether the miniature can be player, OPFOR, or either.
 3. Prototype fixed OPFOR MUL pools.
-   - Acceptance: create a few curated OPFOR MUL files from the miniature list and verify they can be loaded through `CustomizeBotForceDialog`.
+   - Status: completed on `2026-06-18`; workflow is in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`.
+   - Acceptance: source-confirmed `CustomizeBotForceDialog` load/save behavior, added a pool manifest template, and locally verified placeholder MUL generation plus parser round trip with installed jars. Real inventory MULs remain pending the user's physical miniature list.
 4. Decide whether custom RATs are worth it.
    - Acceptance: compare manual MUL substitution against custom `data/rat` plus `data/universe/ratdata` entries using the user's miniature list and one generated StratCon scenario.
 

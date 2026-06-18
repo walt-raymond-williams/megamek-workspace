@@ -69,13 +69,14 @@ Likely relevant formats:
 
 - `.mtf`: classic BattleMech unit files
 - `.blk`: many non-Mek or structured unit definitions
-- `.mul`: MegaMek unit list/scenario force interchange
+- `.mul`: MegaMek unit list/scenario force interchange; fixed OPFOR pool setup-MUL workflow is documented in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`
 - `.csv`: preferred first format for the user's physical-miniature inventory; see `PHYSICAL_MINIATURE_ROSTER_MODEL.md` and `docs/templates/PHYSICAL_MINIATURE_ROSTER.csv`
 - scenario files: inspect local `docs/` and source parser code before assuming format details
 
 Known source references in the MegaMek checkout:
 
 - `megamek/common/loaders/MULParser.java`
+- `megamek/common/units/EntityListFile.java`
 - `megamek/common/loaders/MtfFile.java`
 - `megamek/common/loaders/BLKFile.java`
 - `megamek/common/scenario/ScenarioLoader.java`
