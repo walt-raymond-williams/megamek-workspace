@@ -121,6 +121,19 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: PDF extraction tooling would improve coverage but is not required for text, Markdown, HTML, Java, and properties files.
 - Open questions: Should this become a reusable project-profile pattern?
 
+### Run MekHQ campaign exploration live-assist shakedown
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#16`
+- Owner: `Mixed`
+- Goal: Run the hands-on MekHQ exploration plan as a live user/Codex session while the user manually operates MekHQ and Codex acts as a campaign aide, source/docs reference, and documentation recorder.
+- Why it matters: The workspace needs to move from documentation-only planning into an actual MekHQ shakedown that tries campaign creation, contracts, travel, owned transport, aerospace, scenario resolution, repair, salvage, finances, and close-out.
+- Expected output: Session notes and durable documentation updates from trying `CAMPAIGN_EXPLORATION_PLAN.md`, including what worked, what failed, and what needs source follow-up.
+- Handoff notes: Active handoff: `docs/handoffs/active/run-mekhq-campaign-exploration.md`. The intended workflow is for the user to start MekHQ and Codex together, then operate MekHQ manually while Codex follows the handoff.
+- Dependencies: User must manually operate MekHQ or share enough UI/save context for Codex to advise. Use a disposable exploration save. Do not rely on bot-controlled space-map aerospace combat for the first test; the user intends to resolve aerospace/space battles with two human players.
+- Open questions: Which exploration save path should become active? Can a custom transit aerospace battle be attached cleanly to an active contract, or should it be tracked as a manual/GM narrative scenario? Which Leopard variant and two aerospace fighters should be used for the first test?
+
 ### Epic: Robust tabletop battle result MUL workflow
 
 - Status: `In progress`

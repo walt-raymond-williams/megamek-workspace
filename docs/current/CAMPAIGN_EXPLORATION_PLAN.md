@@ -11,6 +11,12 @@ This document tracks the first hands-on MekHQ exploration campaign. The goal is 
 - Add owned transport and aerospace assets so travel and aerospace combat can be tested intentionally.
 - Preserve notes that will help future Codex sessions interpret the campaign and advise on next actions.
 
+## Tracking
+
+- GitHub issue: `#16`
+- Active handoff: `docs/handoffs/active/run-mekhq-campaign-exploration.md`
+- Intended execution: the user starts MekHQ and Codex together, operates MekHQ manually, and Codex follows the handoff as a live campaign aide and documentation recorder.
+
 ## Evidence And Assumptions
 
 - `Confirmed from local docs`: The installed `0_MHQ New Player Guide.pdf` recommends using StratCon as the digital GM for a first single-player campaign, with low starting difficulty such as the New Player preset / Ultra-Green posture.
