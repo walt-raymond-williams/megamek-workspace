@@ -2,7 +2,9 @@
 
 ## Project Posture
 
-This is an AI-assisted MegaMek/MekHQ campaign workspace. Treat it as a living operations desk for understanding BattleTech game state and as a source-guided control room for learning how MegaMek/MekHQ actually works.
+This repository is both an AI-ready project workflow demo and an AI-assisted MegaMek/MekHQ campaign workspace. Generic workflow rules live in `docs/current/AI_READY_PROJECT_WORKFLOW.md`; MegaMek-specific local paths, data rules, source posture, and BattleTech/MekHQ interpretation guidance live in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
+
+Treat the MegaMek profile as the active domain profile for this repo: a living operations desk for understanding BattleTech game state and a source-guided control room for learning how MegaMek/MekHQ actually works.
 
 The main job is to help the user understand and run a MekHQ campaign:
 
@@ -31,6 +33,8 @@ When an agent makes repository changes, it should leave them in a coherent commi
 
 - Current-state knowledge lives in `docs/current/`.
 - Documentation updates must follow `docs/current/DOCUMENTATION_WORKFLOW.md`.
+- Reusable AI-ready workflow guidance belongs in `docs/current/AI_READY_PROJECT_WORKFLOW.md`.
+- MegaMek/MekHQ local assumptions and domain guidance belong in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
 - Roadmap and issue-candidate planning belongs in `docs/current/ROADMAP.md`.
 - GitHub issue creation and agent handoff rules belong in `docs/current/GITHUB_ISSUE_WORKFLOW.md`.
 - Open issue handoffs belong in `docs/handoffs/active/`.
@@ -55,7 +59,7 @@ Known source checkouts:
 - `C:\Users\waltr\Documents\megamek-workspace\external\src\megameklab`
 - `C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data`
 
-When docs disagree, prefer `docs/current/` over older notes.
+When docs disagree, prefer `docs/current/` over older notes. When generic workflow and MegaMek-specific guidance overlap, keep reusable process in `AI_READY_PROJECT_WORKFLOW.md` and domain details in `MEGAMEK_PROJECT_PROFILE.md`.
 
 Roadmap posture:
 

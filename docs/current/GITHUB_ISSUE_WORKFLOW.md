@@ -7,6 +7,7 @@ Use this workflow when turning roadmap items into GitHub Issues for execution, d
 - `docs/current/ROADMAP.md` is the durable planning source.
 - GitHub Issues are trackable execution units created from roadmap entries.
 - `docs/current/TASKS.md` tracks immediate local work and should point back to the roadmap when planning details live there.
+- Generic workflow patterns belong in `docs/current/AI_READY_PROJECT_WORKFLOW.md`; project-specific execution assumptions belong in the active project profile.
 - Handoff documents give agents enough context to work from an issue without rediscovering the whole repo.
 - Active handoff documents live in `docs/handoffs/active/`.
 - Completed handoff documents move to `docs/handoffs/archive/` after the issue is done, committed, and any merge or close-out work is complete.

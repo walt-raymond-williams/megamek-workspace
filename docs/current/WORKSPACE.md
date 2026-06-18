@@ -2,7 +2,9 @@
 
 ## Purpose
 
-This workspace is becoming an AI-ready project workflow demo, with MegaMek/MekHQ as the worked example. It should show how to make a complex existing project usable by agents through durable context, source-grounded investigation, requirements discovery, verified commands, and safe domain-data analysis.
+This workspace is an AI-ready project workflow demo, with MegaMek/MekHQ as the worked example. It shows how to make a complex existing project usable by agents through durable context, source-grounded investigation, requirements discovery, verified commands, and safe domain-data analysis.
+
+The reusable workflow surface is `AI_READY_PROJECT_WORKFLOW.md`. The MegaMek-specific domain profile is `MEGAMEK_PROJECT_PROFILE.md`.
 
 Primary outcomes:
 
@@ -17,6 +19,8 @@ Primary outcomes:
 
 ## Documentation Operating Model
 
+- `AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern for AI-ready repositories.
+- `MEGAMEK_PROJECT_PROFILE.md`: MegaMek/MekHQ local assumptions, paths, data safety rules, source posture, and domain guidance.
 - `DOCUMENTATION_WORKFLOW.md`: required process for updating durable notes.
 - `ROADMAP.md`: repository-owned roadmap and issue-candidate source of truth.
 - `GITHUB_ISSUE_WORKFLOW.md`: process for creating GitHub Issues and agent handoffs from roadmap entries.
@@ -34,6 +38,10 @@ Primary outcomes:
 - `CAMPAIGN_ANALYSIS_WORKFLOW.md`: campaign and scenario analysis sequence.
 
 If a discovery will matter in a later session, record it in the narrowest relevant `docs/current/` file.
+
+## MegaMek Profile Summary
+
+Full local setup, data safety posture, source inspection expectations, BattleTech rules posture, and verification checks live in `MEGAMEK_PROJECT_PROFILE.md`.
 
 ## Known Local Installation
 
@@ -78,4 +86,4 @@ Use source inspection heavily. When the user asks how to control the campaign, a
 9. Map the source classes that load/save campaigns and perform common campaign actions.
 10. Resolve or document the Gradle daemon Java 17 blocker before relying on source build/test verification.
 11. Build repeatable extraction or automation scripts only after the data shape and code paths are understood.
-12. Split generic AI-ready workflow guidance from MegaMek-specific project profile details.
+12. Use the generic workflow and MegaMek project profile split as the model for future repo positioning work.

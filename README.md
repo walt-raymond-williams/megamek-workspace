@@ -1,6 +1,8 @@
-# MegaMek Workspace
+# MegaMek AI-Ready Workspace
 
-This is an AI-assisted workspace for understanding MegaMek, MekHQ, and BattleTech campaign state.
+This repository is an AI-ready project workflow demo with MegaMek/MekHQ campaign analysis as the worked example.
+
+The reusable workflow pattern lives in `docs/current/AI_READY_PROJECT_WORKFLOW.md`. The MegaMek-specific project profile lives in `docs/current/MEGAMEK_PROJECT_PROFILE.md`.
 
 The purpose is not primarily to develop MegaMek itself. Source code may be cloned nearby for reference, but this workspace is for:
 
@@ -46,6 +48,8 @@ Both should report version 21.
 
 - `AGENTS.md` tells Codex how to work in this project.
 - `docs/current/` is the front door for current understanding.
+- `docs/current/AI_READY_PROJECT_WORKFLOW.md` describes the reusable project workflow pattern.
+- `docs/current/MEGAMEK_PROJECT_PROFILE.md` describes the MegaMek/MekHQ local profile.
 - `docs/templates/` contains repeatable report formats.
 - `campaigns/` is for local campaign snapshots and notes.
 - `analysis/` is for generated extracts and temporary interpretation work.
@@ -60,6 +64,8 @@ Raw campaign saves are ignored by default. Add them deliberately when needed.
 Start here when orienting a new session:
 
 - `docs/current/WORKSPACE.md`: current workspace state, known install/source paths, and near-term milestones.
+- `docs/current/AI_READY_PROJECT_WORKFLOW.md`: reusable AI-ready project structure, intake, handoff, branch, and close-out pattern.
+- `docs/current/MEGAMEK_PROJECT_PROFILE.md`: local MegaMek/MekHQ paths, data safety rules, source posture, and interpretation guidance.
 - `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recent completions.
 - `docs/current/ACTIVE_CAMPAIGN.md`: active campaign save, identity, contract, enabled systems, priorities, and open questions.
 - `docs/current/DOCUMENTATION_WORKFLOW.md`: required process for keeping durable notes current.

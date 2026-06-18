@@ -7,6 +7,8 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `AGENTS.md`: agent instructions, safety posture, project rules, and required workflows.
 - `README.md`: human quick start and workspace orientation.
 - `docs/current/`: current durable knowledge that should guide future sessions.
+- `docs/current/AI_READY_PROJECT_WORKFLOW.md`: reusable workflow pattern for adapting this repo structure to other projects.
+- `docs/current/MEGAMEK_PROJECT_PROFILE.md`: MegaMek/MekHQ-specific local paths, data safety posture, source posture, and domain guidance.
 - `docs/current/ROADMAP.md`: repository-owned planning source, roadmap, issue candidates, and sequencing notes.
 - `docs/current/GITHUB_ISSUE_WORKFLOW.md`: process for turning roadmap entries into GitHub Issues and agent handoff documents.
 - `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recently completed work.
@@ -32,11 +34,14 @@ Update `docs/current/` when any of the following become clear:
 - a BattleTech or MekHQ mechanic that materially changes campaign advice
 - a known risk, open question, or assumption that future agents should not rediscover
 - a task starts, finishes, becomes blocked, or changes priority in a way future agents need to see
+- generic workflow guidance or project-profile boundaries change
 
 Do not record every temporary observation. Record discoveries that are likely to matter again.
 
 ## Where Updates Go
 
+- Use `AI_READY_PROJECT_WORKFLOW.md` for reusable AI-ready project process, repo shape, task intake, handoffs, branch/PR patterns, and close-out requirements.
+- Use `MEGAMEK_PROJECT_PROFILE.md` for MegaMek/MekHQ local setup, protected data, domain posture, source inspection expectations, and BattleTech/MekHQ interpretation guidance.
 - Use `ACTIVE_CAMPAIGN.md` for the current campaign file, identity, enabled systems, priorities, and unresolved campaign-specific questions.
 - Use `ROADMAP.md` for durable planning, issue candidates, sequencing decisions, and handoff notes that may guide future GitHub Issues.
 - Use `GITHUB_ISSUE_WORKFLOW.md` for the process of creating GitHub Issues and agent handoffs from roadmap entries.
