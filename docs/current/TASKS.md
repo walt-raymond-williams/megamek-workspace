@@ -40,39 +40,46 @@ No active task.
 
 ## Next
 
-1. Investigate MekHQ and BattleTech salvage rules.
+1. Discover MekHQ roster-control workflows.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Confirm in-game, data, and source-supported ways to control the player starting roster and OPFOR generation for a physical-miniatures MekHQ campaign.
+   - Output: Discovery notes and child-issue recommendations for epic `#14`.
+   - Notes: GitHub issue `#14`; active handoff `docs/handoffs/active/mech-roster-control-epic.md`; tracking doc `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`.
+
+2. Investigate MekHQ and BattleTech salvage rules.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how MekHQ decides salvage eligibility and compare it against relevant BattleTech campaign salvage rules.
    - Output: Durable salvage notes under `docs/current/` and implications for tabletop result MUL generation.
    - Notes: GitHub issue `#7`; child of epic `#6`; active handoff `docs/handoffs/active/investigate-salvage-rules.md`; recommended next for epic `#6` after completing issue `#8`.
 
-2. Inspect the active demo campaign save without modifying it.
+3. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-3. Identify MekHQ save/load source classes.
+4. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-4. Create help-file usage guidance for agents.
+5. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-5. Turn this repo into an AI-ready project workflow demo.
+6. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-6. Produce the first campaign status report.
+7. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 

@@ -156,3 +156,17 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Child issue of epic `#6`. Use source first, especially `ResolveScenarioTracker`, post-scenario handlers, contract classes, and CamOps salvage utilities. Active handoff: `docs/handoffs/active/investigate-salvage-rules.md`.
 - Dependencies: Local source is available under `external/src`; official BattleTech rulebooks may need user-provided page references or official/primary public references. Do not reproduce large copyrighted rules text.
 - Open questions: Which optional MekHQ salvage systems are enabled in the active campaign? Which BattleTech campaign-rule source should be treated as authoritative for the user's table: Campaign Operations, Chaos Campaign, Mercenaries rules, or another source?
+
+### Epic: Control MekHQ player and OPFOR mech rosters
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#14`
+- Owner: `Mixed`
+- Goal: Figure out the best workflow for setting and controlling MekHQ campaign rosters for a parent-run tabletop campaign, including both the player's mercenary company roster and generated opposition forces.
+- Why it matters: The user wants to manage the campaign and narration for his son while using actual physical BattleTech miniatures. MekHQ should remain the campaign authority, but the player starting roster and OPFOR generation need to align with the units available at the table.
+- Expected output: A source- and UI-grounded recommendation for roster control, followed by child issues for any useful implementation or tooling. Possible outputs include an in-game player-roster workflow, an OPFOR editing/regeneration workflow, custom RAT prototype notes, a miniature-pool roster format, and a decision on whether a workspace tool or MekHQ source change is justified.
+- Handoff notes: This is an epic, not a direct implementation task. Active epic handoff: `docs/handoffs/active/mech-roster-control-epic.md`. Feature tracking snapshot: `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`.
+- Dependencies: Local MekHQ install and source are available under `external/`. Source build/test commands remain blocked by the Java 17 Gradle daemon/toolchain issue. The user's physical miniature list is needed before final OPFOR restrictions or custom RATs can be built.
+- Recommended sequence: Start with source/UI discovery for player roster changes and OPFOR generation, then decide whether to create child issues for custom RATs, a miniature-pool data model, a save-safe roster import helper, or MekHQ source changes.
+- Open questions: Which exact miniatures and variants should be considered legal for the player and OPFOR pools? Is it acceptable for MekHQ to generate a scenario and then have the GM substitute close-BV physical units manually, or should generation itself be constrained? Should any tooling live in this workspace, in MekHQ source, or as data-only custom RAT files?
