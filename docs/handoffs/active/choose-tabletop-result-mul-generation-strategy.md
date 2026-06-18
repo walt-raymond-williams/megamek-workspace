@@ -8,7 +8,7 @@
 
 ## Goal
 
-Decide the implementation strategy for generating battle-record MUL files: standalone Java helper using MegaMek/MekHQ classes, MekHQ source feature, workspace script invoking installed jars, or another safe approach.
+Decide whether custom battle-record MUL generation is needed at all. Compare MekHQ's built-in manual result-entry/import workflow against custom options such as a standalone Java helper using MegaMek/MekHQ classes, a MekHQ source feature, a workspace script invoking installed jars, or another safe approach.
 
 ## Required Context
 
@@ -26,9 +26,10 @@ Read these first:
 ## Expected Output
 
 - A short architecture decision note under `docs/current/` comparing viable generation approaches.
-- Recommendation for the first implementation path.
+- Recommendation for the first path: built-in MekHQ workflow plus documentation, lightweight helper/manual-edit workflow, or custom generator implementation.
 - List of commands, dependencies, and validation hooks needed for implementation.
-- Decision on whether to create `codex/tabletop-result-mul-dev` and a feature tracking doc before implementation begins.
+- Decision on whether issue `#12` should proceed, be narrowed, or be closed as unnecessary.
+- Decision on whether to create `codex/tabletop-result-mul-dev` and a feature tracking doc before any implementation begins.
 
 ## Files And Areas
 
@@ -58,9 +59,11 @@ Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.
 
 - The recommendation identifies where code should live and what it should call.
 - The recommendation explains how generated MULs will be validated before MekHQ import.
+- The recommendation explicitly evaluates the no-custom-code path using MekHQ's built-in workflow.
 - The issue leaves implementation-ready next steps and avoids making unverified source claims.
 
 ## Open Questions
 
 - Is the installed MekHQ suite sufficient for generation and validation?
+- Is MekHQ's built-in manual workflow sufficient with better documentation and operator guidance?
 - Should implementation happen on a feature integration branch?

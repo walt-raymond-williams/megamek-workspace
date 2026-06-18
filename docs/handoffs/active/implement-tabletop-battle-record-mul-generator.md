@@ -8,7 +8,9 @@
 
 ## Goal
 
-Implement the first robust generator that converts structured tabletop battle results into MekHQ-compatible battle-record MUL files.
+If issue `#11` confirms custom generation is necessary, implement the first robust generator that converts structured tabletop battle results into MekHQ-compatible battle-record MUL files.
+
+If issue `#11` concludes MekHQ's built-in manual result-entry/import workflow is sufficient, do not start this implementation as written. Narrow or close this issue and route the remaining work to documentation/verification instead.
 
 ## Required Context
 
@@ -47,7 +49,7 @@ Add implementation-specific commands after `#11` records the strategy.
 
 ## Constraints
 
-- Start only after the generation strategy is chosen.
+- Start only after the generation strategy is chosen and custom implementation is explicitly confirmed.
 - Use MegaMek/MekHQ structured APIs where practical instead of hand-rolled XML.
 - Follow `docs/current/SOURCE_CHANGE_WORKFLOW.md` before modifying any source checkout.
 
@@ -59,5 +61,6 @@ Add implementation-specific commands after `#11` records the strategy.
 
 ## Open Questions
 
-- Which implementation location and branch will `#11` select?
+- Will `#11` confirm this implementation is needed, or will it recommend built-in MekHQ workflow plus documentation?
+- If implementation is needed, which implementation location and branch will `#11` select?
 - What validation should be mandatory before a generated MUL is loaded into MekHQ?

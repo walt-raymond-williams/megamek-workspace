@@ -8,7 +8,9 @@
 
 ## Goal
 
-Define the minimum practical tabletop result schema needed to generate a MekHQ-compatible battle-record MUL from a hand-played BattleTech battle.
+Define the minimum practical tabletop result/input schema needed to get hand-played BattleTech results back into MekHQ. The schema should be useful whether the final workflow is manual entry through MekHQ's built-in UI, editing/importing a battle-record MUL, or generating a battle-record MUL with custom tooling.
+
+Current posture: this is discovery, not a commitment to custom implementation. Keep the schema focused on the information the tabletop player/GM must capture and on how that information maps to MekHQ's built-in resolution workflow.
 
 ## Required Context
 
@@ -26,8 +28,9 @@ Read these first:
 ## Expected Output
 
 - A durable schema/design note under `docs/current/`.
-- Required and optional fields for units, pilots/crew, armor/internal state, critical damage when needed, ammo state if relevant, destroyed/devastated/salvage/retreated outcomes, kills, battlefield control, and scenario outcome inputs.
+- Required and optional fields for units, pilots/crew, armor/internal state, critical damage when needed, ammo state if relevant, destroyed/devastated/salvage/retreated outcomes, kills, battlefield-control prompt guidance, and scenario outcome inputs.
 - Example result records for at least one simple player unit and one enemy/salvage candidate.
+- A short note identifying which fields are needed no matter what and which fields only matter if custom generation is later chosen.
 
 ## Files And Areas
 
@@ -52,6 +55,7 @@ git status --short --branch
 
 - The schema is implementable without editing campaign saves directly.
 - Required fields are separated from optional or future fields.
+- The schema does not assume custom generation is mandatory; it supports built-in MekHQ result-entry/import workflows as a first-class possible outcome.
 - Unresolved edge cases are listed, especially ejections, prisoner/casualty states, salvage ownership, off-board retreat, and ammunition/critical state fidelity.
 
 ## Open Questions

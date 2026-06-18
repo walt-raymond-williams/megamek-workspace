@@ -50,9 +50,9 @@ No active task.
 2. Define tabletop battle result input schema for MekHQ MUL generation.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Define the minimum tabletop result input schema needed to generate MekHQ battle-record MULs.
+   - Goal: Define the minimum tabletop result information needed for MekHQ's built-in manual/import workflow, with custom generation treated as optional until strategy issue `#11`.
    - Output: Durable schema/design notes under `docs/current/` and updates to epic `#6` tracking.
-   - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`.
+   - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`; discovery should remain useful even if final workflow uses built-in MekHQ UI/import only.
 
 3. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
