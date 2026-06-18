@@ -47,19 +47,19 @@ No active task.
    - Output: Live-session notes and durable updates to current docs about campaign creation, first contract flow, travel, owned Leopard transport, aerospace transit scenario handling, repairs, salvage, finances, and open source follow-ups.
    - Notes: GitHub issue `#16`; active handoff `docs/handoffs/active/run-mekhq-campaign-exploration.md`; use a disposable exploration save unless the user explicitly selects another save.
 
-2. Verify quickstart roster replacement workflow.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Verify the no-source-change workflow for replacing the New Player Quickstart roster in a disposable campaign save.
-   - Output: Verification note or update to `MECH_ROSTER_CONTROL_WORKFLOWS.md` with repeatable steps and blockers.
-   - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; recommended next roster-control slice before data modeling or custom RAT work.
-
-3. Define tabletop battle result input schema for MekHQ MUL generation.
+2. Define tabletop battle result input schema for MekHQ MUL generation.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Define the minimum tabletop result information needed for MekHQ's built-in manual/import workflow, with custom generation treated as optional until strategy issue `#11`.
    - Output: Durable schema/design notes under `docs/current/` and updates to epic `#6` tracking.
    - Notes: GitHub issue `#9`; child of epic `#6`; active handoff `docs/handoffs/active/define-tabletop-result-input-schema.md`; recommended next for epic `#6` after completing issues `#8` and `#7`; discovery should remain useful even if final workflow uses built-in MekHQ UI/import only.
+
+3. Prototype fixed OPFOR MUL pools.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Prototype fixed OPFOR MUL pools that can be loaded into MekHQ bot formations for physical-miniatures play.
+   - Output: Documented prototype path for creating/loading fixed OPFOR MULs, with placeholder/sample artifacts only if clearly marked.
+   - Notes: GitHub issue `#19`; child of epic `#14`; active handoff `docs/handoffs/active/prototype-fixed-opfor-mul-pools.md`; can proceed with placeholder data while real miniature inventory is unavailable.
 
 4. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
@@ -100,7 +100,14 @@ No active task.
 
 ## Blocked
 
-1. Verify Gradle build/test commands in local source repos.
+1. Verify quickstart roster replacement workflow.
+   - Status: `Blocked`
+   - Owner: `Mixed`
+   - Goal: Verify the no-source-change workflow for replacing the New Player Quickstart roster in a disposable campaign save.
+   - Output: `QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md` has source-confirmed steps, safe-copy verification, and the remaining UI validation gap.
+   - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; live UI click-through remains blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. Finish with a user-operated MekHQ pass or a working Windows automation helper.
+
+2. Verify Gradle build/test commands in local source repos.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
@@ -109,6 +116,7 @@ No active task.
 
 ## Done
 
+- `2026-06-18`: Completed GitHub issue `#18` by defining the physical-miniature roster model in `PHYSICAL_MINIATURE_ROSTER_MODEL.md`, adding `docs/templates/PHYSICAL_MINIATURE_ROSTER.csv`, and archiving the handoff. Recommended next unblocked roster-control ticket is fixed OPFOR MUL pool prototyping issue `#19`; issue `#17` remains blocked pending live MekHQ UI validation.
 - `2026-06-18`: Completed source/docs discovery for GitHub issue `#14` by documenting MekHQ player roster and OPFOR control workflows in `MECH_ROSTER_CONTROL_WORKFLOWS.md`, then created child issues `#17` through `#20` for disposable-save quickstart roster replacement verification, physical-miniature roster data modeling, fixed OPFOR MUL pool prototyping, and a later custom RAT decision.
 - `2026-06-18`: Added `CAMPAIGN_EXPLORATION_PLAN.md` to track the first hands-on MekHQ shakedown campaign, including new campaign creation, first contract flow, owned Leopard transport, two aerospace fighters, and a human-controlled transit aerospace scenario concept.
 - `2026-06-18`: Completed GitHub issue `#7` by tracing MekHQ salvage behavior through manual scenario resolution, contract salvage terms, BLC, salvage exchange, and CamOps salvage. Findings are in `SALVAGE_RULES_NOTES.md`. Recommended next epic task is schema issue `#9`.

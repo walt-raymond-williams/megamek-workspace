@@ -1,0 +1,4 @@
+mini_id,inventory_status,quantity,chassis,variant,unit_type,weight_class,tech_base,era_start_year,faction_tags,player_use,opfor_use,proxy_policy,proxy_notes,bv,bv_source,mekhq_lookup_name,unit_file_hint,paint_scheme,model_notes,campaign_notes
+MINI-EX-0001,example,1,Wolverine,WVR-6R,Mek,M,IS,3025,MERC;MOC,yes,maybe,exact,,1101,MegaMek 0.51.00,Wolverine WVR-6R,,unpainted,example row only,good starter player unit example
+MINI-EX-0002,example,1,Locust,LCT-1V,Mek,L,IS,3025,PIR;MERC,no,yes,exact,,432,MegaMek 0.51.00,Locust LCT-1V,,red primer,example row only,light OPFOR example
+MINI-EX-0003,example,2,Scorpion,unknown,Tank,L,IS,3025,General,no,yes,close,any light tracked combat vehicle,,unknown,Scorpion,,green,example row only,vehicle proxy example

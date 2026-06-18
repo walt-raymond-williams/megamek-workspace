@@ -24,7 +24,7 @@ Read these first:
 
 ## Expected Output
 
-- A short verification note under `docs/current/` or an update to `MECH_ROSTER_CONTROL_WORKFLOWS.md`.
+- A short verification note under `docs/current/` or an update to `MECH_ROSTER_CONTROL_WORKFLOWS.md`. Current partial verification is in `docs/current/QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md`.
 - Clear steps for replacing quickstart units using MekHQ UI/GM controls.
 - Any blockers or UI uncertainty recorded for the live shakedown.
 
@@ -33,6 +33,7 @@ Read these first:
 Likely files to read or edit:
 
 - `docs/current/MECH_ROSTER_CONTROL_WORKFLOWS.md`
+- `docs/current/QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md`
 - `docs/current/MECH_ROSTER_CONTROL_TRACKING.md`
 - `docs/current/TASKS.md`
 - `docs/current/ROADMAP.md`
@@ -56,10 +57,15 @@ Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.
 
 ## Acceptance Criteria
 
-- A copied quickstart campaign has at least one original unit removed through GM controls.
-- At least one replacement unit is added through GM controls.
-- Personnel, TO&E, and transport follow-up needs are documented.
-- The workflow is documented well enough for the user to repeat manually.
+- A copied quickstart campaign has at least one original unit removed through GM controls. Pending live UI pass.
+- At least one replacement unit is added through GM controls. Pending live UI pass.
+- Personnel, TO&E, and transport follow-up needs are documented. Source-confirmed and documented.
+- The workflow is documented well enough for the user to repeat manually. Source-confirmed and documented.
+
+## Current Blocker
+
+- The Windows Computer Use helper reported `Computer Use native pipe path is unavailable`, so Codex could not complete the live UI click-through.
+- Finish this issue with a user-operated MekHQ pass or a working Windows automation helper.
 
 ## Open Questions
 

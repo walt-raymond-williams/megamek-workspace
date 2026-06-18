@@ -19,6 +19,8 @@ Evidence labels follow `DOCUMENTATION_WORKFLOW.md`.
 
 `Confirmed from source`: `MHQConstants.LAUNCHER_NEW_PLAYER_QUICKSTART_PATH` points at `campaigns/The Learning Ropes.cpnx.gz`, and `StartupScreenPanel` uses that constant for the New Player Quickstart button. This means the quickstart roster is stored in the save.
 
+`Confirmed from source`: the quickstart roster replacement workflow is documented in `QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md`. It confirms the GM add/remove source path and safe disposable-save setup; live UI click-through remains pending.
+
 Recommended practical workflow:
 
 1. Start the New Player Quickstart, then immediately save under a new campaign name/path.
