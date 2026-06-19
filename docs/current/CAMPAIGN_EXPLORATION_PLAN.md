@@ -200,6 +200,12 @@ Use this for each session:
 - Open questions: Computer Use window inspection remains unavailable in this session (`Computer Use native pipe path is unavailable`), so the user must operate MekHQ manually and report key UI fields. Need UI confirmation of what MekHQ displayed after resolution, how battlefield-control prompts affect non-destruction objectives, and where the saved-MUL prompt appears in the MegaMek/MekHQ handoff.
 - Next action: In MekHQ, review the post-battle/campaign state: scenario resolution screen or Briefing Room, salvage dialogs, repair queue, parts ordered, finances, and whether `Deep Raid` is the next scenario to deploy. For the tabletop-result workflow, study the saved full battle-record MUL in issue `#22`, then use the user's next manual-import attempt to verify what MekHQ accepts.
 
+Close-out:
+
+- `Confirmed by user`: This session is complete enough to close the live-assist shakedown task and move narrower follow-up work into dedicated issues.
+- `Confirmed locally`: Issue `#22` tracks studying the generated full battle-record MUL before or alongside the next import attempt.
+- `Confirmed locally`: Issue `#10` remains the right tracking home for the user-operated manual Resolve Manually import attempt.
+
 ## Open Questions
 
 - What exact MekHQ UI path is best for creating a custom space/aerospace scenario during contract travel?

@@ -123,16 +123,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Run MekHQ campaign exploration live-assist shakedown
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#16`
 - Owner: `Mixed`
 - Goal: Run the hands-on MekHQ exploration plan as a live user/Codex session while the user manually operates MekHQ and Codex acts as a campaign aide, source/docs reference, and documentation recorder.
 - Why it matters: The workspace needs to move from documentation-only planning into an actual MekHQ shakedown that tries campaign creation, contracts, travel, owned transport, aerospace, scenario resolution, repair, salvage, finances, and close-out.
-- Expected output: Session notes and durable documentation updates from trying `CAMPAIGN_EXPLORATION_PLAN.md`, including what worked, what failed, and what needs source follow-up.
-- Handoff notes: Active handoff: `docs/handoffs/active/run-mekhq-campaign-exploration.md`. The intended workflow is for the user to start MekHQ and Codex together, then operate MekHQ manually while Codex follows the handoff.
-- Dependencies: User must manually operate MekHQ or share enough UI/save context for Codex to advise. Use a disposable exploration save. Do not rely on bot-controlled space-map aerospace combat for the first test; the user intends to resolve aerospace/space battles with two human players.
-- Open questions: Which exploration save path should become active? Can a custom transit aerospace battle be attached cleanly to an active contract, or should it be tracked as a manual/GM narrative scenario? Which Leopard variant and two aerospace fighters should be used for the first test?
+- Expected output: Completed with session notes in `docs/current/CAMPAIGN_EXPLORATION_PLAN.md`; follow-up work is tracked in issue `#22` for generated battle-record MUL study and issue `#10` for live manual Resolve Manually import validation.
+- Handoff notes: Completed on `2026-06-19`. Archived handoff: `docs/handoffs/archive/run-mekhq-campaign-exploration.md`. The session launched MekHQ, used the user-operated live-assist workflow, inspected post-play saves/logs, and captured campaign-facing lessons from the first resolved MegaMek scenario.
+- Dependencies: None for close-out. Future aerospace and manual-import work should continue through narrower follow-up tasks instead of reopening this shakedown issue.
+- Open questions: Can a custom transit aerospace battle be attached cleanly to an active contract, or should it be tracked as a manual/GM narrative scenario? Which Leopard variant and two aerospace fighters should be used for the first dedicated aerospace test?
 
 ### Epic: Robust tabletop battle result MUL workflow
 

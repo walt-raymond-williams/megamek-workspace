@@ -139,6 +139,16 @@ If the clean workflow is not obvious from the UI, treat the first battle as a ma
 - Durable discoveries are documented in the appropriate `docs/current/` file.
 - Repository documentation updates are committed and pushed, or the blocker is clearly recorded.
 
+## Close-Out
+
+- Completed on `2026-06-19`.
+- Session notes were recorded in `docs/current/CAMPAIGN_EXPLORATION_PLAN.md`.
+- MekHQ launched successfully from the installed `0.51.00` suite.
+- `Confirmed by user`: the user deployed and resolved a MegaMek scenario from MekHQ.
+- `Confirmed from save/logs`: the post-play autosave, battle logs, salvage output, and generated full battle-record MUL were located.
+- Follow-up issue `#22` tracks studying the generated full battle-record MUL.
+- Follow-up issue `#10` remains the tracking home for the manual Resolve Manually import attempt.
+
 ## Open Questions
 
 - Which exact save path should become the exploration campaign?

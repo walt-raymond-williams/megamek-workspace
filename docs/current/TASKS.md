@@ -36,12 +36,7 @@ Use this shape for active and queued work:
 
 ## Now
 
-1. Run MekHQ campaign exploration live-assist shakedown.
-   - Status: `In progress`
-   - Owner: `Mixed`
-   - Goal: Start MekHQ and Codex together, then follow `CAMPAIGN_EXPLORATION_PLAN.md` while the user manually operates MekHQ and Codex records findings.
-   - Output: Live-session notes and durable updates to current docs about campaign creation, first contract flow, travel, owned Leopard transport, aerospace transit scenario handling, repairs, salvage, finances, and open source follow-ups.
-   - Notes: GitHub issue `#16`; active handoff `docs/handoffs/active/run-mekhq-campaign-exploration.md`; use a disposable exploration save unless the user explicitly selects another save.
+No active task.
 
 ## Next
 
@@ -121,6 +116,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-19`: Completed GitHub issue `#16` by running the first MekHQ campaign exploration live-assist shakedown. MekHQ launched successfully, the user played and resolved a MegaMek scenario from `The Learning Ropes`, post-play saves/logs were inspected safely, the scenario/objective draw lesson was recorded, and follow-up tasks were split into issue `#22` for studying the generated full battle-record MUL and issue `#10` for the next manual Resolve Manually import attempt. Archived handoff: `docs/handoffs/archive/run-mekhq-campaign-exploration.md`.
 - `2026-06-18`: Completed GitHub issue `#9` by defining the tabletop result input schema in `TABLETOP_RESULT_INPUT_SCHEMA.md`, separating first-session manual capture fields from optional future generator fields, and linking the schema from the tabletop result MUL workflow. Recommended next tabletop-result task is issue `#10`, prototype battle-record MUL round-trip validation.
 - `2026-06-18`: Completed GitHub issue `#19` by documenting the custom RAT strategy in `CUSTOM_RAT_STRATEGY.md`. Recommendation: do not build custom RATs yet; use fixed OPFOR setup-MUL pools first, and revisit custom classic RATs or modern force-generator data only after confirmed inventory and fixed-pool play show a real need. Remaining roster-control child `#17` is blocked pending live MekHQ UI validation.
 - `2026-06-18`: Completed GitHub issue `#18` by documenting the fixed OPFOR setup-MUL pool workflow in `FIXED_OPFOR_MUL_POOL_WORKFLOW.md`, adding `docs/templates/OPFOR_MUL_POOL_MANIFEST.csv`, and locally verifying placeholder MUL generation plus parser round trip with installed MekHQ/MegaMek jars. Raw placeholder MUL output remains ignored under `analysis/tmp/`; real inventory MULs need the user's confirmed miniature list. This fed the custom RAT strategy decision completed in issue `#19`; issue `#17` remains blocked pending live MekHQ UI validation.
