@@ -81,6 +81,8 @@ Open validation need: the exact minimal XML emitted for each entity should be va
 
 Issue `#10` partial validation: `BATTLE_RECORD_MUL_ROUND_TRIP_VALIDATION.md` confirms locally that a generated `<record>` file using `EntityListFile.writeEntityList(...)` round-trips through `MULParser` with `survivors`, `salvage`, `retreated`, `devastated`, `kills`, entity external ids, crew external ids, and crew hits preserved. The remaining unvalidated step is live MekHQ Resolve Manually import into a disposable campaign.
 
+Issue `#22` live-file study: `GENERATED_BATTLE_RECORD_MUL_STUDY.md` analyzes the battle-record MUL saved from the `2026-06-18` MekHQ shakedown. It confirms that a real MegaMek-saved `<record>` can contain player units across `survivors`, `salvage`, and `devastated`, ejected pilot entities with `pickUpId`, broad damage/ammo/crit serialization, and kill rows that should be compared carefully against post-resolution campaign kill records.
+
 ## Campaign Mapping
 
 `Confirmed from source`: [GameThread.java](../../external/src/mekhq/MekHQ/src/mekhq/GameThread.java) sets each campaign unit entity's external id before sending it to MegaMek:

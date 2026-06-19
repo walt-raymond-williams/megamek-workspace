@@ -40,46 +40,39 @@ No active task.
 
 ## Next
 
-1. Study generated battle-record MUL from MekHQ shakedown.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Analyze the full `<record>` MUL saved from the live MegaMek match and compare it with the game logs, salvage output, and saved campaign scenario state.
-   - Output: Durable notes about battle-record MUL structure, section meanings, campaign UUID mapping, damage/ammo/crit serialization, salvage/devastated classification, kill credit, and manual-import follow-up.
-   - Notes: GitHub issue `#22`; child of epic `#6`; active handoff `docs/handoffs/active/study-generated-battle-record-mul.md`; key artifact is ignored local payload `external/installs/MekHQ-0.51.00/The Learning Ropes.mul`.
-
-2. Run MekHQ quickstart roster UI validation.
+1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Inspect the active demo campaign save without modifying it.
+2. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-4. Identify MekHQ save/load source classes.
+3. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-5. Create help-file usage guidance for agents.
+4. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-6. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-7. Produce the first campaign status report.
+6. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
@@ -116,6 +109,7 @@ No active task.
 
 ## Done
 
+- `2026-06-19`: Completed GitHub issue `#22` by studying the generated full battle-record MUL from the MekHQ shakedown. Findings are in `GENERATED_BATTLE_RECORD_MUL_STUDY.md`: the live file is a full `<record>` with survivors/salvage/devastated/kills, `logs/salvage.mul` is only a plain salvage/export `<unit>` list, player units can land in multiple result buckets depending on end state, ejected pilot and pickup state are serialized, and the next issue `#10` manual import pass should compare raw MUL kill rows against post-resolution MekHQ campaign kill records.
 - `2026-06-19`: Completed GitHub issue `#16` by running the first MekHQ campaign exploration live-assist shakedown. MekHQ launched successfully, the user played and resolved a MegaMek scenario from `The Learning Ropes`, post-play saves/logs were inspected safely, the scenario/objective draw lesson was recorded, and follow-up tasks were split into issue `#22` for studying the generated full battle-record MUL and issue `#10` for the next manual Resolve Manually import attempt. Archived handoff: `docs/handoffs/archive/run-mekhq-campaign-exploration.md`.
 - `2026-06-18`: Completed GitHub issue `#9` by defining the tabletop result input schema in `TABLETOP_RESULT_INPUT_SCHEMA.md`, separating first-session manual capture fields from optional future generator fields, and linking the schema from the tabletop result MUL workflow. Recommended next tabletop-result task is issue `#10`, prototype battle-record MUL round-trip validation.
 - `2026-06-18`: Completed GitHub issue `#19` by documenting the custom RAT strategy in `CUSTOM_RAT_STRATEGY.md`. Recommendation: do not build custom RATs yet; use fixed OPFOR setup-MUL pools first, and revisit custom classic RATs or modern force-generator data only after confirmed inventory and fixed-pool play show a real need. Remaining roster-control child `#17` is blocked pending live MekHQ UI validation.

@@ -30,12 +30,12 @@ Read these first:
 - Game action telemetry: `C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\logs\game_actions_1.tsv`
 - Newest observed save: `C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00\campaigns\Autosave-1-The Learning Ropes-30250720.cpnx.gz`
 
-## Current Observations
+## Initial Observations At Issue Creation
 
 - `Confirmed from generated MUL`: `The Learning Ropes.mul` is a top-level `<record version="0.51.00">` file.
 - `Confirmed from generated MUL`: it contains `survivors`, `allies`, `salvage`, `devastated`, and `kills` sections.
 - `Confirmed from generated MUL`: `survivors` includes friendly campaign units with campaign `Unit` UUIDs in `externalId`.
-- `Confirmed from generated MUL`: `kills` includes kill-credit records such as BattleMaster killed by the Centurion UUID and Pike killed by the Trebuchet UUID.
+- `Superseded by issue work`: initial quick observations about kill credit were corrected during the study. See `docs/current/GENERATED_BATTLE_RECORD_MUL_STUDY.md` for the verified raw `<kills>` rows and the separate post-resolution MekHQ campaign kill records.
 - `Confirmed by user`: the battle ended after the user killed all enemies and accepted battlefield control, but the movement/exit objective was not completed; MekHQ recorded the scenario as `DRAW`.
 
 ## Expected Output
@@ -75,3 +75,9 @@ For save inspection, copy to `analysis/tmp/` first and do not overwrite the orig
 - Does MekHQ's manual Resolve flow accept this exact `The Learning Ropes.mul` file when selected for a disposable scenario?
 - Does selecting battlefield control before completing a movement objective affect only scenario status, or also the resulting battle-record classification?
 - Are `allies` in this file truly allied units for MekHQ import purposes, or enemy survivors classified by MegaMek player/team mapping?
+
+## Completion
+
+- Completed on `2026-06-19`.
+- Durable output: `docs/current/GENERATED_BATTLE_RECORD_MUL_STUDY.md`.
+- Follow-up: issue `#10` should use the study checklist during the next user-operated MekHQ Resolve Manually import pass.
