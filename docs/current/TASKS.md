@@ -36,50 +36,48 @@ Use this shape for active and queued work:
 
 ## Now
 
-No active task.
-
-## Next
-
 1. Set up real-life unit campaign in MekHQ.
-   - Status: `Not started`
+   - Status: `In progress`
    - Owner: `User`
    - Goal: Create or copy a safe MekHQ campaign whose player unit reflects the actual tabletop force: chosen mechs, pilots, tech/support staff, equipment, and DropShip/transport assumptions.
    - Output: Report the save path, campaign name, roster/transport/support setup, important UI paths/prompts, any errors, and whether the save is safe for Codex to copy and inspect.
    - Notes: GitHub issue `#23`; child of epic `#14`; active checklist `docs/handoffs/active/user-real-unit-campaign-setup.md`; this should happen before the issue `#10` manual battle-record MUL import pass.
 
-2. Run MekHQ quickstart roster UI validation.
+## Next
+
+1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Inspect the active demo campaign save without modifying it.
+2. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-4. Identify MekHQ save/load source classes.
+3. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-5. Create help-file usage guidance for agents.
+4. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-6. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-7. Produce the first campaign status report.
+6. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
