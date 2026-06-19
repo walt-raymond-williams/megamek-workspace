@@ -73,6 +73,8 @@ Expected effects for this prototype shape:
 
 The unverified part of issue `#10` is the live MekHQ import pass:
 
+`Updated 2026-06-19`: user task `#23` should happen before this pass. The preferred target is no longer an arbitrary sample campaign; it is a safe MekHQ campaign set up to reflect the user's real-life tabletop unit, including mechs, personnel, support staff, equipment, and DropShip/transport assumptions.
+
 1. Open a disposable campaign save, never the active original.
 2. Pick or create a scenario with deployed player units whose campaign `Unit` UUIDs match the generated survivor/killer entity ids.
 3. Use MekHQ's Resolve Manually flow.
