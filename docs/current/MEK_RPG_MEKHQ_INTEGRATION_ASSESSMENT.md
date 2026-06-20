@@ -47,6 +47,94 @@ Do not try to make MekHQ the source of truth for:
 
 MekHQ can represent a pilot, unit, injury, or asset, but it cannot preserve all RPG context around why that object matters.
 
+## User Maintenance Burden
+
+Without automation, running MEK-RPG and MekHQ side by side is workable but has a real bookkeeping cost.
+
+Low-friction use:
+
+- Open MEK-RPG for scenes and narrative state.
+- Open MekHQ only when unit-scale facts matter.
+- Let MekHQ advance campaign days, refresh markets, process repairs, track contracts, and save.
+- Have MEK-RPG read or summarize the latest saved MekHQ state before play resumes.
+
+This keeps the user burden moderate: one save/load discipline, one source of truth for hard logistics, and no duplicate manual entry except narrative summaries.
+
+High-friction use:
+
+- Manually copy every market offer, contract, repair, purchase, injury, and roster change between both projects.
+- Advance dates independently in both projects.
+- Let MEK-RPG invent hard logistics that MekHQ later disagrees with.
+
+This will drift quickly and should be avoided.
+
+Recommended ownership rule:
+
+- MekHQ owns the calendar once the RPG campaign is linked to a MekHQ campaign. MEK-RPG should treat the MekHQ campaign date as authoritative for downtime, travel, repairs, markets, and contract availability.
+- MEK-RPG owns scene time inside a day. It can run conversations, inspections, negotiations, and personal scenes without advancing MekHQ until the table commits to a day-level or ledger-level consequence.
+
+## Automation Feasibility
+
+### Easy: Read MekHQ Saves
+
+`Confirmed from source`: MekHQ `.cpnx.gz` saves are gzip-compressed XML when saved with the `.gz` suffix, and plain XML otherwise. `CampaignFactory.createCampaign(...)` detects gzip by magic bytes and then uses `CampaignXmlParser`. `CampaignGUI.saveCampaign(...)` writes XML through `Campaign.writeToXML(...)`.
+
+`Confirmed from source`: The saved XML includes units, personnel, missions, formations, finances, locations, player bases, shopping list, kills, personnel market, unit market, and StratCon contract market when enabled.
+
+This makes read-only automation the best first implementation:
+
+- Parse campaign date, name, faction, current location, funds, personnel, units, missions/contracts, scenarios, transport, repairs/parts, unit market offers, personnel market applicants, and contract offers.
+- Generate MEK-RPG Markdown summaries or a JSON bridge file.
+- Let the GM use those hard facts as scene prompts: available contracts, market listings, ship sale opportunities, damaged units, repair delays, or payroll pressure.
+
+Risk is low because the helper does not change MekHQ state.
+
+### Medium: RPG Overlay For MekHQ Markets And Contracts
+
+`Confirmed from source`: Unit market offers are serialized under `unitMarket`; each offer records market type, unit type, unit name, price percentage, and transit duration. `UnitMarketOffer#getPrice()` derives final price from the unit cost, offer percent, and campaign price multipliers.
+
+`Confirmed from source`: Contract market offers are serialized under `contractMarket` for StratCon/AtB campaigns; `AbstractContractMarket` exposes contract offers through `getContracts()` and writes them to XML.
+
+This supports a strong MEK-RPG overlay:
+
+- MEK-RPG reads the MekHQ market and presents it as in-world brokers, sales lots, hiring halls, repair yards, or MRBC listings.
+- The player can inspect a DropShip, talk to a seller, haggle, check title risk, or evaluate a BattleMech in RPG scenes.
+- When the player commits to a purchase, contract, or hire, MekHQ should still perform the actual transaction through UI or a later source-backed automation path.
+
+This gives RPG flair without immediately needing write automation.
+
+### Harder: Automate Day Advancement
+
+`Confirmed from source`: `Campaign.newDay()` delegates to `CampaignNewDayManager.newDay()` and is the real day-advance hook.
+
+`Confirmed from source`: MekHQ's current main entry point is graphical. `MekHQ.main(...)` initializes graphical setup and schedules `MekHQ.getInstance().startup()`, and `startup()` opens `StartupScreenPanel`.
+
+`Confirmed from source`: `CampaignNewDayManager.newDay()` currently reaches GUI state immediately through `campaign.getApp().getCampaigngui().getCommandCenterTab()` and also uses Swing dialogs and immersive dialogs in the daily flow.
+
+Implication: a clean headless day-advance command is not available as a simple existing CLI flag in the inspected source. It might be possible to build one, but it is not a low-risk first step because the daily flow is intertwined with app/GUI services and prompts.
+
+Practical short-term answer:
+
+- The user advances days in MekHQ.
+- The user saves.
+- MEK-RPG reads the saved campaign and updates its view.
+
+Possible later automation:
+
+- UI-assisted automation that opens MekHQ, clicks Advance Day, handles expected dialogs, saves, and exits. This is useful but brittle.
+- A MekHQ source change or companion Java tool that creates a true non-interactive `advance-day-and-save` command. This is higher effort because it must either remove GUI assumptions from new-day processing or provide safe noninteractive policies for prompts and nags.
+
+### Hard: Write Purchases Or Negotiated Outcomes Back To MekHQ
+
+Directly editing `.cpnx.gz` to buy units, accept contracts, change finances, or assign personnel is risky because campaign objects are interlinked.
+
+Safer write paths, in order:
+
+1. Use MekHQ UI and save.
+2. Use exported/imported artifacts MekHQ already understands, such as setup MULs and battle-record MULs.
+3. Add a source-backed MekHQ command or plugin-style helper that calls MekHQ's own campaign methods and saves through `Campaign.writeToXML(...)`.
+4. Direct XML editing only for narrow, source-confirmed fields after round-trip validation.
+
 ## Recommended Integration Stages
 
 ### Stage 1: Parallel Ledger
@@ -86,14 +174,26 @@ Candidate outputs:
 
 The helper should be read-only first. Direct writes into `.cpnx.gz` should remain out of scope until source-backed save mapping and UI validation are much stronger.
 
-### Stage 4: Deeper Automation Only If Proven Useful
+### Stage 4: RPG Market/Contract Overlay
+
+Use MekHQ's saved markets and contract offers as prompts for RPG scenes:
+
+- A MekHQ unit market offer becomes a broker listing, sales yard visit, inspection scene, auction, or negotiation.
+- A MekHQ contract offer becomes an employer meeting, MRBC briefing, intelligence review, clause negotiation, or moral dilemma.
+- A MekHQ personnel-market applicant becomes a hiring interview, reference check, or loyalty risk.
+- A MekHQ repair or acquisition delay becomes a downtime scene, parts hunt, favor request, or debt pressure.
+
+MEK-RPG can narrate and adjudicate the scene, but MekHQ should apply the final hard transaction until a safer write automation exists.
+
+### Stage 5: Deeper Automation Only If Proven Useful
 
 Possible later work:
 
 - Generate battle-record MULs from tabletop results so MekHQ can apply damage, salvage, casualties, and kill credit.
 - Export MekHQ summaries into MEK-RPG campaign folders after every tactical session.
 - Add a stable cross-reference field convention: MekHQ `Unit` UUIDs, `Person` UUIDs, and MEK-RPG character/asset slugs.
-- Consider MekHQ source changes only after the bridge proves a recurring manual pain point that cannot be solved with UI workflows, MULs, or read-only extraction.
+- Add a source-backed noninteractive day-advance command only if manual MekHQ day advancement becomes the main pain point.
+- Consider broader MekHQ source changes only after the bridge proves a recurring manual pain point that cannot be solved with UI workflows, MULs, or read-only extraction.
 
 ## Risks And Tradeoffs
 
@@ -105,13 +205,15 @@ Possible later work:
 
 ## Near-Term Recommendation
 
-Do not integrate code yet.
+Do not start with headless write automation.
 
 The next useful experiment is to create one MEK-RPG-to-MekHQ pilot workflow:
 
 1. Pick the MEK-RPG campaign `playtest-galatea-dropship` or the first real campaign save.
 2. In MekHQ, create a safe campaign that models only the hard assets: funds, DropShip candidate, pilots/crew if known, and any combat units.
-3. Add a MEK-RPG bridge note with the MekHQ save path, what MekHQ owns, what MEK-RPG owns, and the next tactical handoff trigger.
-4. After one tactical or logistics event, compare the cost of maintaining both states against the value MekHQ provided.
+3. Build or manually prototype a read-only summary from the MekHQ save: date, location, funds, roster, units, DropShip/transport state, current contracts, market offers, repairs, and alerts.
+4. Add a MEK-RPG bridge note with the MekHQ save path, what MekHQ owns, what MEK-RPG owns, and the next tactical handoff trigger.
+5. Run one RPG market, contract, repair, or travel scene using MekHQ's hard facts as prompts.
+6. Commit the result in MekHQ through the UI, save, then let MEK-RPG read the updated state.
 
-If that experiment works, create a GitHub issue for a read-only MekHQ-to-MEK-RPG summary helper.
+If that experiment works, create a GitHub issue for a read-only MekHQ-to-MEK-RPG summary helper. If the main remaining pain is repeatedly opening MekHQ just to advance days, then create a separate source investigation issue for a noninteractive day-advance command.
