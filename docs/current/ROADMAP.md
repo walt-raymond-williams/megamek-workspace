@@ -205,3 +205,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: No active implementation handoff yet. Keep this as backlog until the manual tabletop result schema and battle-record MUL generation workflow are further along.
 - Dependencies: Needs sample record sheet photos, known record sheet templates, and a physical-sheet identity strategy. Prefer MekHQ/MUL external IDs, generated short IDs, QR codes, or printed labels over OCR-only matching.
 - Open questions: Which record sheet formats should be supported first? Can the tabletop packet include printed IDs or QR codes tied to MekHQ UUIDs? How consistent will marking style be for filled pips, critical-hit line-through marks, and pilot hits? What confidence/review UI is needed before generated results are trusted?
+
+### Explore MEK-RPG and MekHQ campaign bridge
+
+- Status: `Idea`
+- Priority: `Medium`
+- Issue: `Not created`
+- Owner: `Mixed`
+- Goal: Test whether MekHQ can act as a unit-scale logistics and tactical ledger for the sister MEK-RPG workspace without replacing MEK-RPG's narrative campaign memory.
+- Why it matters: MEK-RPG needs to track assets, missions, contracts, vehicles, repairs, casualties, salvage, and tactical consequences. MekHQ already owns much of that bookkeeping, but direct integration could create drift or overcomplicate RPG play.
+- Expected output: A pilot workflow that links one MEK-RPG campaign folder to one safe MekHQ campaign save, records ownership boundaries, and validates one tactical or logistics handoff.
+- Handoff notes: Start with `docs/current/MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`. Treat MEK-RPG as read-only unless work is explicitly requested there. Prefer a parallel ledger and read-only extraction before any `.cpnx.gz` editing or MekHQ source change.
+- Dependencies: A selected MEK-RPG campaign save folder, a safe MekHQ campaign save, and the user's decision about which unit-scale facts MekHQ should own.
+- Open questions: Should the first bridge use `playtest-galatea-dropship` or wait for MEK-RPG's first real campaign save? What exact facts should be mirrored back into MEK-RPG `assets.md` and `missions.md` after a MekHQ update?
