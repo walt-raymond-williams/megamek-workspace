@@ -70,6 +70,18 @@ New-Item -ItemType Directory -Force analysis\tmp
 Copy-Item 'C:\path\to\campaign.cpnx.gz' analysis\tmp\
 ```
 
+## Export A Read-Only MekHQ Checkpoint Prototype
+
+This prototype compiles a workspace Java helper against the installed MekHQ `0.51.00` jars, loads an explicit save path read-only, and writes checkpoint JSON to stdout. It writes compiled classes and stderr logs under ignored `analysis/tmp/mekhq-checkpoint-exporter/`.
+
+```powershell
+$save = 'C:\path\to\campaign.cpnx.gz'
+$json = powershell -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-exporter\run-mekhq-checkpoint-exporter.ps1 $save
+$parsed = $json | ConvertFrom-Json
+```
+
+Verified on `2026-06-21` against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`.
+
 ## Search Source
 
 ```powershell

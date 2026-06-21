@@ -10,6 +10,8 @@ MEK-RPG consumer contract: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_
 
 Disposable-save validation: `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
 
+Jar-backed prototype: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
+
 ## Boundary
 
 - `Confirmed from source`: MekHQ campaign saves are broad serialized campaign objects. Loading and saving are owned by `CampaignFactory#createCampaign(...)`, `CampaignXmlParser`, `CampaignGUI#saveCampaign(...)`, and `Campaign#writeToXML(...)`.
@@ -136,6 +138,8 @@ Do not export these as authoritative unless a later issue source-confirms and va
 10. Record mismatches in this workspace before MEK-RPG treats the contract as stable.
 
 Initial validation on `2026-06-21` used the copied sample save under `analysis/tmp/issue-22/` and is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`. It confirmed that the schema needs no field rename, but funds, salary, damage state, market final price, transport/cargo pressure, and report classification still require method-backed export or later UI validation.
+
+Prototype follow-up on `2026-06-21` added `tools/mekhq-checkpoint-exporter/`, a jar-backed read-only exporter that loads the same copied save through `CampaignFactory` and emits parseable checkpoint JSON with method-backed examples. Findings and limitations are recorded in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 
 ## MEK-RPG Consumer Guidance
 

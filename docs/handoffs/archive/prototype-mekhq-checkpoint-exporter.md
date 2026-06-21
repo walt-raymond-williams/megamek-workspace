@@ -26,9 +26,9 @@ Read these first:
 
 ## Expected Output
 
-- A prototype exporter, prototype plan, or blocker report.
-- If implemented in this workspace, a read-only tool/script that emits checkpoint JSON and does not modify saves.
-- Current docs updated with classpath/toolchain findings, verification, and limitations.
+- Completed with prototype exporter `tools/mekhq-checkpoint-exporter/`.
+- The wrapper emits checkpoint JSON and does not modify saves.
+- Current docs updated with classpath/toolchain findings, verification, and limitations in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 
 ## Files And Areas
 
@@ -67,14 +67,14 @@ rg "createCampaign|CampaignFactory|CampaignXmlParser" external/src/mekhq/MekHQ/s
 
 ## Acceptance Criteria
 
-- Loads or plans to load an explicit `.cpnx`, `.cpnx.gz`, or plain XML path read-only.
-- Emits or specifies JSON matching `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`.
-- Uses method-backed MekHQ values where feasible and labels serialized/inferred/unsupported fields.
-- Records verification commands or exact blockers.
-- Explicitly states that no writeback was implemented.
+- Done: loads an explicit `.cpnx`, `.cpnx.gz`, or plain XML path read-only through installed MekHQ jars.
+- Done: emits JSON with the top-level shape from `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`.
+- Done: uses method-backed MekHQ values where feasible and labels serialized, needs-inspection, and unsupported fields.
+- Done: records verification commands and limitations.
+- Done: explicitly states that no writeback was implemented.
 
 ## Open Questions
 
-- Can installed MekHQ/MegaMek jars be invoked from a workspace helper without GUI startup dependencies?
-- Is the existing Java/Gradle blocker relevant to a jar-backed prototype, or only to source-level implementation?
-- Should the first prototype live in this workspace, MEK-RPG, or MekHQ source after validation?
+- Resolved: installed MekHQ/MegaMek jars can be invoked from a workspace helper after replaying the non-GUI data initialization sequence from `DataLoadingDialog`.
+- Resolved: the existing Java/Gradle blocker does not block this jar-backed prototype; JDK 21 and `javac` are used directly.
+- Resolved for prototype: first implementation lives in this workspace. Production ownership should be revisited after review; MekHQ source is the likely long-term owner.

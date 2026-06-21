@@ -246,9 +246,9 @@ Use this shape for entries that may become GitHub issues:
 - Child issues:
   - `#27`: Create sanitized MekHQ checkpoint export fixture. Completed on `2026-06-21`; fixture is `docs/templates/mekhq-read-only-checkpoint.fixture.json`; archived handoff: `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
   - `#28`: Validate MekHQ checkpoint schema against disposable save. Completed on `2026-06-21`; validation note is `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; archived handoff: `docs/handoffs/archive/validate-mekhq-checkpoint-schema.md`.
-  - `#29`: Prototype read-only MekHQ checkpoint exporter. Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`.
+  - `#29`: Prototype read-only MekHQ checkpoint exporter. Completed on `2026-06-21`; prototype is `tools/mekhq-checkpoint-exporter/`; findings are in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`; archived handoff: `docs/handoffs/archive/prototype-mekhq-checkpoint-exporter.md`.
 - Recommended sequence: Start with `#27` because it is not blocked by UI, saves, or Java toolchain state and gives MEK-RPG an immediate adapter-test target. Then run `#28` against a disposable save. Start `#29` after schema/fixture validation unless the user explicitly prioritizes prototype discovery first.
-- Open questions: Should the prototype exporter in `#29` be jar-backed in this workspace first, or should it wait for source-level MekHQ work after the Java/Gradle blocker is resolved?
+- Open questions: Should a production exporter move into MekHQ source as an official command/service after human review of the workspace prototype?
 
 ### Create sanitized MekHQ checkpoint export fixture
 
@@ -278,13 +278,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Prototype read-only MekHQ checkpoint exporter
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#29`
 - Owner: `Codex`
 - Goal: Prototype or precisely plan a read-only exporter that loads a MekHQ campaign through MekHQ code or installed jars and emits JSON matching the checkpoint schema.
 - Why it matters: A method-backed exporter is the long-term way to provide MEK-RPG exact derived values such as balance, unit market price, personnel salary, damage state, logistics summaries, and sanitized reports.
-- Expected output: A prototype exporter, prototype plan, or blocker report with exact classpath/toolchain/API issues and the smallest unblock step.
-- Handoff notes: Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`. Start after `#27` and `#28` unless the user explicitly reprioritizes.
+- Expected output: Completed with jar-backed prototype `tools/mekhq-checkpoint-exporter/` and findings in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
+- Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/prototype-mekhq-checkpoint-exporter.md`.
 - Dependencies: Local MekHQ source/install. Existing Gradle/source build blocker may prevent source-level implementation; jar-backed helper feasibility needs discovery.
-- Open questions: Can installed MekHQ/MegaMek jars load a campaign cleanly from a workspace helper without GUI startup dependencies? If not, what source change or build-toolchain fix is smallest?
+- Open questions: Installed jars can load a campaign through a workspace helper after MekHQ data initialization; future production work should decide whether to move this into MekHQ source to avoid reflection and external helper packaging limits.
