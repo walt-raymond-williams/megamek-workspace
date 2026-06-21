@@ -45,6 +45,13 @@ Use this shape for active and queued work:
 
 ## Next
 
+1. Define MekHQ read-only checkpoint export for MEK-RPG.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Turn the issue `#24` bridge-primitives findings into a source-backed read-only checkpoint export contract or prototype plan for MEK-RPG.
+   - Output: Current doc with MekHQ API/method owners, JSON shape, evidence labels, unsupported-field warnings, and validation sequence.
+   - Notes: GitHub issue `#25`; active handoff `docs/handoffs/active/define-mekhq-read-only-checkpoint-export.md`; requested by MEK-RPG sync memo `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_WORKSPACE_SYNC_MEMO.md`.
+
 2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`

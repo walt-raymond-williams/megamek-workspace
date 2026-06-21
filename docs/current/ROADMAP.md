@@ -218,3 +218,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/map-safe-mekhq-bridge-primitives.md`. Recommendation: start future integration with a MekHQ-backed read-only checkpoint exporter. The smallest plausible write-command candidate is a narrow contract-market accept/decline command by stable contract id, but only after sample-save id confirmation and explicit noninteractive prompt policy.
 - Dependencies: None for issue `#24` close-out. Future implementation still depends on local MekHQ/MegaMek source and may be limited by the current Java/Gradle toolchain blocker for source builds.
 - Open questions: Should the read-only exporter live in MekHQ source, MEK-RPG, or this workspace as a jar-backed helper? Are contract-market offer ids stable enough in representative saves for an accept/decline command? What noninteractive policy should be used for AtB/StratCon contract confirmation, faction-standing greeting, start prompt, and facility-rental prompts?
+
+### Define MekHQ read-only checkpoint export for MEK-RPG
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#25`
+- Owner: `Codex`
+- Goal: Define or prototype a MekHQ read-only checkpoint export contract that MEK-RPG can consume without writing to MekHQ saves.
+- Why it matters: Issue `#24` established that read-only checkpoint export is the safest next bridge step. MEK-RPG's sync memo asks this workspace to own the MekHQ-side source-backed field contract before either team attempts write automation.
+- Expected output: A current doc with MekHQ method/API owners, a recommended JSON export shape, field evidence labels, derived-value notes, unsupported-field warnings, and recommended validation sequence.
+- Handoff notes: Active handoff: `docs/handoffs/active/define-mekhq-read-only-checkpoint-export.md`. Start from `MEK_RPG_MEKHQ_BRIDGE_PRIMITIVES.md` and `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_WORKSPACE_SYNC_MEMO.md`. Keep this issue read-only; no headless day advancement or pending-action writeback.
+- Dependencies: Local MekHQ/MegaMek source checkouts. Source builds may remain blocked by the local Java/Gradle toolchain state, so source inspection and documentation/prototype planning are acceptable.
+- Open questions: Should the first exporter live in MekHQ source, this workspace as a jar-backed helper, or MEK-RPG as a consumer adapter? Which field group should be validated first with disposable saves?
