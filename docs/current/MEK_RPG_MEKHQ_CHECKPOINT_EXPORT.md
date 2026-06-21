@@ -1,8 +1,12 @@
 # MEK-RPG MekHQ Checkpoint Export
 
-Status: source-backed export contract for GitHub issue `#25`, created `2026-06-21`.
+Status: source-backed export contract for GitHub issue `#25`, created `2026-06-21`; updated after MEK-RPG issues `#67` and `#68` completed.
 
 Purpose: define a read-only MekHQ campaign checkpoint export that MEK-RPG can consume without writing `.cpnx`, `.cpnx.gz`, or extracted campaign XML.
+
+Companion draft schema: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`.
+
+MEK-RPG consumer contract: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`.
 
 ## Boundary
 
@@ -27,17 +31,15 @@ The first version can be a contract document plus MEK-RPG adapter target. A late
 
 ## JSON Shape
 
-Recommended top-level shape:
+Recommended top-level shape, aligned with MEK-RPG issue `#67`:
 
 ```json
 {
-  "schema": {
-    "name": "mekhq-read-only-checkpoint",
-    "version": "0.1",
-    "producer": "Unknown",
-    "generated_at": "YYYY-MM-DDTHH:MM:SSZ"
-  },
   "bridge_metadata": {
+    "schema_name": "mekhq-read-only-checkpoint",
+    "schema_version": "0.1",
+    "producer": "Unknown",
+    "producer_version": "Unknown",
     "input_path": "C:/path/to/save.cpnx.gz",
     "save_timestamp": "Unknown",
     "save_size_bytes": 0,
@@ -47,7 +49,6 @@ Recommended top-level shape:
     "warnings": []
   },
   "campaign": {},
-  "location": {},
   "finances": {},
   "personnel": [],
   "units": [],
@@ -72,6 +73,7 @@ Use these conventions throughout:
 - `label`: human-friendly text derived by MekHQ methods or carefully mapped enums.
 - `evidence`: one of the workspace evidence labels from `DOCUMENTATION_WORKFLOW.md`.
 - `source_owner`: class or method responsible for the value.
+- `method_backed`: boolean or `Unknown`, matching MEK-RPG's #67 consumer contract.
 - `warnings`: field-level caveats.
 
 Do not shorten or regenerate MekHQ IDs. If an ID is missing, emit `null` plus a warning instead of inventing a substitute.
@@ -144,9 +146,10 @@ MEK-RPG should consume this as a checkpoint, not as a command log:
 
 ## Recommended Next Work
 
-1. Create a disposable-save validation issue that compares the current MEK-RPG raw-XML helper to this source-backed contract.
-2. Decide implementation ownership after validation:
+1. Produce a sanitized fixture from `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` with fake names/ids and method-backed sample fields.
+2. Create a disposable-save validation issue that compares the current MEK-RPG raw-XML helper to this source-backed contract.
+3. Decide implementation ownership after validation:
    - MekHQ source if method-backed precision and future CLI export matter most.
    - This workspace as a jar-backed helper if the near-term goal is bridge experimentation.
    - MEK-RPG if the first deliverable is only an adapter around existing raw XML plus explicit warnings.
-3. Keep the first write-side probe separate. Contract-market accept/decline by stable contract id is still the smallest plausible write candidate, but it depends on saved-offer id validation and noninteractive prompt policy.
+4. Keep the first write-side probe separate. Contract-market accept/decline by stable contract id is still the smallest plausible write candidate, but it depends on saved-offer id validation and noninteractive prompt policy.

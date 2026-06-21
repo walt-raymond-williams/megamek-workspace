@@ -114,6 +114,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-21`: Incorporated MEK-RPG issues `#67` and `#68` into the MegaMek-side checkpoint-export plan. Added `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` as the draft exporter JSON shape aligned to MEK-RPG's consumer contract, and reaffirmed that headless day advancement/write automation remains out of scope.
 - `2026-06-21`: Completed GitHub issue `#25` by defining the MekHQ read-only checkpoint export contract for MEK-RPG in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`. The contract recommends a source-backed MekHQ DTO/JSON exporter, maps method/API owners for campaign identity, location, finances, personnel, units, contracts, scenarios, markets, repairs/logistics, and reports, marks raw-XML-only gaps, and keeps writeback out of scope.
 - `2026-06-21`: Completed GitHub issue `#24` by mapping safe MekHQ bridge primitives for MEK-RPG pending actions in `MEK_RPG_MEKHQ_BRIDGE_PRIMITIVES.md`. The map recommends read-only checkpoint export first, identifies `Campaign#newDay()` as GUI-coupled through `CampaignNewDayManager`, maps unit market, contract, personnel, repair/logistics, tactical-result, and finance method candidates, and recommends a narrow contract-market decision command only after stable id and prompt-policy validation.
 - `2026-06-20`: Added `MEK_RPG_MEKHQ_COLLABORATION_BRIEF.md` as a shareable coordination packet for the MEK-RPG team, with ownership boundaries, automation phases, open collaboration questions, and a proposed first joint read-only bridge issue.
