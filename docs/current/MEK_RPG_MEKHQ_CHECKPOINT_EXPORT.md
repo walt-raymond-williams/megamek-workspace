@@ -8,6 +8,8 @@ Companion draft schema: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`.
 
 MEK-RPG consumer contract: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`.
 
+Disposable-save validation: `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
+
 ## Boundary
 
 - `Confirmed from source`: MekHQ campaign saves are broad serialized campaign objects. Loading and saving are owned by `CampaignFactory#createCampaign(...)`, `CampaignXmlParser`, `CampaignGUI#saveCampaign(...)`, and `Campaign#writeToXML(...)`.
@@ -132,6 +134,8 @@ Do not export these as authoritative unless a later issue source-confirms and va
 8. Compare one damaged or maintenance-bearing unit's `getDamageState()`, parts/service summary, and maintenance report against MekHQ UI.
 9. Compare contract/scenario ids and statuses against MekHQ UI.
 10. Record mismatches in this workspace before MEK-RPG treats the contract as stable.
+
+Initial validation on `2026-06-21` used the copied sample save under `analysis/tmp/issue-22/` and is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`. It confirmed that the schema needs no field rename, but funds, salary, damage state, market final price, transport/cargo pressure, and report classification still require method-backed export or later UI validation.
 
 ## MEK-RPG Consumer Guidance
 

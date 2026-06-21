@@ -245,10 +245,10 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: MEK-RPG consumer contract `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`; MegaMek docs `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` and `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`; local MekHQ source/install under `external/`.
 - Child issues:
   - `#27`: Create sanitized MekHQ checkpoint export fixture. Completed on `2026-06-21`; fixture is `docs/templates/mekhq-read-only-checkpoint.fixture.json`; archived handoff: `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
-  - `#28`: Validate MekHQ checkpoint schema against disposable save. Active handoff: `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`.
+  - `#28`: Validate MekHQ checkpoint schema against disposable save. Completed on `2026-06-21`; validation note is `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; archived handoff: `docs/handoffs/archive/validate-mekhq-checkpoint-schema.md`.
   - `#29`: Prototype read-only MekHQ checkpoint exporter. Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`.
 - Recommended sequence: Start with `#27` because it is not blocked by UI, saves, or Java toolchain state and gives MEK-RPG an immediate adapter-test target. Then run `#28` against a disposable save. Start `#29` after schema/fixture validation unless the user explicitly prioritizes prototype discovery first.
-- Open questions: Which disposable save should be the validation fixture for `#28`? Should the prototype exporter in `#29` be jar-backed in this workspace first, or should it wait for source-level MekHQ work after the Java/Gradle blocker is resolved?
+- Open questions: Should the prototype exporter in `#29` be jar-backed in this workspace first, or should it wait for source-level MekHQ work after the Java/Gradle blocker is resolved?
 
 ### Create sanitized MekHQ checkpoint export fixture
 
@@ -265,16 +265,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Validate MekHQ checkpoint schema against disposable save
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#28`
 - Owner: `Codex`
 - Goal: Compare the draft checkpoint schema and current MEK-RPG helper output against a disposable MekHQ save and, where possible, MekHQ UI facts.
 - Why it matters: Validation should identify gaps before the prototype exporter locks in JSON field names or unsupported-field semantics.
-- Expected output: A current validation note, schema/doc updates if needed, and clear blocker notes if UI comparison or helper execution cannot run.
-- Handoff notes: Active handoff: `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`. Run after `#27` unless reprioritized.
+- Expected output: Completed with `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; schema/export docs now link the validation note. UI comparison is recorded as not completed because no safe user-operated UI pass was available.
+- Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/validate-mekhq-checkpoint-schema.md`.
 - Dependencies: A disposable MekHQ save or safe copied sample save. MekHQ UI comparison may require user operation if automated UI control remains unavailable.
-- Open questions: Which save should be used for the first validation pass: bundled quickstart, the shakedown autosave copied under `analysis/tmp/`, or a new disposable save?
+- Open questions: None for issue `#28`; future UI spot-checking can use a disposable copy if the user wants stricter visual validation.
 
 ### Prototype read-only MekHQ checkpoint exporter
 

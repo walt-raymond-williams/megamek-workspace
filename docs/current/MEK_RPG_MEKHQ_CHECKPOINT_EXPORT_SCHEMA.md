@@ -10,6 +10,7 @@ Purpose: give a future MekHQ-owned read-only checkpoint exporter a concrete JSON
 - `Confirmed from MEK-RPG docs`: MEK-RPG wants the top-level shape to stay close to its current Python save-summary helper: `bridge_metadata`, `campaign`, `finances`, `personnel`, `units`, `contracts`, `scenarios`, `repairs_and_logistics`, `markets`, `reports`, and `unsupported`.
 - `Confirmed from MEK-RPG docs`: every complex object should preserve stable MekHQ ids when available and expose provenance through evidence/source fields, object warnings, and `method_backed`.
 - `Confirmed from source`: source-backed field owners and derived-value warnings are mapped in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`.
+- `Confirmed from save`: disposable-save validation is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema field rename was required, but helper-derived values remain lower trust than method-backed exporter values.
 - `Out of scope`: this schema does not define write commands, pending-action application, save mutation, headless day advancement, or automation selectors as trusted executable commands.
 
 ## Evidence Values

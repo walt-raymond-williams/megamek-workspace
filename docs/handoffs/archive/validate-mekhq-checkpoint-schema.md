@@ -26,9 +26,9 @@ Read these first:
 
 ## Expected Output
 
-- A validation note under `docs/current/`, likely `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
-- Schema/current-doc updates if validation changes field names, provenance expectations, unsupported fields, or warnings.
-- Clear blocker note if UI comparison or MEK-RPG helper execution cannot run.
+- Completed with validation note `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
+- Schema/export docs now link the validation note. No field rename was required.
+- UI comparison was not completed; blocker is recorded in the validation note.
 
 ## Files And Areas
 
@@ -62,13 +62,13 @@ Test-Path 'C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.
 
 ## Acceptance Criteria
 
-- Identifies exact save/helper inputs used.
-- Compares campaign identity/date/location/funds, personnel ids/names, unit ids/names/status, at least one market offer if present, reports if present, and unsupported fields.
-- Distinguishes method-backed values from raw XML/helper inferred values.
-- Records whether MekHQ UI comparison was completed, skipped, or blocked.
-- Updates schema/current docs when validation changes the contract.
+- Done: identifies exact save/helper inputs used.
+- Done: compares campaign identity/date/location/funds, personnel ids/names, unit ids/names/status, market offers, report support, and unsupported fields.
+- Done: distinguishes method-backed values from raw XML/helper inferred values.
+- Done: records MekHQ UI comparison as not completed, with blocker.
+- Done: updates current docs to link validation; no contract-changing schema update was needed.
 
 ## Open Questions
 
-- Which disposable save should be used first: bundled quickstart copy, shakedown autosave copy, or a newly created throwaway save?
-- Can the current environment run the MEK-RPG helper directly, or should validation consume previously generated helper JSON?
+- Resolved: first validation used copied shakedown autosave `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`.
+- Resolved: current environment ran the MEK-RPG helper directly.
