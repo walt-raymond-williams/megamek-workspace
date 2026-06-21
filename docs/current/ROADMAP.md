@@ -231,3 +231,60 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/define-mekhq-read-only-checkpoint-export.md`. The contract keeps the first bridge read-only, recommends a MekHQ-backed DTO over raw XML as the long-term exporter, and leaves headless day advancement plus pending-action writeback out of scope.
 - Dependencies: Local MekHQ/MegaMek source checkouts. Source builds may remain blocked by the local Java/Gradle toolchain state, so source inspection and documentation/prototype planning are acceptable.
 - Open questions: Should the first implementation live in MekHQ source, this workspace as a jar-backed helper, or MEK-RPG as a consumer adapter? Which disposable save should be used for the first contract-vs-helper validation pass?
+
+### Epic: Deliver MekHQ read-only checkpoint export for MEK-RPG
+
+- Status: `In progress`
+- Priority: `Medium`
+- Issue: `#26`
+- Owner: `Codex`
+- Goal: Deliver the MegaMek-side artifacts needed for MEK-RPG to consume a future MekHQ-owned read-only checkpoint export.
+- Why it matters: MEK-RPG has a consumer contract from issue `#67`; the MegaMek workspace now needs concrete fixture, validation, and prototype-exporter work so the RPG team can build against stable examples instead of only prose.
+- Expected output: Sanitized example fixture, disposable-save validation, and a read-only exporter prototype or clear blocker report.
+- Handoff notes: This is an epic, not a direct implementation task. Proceed through child issues `#27`, `#28`, and `#29`. Keep all work read-only; do not add write automation, direct save mutation, or headless day advancement.
+- Dependencies: MEK-RPG consumer contract `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`; MegaMek docs `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` and `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`; local MekHQ source/install under `external/`.
+- Child issues:
+  - `#27`: Create sanitized MekHQ checkpoint export fixture. Active handoff: `docs/handoffs/active/create-mekhq-checkpoint-fixture.md`.
+  - `#28`: Validate MekHQ checkpoint schema against disposable save. Active handoff: `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`.
+  - `#29`: Prototype read-only MekHQ checkpoint exporter. Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`.
+- Recommended sequence: Start with `#27` because it is not blocked by UI, saves, or Java toolchain state and gives MEK-RPG an immediate adapter-test target. Then run `#28` against a disposable save. Start `#29` after schema/fixture validation unless the user explicitly prioritizes prototype discovery first.
+- Open questions: Which disposable save should be the validation fixture for `#28`? Should the prototype exporter in `#29` be jar-backed in this workspace first, or should it wait for source-level MekHQ work after the Java/Gradle blocker is resolved?
+
+### Create sanitized MekHQ checkpoint export fixture
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#27`
+- Owner: `Codex`
+- Goal: Create a sanitized JSON fixture matching MEK-RPG's read-only checkpoint consumer shape.
+- Why it matters: MEK-RPG can build adapter and bootstrap tests against a fake but realistic payload before a real MekHQ exporter exists.
+- Expected output: `docs/templates/mekhq-read-only-checkpoint.fixture.json` or equivalent, with fake names/ids, method-backed provenance fields, warnings, and unsupported entries.
+- Handoff notes: Active handoff: `docs/handoffs/active/create-mekhq-checkpoint-fixture.md`. Use `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` and MEK-RPG's issue `#67` consumer contract.
+- Dependencies: None beyond current docs. No live save or source build required.
+- Open questions: Should the fixture include one or multiple sample market offers to test duplicate-selector warnings?
+
+### Validate MekHQ checkpoint schema against disposable save
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#28`
+- Owner: `Codex`
+- Goal: Compare the draft checkpoint schema and current MEK-RPG helper output against a disposable MekHQ save and, where possible, MekHQ UI facts.
+- Why it matters: Validation should identify gaps before the prototype exporter locks in JSON field names or unsupported-field semantics.
+- Expected output: A current validation note, schema/doc updates if needed, and clear blocker notes if UI comparison or helper execution cannot run.
+- Handoff notes: Active handoff: `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`. Run after `#27` unless reprioritized.
+- Dependencies: A disposable MekHQ save or safe copied sample save. MekHQ UI comparison may require user operation if automated UI control remains unavailable.
+- Open questions: Which save should be used for the first validation pass: bundled quickstart, the shakedown autosave copied under `analysis/tmp/`, or a new disposable save?
+
+### Prototype read-only MekHQ checkpoint exporter
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#29`
+- Owner: `Codex`
+- Goal: Prototype or precisely plan a read-only exporter that loads a MekHQ campaign through MekHQ code or installed jars and emits JSON matching the checkpoint schema.
+- Why it matters: A method-backed exporter is the long-term way to provide MEK-RPG exact derived values such as balance, unit market price, personnel salary, damage state, logistics summaries, and sanitized reports.
+- Expected output: A prototype exporter, prototype plan, or blocker report with exact classpath/toolchain/API issues and the smallest unblock step.
+- Handoff notes: Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`. Start after `#27` and `#28` unless the user explicitly reprioritizes.
+- Dependencies: Local MekHQ source/install. Existing Gradle/source build blocker may prevent source-level implementation; jar-backed helper feasibility needs discovery.
+- Open questions: Can installed MekHQ/MegaMek jars load a campaign cleanly from a workspace helper without GUI startup dependencies? If not, what source change or build-toolchain fix is smallest?
