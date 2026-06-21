@@ -11,6 +11,8 @@ Purpose: give a future MekHQ-owned read-only checkpoint exporter a concrete JSON
 - `Confirmed from MEK-RPG docs`: every complex object should preserve stable MekHQ ids when available and expose provenance through evidence/source fields, object warnings, and `method_backed`.
 - `Confirmed from source`: source-backed field owners and derived-value warnings are mapped in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`.
 - `Confirmed from save`: disposable-save validation is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema field rename was required, but helper-derived values remain lower trust than method-backed exporter values.
+- `Confirmed by user`: MEK-RPG review feedback on `2026-06-21` says the current top-level JSON shape is good enough for adapter experiments and that `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` should stay in the contract.
+- `Confirmed by user`: MEK-RPG issue `#87` owns consumed-field mapping and any naming/grouping feedback that should guide future MegaMek schema hardening.
 - `Out of scope`: this schema does not define write commands, pending-action application, save mutation, headless day advancement, or automation selectors as trusted executable commands.
 
 ## Evidence Values
@@ -340,3 +342,15 @@ Completed MegaMek-side checks:
 3. Method-backed jar prototype: `tools/mekhq-checkpoint-exporter/` and `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 
 Do not start write automation from this schema. Any future write-side probe must be a separate issue with explicit scope and selectors.
+
+## Consumer Feedback Queue
+
+`Confirmed by user`: MEK-RPG created issue `#84` as the consumer-side epic for checkpoint adapter experiments, with child issues for fixture tests, prototype-output tests, consumed-field mapping, GM-facing warning behavior, and fixture edge cases.
+
+MegaMek-side schema/exporter work should use this queue as the feedback boundary:
+
+- Reference MEK-RPG `#87` when waiting on consumed-field mapping, field priority, naming, or grouping feedback.
+- Reference MEK-RPG `#85` and `#86` when waiting on adapter behavior against the sanitized fixture or disposable-save prototype output.
+- Preserve `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` unless MEK-RPG explicitly replaces them with an equivalent trust-boundary mechanism.
+- Keep unit-market offers as display/opportunity data until a stable source-confirmed selector exists.
+- Treat prototype output as experiment input only, not as a production exporter contract.

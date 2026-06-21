@@ -17,6 +17,8 @@ Jar-backed prototype: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 - `Confirmed from source`: MekHQ campaign saves are broad serialized campaign objects. Loading and saving are owned by `CampaignFactory#createCampaign(...)`, `CampaignXmlParser`, `CampaignGUI#saveCampaign(...)`, and `Campaign#writeToXML(...)`.
 - `Confirmed from source`: `Campaign#writeToXML(...)` serializes reports, options, units, personnel, missions, formations, finances, locations, bases, shopping list, kills, skill/ability data, parts, personnel market, unit market, and contract market.
 - `Inferred`: the first production-quality bridge should be a MekHQ-backed exporter that loads a campaign through MekHQ code and emits JSON using MekHQ methods for derived values. Raw XML parsing remains useful for fallback inspection and MEK-RPG's current helper, but it should not claim exact method-derived semantics where MekHQ source owns the calculation.
+- `Confirmed by user`: MEK-RPG accepted the current top-level JSON shape for adapter experiments and asked to keep `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported`.
+- `Confirmed by user`: MEK-RPG's near-term consumed-field priorities are unit condition, personnel, contracts, reports/warnings, and campaign/finance basics.
 - `Out of scope`: day advancement, purchases, sales, contract accept/decline, repair actions, personnel hiring/assignment, tactical-result application, direct XML edits, and save writeback.
 
 ## Recommended Implementation Shape
@@ -151,6 +153,18 @@ MEK-RPG should consume this as a checkpoint, not as a command log:
 - Treat report lines as hard MekHQ output but sanitize and summarize them before putting them in campaign-facing Markdown.
 - Treat `unsupported` as required GM context, not as noise.
 - Reconcile pending actions only after a new checkpoint confirms the MekHQ-side result.
+- Keep market offers as display/opportunity context until stable source-confirmed selectors exist.
+
+## Cross-Board Feedback Tracking
+
+`Confirmed by user`: MEK-RPG created the consumer-side queue `walt-raymond-williams/mek-rpg#84` through `#89` after reviewing the MegaMek checkpoint export memo.
+
+Use these links when opening future MegaMek-side exporter or schema work:
+
+- Reference MEK-RPG `#87` when waiting on consumed-field mapping, naming, or grouping feedback.
+- Reference MEK-RPG `#85` and `#86` when waiting on adapter test results against the sanitized fixture or disposable-save prototype output.
+- Reference MEK-RPG `#88` when report/warning surfacing affects exporter warning shape.
+- Reference MEK-RPG `#89` when fixture edge cases should drive schema robustness.
 
 ## Completed Follow-Up Work
 
@@ -163,4 +177,5 @@ Potential future work should be opened as new issues after review:
 
 - move the prototype into MekHQ source as an official exporter or service
 - deepen cargo/transport and contract-term extraction
+- harden exporter output against MEK-RPG adapter feedback from issues `#85`, `#86`, and `#87`
 - keep any write-side probe separate from this read-only checkpoint workstream

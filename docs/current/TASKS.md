@@ -114,6 +114,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-21`: Recorded MEK-RPG checkpoint export review feedback and consumer-side issue queue `walt-raymond-williams/mek-rpg#84` through `#89`. MegaMek-side future exporter/schema tickets should wait on MEK-RPG `#87` for consumed-field mapping and `#85`/`#86` for adapter test feedback; market selectors and write-side actions remain out of scope.
 - `2026-06-21`: Completed GitHub epic `#26` after closing child issues `#27`, `#28`, and `#29`. Final review is in `MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`; read-only boundary held, checkpoint handoffs are archived, and future production exporter/write-side work should be opened separately.
 - `2026-06-21`: Completed GitHub issue `#29` by adding jar-backed read-only prototype `tools/mekhq-checkpoint-exporter/`. The prototype loads an explicit copied `.cpnx.gz` through installed MekHQ jars and emits parseable checkpoint JSON with method-backed balance, salary, unit condition, repair counts, unit-market final price, and sanitized report examples. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 - `2026-06-21`: Completed GitHub issue `#28` by validating the checkpoint schema against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz` with MEK-RPG helper `summarize-mekhq-save.py`. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema rename was needed, and UI validation remains an optional future user-operated spot check.

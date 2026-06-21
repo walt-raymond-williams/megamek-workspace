@@ -51,3 +51,16 @@ Known prototype side effect: installed MekHQ jars initialize logging and data ca
 ## Conclusion
 
 Epic `#26` is complete. MEK-RPG now has a sanitized fixture, disposable-save validation note, and working jar-backed read-only prototype exporter to consume or adapt.
+
+## Post-Review Consumer Queue
+
+`Confirmed by user` on `2026-06-21`: MEK-RPG reviewed the checkpoint export memo and created consumer-side issues `walt-raymond-williams/mek-rpg#84` through `#89`.
+
+Resulting MegaMek-side posture:
+
+- The checkpoint shape is acceptable for MEK-RPG adapter experiments.
+- Trust-boundary fields `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` should be preserved.
+- Near-term feedback should focus on unit condition, personnel, contracts, reports/warnings, and campaign/finance basics.
+- Future exporter/schema hardening should wait on MEK-RPG consumed-field mapping `#87` and adapter test feedback from `#85` and `#86`.
+- Market offers remain display/opportunity data only until stable source-confirmed identifiers exist.
+- Prototype output remains experimental and should not be treated as a production exporter contract.

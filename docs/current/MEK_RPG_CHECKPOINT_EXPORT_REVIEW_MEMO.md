@@ -84,6 +84,39 @@ Please review the fixture, schema, validation note, and prototype notes with the
 6. Should the next shared milestone be MEK-RPG adapter tests, MegaMek exporter hardening, or moving the exporter into MekHQ source?
 7. Are there fields MEK-RPG wants removed, renamed, or grouped differently before the shape becomes harder to change?
 
+## MEK-RPG Review Response
+
+`Confirmed by user` on `2026-06-21`: MEK-RPG reviewed this memo and created a consumer-side issue queue for adapter experiments and schema feedback:
+
+- `walt-raymond-williams/mek-rpg#84`: Epic: Consume MekHQ checkpoint export for MEK-RPG adapter experiments
+- `walt-raymond-williams/mek-rpg#85`: Add checkpoint adapter tests using sanitized MekHQ fixture
+- `walt-raymond-williams/mek-rpg#86`: Add checkpoint adapter tests using disposable-save prototype output
+- `walt-raymond-williams/mek-rpg#87`: Define MEK-RPG consumed-field mapping for MekHQ checkpoint exports
+- `walt-raymond-williams/mek-rpg#88`: Define GM-facing surfacing for checkpoint warnings and unsupported fields
+- `walt-raymond-williams/mek-rpg#89`: Add checkpoint fixture edge cases for adapter robustness
+
+Initial MEK-RPG feedback:
+
+- The current top-level JSON shape is good enough for adapter experiments.
+- Keep `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported`; these fields are useful at the trust boundary.
+- Near-term consumed-field priority is unit condition, personnel, contracts, reports/warnings, and campaign/finance basics.
+- Market offers should remain display/opportunity data only until stable source-confirmed identifiers exist.
+- Prototype output is acceptable for experiments, but MEK-RPG will not treat it as a production exporter contract yet.
+
+Shared sequence:
+
+1. MEK-RPG runs adapter tests against the sanitized fixture and prototype output.
+2. MEK-RPG documents consumed fields and GM-facing warning behavior.
+3. MegaMek hardens exporter output against the schema using that feedback.
+4. Only after that should either side consider moving the exporter into MekHQ source or treating the shape as production-facing.
+
+Cross-board tracking:
+
+- MegaMek exporter/schema tickets should reference MEK-RPG `#87` when waiting on consumed-field mapping or naming/grouping feedback.
+- MegaMek exporter hardening tickets should reference MEK-RPG `#85` and `#86` when waiting on adapter test feedback.
+- Market selector or automation-adjacent work remains blocked on stable source-confirmed identifiers.
+- Write-side actions remain out of scope for this read-only checkpoint queue.
+
 ## Suggested Next Issues After Review
 
 Potential MegaMek-side issues:

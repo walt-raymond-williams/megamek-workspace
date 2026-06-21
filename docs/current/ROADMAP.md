@@ -249,6 +249,7 @@ Use this shape for entries that may become GitHub issues:
   - `#29`: Prototype read-only MekHQ checkpoint exporter. Completed on `2026-06-21`; prototype is `tools/mekhq-checkpoint-exporter/`; findings are in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`; archived handoff: `docs/handoffs/archive/prototype-mekhq-checkpoint-exporter.md`.
 - Recommended sequence: Complete. Future production exporter ownership should be reviewed as a new issue if needed.
 - Open questions: None for issue `#26`; possible future source-owned exporter work is outside this epic.
+- Post-review MEK-RPG queue: `Confirmed by user` on `2026-06-21`: MEK-RPG created consumer-side epic `walt-raymond-williams/mek-rpg#84` and child issues `#85` through `#89`. Future MegaMek schema/exporter issues should reference MEK-RPG `#87` for consumed-field mapping or naming/grouping feedback, `#85` and `#86` for adapter test feedback, `#88` for warning/unsupported surfacing, and `#89` for fixture edge cases. Market-selector and automation-adjacent work remains blocked on stable source-confirmed identifiers; write-side actions remain out of scope for this read-only checkpoint queue.
 
 ### Create sanitized MekHQ checkpoint export fixture
 
