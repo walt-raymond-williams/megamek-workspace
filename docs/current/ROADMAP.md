@@ -208,13 +208,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Explore MEK-RPG and MekHQ campaign bridge
 
-- Status: `Idea`
+- Status: `Issue created`
 - Priority: `Medium`
-- Issue: `Not created`
+- Issue: `#24`
 - Owner: `Mixed`
-- Goal: Test whether MekHQ can act as a unit-scale logistics and tactical ledger for the sister MEK-RPG workspace without replacing MEK-RPG's narrative campaign memory.
-- Why it matters: MEK-RPG needs to track assets, missions, contracts, vehicles, repairs, casualties, salvage, and tactical consequences. MekHQ already owns much of that bookkeeping, but direct integration could create drift or overcomplicate RPG play.
-- Expected output: A pilot workflow that links one MEK-RPG campaign folder to one safe MekHQ campaign save, records ownership boundaries, and validates one tactical or logistics handoff.
-- Handoff notes: Start with `docs/current/MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`. Treat MEK-RPG as read-only unless work is explicitly requested there. Prefer a parallel ledger and read-only extraction before any `.cpnx.gz` editing or MekHQ source change. Source inspection found no simple existing headless MekHQ day-advance CLI; `Campaign.newDay()` is the core hook but current daily processing reaches GUI objects and dialogs, so noninteractive day advancement should be a later source investigation, not the first bridge.
-- Dependencies: A selected MEK-RPG campaign save folder, a safe MekHQ campaign save, and the user's decision about which unit-scale facts MekHQ should own.
-- Open questions: Should the first bridge use `playtest-galatea-dropship` or wait for MEK-RPG's first real campaign save? What exact facts should be mirrored back into MEK-RPG `assets.md` and `missions.md` after a MekHQ update? Is manual MekHQ day advancement acceptable if MEK-RPG can read the saved state automatically after each save?
+- Goal: Test whether MekHQ can act as a unit-scale logistics and tactical ledger for the sister MEK-RPG workspace without replacing MEK-RPG's narrative campaign memory, starting with a source-backed map of safe bridge primitives.
+- Why it matters: MEK-RPG now has read-only MekHQ save summary, campaign bootstrap, pending-action validation, and a manually validated day-advance/re-import loop. The next risk is knowing which fields and hard-ledger actions can be trusted from serialized saves, which require MekHQ method calls, and which are still too GUI-coupled for noninteractive automation.
+- Expected output: Issue `#24` should produce a source-backed bridge primitive map for stable read-only export fields, unsafe or derived XML-only fields, pending-action API candidates, GUI/dialog blockers, tactical result artifact paths, and one or two smallest safe future implementation issues.
+- Handoff notes: Start with `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_WORKSPACE_BRIDGE_REQUEST.md`, `docs/current/MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`, and `docs/current/MEK_RPG_MEKHQ_COLLABORATION_BRIEF.md`. Active handoff: `docs/handoffs/active/map-safe-mekhq-bridge-primitives.md`. Treat MEK-RPG as read-only unless work is explicitly requested there. Preserve the no-direct-save-editing boundary. Source inspection already found no simple existing headless MekHQ day-advance CLI; `Campaign.newDay()` is the core hook but current daily processing reaches GUI objects and dialogs, so issue `#24` should verify and refine that blocker rather than assume command automation is easy.
+- Dependencies: Local MekHQ/MegaMek source checkouts; the MEK-RPG bridge request; source build/test commands may remain blocked by local Java/Gradle toolchain state, so the first pass can be completed through source inspection and documentation.
+- Open questions: Which fields should external tools read from serialized facts versus MekHQ methods? Which pending action type is the lowest-risk first command/helper candidate? Are market and contract offers stable enough to select by ID or do they need a safer selector contract? What should MEK-RPG include in tactical handoff packets so MekHQ remains authoritative for damage, casualties, salvage, prisoners, kill credit, scenario status, repairs, and force history?
