@@ -331,12 +331,12 @@ A future fixture should:
 - include at least one unsupported field for unit-market stable selector and one warning for cargo/transport validation
 - avoid raw MekHQ XML, raw save payloads, copyrighted rulebook text, and live user campaign secrets
 
-## Next Validation Target
+## Validation And Prototype Status
 
-The next MegaMek-side validation task should compare this draft schema against:
+Completed MegaMek-side checks:
 
-1. a disposable MekHQ save opened in the MekHQ UI
-2. the current MEK-RPG `scripts/summarize-mekhq-save.py` output
-3. method-backed values produced by a MekHQ-source or jar-backed prototype
+1. Sanitized fixture: `docs/templates/mekhq-read-only-checkpoint.fixture.json`.
+2. Disposable-save/helper/source validation: `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
+3. Method-backed jar prototype: `tools/mekhq-checkpoint-exporter/` and `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 
-Do not start write automation during that validation task.
+Do not start write automation from this schema. Any future write-side probe must be a separate issue with explicit scope and selectors.

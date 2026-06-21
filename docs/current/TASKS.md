@@ -114,6 +114,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-21`: Completed GitHub epic `#26` after closing child issues `#27`, `#28`, and `#29`. Final review is in `MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`; read-only boundary held, checkpoint handoffs are archived, and future production exporter/write-side work should be opened separately.
 - `2026-06-21`: Completed GitHub issue `#29` by adding jar-backed read-only prototype `tools/mekhq-checkpoint-exporter/`. The prototype loads an explicit copied `.cpnx.gz` through installed MekHQ jars and emits parseable checkpoint JSON with method-backed balance, salary, unit condition, repair counts, unit-market final price, and sanitized report examples. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 - `2026-06-21`: Completed GitHub issue `#28` by validating the checkpoint schema against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz` with MEK-RPG helper `summarize-mekhq-save.py`. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema rename was needed, and UI validation remains an optional future user-operated spot check.
 - `2026-06-21`: Completed GitHub issue `#27` by adding sanitized fixture `docs/templates/mekhq-read-only-checkpoint.fixture.json` for MEK-RPG checkpoint adapter tests, linking it from the checkpoint schema, and archiving `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.

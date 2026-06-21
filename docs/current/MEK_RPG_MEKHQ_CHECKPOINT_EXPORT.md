@@ -152,12 +152,15 @@ MEK-RPG should consume this as a checkpoint, not as a command log:
 - Treat `unsupported` as required GM context, not as noise.
 - Reconcile pending actions only after a new checkpoint confirms the MekHQ-side result.
 
-## Recommended Next Work
+## Completed Follow-Up Work
 
-1. Produce a sanitized fixture from `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` with fake names/ids and method-backed sample fields.
-2. Create a disposable-save validation issue that compares the current MEK-RPG raw-XML helper to this source-backed contract.
-3. Decide implementation ownership after validation:
-   - MekHQ source if method-backed precision and future CLI export matter most.
-   - This workspace as a jar-backed helper if the near-term goal is bridge experimentation.
-   - MEK-RPG if the first deliverable is only an adapter around existing raw XML plus explicit warnings.
-4. Keep the first write-side probe separate. Contract-market accept/decline by stable contract id is still the smallest plausible write candidate, but it depends on saved-offer id validation and noninteractive prompt policy.
+1. Sanitized fixture completed in `docs/templates/mekhq-read-only-checkpoint.fixture.json`.
+2. Disposable-save validation completed in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
+3. Jar-backed prototype completed in `tools/mekhq-checkpoint-exporter/`, with findings in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
+4. Epic review completed in `MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`.
+
+Potential future work should be opened as new issues after review:
+
+- move the prototype into MekHQ source as an official exporter or service
+- deepen cargo/transport and contract-term extraction
+- keep any write-side probe separate from this read-only checkpoint workstream

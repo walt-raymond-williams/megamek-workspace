@@ -234,21 +234,21 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Deliver MekHQ read-only checkpoint export for MEK-RPG
 
-- Status: `In progress`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#26`
 - Owner: `Codex`
 - Goal: Deliver the MegaMek-side artifacts needed for MEK-RPG to consume a future MekHQ-owned read-only checkpoint export.
 - Why it matters: MEK-RPG has a consumer contract from issue `#67`; the MegaMek workspace now needs concrete fixture, validation, and prototype-exporter work so the RPG team can build against stable examples instead of only prose.
-- Expected output: Sanitized example fixture, disposable-save validation, and a read-only exporter prototype or clear blocker report.
-- Handoff notes: This is an epic, not a direct implementation task. Proceed through child issues `#27`, `#28`, and `#29`. Keep all work read-only; do not add write automation, direct save mutation, or headless day advancement.
+- Expected output: Completed with sanitized fixture, disposable-save validation, jar-backed read-only exporter prototype, and final epic review.
+- Handoff notes: Completed on `2026-06-21`. Final review: `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`. Keep future write-side work separate; this epic added no write automation, direct save mutation, or headless day advancement.
 - Dependencies: MEK-RPG consumer contract `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`; MegaMek docs `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` and `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`; local MekHQ source/install under `external/`.
 - Child issues:
   - `#27`: Create sanitized MekHQ checkpoint export fixture. Completed on `2026-06-21`; fixture is `docs/templates/mekhq-read-only-checkpoint.fixture.json`; archived handoff: `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
   - `#28`: Validate MekHQ checkpoint schema against disposable save. Completed on `2026-06-21`; validation note is `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; archived handoff: `docs/handoffs/archive/validate-mekhq-checkpoint-schema.md`.
   - `#29`: Prototype read-only MekHQ checkpoint exporter. Completed on `2026-06-21`; prototype is `tools/mekhq-checkpoint-exporter/`; findings are in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`; archived handoff: `docs/handoffs/archive/prototype-mekhq-checkpoint-exporter.md`.
-- Recommended sequence: Start with `#27` because it is not blocked by UI, saves, or Java toolchain state and gives MEK-RPG an immediate adapter-test target. Then run `#28` against a disposable save. Start `#29` after schema/fixture validation unless the user explicitly prioritizes prototype discovery first.
-- Open questions: Should a production exporter move into MekHQ source as an official command/service after human review of the workspace prototype?
+- Recommended sequence: Complete. Future production exporter ownership should be reviewed as a new issue if needed.
+- Open questions: None for issue `#26`; possible future source-owned exporter work is outside this epic.
 
 ### Create sanitized MekHQ checkpoint export fixture
 
