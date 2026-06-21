@@ -221,13 +221,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Define MekHQ read-only checkpoint export for MEK-RPG
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#25`
 - Owner: `Codex`
 - Goal: Define or prototype a MekHQ read-only checkpoint export contract that MEK-RPG can consume without writing to MekHQ saves.
 - Why it matters: Issue `#24` established that read-only checkpoint export is the safest next bridge step. MEK-RPG's sync memo asks this workspace to own the MekHQ-side source-backed field contract before either team attempts write automation.
-- Expected output: A current doc with MekHQ method/API owners, a recommended JSON export shape, field evidence labels, derived-value notes, unsupported-field warnings, and recommended validation sequence.
-- Handoff notes: Active handoff: `docs/handoffs/active/define-mekhq-read-only-checkpoint-export.md`. Start from `MEK_RPG_MEKHQ_BRIDGE_PRIMITIVES.md` and `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_WORKSPACE_SYNC_MEMO.md`. Keep this issue read-only; no headless day advancement or pending-action writeback.
+- Expected output: Completed in `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` with MekHQ method/API owners, a recommended JSON export shape, field evidence labels, derived-value notes, unsupported-field warnings, and a validation sequence.
+- Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/define-mekhq-read-only-checkpoint-export.md`. The contract keeps the first bridge read-only, recommends a MekHQ-backed DTO over raw XML as the long-term exporter, and leaves headless day advancement plus pending-action writeback out of scope.
 - Dependencies: Local MekHQ/MegaMek source checkouts. Source builds may remain blocked by the local Java/Gradle toolchain state, so source inspection and documentation/prototype planning are acceptable.
-- Open questions: Should the first exporter live in MekHQ source, this workspace as a jar-backed helper, or MEK-RPG as a consumer adapter? Which field group should be validated first with disposable saves?
+- Open questions: Should the first implementation live in MekHQ source, this workspace as a jar-backed helper, or MEK-RPG as a consumer adapter? Which disposable save should be used for the first contract-vs-helper validation pass?

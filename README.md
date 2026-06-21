@@ -74,5 +74,6 @@ Start here when orienting a new session:
 - `docs/current/SAVE_FORMAT_NOTES.md`: confirmed and suspected MekHQ save-format knowledge.
 - `docs/current/DATA_MAP.md`: local data locations and file format references.
 - `docs/current/SOURCE_CODE_GUIDE.md`: source inspection strategy and important source areas.
+- `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`: read-only MekHQ checkpoint export contract for MEK-RPG bridge work.
 
 When a discovery will matter again, record it in `docs/current/` instead of leaving it only in chat.
