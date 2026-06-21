@@ -45,13 +45,6 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Map safe MekHQ bridge primitives for MEK-RPG pending actions.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Source-map stable MekHQ read fields, pending-action method candidates, GUI blockers, and tactical artifact paths for the MEK-RPG bridge request.
-   - Output: A current doc with bridge primitives and recommended next implementation issues.
-   - Notes: GitHub issue `#24`; active handoff `docs/handoffs/active/map-safe-mekhq-bridge-primitives.md`; source request is `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_WORKSPACE_BRIDGE_REQUEST.md`.
-
 2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
@@ -121,6 +114,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-21`: Completed GitHub issue `#24` by mapping safe MekHQ bridge primitives for MEK-RPG pending actions in `MEK_RPG_MEKHQ_BRIDGE_PRIMITIVES.md`. The map recommends read-only checkpoint export first, identifies `Campaign#newDay()` as GUI-coupled through `CampaignNewDayManager`, maps unit market, contract, personnel, repair/logistics, tactical-result, and finance method candidates, and recommends a narrow contract-market decision command only after stable id and prompt-policy validation.
 - `2026-06-20`: Added `MEK_RPG_MEKHQ_COLLABORATION_BRIEF.md` as a shareable coordination packet for the MEK-RPG team, with ownership boundaries, automation phases, open collaboration questions, and a proposed first joint read-only bridge issue.
 - `2026-06-20`: Assessed the sister MEK-RPG repository for MekHQ integration opportunities. Recommendation is to keep MEK-RPG as narrative/RPG memory and use MekHQ as an optional unit-scale logistics, roster, contract, repair, salvage, and tactical-result ledger. Findings are in `MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`; roadmap now has a pilot bridge candidate.
 - `2026-06-19`: Completed GitHub issue `#22` by studying the generated full battle-record MUL from the MekHQ shakedown. Findings are in `GENERATED_BATTLE_RECORD_MUL_STUDY.md`: the live file is a full `<record>` with survivors/salvage/devastated/kills, `logs/salvage.mul` is only a plain salvage/export `<unit>` list, player units can land in multiple result buckets depending on end state, ejected pilot and pickup state are serialized, and the next issue `#10` manual import pass should compare raw MUL kill rows against post-resolution MekHQ campaign kill records.
