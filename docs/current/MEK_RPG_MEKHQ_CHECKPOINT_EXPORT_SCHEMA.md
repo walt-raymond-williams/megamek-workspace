@@ -314,6 +314,14 @@ Report entries should be sanitized, categorized, and short enough for MEK-RPG to
 
 ## Sanitized Fixture Guidance
 
+Sanitized fixture:
+
+```text
+docs/templates/mekhq-read-only-checkpoint.fixture.json
+```
+
+The fixture is fake data only. It preserves the MEK-RPG top-level consumer shape, uses synthetic names and IDs, demonstrates method-backed provenance for balance, salary, damage state, market final price, and report lines, and includes warning/unsupported examples for unit-market selector gaps plus cargo/transport validation.
+
 A future fixture should:
 
 - use fake campaign, person, unit, contract, and scenario names
@@ -321,12 +329,6 @@ A future fixture should:
 - include at least one method-backed finance value, unit damage value, personnel salary, unit market final price, and sanitized report line
 - include at least one unsupported field for unit-market stable selector and one warning for cargo/transport validation
 - avoid raw MekHQ XML, raw save payloads, copyrighted rulebook text, and live user campaign secrets
-
-Recommended path if created later:
-
-```text
-docs/templates/mekhq-read-only-checkpoint.fixture.json
-```
 
 ## Next Validation Target
 

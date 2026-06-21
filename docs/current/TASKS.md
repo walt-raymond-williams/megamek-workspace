@@ -45,60 +45,53 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Create sanitized MekHQ checkpoint export fixture.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Give MEK-RPG a fake but realistic read-only checkpoint JSON payload that matches its issue `#67` consumer contract.
-   - Output: `docs/templates/mekhq-read-only-checkpoint.fixture.json` with method-backed provenance examples, warnings, and unsupported entries.
-   - Notes: GitHub issue `#27`; child of epic `#26`; active handoff `docs/handoffs/active/create-mekhq-checkpoint-fixture.md`; no live save, UI, or source build required.
-
-2. Validate MekHQ checkpoint schema against disposable save.
+1. Validate MekHQ checkpoint schema against disposable save.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Compare the checkpoint schema and MEK-RPG helper output against a disposable MekHQ save and UI facts where possible.
    - Output: Current validation note plus schema/doc updates or explicit blockers.
    - Notes: GitHub issue `#28`; child of epic `#26`; active handoff `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`; may need a disposable save and user-operated UI comparison.
 
-3. Prototype read-only MekHQ checkpoint exporter.
+2. Prototype read-only MekHQ checkpoint exporter.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Discover or implement a read-only MekHQ-code/jar-backed exporter that emits the checkpoint schema with method-backed fields.
    - Output: Prototype exporter, prototype plan, or exact blocker report.
    - Notes: GitHub issue `#29`; child of epic `#26`; active handoff `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`; source-level work may be blocked by the existing Java/Gradle toolchain state.
 
-4. Run MekHQ quickstart roster UI validation.
+3. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-5. Inspect the active demo campaign save without modifying it.
+4. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-6. Identify MekHQ save/load source classes.
+5. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-7. Create help-file usage guidance for agents.
+6. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-8. Turn this repo into an AI-ready project workflow demo.
+7. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-9. Produce the first campaign status report.
+8. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
@@ -135,6 +128,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-21`: Completed GitHub issue `#27` by adding sanitized fixture `docs/templates/mekhq-read-only-checkpoint.fixture.json` for MEK-RPG checkpoint adapter tests, linking it from the checkpoint schema, and archiving `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
 - `2026-06-21`: Incorporated MEK-RPG issues `#67` and `#68` into the MegaMek-side checkpoint-export plan. Added `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` as the draft exporter JSON shape aligned to MEK-RPG's consumer contract, and reaffirmed that headless day advancement/write automation remains out of scope.
 - `2026-06-21`: Completed GitHub issue `#25` by defining the MekHQ read-only checkpoint export contract for MEK-RPG in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`. The contract recommends a source-backed MekHQ DTO/JSON exporter, maps method/API owners for campaign identity, location, finances, personnel, units, contracts, scenarios, markets, repairs/logistics, and reports, marks raw-XML-only gaps, and keeps writeback out of scope.
 - `2026-06-21`: Completed GitHub issue `#24` by mapping safe MekHQ bridge primitives for MEK-RPG pending actions in `MEK_RPG_MEKHQ_BRIDGE_PRIMITIVES.md`. The map recommends read-only checkpoint export first, identifies `Campaign#newDay()` as GUI-coupled through `CampaignNewDayManager`, maps unit market, contract, personnel, repair/logistics, tactical-result, and finance method candidates, and recommends a narrow contract-market decision command only after stable id and prompt-policy validation.

@@ -244,7 +244,7 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: This is an epic, not a direct implementation task. Proceed through child issues `#27`, `#28`, and `#29`. Keep all work read-only; do not add write automation, direct save mutation, or headless day advancement.
 - Dependencies: MEK-RPG consumer contract `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_READ_ONLY_CHECKPOINT_EXPORT_CONTRACT.md`; MegaMek docs `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` and `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`; local MekHQ source/install under `external/`.
 - Child issues:
-  - `#27`: Create sanitized MekHQ checkpoint export fixture. Active handoff: `docs/handoffs/active/create-mekhq-checkpoint-fixture.md`.
+  - `#27`: Create sanitized MekHQ checkpoint export fixture. Completed on `2026-06-21`; fixture is `docs/templates/mekhq-read-only-checkpoint.fixture.json`; archived handoff: `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
   - `#28`: Validate MekHQ checkpoint schema against disposable save. Active handoff: `docs/handoffs/active/validate-mekhq-checkpoint-schema.md`.
   - `#29`: Prototype read-only MekHQ checkpoint exporter. Active handoff: `docs/handoffs/active/prototype-mekhq-checkpoint-exporter.md`.
 - Recommended sequence: Start with `#27` because it is not blocked by UI, saves, or Java toolchain state and gives MEK-RPG an immediate adapter-test target. Then run `#28` against a disposable save. Start `#29` after schema/fixture validation unless the user explicitly prioritizes prototype discovery first.
@@ -252,16 +252,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Create sanitized MekHQ checkpoint export fixture
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#27`
 - Owner: `Codex`
 - Goal: Create a sanitized JSON fixture matching MEK-RPG's read-only checkpoint consumer shape.
 - Why it matters: MEK-RPG can build adapter and bootstrap tests against a fake but realistic payload before a real MekHQ exporter exists.
-- Expected output: `docs/templates/mekhq-read-only-checkpoint.fixture.json` or equivalent, with fake names/ids, method-backed provenance fields, warnings, and unsupported entries.
-- Handoff notes: Active handoff: `docs/handoffs/active/create-mekhq-checkpoint-fixture.md`. Use `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md` and MEK-RPG's issue `#67` consumer contract.
+- Expected output: Completed with `docs/templates/mekhq-read-only-checkpoint.fixture.json`, using fake names/ids, method-backed provenance fields, warnings, duplicate-selector market examples, and unsupported entries.
+- Handoff notes: Completed on `2026-06-21`. Archived handoff: `docs/handoffs/archive/create-mekhq-checkpoint-fixture.md`.
 - Dependencies: None beyond current docs. No live save or source build required.
-- Open questions: Should the fixture include one or multiple sample market offers to test duplicate-selector warnings?
+- Open questions: None for issue `#27`; duplicate-looking unit-market offers are included to test selector warnings.
 
 ### Validate MekHQ checkpoint schema against disposable save
 

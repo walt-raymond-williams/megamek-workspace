@@ -23,9 +23,9 @@ Read these first:
 
 ## Expected Output
 
-- A sanitized JSON fixture, likely `docs/templates/mekhq-read-only-checkpoint.fixture.json`.
-- Fixture notes or schema updates if a field shape needs clarification.
-- Roadmap/task updates and commit.
+- Completed with sanitized JSON fixture `docs/templates/mekhq-read-only-checkpoint.fixture.json`.
+- Linked from `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`.
+- Roadmap/task updates completed with issue close-out.
 
 ## Files And Areas
 
@@ -55,13 +55,13 @@ rg "MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA|mekhq-read-only-checkpoint" docs
 
 ## Acceptance Criteria
 
-- Fixture matches the MEK-RPG issue `#67` top-level consumer shape: `bridge_metadata`, `campaign`, `finances`, `personnel`, `units`, `contracts`, `scenarios`, `repairs_and_logistics`, `markets`, `reports`, and `unsupported`.
-- Fixture includes fake but realistic MekHQ UUIDs/integer ids and display names.
-- Fixture includes method-backed examples for finances, personnel salary, unit damage state, unit market final price, and a sanitized report line.
-- Fixture includes unsupported/warning examples for missing unit-market stable offer id and cargo/transport validation.
-- Fixture is linked from the schema or related current doc.
+- Done: fixture matches the MEK-RPG issue `#67` top-level consumer shape: `bridge_metadata`, `campaign`, `finances`, `personnel`, `units`, `contracts`, `scenarios`, `repairs_and_logistics`, `markets`, `reports`, and `unsupported`.
+- Done: fixture includes fake but realistic MekHQ UUIDs/integer ids and display names.
+- Done: fixture includes method-backed examples for finances, personnel salary, unit damage state, unit market final price, and sanitized report lines.
+- Done: fixture includes unsupported/warning examples for missing unit-market stable offer id and cargo/transport validation.
+- Done: fixture is linked from the schema doc.
 
 ## Open Questions
 
-- Should the fixture include duplicate unit-market offers to test selector warnings?
-- Should the fixture include both active contract and contract-market offer examples, or keep the first fixture compact?
+- Resolved: duplicate-looking unit-market offers are included to test selector warnings.
+- Resolved: fixture includes both an active contract and a contract-market offer example while staying compact.
