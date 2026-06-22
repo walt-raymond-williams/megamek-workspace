@@ -509,6 +509,8 @@
       "value": {
         "parts_needed_count": 0,
         "parts_needing_service_count": 0,
+        "units_needing_parts_count": 0,
+        "units_needing_service_count": 0,
         "units_under_repair_count": 0
       },
       "evidence": "Confirmed from MekHQ export",
@@ -516,11 +518,126 @@
       "source_owner": "Unit repair summary methods",
       "warnings": []
     },
+    "repair_queue": [],
+    "parts_pressure": {
+      "shopping_list_item_count": 1,
+      "shopping_list_part_item_count": 1,
+      "shopping_list_unit_item_count": 0,
+      "total_buy_cost": "10,000 C-bills",
+      "source_owner": "Campaign#getShoppingList(); ShoppingList summary methods",
+      "warnings": [
+        "Shopping list rows are read-only display rows; they are not stable procurement command selectors."
+      ]
+    },
+    "shopping_list": [
+      {
+        "display_name": "Medium Laser",
+        "name": "Medium Laser",
+        "description": "Replacement weapon",
+        "extra_description": "",
+        "bonus": "",
+        "quantity": 1,
+        "total_quantity": 1,
+        "days_to_wait": 2,
+        "buy_cost": "10,000 C-bills",
+        "total_buy_cost": "10,000 C-bills",
+        "tech_base": {
+          "raw": "ALL",
+          "display": "All",
+          "evidence": "Confirmed from MekHQ export",
+          "method_backed": true,
+          "source_owner": "IAcquisitionWork#getTechBase()",
+          "warnings": []
+        },
+        "availability": {
+          "raw": "C",
+          "display": "C",
+          "evidence": "Confirmed from MekHQ export",
+          "method_backed": true,
+          "source_owner": "IAcquisitionWork#getAvailability()",
+          "warnings": []
+        },
+        "unit_id": "Unknown",
+        "bulk_acquisition": false,
+        "source_owner": "Campaign#getShoppingList(); IAcquisitionWork getters",
+        "warnings": [
+          "Display-only shopping-list row; no stable acquisition selector or purchase command is exposed."
+        ]
+      }
+    ],
+    "cargo": {
+      "units_with_transport_assignment_count": 0,
+      "carried_unit_reference_count": 0,
+      "source_owner": "Unit#getTransportAssignment(); Unit#getTransportedUnits()",
+      "warnings": [
+        "Cargo output summarizes transport relationships only; capacity math and load/unload commands are not exposed in V1."
+      ]
+    },
+    "transport_bays": {
+      "assigned_unit_counts_by_transport_type": {},
+      "carried_unit_counts_by_transport_type": {},
+      "source_owner": "CampaignTransportType; Unit transport assignment methods",
+      "warnings": [
+        "Transport bay output is display-only and does not validate bay capacity or expose reassignment commands."
+      ]
+    },
+    "automation_guard": {
+      "read_only": true,
+      "repair_execution_supported": false,
+      "repair_assignment_supported": false,
+      "procurement_execution_supported": false,
+      "stable_repair_work_ids_available": false,
+      "stable_acquisition_selectors_available": false
+    },
     "warnings": [
-      "Repair pressure is an aggregate summary, not a complete work queue."
+      "Repair and procurement output is display-only context, not a complete work-order command queue."
+    ]
+  },
+  "markets": {
+    "display_only": true,
+    "automation_ready": false,
+    "guard_fields": {
+      "stable_selector_required_for_commands": true,
+      "stable_offer_selectors_available": false,
+      "duplicate_safe_selection_available": false,
+      "purchase_hire_accept_commands_available": false,
+      "save_writeback_available": false
+    },
+    "summary": {
+      "unit_market_method": "Disabled",
+      "unit_offer_count": 0,
+      "personnel_market_style": "Personnel Market Disabled",
+      "personnel_applicant_count": 0,
+      "contract_market_method": "None",
+      "contract_offer_count": 0,
+      "source_owner": "Campaign market getter methods"
+    },
+    "unit_offers": [],
+    "personnel_applicants": [],
+    "contract_offers": [],
+    "warnings": [
+      "Market rows are display-only. Consumers must not treat list position, display name, or object content as a durable command selector."
     ]
   },
   "reports": {
+    "metadata": {
+      "report_limit_per_category": 12,
+      "campaign_date": "3025-04-09",
+      "sanitization": "HTML tags stripped and long lines truncated.",
+      "categories": {
+        "current": 1,
+        "skill": 0,
+        "technical": 0,
+        "finances": 0,
+        "acquisitions": 0,
+        "medical": 0,
+        "personnel": 0,
+        "battle": 0,
+        "politics": 0,
+        "aggregate": 1
+      },
+      "source_owner": "Campaign report getter methods"
+    },
     "current": [
       {
         "category": "current",
@@ -545,6 +662,38 @@
       "evidence": "Unsupported",
       "recommended_owner": "MekHQ GUI save-state tracking",
       "blocks_automation": false
+    },
+    {
+      "area": "markets",
+      "field": "stable_offer_selectors",
+      "reason": "Markets are display-only in V1; no stable source-confirmed offer selectors are exposed.",
+      "evidence": "Unsupported",
+      "recommended_owner": "Future MekHQ exporter or source change",
+      "blocks_automation": true
+    },
+    {
+      "area": "markets",
+      "field": "market_mutation_commands",
+      "reason": "This V1 endpoint does not expose unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, or save/writeback commands.",
+      "evidence": "Unsupported",
+      "recommended_owner": "Future MekHQ command API design",
+      "blocks_automation": true
+    },
+    {
+      "area": "repairs_and_logistics",
+      "field": "stable_repair_work_ids",
+      "reason": "Stable IPartWork/IAcquisitionWork selectors are not exposed by this V1 read-only endpoint.",
+      "evidence": "Unsupported",
+      "recommended_owner": "Future MekHQ exporter work",
+      "blocks_automation": true
+    },
+    {
+      "area": "repairs_and_logistics",
+      "field": "repair_or_procurement_commands",
+      "reason": "This V1 endpoint does not expose repair execution, repair assignment, shopping-list purchase, or shopping-list priority mutation commands.",
+      "evidence": "Unsupported",
+      "recommended_owner": "Future MekHQ command API design",
+      "blocks_automation": true
     }
   ]
 }

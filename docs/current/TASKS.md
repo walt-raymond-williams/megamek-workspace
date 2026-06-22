@@ -45,21 +45,14 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Deepen live API logistics, reports, and market safeguards.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Expand the live read-only MekHQ campaign API with richer repairs/logistics/report context while keeping market data display-only and automation guarded.
-   - Output: GitHub issue `#42` completed with source-backed API/docs/fixture updates or documented source blockers.
-   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`; follows completed issues `#39`, `#40`, and `#41`.
-
-2. Run MekHQ quickstart roster UI validation.
+1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Turn this repo into an AI-ready project workflow demo.
+2. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -103,6 +96,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#42` and epic `#38` by deepening live API logistics, reports, and market safeguards in MekHQ source commit `911a338788`. Added display-only repair queue, shopping-list pressure/rows, cargo/transport relationship summaries, report metadata/counts, market summaries/rows, and explicit unsupported automation blockers for stable selectors and mutation commands. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#41` by deepening live API contract and scenario sections in MekHQ source commit `495b58faef`. Added contract description/date/travel/payment/salvage/rental/scenario-link fields and scenario description/link/map/conditions/player-force/salvage/objective/bot-force/tactical-result context. Updated live API docs and active-contract/scenario-rich fixture; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#40` by deepening live API finance, personnel, and unit sections in MekHQ source commit `d38a500960`. Added loan/default/warning summaries, personnel assignment/leadership/injury-summary/current-personnel fields, and unit availability/deployability/maintenance/transport summaries. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#39` by hardening the live MekHQ campaign API trust/location metadata in MekHQ source commit `dc214d946d`. Dirty state remains explicit `Unknown` with stronger unsupported metadata because source search found no loaded-campaign dirty flag; location labels now come from `Campaign#getCurrentLocation()` and `AbstractLocation` methods instead of relying on `toString()`. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq`.

@@ -73,5 +73,30 @@ Run Gradle commands from `external/src/mekhq`. Record exact blockers if source v
 
 ## Open Questions
 
-- Are stable repair work item ids available for read-only display?
-- Are market offer selectors stable enough to expose without implying command automation?
+- Stable repair work item ids and market offer selectors were not exposed as automation-safe selectors in this pass.
+- Market rows, repair rows, and shopping-list rows remain display-only. Future command work needs separate selector, duplicate-safety, prompt-policy, and writeback design.
+
+## Completion Notes
+
+Completed on `2026-06-22`.
+
+MekHQ source commit:
+
+- `911a338788` (`Deepen live campaign logistics market reports`)
+
+Implemented:
+
+- repair pressure counts, display-only repair queue rows, shopping-list pressure/rows, cargo/transport relationship summaries, report metadata/counts, market summaries/rows, and explicit automation guards.
+- unsupported entries for stable repair work ids, repair/procurement commands, stable market offer selectors, and market mutation commands.
+- fixture/docs updates preserving the read-only, loopback-only, disabled-by-default boundary.
+
+Verification:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
+Both passed from `external/src/mekhq`.

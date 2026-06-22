@@ -20,6 +20,7 @@ Source commit:
 - `dc214d946d` (`Harden live campaign state metadata`)
 - `d38a500960` (`Deepen live campaign personnel unit finance state`)
 - `495b58faef` (`Deepen live campaign contract scenario state`)
+- `911a338788` (`Deepen live campaign logistics market reports`)
 
 Files changed:
 
@@ -97,9 +98,11 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `495b58faef` deepens contract and scenario output. Contract DTOs now include descriptions, dates, travel days, payment summaries, salvage summaries, rental summaries, and scenario links. Scenario DTOs now include descriptions, linked scenario ids, StratCon type, map and planetary condition summaries, player force ids/unit ids, salvage assignments, objective summaries, bot-force summaries, bot-force stubs, and a read-only tactical-result context block.
 
+`Confirmed from source`: source commit `911a338788` deepens logistics, reports, and market safeguards. Repairs/logistics output now includes repair pressure counts, a display-only repair queue, shopping-list pressure and rows from `IAcquisitionWork`, transport/cargo relationship summaries, and an automation guard marking repair execution, assignment, procurement execution, and stable selectors unavailable. Reports now include per-category metadata/counts alongside sanitized report rows. Markets now expose display-only summaries and optional unit/personnel/contract rows while explicitly setting `automation_ready: false` and adding unsupported entries for stable offer selectors and market mutation commands.
+
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
-`Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, full cargo/transport semantics, personnel injuries/skills, or write/action surfaces. Markets are intentionally display-only/empty with automation-blocking unsupported entries.
+`Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, save, or writeback commands. Market rows and repair/acquisition rows are display-only context and must not be treated as durable selectors.
 
 ## Fixtures
 
@@ -156,6 +159,15 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:checkstyleMain
 ```
 
+`Confirmed locally`: after source commit `911a338788`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
 
 `Confirmed locally`: follow-up MEK-RPG issue `#106` verified that selected-section state requests must include `bridge_metadata` when the response is intended for MEK-RPG dashboard/context validation. Omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
@@ -174,6 +186,6 @@ Invoke-RestMethod -Method Get `
 
 ## Source Push Status
 
-`Blocked`: source commit `7d3b345327` is committed locally in `external/src/mekhq`, but pushing that branch failed because the checkout remote is `https://github.com/MegaMek/mekhq.git` and the authenticated account lacks write permission.
+`Blocked`: the source commits listed above are committed locally in `external/src/mekhq`, but pushing that branch failed because the checkout remote is `https://github.com/MegaMek/mekhq.git` and the authenticated account lacks write permission.
 
 The workspace documentation commit can still be pushed to `walt-raymond-williams/megamek-workspace`.
