@@ -1,6 +1,6 @@
 # MEK-RPG MekHQ Checkpoint Export Schema
 
-Status: draft MegaMek-side schema aligned with MEK-RPG issue `#67`, created `2026-06-21`.
+Status: draft MegaMek-side schema aligned with MEK-RPG issue `#67`, created `2026-06-21`; updated after MEK-RPG feedback issues `#84` through `#89` completed.
 
 Purpose: give a future MekHQ-owned read-only checkpoint exporter a concrete JSON target that MEK-RPG can consume without direct save/XML edits or write automation.
 
@@ -12,7 +12,8 @@ Purpose: give a future MekHQ-owned read-only checkpoint exporter a concrete JSON
 - `Confirmed from source`: source-backed field owners and derived-value warnings are mapped in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`.
 - `Confirmed from save`: disposable-save validation is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema field rename was required, but helper-derived values remain lower trust than method-backed exporter values.
 - `Confirmed by user`: MEK-RPG review feedback on `2026-06-21` says the current top-level JSON shape is good enough for adapter experiments and that `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` should stay in the contract.
-- `Confirmed by user`: MEK-RPG issue `#87` owns consumed-field mapping and any naming/grouping feedback that should guide future MegaMek schema hardening.
+- `Confirmed from MEK-RPG docs`: MEK-RPG issue `#87` completed the consumed-field mapping. No top-level rename or removal is requested; producer hardening should preserve trust-boundary fields, replace object-string location values with stable display/id fields, deepen contract-term extraction, keep markets display-only, and keep `unsupported` mandatory.
+- `Confirmed from MEK-RPG docs`: MEK-RPG issue `#88` completed warning and unsupported-field surfacing policy. Warnings should remain structured enough to support blocker, manual-inspection, caution, and FYI treatment.
 - `Out of scope`: this schema does not define write commands, pending-action application, save mutation, headless day advancement, or automation selectors as trusted executable commands.
 
 ## Evidence Values
@@ -343,14 +344,18 @@ Completed MegaMek-side checks:
 
 Do not start write automation from this schema. Any future write-side probe must be a separate issue with explicit scope and selectors.
 
-## Consumer Feedback Queue
+## Completed Consumer Feedback
 
-`Confirmed by user`: MEK-RPG created issue `#84` as the consumer-side epic for checkpoint adapter experiments, with child issues for fixture tests, prototype-output tests, consumed-field mapping, GM-facing warning behavior, and fixture edge cases.
+`Confirmed from MEK-RPG docs`: MEK-RPG completed issue `#84` as the consumer-side epic for checkpoint adapter experiments, with child issues for fixture tests, prototype-output tests, consumed-field mapping, GM-facing warning behavior, and fixture edge cases.
 
-MegaMek-side schema/exporter work should use this queue as the feedback boundary:
+MegaMek-side schema/exporter work should use these completed results as the feedback boundary:
 
-- Reference MEK-RPG `#87` when waiting on consumed-field mapping, field priority, naming, or grouping feedback.
-- Reference MEK-RPG `#85` and `#86` when waiting on adapter behavior against the sanitized fixture or disposable-save prototype output.
-- Preserve `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` unless MEK-RPG explicitly replaces them with an equivalent trust-boundary mechanism.
+- Adapter tests against the sanitized fixture and sanitized prototype-output fixture passed on the MEK-RPG side.
+- Preserve `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported`; MEK-RPG uses them to decide whether values can become campaign state, GM context, manual-inspection prompts, or automation blockers.
+- Keep the current top-level groups: `bridge_metadata`, `campaign`, `finances`, `personnel`, `units`, `contracts`, `scenarios`, `repairs_and_logistics`, `markets`, `reports`, and `unsupported`.
+- Prioritize method-backed campaign/date/location, finance balance, personnel role/status/condition, unit status/condition/repair summary, active contract terms, scenario status, and sanitized reports.
+- Replace prototype object-string location values with stable display/id fields.
+- Deepen active contract-term extraction through `Contract` getters before treating contract fields as schema-stable.
 - Keep unit-market offers as display/opportunity data until a stable source-confirmed selector exists.
 - Treat prototype output as experiment input only, not as a production exporter contract.
+- Keep sparse, warning-heavy, and partially missing data parseable; adapters should preserve warnings and unsupported entries instead of filling gaps with guesses.

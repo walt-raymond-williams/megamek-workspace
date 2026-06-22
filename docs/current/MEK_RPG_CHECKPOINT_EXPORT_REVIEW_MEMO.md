@@ -112,10 +112,32 @@ Shared sequence:
 
 Cross-board tracking:
 
-- MegaMek exporter/schema tickets should reference MEK-RPG `#87` when waiting on consumed-field mapping or naming/grouping feedback.
-- MegaMek exporter hardening tickets should reference MEK-RPG `#85` and `#86` when waiting on adapter test feedback.
+- MEK-RPG `#85` verified the sanitized fixture through adapter tests.
+- MEK-RPG `#86` verified a sanitized prototype-output fixture from the jar-backed exporter.
+- MEK-RPG `#87` produced the consumed-field mapping and naming/grouping feedback.
+- MEK-RPG `#88` produced the GM-facing warning and unsupported-field surfacing policy.
+- MEK-RPG `#89` added sparse and warning-heavy edge fixture coverage for adapter robustness.
 - Market selector or automation-adjacent work remains blocked on stable source-confirmed identifiers.
 - Write-side actions remain out of scope for this read-only checkpoint queue.
+
+## Completed MEK-RPG Feedback
+
+`Confirmed from MEK-RPG docs`: MEK-RPG completed issues `#84` through `#89` and recorded the producer-facing results in:
+
+- `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_CHECKPOINT_CROSS_BOARD_TRACKING_PROPOSAL.md`
+- `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_CHECKPOINT_CONSUMED_FIELD_MAPPING.md`
+- `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_CHECKPOINT_WARNING_SURFACING.md`
+
+Producer-side requirements for the next MegaMek hardening issue:
+
+- Keep the current top-level grouping: `bridge_metadata`, `campaign`, `finances`, `personnel`, `units`, `contracts`, `scenarios`, `repairs_and_logistics`, `markets`, `reports`, and `unsupported`.
+- Preserve trust-boundary fields wherever values may become campaign-facing or action-adjacent: `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported`.
+- Prioritize method-backed campaign/date/location, finance balance, personnel role/status/condition, unit status/condition/repair summary, active contract terms, scenario status, and sanitized reports.
+- Replace object-string prototype location values such as `current_location` with stable display and id fields.
+- Deepen active contract-term extraction through `Contract` getters before treating contract fields as schema-stable.
+- Keep market offers read-only and display-only until stable source-confirmed identifiers and prompt policy exist.
+- Keep `unsupported` entries mandatory, structured, and automation-blocking where appropriate.
+- Prefer compact sanitized report and maintenance summaries for downstream GM display.
 
 ## Suggested Next Issues After Review
 

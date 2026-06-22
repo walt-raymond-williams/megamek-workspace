@@ -1,6 +1,6 @@
 # MEK-RPG MekHQ Checkpoint Export
 
-Status: source-backed export contract for GitHub issue `#25`, created `2026-06-21`; updated after MEK-RPG issues `#67` and `#68` completed.
+Status: source-backed export contract for GitHub issue `#25`, created `2026-06-21`; updated after MEK-RPG issues `#67`, `#68`, and consumer feedback issues `#84` through `#89` completed.
 
 Purpose: define a read-only MekHQ campaign checkpoint export that MEK-RPG can consume without writing `.cpnx`, `.cpnx.gz`, or extracted campaign XML.
 
@@ -19,6 +19,7 @@ Jar-backed prototype: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 - `Inferred`: the first production-quality bridge should be a MekHQ-backed exporter that loads a campaign through MekHQ code and emits JSON using MekHQ methods for derived values. Raw XML parsing remains useful for fallback inspection and MEK-RPG's current helper, but it should not claim exact method-derived semantics where MekHQ source owns the calculation.
 - `Confirmed by user`: MEK-RPG accepted the current top-level JSON shape for adapter experiments and asked to keep `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported`.
 - `Confirmed by user`: MEK-RPG's near-term consumed-field priorities are unit condition, personnel, contracts, reports/warnings, and campaign/finance basics.
+- `Confirmed from MEK-RPG docs`: completed consumer feedback keeps the current top-level grouping, preserves trust-boundary fields, asks the producer to replace object-string location values with stable display/id fields, deepen active contract terms through `Contract` getters, keep market offers display-only, and keep `unsupported` mandatory.
 - `Out of scope`: day advancement, purchases, sales, contract accept/decline, repair actions, personnel hiring/assignment, tactical-result application, direct XML edits, and save writeback.
 
 ## Recommended Implementation Shape
@@ -157,14 +158,14 @@ MEK-RPG should consume this as a checkpoint, not as a command log:
 
 ## Cross-Board Feedback Tracking
 
-`Confirmed by user`: MEK-RPG created the consumer-side queue `walt-raymond-williams/mek-rpg#84` through `#89` after reviewing the MegaMek checkpoint export memo.
+`Confirmed from MEK-RPG docs`: MEK-RPG completed the consumer-side queue `walt-raymond-williams/mek-rpg#84` through `#89` after reviewing the MegaMek checkpoint export memo.
 
-Use these links when opening future MegaMek-side exporter or schema work:
+Use these completed feedback points when opening or executing future MegaMek-side exporter or schema work:
 
-- Reference MEK-RPG `#87` when waiting on consumed-field mapping, naming, or grouping feedback.
-- Reference MEK-RPG `#85` and `#86` when waiting on adapter test results against the sanitized fixture or disposable-save prototype output.
-- Reference MEK-RPG `#88` when report/warning surfacing affects exporter warning shape.
-- Reference MEK-RPG `#89` when fixture edge cases should drive schema robustness.
+- `#85` and `#86`: adapter tests accepted both sanitized fixture and sanitized prototype-output fixture as experiment inputs.
+- `#87`: consumed-field mapping requests no top-level rename/removal, but does require stable display/id location values and deeper contract-term extraction.
+- `#88`: warnings and `unsupported` entries are first-class GM-facing diagnostics; blocker/manual-inspection/caution/FYI severity should be preserved or easy for adapters to derive.
+- `#89`: sparse and warning-heavy fixtures prove adapters must tolerate missing optional data while preserving warnings, unsupported entries, and read-only boundaries.
 
 ## Completed Follow-Up Work
 
@@ -173,9 +174,11 @@ Use these links when opening future MegaMek-side exporter or schema work:
 3. Jar-backed prototype completed in `tools/mekhq-checkpoint-exporter/`, with findings in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 4. Epic review completed in `MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`.
 
-Potential future work should be opened as new issues after review:
+Potential future work should proceed through the checkpoint hardening queue:
 
-- move the prototype into MekHQ source as an official exporter or service
+- harden exporter output against completed MEK-RPG adapter feedback from issues `#85` through `#89`
+- add or document repeatable smoke checks for sanitized fixture JSON and prototype JSON
 - deepen cargo/transport and contract-term extraction
-- harden exporter output against MEK-RPG adapter feedback from issues `#85`, `#86`, and `#87`
+- deepen active contract-term extraction through `Contract` getters
+- decide whether to move the prototype into MekHQ source as an official exporter or service
 - keep any write-side probe separate from this read-only checkpoint workstream

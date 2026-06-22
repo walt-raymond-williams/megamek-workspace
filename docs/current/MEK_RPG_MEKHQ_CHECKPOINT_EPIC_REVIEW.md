@@ -61,6 +61,6 @@ Resulting MegaMek-side posture:
 - The checkpoint shape is acceptable for MEK-RPG adapter experiments.
 - Trust-boundary fields `evidence`, `source_owner`, `method_backed`, `warnings`, and `unsupported` should be preserved.
 - Near-term feedback should focus on unit condition, personnel, contracts, reports/warnings, and campaign/finance basics.
-- Future exporter/schema hardening should wait on MEK-RPG consumed-field mapping `#87` and adapter test feedback from `#85` and `#86`.
+- Future exporter/schema hardening is unblocked by completed MEK-RPG consumed-field mapping `#87`, adapter test feedback from `#85` and `#86`, warning policy from `#88`, and edge-fixture coverage from `#89`.
 - Market offers remain display/opportunity data only until stable source-confirmed identifiers exist.
 - Prototype output remains experimental and should not be treated as a production exporter contract.

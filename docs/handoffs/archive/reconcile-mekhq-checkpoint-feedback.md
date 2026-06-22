@@ -10,6 +10,14 @@
 
 Update MegaMek-side checkpoint documentation now that MEK-RPG issues `#84` through `#89` are complete, replacing "waiting on MEK-RPG" language with concrete consumed-field, warning-surfacing, and edge-fixture feedback.
 
+## Result
+
+Completed on `2026-06-22`.
+
+- Updated MegaMek checkpoint review/schema/export docs with completed MEK-RPG feedback from issues `#84` through `#89`.
+- Recorded producer-side hardening requirements: preserve top-level grouping and trust-boundary fields, replace object-string location values with stable display/id fields, deepen active contract terms through `Contract` getters, keep market offers display-only, and keep `unsupported` mandatory.
+- Updated `ROADMAP.md` and `TASKS.md`; follow-on implementation remains issue `#32`.
+
 ## Required Context
 
 Read these first:

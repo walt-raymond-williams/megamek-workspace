@@ -52,42 +52,35 @@ Use this shape for active and queued work:
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Reconcile MegaMek checkpoint docs with completed MEK-RPG feedback.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Replace pending-feedback language with concrete results from completed MEK-RPG issues `#84` through `#89`.
-   - Output: Updated checkpoint docs, roadmap/task notes, and handoff close-out.
-   - Notes: GitHub issue `#31`; child of checkpoint hardening epic `#30`; active handoff `docs/handoffs/active/reconcile-mekhq-checkpoint-feedback.md`.
-
-3. Harden jar-backed MekHQ checkpoint exporter output against MEK-RPG feedback.
+2. Harden jar-backed MekHQ checkpoint exporter output against MEK-RPG feedback.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Improve prototype output shape and checks based on MEK-RPG consumed-field mapping.
    - Output: Hardened read-only prototype output where practical, smoke verification or exact blocker, and updated prototype/schema docs.
    - Notes: GitHub issue `#32`; child of checkpoint hardening epic `#30`; depends on checkpoint doc reconciliation `#31`; active handoff `docs/handoffs/active/harden-mekhq-checkpoint-exporter-output.md`.
 
-4. Decide production ownership path for MekHQ checkpoint exporter.
+3. Decide production ownership path for MekHQ checkpoint exporter.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide whether the checkpoint exporter should move into MekHQ source, remain a workspace helper, or stay experimental for now.
    - Output: Decision note or updated checkpoint export doc with tradeoffs and follow-up issue recommendation.
    - Notes: GitHub issue `#33`; child of checkpoint hardening epic `#30`; depends on exporter hardening `#32`; active handoff `docs/handoffs/active/decide-mekhq-checkpoint-production-ownership.md`.
 
-5. Inspect the active demo campaign save without modifying it.
+4. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-6. Identify MekHQ save/load source classes.
+5. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-7. Create help-file usage guidance for agents.
+6. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
@@ -135,7 +128,8 @@ Use this shape for active and queued work:
 
 ## Done
 
-- `2026-06-21`: Recorded MEK-RPG checkpoint export review feedback and consumer-side issue queue `walt-raymond-williams/mek-rpg#84` through `#89`. MegaMek-side future exporter/schema tickets should wait on MEK-RPG `#87` for consumed-field mapping and `#85`/`#86` for adapter test feedback; market selectors and write-side actions remain out of scope.
+- `2026-06-22`: Completed GitHub issue `#31` by reconciling MegaMek checkpoint docs with completed MEK-RPG feedback from issues `#84` through `#89`. The docs now record accepted top-level grouping, required trust-boundary fields, location and contract hardening requirements, warning/unsupported surfacing policy, edge-fixture coverage, and the handoff to exporter hardening issue `#32`.
+- `2026-06-21`: Recorded MEK-RPG checkpoint export review feedback and consumer-side issue queue `walt-raymond-williams/mek-rpg#84` through `#89`. Superseded by the `2026-06-22` reconciliation above: MEK-RPG feedback is now complete and exporter hardening should proceed through issue `#32`; market selectors and write-side actions remain out of scope.
 - `2026-06-21`: Completed GitHub epic `#26` after closing child issues `#27`, `#28`, and `#29`. Final review is in `MEK_RPG_MEKHQ_CHECKPOINT_EPIC_REVIEW.md`; read-only boundary held, checkpoint handoffs are archived, and future production exporter/write-side work should be opened separately.
 - `2026-06-21`: Completed GitHub issue `#29` by adding jar-backed read-only prototype `tools/mekhq-checkpoint-exporter/`. The prototype loads an explicit copied `.cpnx.gz` through installed MekHQ jars and emits parseable checkpoint JSON with method-backed balance, salary, unit condition, repair counts, unit-market final price, and sanitized report examples. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 - `2026-06-21`: Completed GitHub issue `#28` by validating the checkpoint schema against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz` with MEK-RPG helper `summarize-mekhq-save.py`. Findings are in `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`; no schema rename was needed, and UI validation remains an optional future user-operated spot check.
