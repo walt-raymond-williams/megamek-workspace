@@ -52,20 +52,9 @@ Use this shape for active and queued work:
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Create help-file usage guidance for agents.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
-   - Output: A durable workflow note or skill-style guide under `docs/current/`.
-   - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
-
-8. Turn this repo into an AI-ready project workflow demo.
+2. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
-
-9. Produce the first campaign status report.
-   - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
-   - Output: A report under `campaigns/demo/reports/`.
 
 ## Backlog
 
@@ -100,6 +89,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#4` by adding `HELP_FILE_WORKFLOW.md`, linking it from current workspace/profile/workflow docs, adding local help/glossary/PDF extraction commands, and superseding `HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 - `2026-06-22`: Completed GitHub issue `#3` by mapping MekHQ campaign save/load source classes. `SAVE_FORMAT_NOTES.md`, `SOURCE_CODE_GUIDE.md`, and `KNOWN_COMMANDS.md` now record gzip magic-byte load detection, manual save extension/gzip behavior, always-gzipped autosaves, parser ownership, and the main source files.
 - `2026-06-22`: Completed GitHub issue `#2` by inspecting `campaigns/demo/ai-ready-demo.cpnx.gz` read-only. Updated `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, `KNOWN_COMMANDS.md`, and added first report `campaigns/demo/reports/first-demo-status-3025-04-08.md`.
 - `2026-06-22`: Completed GitHub issue `#33` and epic `#30` by recording `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`. Recommendation: keep the jar-backed checkpoint exporter as a workspace experimental helper for near-term use, and defer any MekHQ source move to a separate source-change issue triggered by real campaign use, MEK-RPG production dependency, upstream/source-maintainer intent, or unblocked source build/test verification.

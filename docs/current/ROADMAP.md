@@ -110,16 +110,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Create help-file usage guidance
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#4`
 - Owner: `Codex`
 - Goal: Decide how agents should use local MegaMek/MekHQ help files, glossary resources, installed docs, and source code.
 - Why it matters: Help files are a safer user-facing reference for concepts, while source is needed for exact behavior.
-- Expected output: Durable workflow note or skill-style guide, linked from `WORKSPACE.md` or the current MegaMek project profile.
-- Handoff notes: Resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`. Active handoff: `docs/handoffs/active/create-help-file-usage-guidance.md`.
-- Dependencies: PDF extraction tooling would improve coverage but is not required for text, Markdown, HTML, Java, and properties files.
-- Open questions: Should this become a reusable project-profile pattern?
+- Expected output: Completed with `docs/current/HELP_FILE_WORKFLOW.md`, links from current workspace/profile/workflow docs, repeatable commands in `KNOWN_COMMANDS.md`, and updated state note.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/create-help-file-usage-guidance.md`. Guidance now routes agents across campaign data, local help/glossary/docs, source code, user confirmation, and external sources, with copyright and evidence-label posture.
+- Dependencies: None for close-out. `pdftotext` is available locally through Poppler, and Python `pypdf` is importable.
+- Open questions: Whether this should later become a reusable project-profile pattern remains a generic workflow question, not a blocker for MegaMek guidance.
 
 ### Run MekHQ campaign exploration live-assist shakedown
 

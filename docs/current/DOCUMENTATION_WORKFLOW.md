@@ -12,6 +12,7 @@ This workspace depends on documentation as operational memory. Update docs when 
 - `docs/current/ROADMAP.md`: repository-owned planning source, roadmap, issue candidates, and sequencing notes.
 - `docs/current/GITHUB_ISSUE_WORKFLOW.md`: process for turning roadmap entries into GitHub Issues and agent handoff documents.
 - `docs/current/TASKS.md`: current work board for active tasks, queued work, blocked items, and recently completed work.
+- `docs/current/HELP_FILE_WORKFLOW.md`: routing guidance for local help files, in-app glossary/documentation resources, source code, and external references.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue feature branches, created only when `ROADMAP.md` plus handoffs are not enough.
 - `docs/handoffs/active/`: per-issue handoff documents for open agent-executed GitHub Issues.
 - `docs/handoffs/archive/`: completed handoff documents after issues are done and close-out docs are committed.
@@ -50,6 +51,7 @@ Do not record every temporary observation. Record discoveries that are likely to
 - Use `docs/handoffs/active/` for issue-specific execution context and move completed handoffs to `docs/handoffs/archive/`.
 - Use `KNOWN_COMMANDS.md` for commands that are safe, repeatable, and useful across sessions.
 - Use `SOURCE_CHANGE_WORKFLOW.md` for source modification, build/test, dirty-worktree, and documentation follow-through rules.
+- Use `HELP_FILE_WORKFLOW.md` for deciding when to consult local docs/help/glossary resources versus source code, campaign data, user confirmation, or external sources.
 - Use `SAVE_FORMAT_NOTES.md` for confirmed or suspected MekHQ save structure, field meanings, and source references.
 - Use `DATA_MAP.md` for local data locations and durable format references.
 - Use `SOURCE_CODE_GUIDE.md` for source search strategy and important source entry points.

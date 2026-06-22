@@ -50,6 +50,7 @@ Campaign files can contain active user campaign state. Do not overwrite, move, o
 - `DATA_MAP.md`: local data locations and file formats.
 - `SAVE_FORMAT_NOTES.md`: MekHQ campaign save structure, evidence labels, field meanings, and source references.
 - `SOURCE_CODE_GUIDE.md`: source inspection strategy and important source areas.
+- `HELP_FILE_WORKFLOW.md`: how to route questions across campaign data, local docs/help/glossary resources, source code, user confirmation, and external sources.
 - `SOURCE_CHANGE_WORKFLOW.md`: source modification, build/test, dirty-worktree, and documentation follow-through process.
 - `KNOWN_COMMANDS.md`: repeatable commands for verification, launch, source search, and safe inspection.
 
@@ -90,6 +91,7 @@ If code changes become the task, keep source changes in the source checkout, not
 BattleTech has many rule layers and optional systems. Do not pretend all tables and edge cases are known from memory.
 
 - Prefer local MegaMek/MekHQ docs, source code, and campaign data when explaining how this install behaves.
+- Use `HELP_FILE_WORKFLOW.md` to choose between save data, local help/glossary/docs, source inspection, user confirmation, and external sources.
 - Use official or primary sources when browsing is necessary.
 - Do not reproduce large copyrighted rulebook passages. Summarize mechanics and cite source context when possible.
 - Ask which ruleset or optional systems are active when it materially changes the answer.

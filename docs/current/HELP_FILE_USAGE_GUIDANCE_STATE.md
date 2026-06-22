@@ -2,7 +2,9 @@
 
 ## Status
 
-Paused on `2026-06-18` so the workspace can prioritize migrating work tracking to GitHub Issues/Projects.
+Superseded on `2026-06-22` by `HELP_FILE_WORKFLOW.md`.
+
+This file is retained as the research stub that fed GitHub issue `#4`. Future agents should use `HELP_FILE_WORKFLOW.md` for active guidance.
 
 ## Goal
 
@@ -48,30 +50,20 @@ Recommended ingestion/search priority:
 5. Scenario, RAT, and force-generator docs
    - Useful when answering questions about `.mms` files, random assignment tables, generated OpFors, or force construction.
 
-## Known Tooling Gap
+## PDF Tooling Status
 
-`Confirmed locally`: `pdftotext`, `pdfinfo`, `pypdf`, `pdfplumber`, and `PyPDF2` were not available during the initial research pass.
+`Confirmed locally`: `pdftotext` is now available through Poppler, and Python `pypdf` is importable in the default shell.
 
-Implication: `.md`, `.txt`, `.html`, `.properties`, and `.java` files can be searched immediately with `rg`, but PDF ingestion needs a converter, dependency, or other extraction path.
+`Confirmed locally`: `pdfplumber` and `PyPDF2` were not available in the default shell on `2026-06-22`.
 
-## Guidance Still Needed
+Implication: `.md`, `.txt`, `.html`, `.properties`, and `.java` files can be searched immediately with `rg`; PDFs can be extracted to ignored scratch text with `pdftotext` when needed.
 
-When resumed, decide and document:
+## Guidance Completed
+
+Completed in `HELP_FILE_WORKFLOW.md`:
 
 - When agents should consult local docs before source code.
 - When source code should override or verify local docs.
 - How to handle BattleTech rulebook-adjacent content without reproducing copyrighted passages.
 - How to cite evidence labels: `Confirmed from local docs`, `Confirmed from source`, `Inferred`, and `Unknown`.
-- Whether this belongs in a new `docs/current/HELP_FILE_WORKFLOW.md`, an update to `SOURCE_CODE_GUIDE.md`, an update to `CAMPAIGN_ANALYSIS_WORKFLOW.md`, or a formal Codex skill.
-- Whether to add repeatable commands to `KNOWN_COMMANDS.md` for searching glossary/docs locations.
-
-## Suggested Resume Plan
-
-1. Re-read `TASKS.md` and this state note.
-2. Inspect `GlossaryEntry.properties`, `DocumentationEntry.java`, and `docs/StratCon` again for final examples.
-3. Draft a workflow that tells agents:
-   - Start with campaign save data for campaign-specific facts.
-   - Use local help/glossary docs for user-facing concepts and UI guidance.
-   - Use source code for implementation behavior, file formats, automation, and mechanics where exact behavior matters.
-   - Preserve uncertainty when docs/source/save data disagree.
-4. Add links from `WORKSPACE.md`, `SOURCE_CODE_GUIDE.md`, or `CAMPAIGN_ANALYSIS_WORKFLOW.md` only if the final workflow should be part of normal agent routing.
+- Repeatable commands in `KNOWN_COMMANDS.md` for searching local docs/glossary resources and extracting PDFs.

@@ -42,6 +42,8 @@ Translate raw data into gameplay meaning:
 - Are there obvious Battle Value or tonnage mismatches?
 - Is the scenario asking for speed, armor, range, jump capability, infantry, or aerospace support?
 
+Use `HELP_FILE_WORKFLOW.md` when the interpretation needs MekHQ glossary/help context, BattleTech rules context, or source confirmation. Local campaign data owns current facts; local docs and glossary resources explain player-facing concepts; source code confirms exact implementation behavior.
+
 ## 4. Recommend Actions
 
 Sort recommendations by time horizon:

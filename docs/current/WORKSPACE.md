@@ -32,6 +32,7 @@ Primary outcomes:
 - `MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`: assessment of how the sister MEK-RPG repository can use MekHQ as a unit-scale campaign ledger and tactical handoff tool without replacing RPG campaign memory.
 - `MEK_RPG_CHECKPOINT_EXPORT_REVIEW_MEMO.md`: shareable review memo and response record for the read-only checkpoint export, including MEK-RPG consumer-side issue queue `#84` through `#89`.
 - `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`: decision note keeping the checkpoint exporter as a workspace experimental helper for now, with triggers for a future MekHQ source-owned exporter issue.
+- `HELP_FILE_WORKFLOW.md`: routing guidance for using campaign data, local help/glossary/docs, source code, user confirmation, and external sources.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
 - `docs/handoffs/archive/`: completed issue handoff documents after close-out.
@@ -41,6 +42,7 @@ Primary outcomes:
 - `SAVE_FORMAT_NOTES.md`: MekHQ campaign save structure, evidence labels, field meanings, and source references.
 - `DATA_MAP.md`: local data locations and file formats.
 - `SOURCE_CODE_GUIDE.md`: source inspection strategy.
+- `HELP_FILE_WORKFLOW.md`: local help, glossary, documentation, and source-evidence workflow.
 - `BATTLETECH_CONTEXT.md`: reusable BattleTech and MekHQ interpretation context.
 - `CAMPAIGN_ANALYSIS_WORKFLOW.md`: campaign and scenario analysis sequence.
 

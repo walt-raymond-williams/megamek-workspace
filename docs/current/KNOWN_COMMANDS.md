@@ -123,6 +123,26 @@ rg "GZIPInputStream|GZIPOutputStream|writeToXML|CampaignXmlParser" C:\Users\walt
 
 Verified on `2026-06-22` for source-backed campaign save/load notes.
 
+## Search Local Help And Docs
+
+Search MekHQ glossary, source docs, and installed docs:
+
+```powershell
+rg -n "fatigue|maintenance|contract|StratCon|resupply|force generation" external/src/mekhq/MekHQ/resources external/src/mekhq/MekHQ/docs external/installs/MekHQ-0.51.00/docs
+rg -n "scenario|RAT|force generator|movement|Princess|AutoResolve" external/src/megamek/megamek/docs external/installs/MekHQ-0.51.00/docs
+rg -n "GlossaryDocs|DocumentationEntry|GlossaryEntry" external/src/mekhq/MekHQ/src external/src/mekhq/MekHQ/resources
+```
+
+Extract a local help PDF to ignored scratch text:
+
+```powershell
+New-Item -ItemType Directory -Force analysis\tmp\docs
+pdftotext "external/src/mekhq/MekHQ/docs/GlossaryDocs/Unit Markets.pdf" analysis\tmp\docs\unit-markets.txt
+rg -n "contract|availability|market" analysis\tmp\docs\unit-markets.txt
+```
+
+Verified on `2026-06-22`: `pdftotext` is available from Poppler and Python `pypdf` is importable.
+
 ## Source Repo Status
 
 Check all source repo worktrees before source investigation or edits:
