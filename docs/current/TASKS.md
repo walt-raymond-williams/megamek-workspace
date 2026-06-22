@@ -45,6 +45,13 @@ Use this shape for active and queued work:
 
 ## Next
 
+1. Implement live read-only MekHQ campaign state API for MEK-RPG.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Add `GET /campaign/summary` and `GET /campaign/state?sections=...` to the existing local MekHQ control API so MEK-RPG can refresh live campaign context without requiring a save first.
+   - Output: Source implementation in `external/src/mekhq`, updated endpoint docs/fixtures, compile/checkstyle verification, source commit, and workspace docs commit.
+   - Notes: GitHub issue `#36`; roadmap entry created from MEK-RPG response memo; active handoff `docs/handoffs/active/implement-live-mekhq-campaign-state-api.md`.
+
 1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`

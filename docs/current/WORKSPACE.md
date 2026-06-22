@@ -32,6 +32,7 @@ Primary outcomes:
 - `MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`: assessment of how the sister MEK-RPG repository can use MekHQ as a unit-scale campaign ledger and tactical handoff tool without replacing RPG campaign memory.
 - `MEK_RPG_CHECKPOINT_EXPORT_REVIEW_MEMO.md`: shareable review memo and response record for the read-only checkpoint export, including MEK-RPG consumer-side issue queue `#84` through `#89`.
 - `MEK_RPG_LIVE_MEKHQ_API_FEEDBACK_MEMO.md`: shareable feedback memo asking whether MEK-RPG wants the save/checkpoint import contract to move toward a live localhost MekHQ read-only state API.
+- `MEK_RPG_LIVE_MEKHQ_API_IMPLEMENTATION_PLAN.md`: source implementation plan for adding read-only live campaign-state endpoints to the local MekHQ control API after MEK-RPG accepted the direction.
 - `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`: decision note keeping the checkpoint exporter as a workspace experimental helper for now, with triggers for a future MekHQ source-owned exporter issue.
 - `HELP_FILE_WORKFLOW.md`: routing guidance for using campaign data, local help/glossary/docs, source code, user confirmation, and external sources.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
