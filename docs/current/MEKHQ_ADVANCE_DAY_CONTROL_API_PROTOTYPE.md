@@ -139,7 +139,7 @@ The `MekHQ.java` fallback check emitted one unrelated existing deprecation warni
 
 `Confirmed by user`: dialogs were visible during the live `/advance-day` call and were manually dismissed by the user. Therefore, the `visibleDialogs=0` response should be interpreted only as "no dialogs detected when the response was assembled," not proof that the advance completed without prompts.
 
-`Not yet live-tested`: the newer `dismissAdvanceDayNags` behavior requires restarting the source-built MekHQ app so it loads source commit `17207baa90`.
+`Confirmed locally with user present`: after restarting MekHQ on source commit `17207baa90`, a guarded `/advance-day` request with `dismissAdvanceDayNags=true` advanced `The Learning Ropes` from `3025-04-08` to `3025-04-09`. The response returned `advanced`, `newDayReturned=true`, `advanceDayNagsDismissed=true`, `visibleDialogs=0`, and `saveAttempted=false`. A follow-up `/status` call reported the campaign at `3025-04-09`.
 
 ## User-Assisted Live Test Plan
 
@@ -161,7 +161,6 @@ Do not test against the real campaign save until the disposable campaign test is
 ## Remaining Work
 
 - Try one refused call with an intentionally wrong expected date.
-- Restart source-built MekHQ and test another one-day advance with default `dismissAdvanceDayNags=true`.
 - Test `dismissAdvanceDayNags=false` to confirm nag prompts still appear when requested.
 - Test `saveAfterSuccess=true` to an explicit disposable output path.
 - Decide whether to add broader prompt/dialog reporting so non-nag dialogs that appeared and were user-dismissed during the command are not lost by the final `visibleDialogs` snapshot.
