@@ -481,7 +481,7 @@ Use this shape for entries that may become GitHub issues:
 - Expected output: Completed with updated `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. The source-backed recommendation is to implement a guarded campaign status/report note first, because `Campaign#addReport(...)` is lower risk than finance, market, personnel, contract, medical, repair, or scenario mutations.
 - Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`. Follow-up implementation issue: `#50`.
 - Dependencies: Completed live read-only API epic `#38`; Advance Day control API issue `#35`; source branch `external/src/mekhq` on `codex/mekhq-advance-day-control-api`; disposable campaign data for any mutation tests.
-- Open questions: Which `DailyReportType` values should V1 status-note allow? Should the note be plain text only, or source-generated sanitized HTML with MEK-RPG audit context?
+- Open questions: Resolved by issue `#50` for V1: status-note allows only `GENERAL` and plain text. Future versions can revisit report-type allowlists or source-generated HTML.
 
 ### Epic: Guarded live MekHQ command API for MEK-RPG
 
@@ -493,16 +493,16 @@ Use this shape for entries that may become GitHub issues:
 - Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
 - Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
 - Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Feature tracking snapshot: `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
-- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, next implementation issue `#50`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
+- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, completed first command issue `#50`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
 - Child issues:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
   - `#46`: Implement live MekHQ command readiness and selector discovery. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
-  - `#50`: Implement guarded live MekHQ campaign status-note command. Active handoff: `docs/handoffs/active/implement-live-mekhq-status-note-command.md`.
+  - `#50`: Implement guarded live MekHQ campaign status-note command. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`.
   - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
-- Recommended sequence: Implement `#50` as the first low-risk non-day-advance mutation, then source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase.
+- Recommended sequence: Source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase. Start with `#47`.
 - Open questions: Where should MEK-RPG status notes be stored in MekHQ? Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -533,16 +533,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement guarded live MekHQ campaign status-note command
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#50`
 - Owner: `Codex`
 - Goal: Add the first low-risk non-day-advance guarded command by letting MEK-RPG append an auditable campaign status/report note through MekHQ report logic.
 - Why it matters: This proves the shared command envelope, idempotency, dry-run, opt-in save policy, and before/after response shape without touching finances, units, personnel status, markets, contracts, medical state, repairs, or scenarios.
-- Expected output: `POST /campaign/command/status-note` or equivalent source endpoint using `Campaign#addReport(...)`, with dry-run validation, report-category/text guards, prompt/save facts, before/after report counts, updated readiness output, docs, and fixture updates.
-- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-status-note-command.md`.
+- Expected output: Completed with local MekHQ source commit `4429d99ea2`, which adds `POST /campaign/command/status-note` using `Campaign#addReport(DailyReportType.GENERAL, ...)`, dry-run validation, report-category/text guards, prompt/save facts, before/after report counts, process-local idempotency for applied commands, updated readiness output, docs, and fixture updates.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`.
 - Dependencies: Issues `#43`, `#45`, and `#46`; MekHQ source around `LocalControlService`, `LocalCommandReadinessExporter`, `Campaign#addReport(...)`, and `DailyReportType`.
-- Open questions: Whether V1 should allow only `GENERAL` notes or a small report-type allowlist; whether note content should be plain text only or source-sanitized HTML.
+- Open questions: Future versions may allow a small report-type allowlist or source-generated HTML, but V1 intentionally allows only `GENERAL` and plain text.
 
 ### Design live MekHQ personnel death and status command API
 

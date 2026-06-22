@@ -111,6 +111,25 @@
       "requires_command_envelope": false
     },
     {
+      "command": "campaign.status_note",
+      "endpoint": "/campaign/command/status-note",
+      "method": "POST",
+      "status": "available",
+      "reason_code": "implemented",
+      "reason": "Guarded status-note command can append a plain-text MEK-RPG audit note to the campaign general report.",
+      "safe_selectors_available": true,
+      "required_selectors": [
+        "campaign.id",
+        "campaign.date",
+        "idempotency_key",
+        "note_text"
+      ],
+      "dry_run_supported": true,
+      "save_after_success_supported": true,
+      "prompt_policy": "refuse_if_prompt",
+      "requires_command_envelope": true
+    },
+    {
       "command": "markets.unit_offers.purchase",
       "endpoint": "/campaign/command/markets/unit-offers/purchase",
       "method": "POST",

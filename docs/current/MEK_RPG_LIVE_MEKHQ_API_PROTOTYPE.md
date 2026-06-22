@@ -22,11 +22,13 @@ Source commit:
 - `495b58faef` (`Deepen live campaign contract scenario state`)
 - `911a338788` (`Deepen live campaign logistics market reports`)
 - `e19740b110` (`Expose command readiness endpoint`)
+- `4429d99ea2` (`Add guarded status note command`)
 
 Files changed:
 
 - `MekHQ/src/mekhq/service/LocalControlService.java`
 - `MekHQ/src/mekhq/service/LocalCampaignStateExporter.java`
+- `MekHQ/src/mekhq/service/LocalCommandReadinessExporter.java`
 
 `Confirmed from source`: the new endpoints are added to the existing disabled-by-default local control API. The API still starts only with `-Dmekhq.controlApi.enabled=true`, binds to `127.0.0.1`, and runs in-process with the open MekHQ GUI app.
 
@@ -52,6 +54,12 @@ Command readiness:
 GET /campaign/commands
 ```
 
+Status-note command:
+
+```http
+POST /campaign/command/status-note
+```
+
 Supported state sections:
 
 ```text
@@ -64,6 +72,8 @@ If `sections` is omitted, the endpoint returns all supported sections. Unknown s
 If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `409` with a local control response saying no campaign is loaded.
 
 `GET /campaign/commands` follows the same loaded-campaign rule. It returns read-only command readiness and selector metadata; it does not mutate the campaign.
+
+`POST /campaign/command/status-note` follows the shared guarded command-envelope posture. It appends a plain-text MEK-RPG audit note to the loaded campaign's `GENERAL` report through `Campaign#addReport(...)`; supports dry-run validation; requires campaign id/name/date guards, idempotency key, explicit `dryRun`, `promptPolicy=refuse_if_prompt`, client audit context, and plain-text note text; and refuses unsupported report categories, HTML, visible dialogs, stale campaign guards, or missing save paths.
 
 ## Output Contract
 
@@ -111,9 +121,11 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `e19740b110` adds `GET /campaign/commands`, a read-only readiness endpoint for MEK-RPG action discovery. It exposes campaign/person/unit/applicant/contract candidate selectors from source-backed ids, reports `advanceDayOnce` as the only currently available mutating command, and marks status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save as blocked with machine-readable reason codes. Unit-market purchase remains blocked with `stable_offer_selector_missing` because `UnitMarketOffer#writeToXML()` still has no unique stable offer id.
 
+`Confirmed from source`: source commit `4429d99ea2` adds `POST /campaign/command/status-note`. V1 accepts only `reportCategory=GENERAL` or an omitted category, rejects note/client-context HTML, requires `clientContext`, blocks when visible dialogs exist under `promptPolicy=refuse_if_prompt`, supports `dryRun`, records applied notes via `Campaign#addReport(DailyReportType.GENERAL, ...)`, reports before/after general-report counts, supports process-local idempotency for applied commands, and keeps save-after-success explicit and opt-in through `CampaignGUI.saveCampaign(...)`.
+
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
-`Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, save, or writeback commands. Market rows and repair/acquisition rows are display-only context and must not be treated as durable selectors.
+`Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, standalone save, or broad writeback commands. Market rows and repair/acquisition rows are display-only context and must not be treated as durable selectors.
 
 ## Fixtures
 
@@ -189,6 +201,15 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:checkstyleMain
 ```
 
+`Confirmed locally`: after source commit `4429d99ea2`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
 
 `Confirmed locally`: follow-up MEK-RPG issue `#106` verified that selected-section state requests must include `bridge_metadata` when the response is intended for MEK-RPG dashboard/context validation. Omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
@@ -205,6 +226,28 @@ Invoke-RestMethod -Method Get `
   ConvertTo-Json -Depth 12
 
 Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/commands' -TimeoutSec 10 |
+  ConvertTo-Json -Depth 12
+
+$body = @{
+  command = 'campaign.status_note'
+  commandVersion = 1
+  idempotencyKey = 'mek-rpg-status-note-example-001'
+  expectedCampaignId = '<campaign id from /campaign/summary>'
+  expectedDate = '<campaign date from /campaign/summary>'
+  dryRun = $true
+  promptPolicy = 'refuse_if_prompt'
+  reportCategory = 'GENERAL'
+  noteText = 'MEK-RPG dry-run status note example.'
+  clientContext = @{
+    actor = 'MEK-RPG'
+    sceneId = 'example-scene'
+    actionId = 'example-action'
+    reason = 'Dry-run smoke check'
+  }
+} | ConvertTo-Json -Depth 4
+
+Invoke-RestMethod -Method Post -Uri 'http://127.0.0.1:32180/campaign/command/status-note' `
+  -Body $body -ContentType 'application/json' -TimeoutSec 10 |
   ConvertTo-Json -Depth 12
 ```
 

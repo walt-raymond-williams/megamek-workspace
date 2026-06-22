@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope and readiness discovery implemented for issues `#45` and `#46` on `2026-06-22`; issue `#43` selected status-note as the first new implementation slice and opened issue `#50`.
+Status: command envelope, readiness discovery, and guarded status-note command implemented for issues `#45`, `#46`, and `#50` on `2026-06-22`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -153,7 +153,7 @@ Risk: low to medium, depending on where the note/status is stored.
 Shape:
 
 - Add a MEK-RPG-visible campaign status marker, note, or report entry through a source-owned MekHQ path.
-- Possible endpoint shape: `POST /campaign/command/status-note`.
+- Implemented endpoint shape: `POST /campaign/command/status-note`.
 - Guard with campaign id/name/date and a client-provided idempotency key.
 - Return the created report/note text, report category, and new state revision.
 
@@ -166,12 +166,12 @@ Open source question:
 
 `Confirmed from source`: `Campaign#addReport(DailyReportType, String)` appends report text through MekHQ's report path, honors unified/historical daily log options, updates new-report buffers, and current report lines are serialized as CDATA in `Campaign#writeToXML(...)`.
 
-Recommendation:
+Implemented result:
 
-- Implement this first as issue `#50`: `POST /campaign/command/status-note`.
-- Use a source-owned report entry as the V1 storage target, likely restricted to `GENERAL` first or a small allowlist of safe `DailyReportType` values.
-- Keep the request body plain-text or source-sanitized; do not accept arbitrary HTML from MEK-RPG.
-- Use this command to prove the shared envelope, idempotency cache, dry-run, opt-in save behavior, and response shape before higher-risk mutation endpoints.
+- Issue `#50` implemented `POST /campaign/command/status-note` in local MekHQ source commit `4429d99ea2`.
+- V1 uses `Campaign#addReport(DailyReportType.GENERAL, ...)` as the source-owned storage target.
+- V1 accepts only `GENERAL` or an omitted report category, requires plain-text `noteText` and `clientContext`, rejects HTML, supports dry-run, blocks visible dialogs under `promptPolicy=refuse_if_prompt`, and supports process-local idempotency for applied commands.
+- The command proves the shared envelope direction, opt-in save behavior, before/after report counts, and readiness update before higher-risk mutation endpoints.
 
 ### Command Readiness / Selector Discovery
 
@@ -194,7 +194,7 @@ Implemented result:
 
 - `advanceDayOnce` is reported as the only currently available mutating command, using the legacy `/advance-day` prototype.
 - Campaign/person/unit/applicant/contract selector candidates are exposed from source-backed ids and must still be paired with command-specific guard fields.
-- Status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save are reported as blocked with machine-readable reason codes.
+- `campaign.status_note` is now reported as available; funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save remain blocked with machine-readable reason codes.
 - Unit-market purchase remains blocked with `stable_offer_selector_missing`; `UnitMarketOffer#writeToXML()` serializes no unique stable offer id, so MEK-RPG must not select offers by display name or row index.
 
 Remaining source question:
@@ -369,25 +369,24 @@ Recommendation:
 
 ## Recommended First Issue Scope
 
-Issue `#43` completed the discovery pass. The first safe MEK-RPG command API slice is now issue `#50`.
+Issue `#50` completed the first safe MEK-RPG command API slice.
 
 Completed ordering:
 
 1. Define the common command envelope: completed by issue `#45`.
 2. Implement command-readiness and selector discovery: completed by issue `#46`.
 3. Source-check campaign status/note storage: completed by issue `#43`.
-4. Create a narrowed implementation child for the first mutation endpoint: issue `#50`.
+4. Implement the first mutation endpoint: completed by issue `#50`.
 
 ## Current Easy-Win Ranking
 
-1. `POST /campaign/command/status-note` or equivalent campaign status/report-note mutation. Ready for implementation under issue `#50`.
-2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-3. Personnel death/status command design for RPG events that are not MekHQ tactical results.
-4. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
-5. Contract-market accept/decline by contract id, after prompt-policy review.
-6. Personnel hire by applicant id, after market-style review.
-7. Unit-market purchase by stable offer id, after selector design.
-8. Repair/procurement execution, after stable work ids and repair prompt policy exist.
+1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
+2. Personnel death/status command design for RPG events that are not MekHQ tactical results.
+3. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
+4. Contract-market accept/decline by contract id, after prompt-policy review.
+5. Personnel hire by applicant id, after market-style review.
+6. Unit-market purchase by stable offer id, after selector design.
+7. Repair/procurement execution, after stable work ids and repair prompt policy exist.
 
 ## Guardrail For MEK-RPG
 
