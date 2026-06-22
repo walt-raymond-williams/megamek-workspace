@@ -10,6 +10,16 @@
 
 Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz` without modifying the save.
 
+## Result
+
+Completed on `2026-06-22`.
+
+- Inspected a copy under `analysis/tmp/issue-2/` and left `campaigns/demo/ai-ready-demo.cpnx.gz` untouched.
+- Updated `docs/current/ACTIVE_CAMPAIGN.md` with confirmed campaign identity, commander, finances, force, market, and enabled-system facts.
+- Updated `docs/current/SAVE_FORMAT_NOTES.md` with demo save structure findings.
+- Added `campaigns/demo/reports/first-demo-status-3025-04-08.md`.
+- Added repeatable demo inspection command notes to `docs/current/KNOWN_COMMANDS.md`.
+
 ## Required Context
 
 Read these first:

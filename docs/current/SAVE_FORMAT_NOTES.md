@@ -8,6 +8,8 @@ This file tracks confirmed and suspected facts about MekHQ campaign save files. 
 - `Confirmed from save`: The bundled sample root element is `campaign`.
 - `Confirmed from save`: The bundled sample reports `version="0.51.00"`.
 - `Confirmed from save`: The early XML includes campaign identity, campaign date, faction, reputation, and transportation capacity/requirements.
+- `Confirmed from save`: The demo fixture `campaigns/demo/ai-ready-demo.cpnx.gz` is also gzip-compressed XML with root `campaign` and `version="0.51.00"`.
+- `Confirmed from save`: Current campaign identity is stored under `/campaign/info`; in the demo save this includes id `ea0d334a-1582-459a-9084-b349f0baca5a`, date `3025-04-08`, name `The Learning Ropes`, and faction `MERC`.
 
 ## Safe Inspection Workflow
 
@@ -32,6 +34,10 @@ Record field meanings here as they are confirmed.
 | --- | --- | --- | --- |
 | `campaign` root | Top-level MekHQ campaign save element | Confirmed from save | Bundled sample `The Learning Ropes.cpnx.gz` |
 | `version="0.51.00"` | Save version reported by bundled sample | Confirmed from save | Bundled sample `The Learning Ropes.cpnx.gz` |
+| `/campaign/info` | Campaign identity area containing id, calendar date, name, faction, reputation, and transportation/admin requirements | Confirmed from save | `campaigns/demo/ai-ready-demo.cpnx.gz` |
+| `/campaign/humanResources/personnel/person` | Personnel roster entries; demo save has `106` personnel | Confirmed from save | `campaigns/demo/ai-ready-demo.cpnx.gz` |
+| `/campaign/units/unit/entity` | Unit identity is carried in entity attributes such as `chassis`, `model`, `type`, and `externalId`; demo save has `25` units | Confirmed from save | `campaigns/demo/ai-ready-demo.cpnx.gz` |
+| `/campaign/contractMarket` | Contract-market offers can appear even when `/campaign/missions` is empty; demo save has one offer, `3025 - FWL - Castrovia Objective Raid` | Confirmed from save | `campaigns/demo/ai-ready-demo.cpnx.gz` |
 | major campaign sections | Reports, units, personnel, missions/scenarios, finances, locations, shopping list, parts, personnel market, unit market, contract market, and related campaign state are serialized by `Campaign#writeToXML(...)` | Confirmed from source | `external/src/mekhq/MekHQ/src/mekhq/campaign/Campaign.java` |
 | derived checkpoint values | Balance, market price, unit damage state, salary, cargo/bay summaries, and report-alert classification need MekHQ methods or validation before consumer-facing export | Confirmed from source / Inferred | `MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md` |
 

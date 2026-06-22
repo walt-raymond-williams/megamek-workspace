@@ -84,16 +84,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Inspect demo campaign save
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#2`
 - Owner: `Codex`
 - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
 - Why it matters: The demo save is the concrete example for save-file investigation, reporting, and requirements discovery.
-- Expected output: Updated `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first demo campaign status report.
-- Handoff notes: Follow `CAMPAIGN_ANALYSIS_WORKFLOW.md`. Do not overwrite the save. Active handoff: `docs/handoffs/active/inspect-demo-campaign-save.md`.
+- Expected output: Completed with updated `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, `KNOWN_COMMANDS.md`, and first report `campaigns/demo/reports/first-demo-status-3025-04-08.md`.
+- Handoff notes: Follow `CAMPAIGN_ANALYSIS_WORKFLOW.md`. Do not overwrite the save. Archived handoff: `docs/handoffs/archive/inspect-demo-campaign-save.md`.
 - Dependencies: None.
-- Open questions: Should generated extracts live under `analysis/generated/demo/`?
+- Open questions: Should generated extracts live under `analysis/generated/demo/` once a repeatable extractor exists?
 
 ### Identify MekHQ save/load source classes
 

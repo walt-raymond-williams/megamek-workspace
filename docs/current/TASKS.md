@@ -52,21 +52,14 @@ Use this shape for active and queued work:
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Inspect the active demo campaign save without modifying it.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
-   - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
-   - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
-
-3. Identify MekHQ save/load source classes.
+2. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-4. Create help-file usage guidance for agents.
+3. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
@@ -114,6 +107,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#2` by inspecting `campaigns/demo/ai-ready-demo.cpnx.gz` read-only. Updated `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, `KNOWN_COMMANDS.md`, and added first report `campaigns/demo/reports/first-demo-status-3025-04-08.md`.
 - `2026-06-22`: Completed GitHub issue `#33` and epic `#30` by recording `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`. Recommendation: keep the jar-backed checkpoint exporter as a workspace experimental helper for near-term use, and defer any MekHQ source move to a separate source-change issue triggered by real campaign use, MEK-RPG production dependency, upstream/source-maintainer intent, or unblocked source build/test verification.
 - `2026-06-22`: Completed GitHub issue `#32` by hardening the jar-backed read-only checkpoint exporter. The prototype now emits stable location display/id fields, method-backed core `Contract` terms, preserved market selector warnings and mandatory `unsupported` entries, plus repeatable smoke check `tools/mekhq-checkpoint-exporter/test-mekhq-checkpoint-exporter.ps1`.
 - `2026-06-22`: Completed GitHub issue `#31` by reconciling MegaMek checkpoint docs with completed MEK-RPG feedback from issues `#84` through `#89`. The docs now record accepted top-level grouping, required trust-boundary fields, location and contract hardening requirements, warning/unsupported surfacing policy, edge-fixture coverage, and the handoff to exporter hardening issue `#32`.

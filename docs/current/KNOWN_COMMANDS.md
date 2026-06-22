@@ -88,6 +88,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-expor
 
 Verified on `2026-06-21` against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`; hardened smoke check passed on `2026-06-22`.
 
+## Inspect The Demo Campaign Fixture
+
+Use a copied save and the read-only checkpoint exporter for method-backed summary facts:
+
+```powershell
+New-Item -ItemType Directory -Force analysis\tmp\issue-2
+Copy-Item campaigns\demo\ai-ready-demo.cpnx.gz analysis\tmp\issue-2\ai-ready-demo.cpnx.gz
+$save = 'C:\Users\waltr\Documents\megamek-workspace\analysis\tmp\issue-2\ai-ready-demo.cpnx.gz'
+$json = powershell -NoProfile -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-exporter\run-mekhq-checkpoint-exporter.ps1 $save
+$parsed = $json | ConvertFrom-Json
+```
+
+Verified on `2026-06-22` for the first demo status report.
+
 ## Search Source
 
 ```powershell
