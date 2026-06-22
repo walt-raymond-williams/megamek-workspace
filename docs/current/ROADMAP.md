@@ -497,11 +497,11 @@ Use this shape for entries that may become GitHub issues:
 - Child issues:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. This remains the broad discovery/ranking child and should feed implementation sequencing.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
-  - `#46`: Implement live MekHQ command readiness and selector discovery. Active handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`.
+  - `#46`: Implement live MekHQ command readiness and selector discovery. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
   - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
-- Recommended sequence: Start with `#45` so every command uses one safety envelope. Then run `#46` so MEK-RPG can know which commands/selectors are available. In parallel or after that, source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase. Use `#43` to keep the easy-win ranking and spawn narrower implementation issues.
+- Recommended sequence: Refresh `#43` easy-win ranking now that `#45` and `#46` are complete. Then source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase.
 - Open questions: Where should MEK-RPG status notes be stored in MekHQ? Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -519,16 +519,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement live MekHQ command readiness and selector discovery
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#46`
 - Owner: `Codex`
 - Goal: Expose which commands are available, blocked, or unsupported for the currently loaded MekHQ campaign, including safe selectors where available.
 - Why it matters: MEK-RPG should show action buttons from MekHQ-provided readiness, not by guessing from display-only state rows.
-- Expected output: Endpoint or section design, likely `GET /campaign/commands`, with command readiness rows, machine-readable blockers, and selector policy for market offers, personnel, units, contracts, repairs, and medical targets.
-- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`.
-- Dependencies: Issue `#45` should be read first. Unit-market purchase remains blocked until selectors are safe.
-- Open questions: Should selectors be opaque live-session tokens tied to `stateRevision`, or durable ids that survive save/reload?
+- Expected output: Completed with MekHQ source endpoint `GET /campaign/commands`, which reports command readiness rows, machine-readable blockers, selector policy, and safe selector candidates for campaign/person/unit/applicant/contract ids. Unit-market purchase remains blocked with `stable_offer_selector_missing`.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
+- Dependencies: Issue `#45` command envelope is complete. Future domain command issues must use the readiness output and keep unit-market purchase blocked until selectors are safe.
+- Open questions: Future command-specific selectors still need a durability decision: opaque live-session tokens tied to `state_revision`, durable ids that survive save/reload, or a mix by domain.
 
 ### Design live MekHQ personnel death and status command API
 

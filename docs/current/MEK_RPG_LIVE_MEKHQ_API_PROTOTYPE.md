@@ -21,6 +21,7 @@ Source commit:
 - `d38a500960` (`Deepen live campaign personnel unit finance state`)
 - `495b58faef` (`Deepen live campaign contract scenario state`)
 - `911a338788` (`Deepen live campaign logistics market reports`)
+- `e19740b110` (`Expose command readiness endpoint`)
 
 Files changed:
 
@@ -45,6 +46,12 @@ State:
 GET /campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,markets,reports,unsupported
 ```
 
+Command readiness:
+
+```http
+GET /campaign/commands
+```
+
 Supported state sections:
 
 ```text
@@ -55,6 +62,8 @@ repairs_and_logistics, markets, reports, unsupported
 If `sections` is omitted, the endpoint returns all supported sections. Unknown section names return HTTP `400` with `unknown_sections` and `supported_sections`.
 
 If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `409` with a local control response saying no campaign is loaded.
+
+`GET /campaign/commands` follows the same loaded-campaign rule. It returns read-only command readiness and selector metadata; it does not mutate the campaign.
 
 ## Output Contract
 
@@ -100,6 +109,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `911a338788` deepens logistics, reports, and market safeguards. Repairs/logistics output now includes repair pressure counts, a display-only repair queue, shopping-list pressure and rows from `IAcquisitionWork`, transport/cargo relationship summaries, and an automation guard marking repair execution, assignment, procurement execution, and stable selectors unavailable. Reports now include per-category metadata/counts alongside sanitized report rows. Markets now expose display-only summaries and optional unit/personnel/contract rows while explicitly setting `automation_ready: false` and adding unsupported entries for stable offer selectors and market mutation commands.
 
+`Confirmed from source`: source commit `e19740b110` adds `GET /campaign/commands`, a read-only readiness endpoint for MEK-RPG action discovery. It exposes campaign/person/unit/applicant/contract candidate selectors from source-backed ids, reports `advanceDayOnce` as the only currently available mutating command, and marks status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save as blocked with machine-readable reason codes. Unit-market purchase remains blocked with `stable_offer_selector_missing` because `UnitMarketOffer#writeToXML()` still has no unique stable offer id.
+
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
 `Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, save, or writeback commands. Market rows and repair/acquisition rows are display-only context and must not be treated as durable selectors.
@@ -111,6 +122,7 @@ Sanitized examples:
 - `docs/templates/mekhq-live-campaign-summary.fixture.json`
 - `docs/templates/mekhq-live-campaign-state.fixture.json`
 - `docs/templates/mekhq-live-campaign-warning-heavy.fixture.json`
+- `docs/templates/mekhq-live-campaign-commands.fixture.json`
 
 These are fake data only. They preserve the live API shape, trust-envelope fields, dirty-state warning, and unsupported/blocking entries without exposing local save paths or real campaign details.
 
@@ -168,6 +180,15 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:checkstyleMain
 ```
 
+`Confirmed locally`: after source commit `e19740b110`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
 
 `Confirmed locally`: follow-up MEK-RPG issue `#106` verified that selected-section state requests must include `bridge_metadata` when the response is intended for MEK-RPG dashboard/context validation. Omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
@@ -181,6 +202,9 @@ Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/summary' -Ti
 Invoke-RestMethod -Method Get `
   -Uri 'http://127.0.0.1:32180/campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported' `
   -TimeoutSec 30 |
+  ConvertTo-Json -Depth 12
+
+Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/commands' -TimeoutSec 10 |
   ConvertTo-Json -Depth 12
 ```
 

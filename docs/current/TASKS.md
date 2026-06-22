@@ -45,49 +45,42 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Implement live MekHQ command readiness and selector discovery.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Let MEK-RPG ask MekHQ which mutating commands are currently available and why blocked commands are blocked.
-   - Output: Endpoint/section design, selector policy, and implementation or follow-up implementation issue.
-   - Notes: GitHub issue `#46`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`; depends on reading issue `#45`.
-
-2. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
+1. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check and rank the first safe write-side live MekHQ API endpoints after the read-only live state work, with a command envelope and follow-up implementation tickets.
    - Output: GitHub issue, active handoff, and updated `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md` with easy-win ranking and blockers.
    - Notes: GitHub issue `#43`; child of epic `#44`; active handoff `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`; new post-`#38` MEK-RPG strategy shift. Initial candidates are command readiness/selector discovery, campaign status/note mutation, personnel death/status, medical/prosthetics, GM-only funds adjustment, contract decision, personnel hire, and unit-market purchase after stable selectors.
 
-3. Design personnel death/status command API.
+2. Design personnel death/status command API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check how MEK-RPG narrative death, capture, disappearance, retirement, or recovery should mutate MekHQ personnel state.
    - Output: Design note, endpoint proposal, refusal rules, verification facts, and a narrowed implementation issue if safe.
    - Notes: GitHub issue `#47`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
 
-4. Design medical treatment and prosthetic command API.
+3. Design medical treatment and prosthetic command API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check how MEK-RPG medical treatment, prosthetics, injury recovery, fatigue/hit recovery, and medical expenses should mutate MekHQ medical state.
    - Output: Design note, endpoint proposal, option-dependent refusal rules, verification facts, and a narrowed implementation issue if safe.
    - Notes: GitHub issue `#48`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
 
-5. Design unit-market purchase command API.
+4. Design unit-market purchase command API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check safe selectors and workflow for MEK-RPG-driven unit or DropShip purchases from MekHQ's live market.
    - Output: Selector design, endpoint proposal, duplicate-offer refusal rules, verification facts, and a narrowed implementation issue if safe.
    - Notes: GitHub issue `#49`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`; do not implement purchase by row index or display name.
 
-6. Run MekHQ quickstart roster UI validation.
+5. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-7. Turn this repo into an AI-ready project workflow demo.
+6. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -131,6 +124,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#46` by adding MekHQ source endpoint `GET /campaign/commands` in local source commit `e19740b110` for read-only command readiness and selector discovery. The endpoint reports `advanceDayOnce` as the only available mutating command; exposes campaign/person/unit/applicant/contract candidate selectors from source-backed ids; and blocks status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save with machine-readable reason codes. Unit-market purchase remains blocked with `stable_offer_selector_missing`. Verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#45` by defining the guarded live MekHQ command envelope and prompt policy in `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`, creating epic tracking doc `GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`, and archiving the issue handoff. The shared contract covers command/version/idempotency fields, campaign and target guards, dry-run behavior, opt-in save policy, prompt/dialog policy, response statuses, and reusable implementation acceptance criteria for epic `#44`.
 - `2026-06-22`: Completed GitHub issue `#42` and epic `#38` by deepening live API logistics, reports, and market safeguards in MekHQ source commit `911a338788`. Added display-only repair queue, shopping-list pressure/rows, cargo/transport relationship summaries, report metadata/counts, market summaries/rows, and explicit unsupported automation blockers for stable selectors and mutation commands. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#41` by deepening live API contract and scenario sections in MekHQ source commit `495b58faef`. Added contract description/date/travel/payment/salvage/rental/scenario-link fields and scenario description/link/map/conditions/player-force/salvage/objective/bot-force/tactical-result context. Updated live API docs and active-contract/scenario-rich fixture; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.

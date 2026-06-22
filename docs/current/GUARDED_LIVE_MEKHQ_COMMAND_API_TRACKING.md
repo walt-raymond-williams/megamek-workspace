@@ -15,9 +15,9 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - Last refreshed: `2026-06-22`
 - Closed:
   - `#45`: Define guarded live MekHQ command envelope and prompt policy.
+  - `#46`: Implement live MekHQ command readiness and selector discovery.
 - Open:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
-  - `#46`: Implement live MekHQ command readiness and selector discovery.
   - `#47`: Design live MekHQ personnel death and status command API.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
   - `#49`: Design live MekHQ unit-market purchase command API.
@@ -26,18 +26,23 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Recommended Next Step
 
-- Issue: `#46`
-- Why next: `#45` defines the reusable command envelope; command readiness and selector discovery should now expose which commands are available or blocked before domain-specific write endpoints are implemented.
-- Handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`
+- Issue: `#43`
+- Why next: refresh the easy-win ranking now that `GET /campaign/commands` exists, then proceed into the domain-specific designs for personnel status, medical/prosthetics, and unit-market purchase.
+- Handoff: `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`
 
 ## Verification State
 
 - Commands passed:
   - Documentation consistency review by source/doc inspection for issue `#45`.
+  - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#46`.
+  - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#46`.
+- Source commits:
+  - `e19740b110` in `external/src/mekhq`: `Expose command readiness endpoint`.
 - Manual checks:
   - Read issue `#45`, the active handoff, `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and `LocalControlService.java`.
+  - Read issue `#46`, `UnitMarketOffer.java`, `LocalCampaignStateExporter.java`, and source-confirmed selector methods before implementing `GET /campaign/commands`.
 - Known blockers:
-  - Source push for MekHQ itself remains separate from this workspace branch because `external/src/mekhq` points at upstream `MegaMek/mekhq`.
+  - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
 
 ## Related Docs
 
@@ -45,3 +50,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
+- `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`

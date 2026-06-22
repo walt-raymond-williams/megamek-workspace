@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope defined for issue `#45` on `2026-06-22`; command readiness and domain command designs remain open under epic `#44`.
+Status: command envelope and readiness discovery implemented for issues `#45` and `#46` on `2026-06-22`; domain command designs remain open under epic `#44`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -174,18 +174,25 @@ Risk: low.
 
 Shape:
 
-- Add endpoint fields or a new endpoint that says which command types are currently automation-ready and why blocked command types are blocked.
-- Expose stable command selectors only when MekHQ can produce them safely.
-- Possible endpoint shape: `GET /campaign/commands`.
+- Implemented endpoint shape: `GET /campaign/commands`.
+- The endpoint says which command types are currently available or blocked and why blocked command types are blocked.
+- It exposes stable command selector candidates only when MekHQ can produce them safely.
 
 Why this is an easy win:
 
 - MEK-RPG can light up or hide action buttons without guessing from display-only market rows.
 - It creates the missing bridge between read-only context and future mutation endpoints.
 
-Open source question:
+Implemented result:
 
-- Decide whether selectors should be ephemeral only for the current live session or durable across save/reload. Unit market offers currently do not have source-confirmed stable offer ids.
+- `advanceDayOnce` is reported as the only currently available mutating command, using the legacy `/advance-day` prototype.
+- Campaign/person/unit/applicant/contract selector candidates are exposed from source-backed ids and must still be paired with command-specific guard fields.
+- Status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save are reported as blocked with machine-readable reason codes.
+- Unit-market purchase remains blocked with `stable_offer_selector_missing`; `UnitMarketOffer#writeToXML()` serializes no unique stable offer id, so MEK-RPG must not select offers by display name or row index.
+
+Remaining source question:
+
+- Decide whether future command-specific selectors should be opaque live-session tokens tied to `state_revision`, durable ids that survive save/reload, or a mix by domain. Current readiness output treats selectors as live-session command candidates unless a command row states otherwise.
 
 ### GM Funds Adjustment
 
@@ -366,15 +373,14 @@ Recommended ordering:
 
 ## Current Easy-Win Ranking
 
-1. `GET /campaign/commands` or equivalent command-readiness/selector discovery.
-2. `POST /campaign/command/status-note` or equivalent campaign status/report-note mutation.
-3. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-4. Personnel death/status command design for RPG events that are not MekHQ tactical results.
-5. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
-6. Contract-market accept/decline by contract id, after prompt-policy review.
-7. Personnel hire by applicant id, after market-style review.
-8. Unit-market purchase by stable offer id, after selector design.
-9. Repair/procurement execution, after stable work ids and repair prompt policy exist.
+1. `POST /campaign/command/status-note` or equivalent campaign status/report-note mutation.
+2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
+3. Personnel death/status command design for RPG events that are not MekHQ tactical results.
+4. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
+5. Contract-market accept/decline by contract id, after prompt-policy review.
+6. Personnel hire by applicant id, after market-style review.
+7. Unit-market purchase by stable offer id, after selector design.
+8. Repair/procurement execution, after stable work ids and repair prompt policy exist.
 
 ## Guardrail For MEK-RPG
 
