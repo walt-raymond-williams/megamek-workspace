@@ -119,4 +119,4 @@ Method-backed examples emitted by the prototype:
 
 ## Next Step
 
-Use this prototype as the smallest proven implementation path for MEK-RPG adapter experiments. For durable production use, the smallest unblock step is to add a MekHQ-owned command or service that reuses the same initialization and `CampaignFactory` load path but avoids reflection, avoids external helper packaging issues, and owns stable DTO serialization directly in source.
+Use this prototype as the smallest proven implementation path for MEK-RPG adapter experiments. The ownership decision is recorded in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`: keep the helper in this workspace as experimental tooling for now, and open a separate source-change issue only if real campaign use, MEK-RPG production dependency, upstream/source-maintainer intent, or unblocked source verification justifies moving it into MekHQ source.

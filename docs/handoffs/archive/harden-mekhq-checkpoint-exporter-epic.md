@@ -12,6 +12,15 @@ Track the producer-side MegaMek follow-up after MEK-RPG completed adapter experi
 
 This is an epic. Do not implement directly from this handoff. Work through the child issues linked from the roadmap and GitHub issue.
 
+## Result
+
+Completed on `2026-06-22`.
+
+- Child issue `#31` reconciled MegaMek docs with completed MEK-RPG feedback.
+- Child issue `#32` hardened the jar-backed exporter output and added smoke verification.
+- Child issue `#33` recorded the production ownership decision.
+- Recommendation after the epic: keep the workspace helper experimental near term and defer MekHQ source movement to a later separately scoped source issue if clear triggers appear.
+
 ## Required Context
 
 Read these first:

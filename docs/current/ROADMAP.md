@@ -292,21 +292,21 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Harden MekHQ checkpoint exporter after MEK-RPG adapter feedback
 
-- Status: `In progress`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#30`
 - Owner: `Codex`
 - Goal: Turn MEK-RPG's completed checkpoint adapter experiment feedback into producer-side MegaMek schema/exporter hardening work.
 - Why it matters: MEK-RPG issues `walt-raymond-williams/mek-rpg#84` through `#89` closed the feedback loop that previously blocked MegaMek-side hardening. The workspace should now convert that feedback into a tighter read-only exporter shape before considering production ownership.
-- Expected output: Updated MegaMek checkpoint docs, hardened jar-backed prototype output where practical, repeatable smoke checks, and a decision on production ownership path after hardening.
-- Handoff notes: Epic handoff `docs/handoffs/active/harden-mekhq-checkpoint-exporter-epic.md`. This is an epic; execute through the child issues below.
+- Expected output: Completed with updated MegaMek checkpoint docs, hardened jar-backed prototype output, repeatable smoke check, and production ownership decision.
+- Handoff notes: Archived epic handoff: `docs/handoffs/archive/harden-mekhq-checkpoint-exporter-epic.md`.
 - Dependencies: Completed MEK-RPG issues `#85` through `#89`; local docs under `C:\Users\waltr\Documents\mek-rpg\docs\current\`; local MekHQ source/install under `external/`; source build remains limited by the Java/Gradle blocker.
 - Child issues:
   - `#31`: Reconcile MegaMek checkpoint docs with completed MEK-RPG feedback. Completed; archived handoff: `docs/handoffs/archive/reconcile-mekhq-checkpoint-feedback.md`.
   - `#32`: Harden jar-backed MekHQ checkpoint exporter output against MEK-RPG feedback. Completed; archived handoff: `docs/handoffs/archive/harden-mekhq-checkpoint-exporter-output.md`.
-  - `#33`: Decide production ownership path for MekHQ checkpoint exporter. Handoff: `docs/handoffs/active/decide-mekhq-checkpoint-production-ownership.md`.
-- Recommended sequence: Documentation reconciliation `#31` and prototype hardening `#32` are complete. Next decide production ownership in `#33`. Do not move the exporter into MekHQ source before issue `#33` records the tradeoffs.
-- Open questions: After hardening, is a workspace helper sufficient for near-term MEK-RPG use? Is source movement justified despite the current Java/Gradle verification blocker?
+  - `#33`: Decide production ownership path for MekHQ checkpoint exporter. Completed; archived handoff: `docs/handoffs/archive/decide-mekhq-checkpoint-production-ownership.md`.
+- Recommended sequence: Complete. Keep the workspace helper as experimental tooling for now; defer MekHQ source movement until a separately scoped source issue is justified.
+- Open questions: None for issue `#30`; future source ownership can be reopened through the triggers in `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`.
 
 ### Reconcile MegaMek checkpoint docs with completed MEK-RPG feedback
 
@@ -336,13 +336,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Decide production ownership path for MekHQ checkpoint exporter
 
-- Status: `Ready for issue`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#33`
 - Owner: `Codex`
 - Goal: Decide whether the read-only checkpoint exporter should move into MekHQ source, remain a workspace helper, or stay experimental until more campaign use exists.
 - Why it matters: Source movement has maintenance and verification costs. The decision should use hardened prototype evidence instead of jumping straight from consumer feedback to source implementation.
-- Expected output: A short decision note or updated checkpoint export doc with recommendation, tradeoffs, source/build blockers, and any follow-up source-change issue proposal.
-- Handoff notes: `docs/handoffs/active/decide-mekhq-checkpoint-production-ownership.md`.
+- Expected output: Completed with `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`, recommending the workspace helper remain experimental near-term and deferring MekHQ source movement to a later separately scoped issue.
+- Handoff notes: Archived handoff: `docs/handoffs/archive/decide-mekhq-checkpoint-production-ownership.md`.
 - Dependencies: Hardened prototype output issue should complete first.
-- Open questions: Would upstream MekHQ accept a read-only JSON checkpoint exporter, and what tests would it require?
+- Open questions: None for `#33`; upstream/source acceptance remains a future question only if a source-change issue is opened.

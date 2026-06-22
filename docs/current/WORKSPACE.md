@@ -31,6 +31,7 @@ Primary outcomes:
 - `MEK_RPG_MEKHQ_COLLABORATION_BRIEF.md`: shareable coordination brief for the MEK-RPG team, including ownership boundaries, automation phases, questions, and a proposed first joint issue.
 - `MEK_RPG_MEKHQ_INTEGRATION_ASSESSMENT.md`: assessment of how the sister MEK-RPG repository can use MekHQ as a unit-scale campaign ledger and tactical handoff tool without replacing RPG campaign memory.
 - `MEK_RPG_CHECKPOINT_EXPORT_REVIEW_MEMO.md`: shareable review memo and response record for the read-only checkpoint export, including MEK-RPG consumer-side issue queue `#84` through `#89`.
+- `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`: decision note keeping the checkpoint exporter as a workspace experimental helper for now, with triggers for a future MekHQ source-owned exporter issue.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
 - `docs/handoffs/archive/`: completed issue handoff documents after close-out.

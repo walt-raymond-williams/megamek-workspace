@@ -10,6 +10,15 @@
 
 After the workspace prototype is hardened against MEK-RPG feedback, decide whether the read-only checkpoint exporter should move into MekHQ source, remain a workspace jar-backed helper, or be treated as an experimental bridge artifact.
 
+## Result
+
+Completed on `2026-06-22`.
+
+- Added `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`.
+- Recommendation: keep the jar-backed checkpoint exporter as a workspace experimental helper for near-term use.
+- Deferred MekHQ source movement to a future source-change issue only after a clear trigger: regular real-campaign exports, MEK-RPG production dependency, upstream/source-maintainer intent, or unblocked source build/test verification.
+- Updated checkpoint export/prototype docs, roadmap, and task board.
+
 ## Required Context
 
 Read these first:

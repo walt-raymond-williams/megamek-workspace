@@ -12,6 +12,8 @@ Disposable-save validation: `MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
 
 Jar-backed prototype: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
 
+Ownership decision: `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`.
+
 ## Boundary
 
 - `Confirmed from source`: MekHQ campaign saves are broad serialized campaign objects. Loading and saving are owned by `CampaignFactory#createCampaign(...)`, `CampaignXmlParser`, `CampaignGUI#saveCampaign(...)`, and `Campaign#writeToXML(...)`.
@@ -180,5 +182,5 @@ Potential future work should proceed through the checkpoint hardening queue:
 - add or document repeatable smoke checks for sanitized fixture JSON and prototype JSON
 - deepen cargo/transport and contract-term extraction
 - deepen active contract-term extraction through `Contract` getters
-- decide whether to move the prototype into MekHQ source as an official exporter or service
+- defer moving the prototype into MekHQ source until regular real-campaign use, MEK-RPG production dependency, upstream/source-maintainer intent, or unblocked source build/test verification justifies a separate source issue
 - keep any write-side probe separate from this read-only checkpoint workstream
