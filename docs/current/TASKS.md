@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
+1. Implement guarded live MekHQ campaign status-note command.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Source-check and rank the first safe write-side live MekHQ API endpoints after the read-only live state work, with a command envelope and follow-up implementation tickets.
-   - Output: GitHub issue, active handoff, and updated `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md` with easy-win ranking and blockers.
-   - Notes: GitHub issue `#43`; child of epic `#44`; active handoff `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`; new post-`#38` MEK-RPG strategy shift. Initial candidates are command readiness/selector discovery, campaign status/note mutation, personnel death/status, medical/prosthetics, GM-only funds adjustment, contract decision, personnel hire, and unit-market purchase after stable selectors.
+   - Goal: Add the first low-risk non-day-advance guarded MekHQ command for MEK-RPG by appending an auditable campaign report note through MekHQ report logic.
+   - Output: Source endpoint, command-envelope validation, dry-run/apply behavior, updated readiness output, docs, and fixture updates.
+   - Notes: GitHub issue `#50`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-status-note-command.md`; source-backed by issue `#43`.
 
 2. Design personnel death/status command API.
    - Status: `Not started`
@@ -124,6 +124,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#43` by refreshing the guarded live MekHQ command easy-win ranking after issues `#45` and `#46`. Source review selected campaign status/report note as the first low-risk non-day-advance mutation because `Campaign#addReport(...)` appends through MekHQ-owned report logic and current reports are serialized by `Campaign#writeToXML(...)`. Created follow-up implementation issue `#50` with active handoff `docs/handoffs/active/implement-live-mekhq-status-note-command.md`; kept funds adjustment, personnel hire/status, medical, contract decision, unit purchase, and repair/procurement behind their specific blockers.
 - `2026-06-22`: Completed GitHub issue `#46` by adding MekHQ source endpoint `GET /campaign/commands` in local source commit `e19740b110` for read-only command readiness and selector discovery. The endpoint reports `advanceDayOnce` as the only available mutating command; exposes campaign/person/unit/applicant/contract candidate selectors from source-backed ids; and blocks status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save with machine-readable reason codes. Unit-market purchase remains blocked with `stable_offer_selector_missing`. Verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#45` by defining the guarded live MekHQ command envelope and prompt policy in `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`, creating epic tracking doc `GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`, and archiving the issue handoff. The shared contract covers command/version/idempotency fields, campaign and target guards, dry-run behavior, opt-in save policy, prompt/dialog policy, response statuses, and reusable implementation acceptance criteria for epic `#44`.
 - `2026-06-22`: Completed GitHub issue `#42` and epic `#38` by deepening live API logistics, reports, and market safeguards in MekHQ source commit `911a338788`. Added display-only repair queue, shopping-list pressure/rows, cargo/transport relationship summaries, report metadata/counts, market summaries/rows, and explicit unsupported automation blockers for stable selectors and mutation commands. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.

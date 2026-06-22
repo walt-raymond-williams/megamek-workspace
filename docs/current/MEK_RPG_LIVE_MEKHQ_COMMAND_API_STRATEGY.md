@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope and readiness discovery implemented for issues `#45` and `#46` on `2026-06-22`; domain command designs remain open under epic `#44`.
+Status: command envelope and readiness discovery implemented for issues `#45` and `#46` on `2026-06-22`; issue `#43` selected status-note as the first new implementation slice and opened issue `#50`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -164,7 +164,14 @@ Why this is an easy win:
 
 Open source question:
 
-- Confirm the best MekHQ-owned storage target. A report entry may be easiest but could be noisy; a campaign note/custom metadata field may be better if one exists.
+`Confirmed from source`: `Campaign#addReport(DailyReportType, String)` appends report text through MekHQ's report path, honors unified/historical daily log options, updates new-report buffers, and current report lines are serialized as CDATA in `Campaign#writeToXML(...)`.
+
+Recommendation:
+
+- Implement this first as issue `#50`: `POST /campaign/command/status-note`.
+- Use a source-owned report entry as the V1 storage target, likely restricted to `GENERAL` first or a small allowlist of safe `DailyReportType` values.
+- Keep the request body plain-text or source-sanitized; do not accept arbitrary HTML from MEK-RPG.
+- Use this command to prove the shared envelope, idempotency cache, dry-run, opt-in save behavior, and response shape before higher-risk mutation endpoints.
 
 ### Command Readiness / Selector Discovery
 
@@ -362,18 +369,18 @@ Recommendation:
 
 ## Recommended First Issue Scope
 
-Create one discovery/execution issue to identify and prototype the first safe MEK-RPG command API slice.
+Issue `#43` completed the discovery pass. The first safe MEK-RPG command API slice is now issue `#50`.
 
-Recommended ordering:
+Completed ordering:
 
-1. Define the common command envelope: guard fields, idempotency key, dry-run option, save policy, before/after response, warnings, and prompt behavior.
-2. Source-check campaign status/note storage and command-readiness selector exposure.
-3. Rank easy wins against disposable campaign validation.
-4. Create child issues for the first one or two command endpoints only.
+1. Define the common command envelope: completed by issue `#45`.
+2. Implement command-readiness and selector discovery: completed by issue `#46`.
+3. Source-check campaign status/note storage: completed by issue `#43`.
+4. Create a narrowed implementation child for the first mutation endpoint: issue `#50`.
 
 ## Current Easy-Win Ranking
 
-1. `POST /campaign/command/status-note` or equivalent campaign status/report-note mutation.
+1. `POST /campaign/command/status-note` or equivalent campaign status/report-note mutation. Ready for implementation under issue `#50`.
 2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
 3. Personnel death/status command design for RPG events that are not MekHQ tactical results.
 4. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.

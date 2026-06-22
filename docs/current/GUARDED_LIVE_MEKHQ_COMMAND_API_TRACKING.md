@@ -14,10 +14,11 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 - Last refreshed: `2026-06-22`
 - Closed:
+  - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy.
   - `#46`: Implement live MekHQ command readiness and selector discovery.
 - Open:
-  - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
+  - `#50`: Implement guarded live MekHQ campaign status-note command.
   - `#47`: Design live MekHQ personnel death and status command API.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
   - `#49`: Design live MekHQ unit-market purchase command API.
@@ -26,9 +27,9 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Recommended Next Step
 
-- Issue: `#43`
-- Why next: refresh the easy-win ranking now that `GET /campaign/commands` exists, then proceed into the domain-specific designs for personnel status, medical/prosthetics, and unit-market purchase.
-- Handoff: `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`
+- Issue: `#50`
+- Why next: `#43` source-checked the candidates and selected a campaign status/report note as the first low-risk non-day-advance mutation. It avoids finance, market, unit, personnel, contract, medical, repair, and scenario side effects while proving the shared envelope.
+- Handoff: `docs/handoffs/active/implement-live-mekhq-status-note-command.md`
 
 ## Verification State
 
@@ -41,6 +42,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - Manual checks:
   - Read issue `#45`, the active handoff, `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and `LocalControlService.java`.
   - Read issue `#46`, `UnitMarketOffer.java`, `LocalCampaignStateExporter.java`, and source-confirmed selector methods before implementing `GET /campaign/commands`.
+  - Read issue `#43`, bridge primitive notes, `Campaign#addReport(...)`, `Campaign#addFunds(...)`, `FinancesTab#addFundsActionPerformed()`, `PersonnelMarketDialog#hireActionListener(...)`, `ContractMarketDialog#acceptContract(...)`, and `UnitMarketPane#purchaseSelectedOffers()` before selecting issue `#50`.
 - Known blockers:
   - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
 
@@ -49,5 +51,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
+- `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
 - `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`
+- `docs/handoffs/active/implement-live-mekhq-status-note-command.md`

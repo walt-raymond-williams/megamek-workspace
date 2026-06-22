@@ -472,16 +472,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Discover first guarded live MekHQ command API easy wins for MEK-RPG
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#43`
 - Owner: `Codex`
 - Goal: Convert the post-read-only strategy shift into a source-backed plan for guarded live MekHQ command endpoints that can mutate the already-loaded campaign through MekHQ-owned logic.
 - Why it matters: MEK-RPG wants to move beyond read-only freshness into player/RPG-driven actions such as campaign status updates and market purchases. The Advance Day prototype proves MekHQ can safely run a narrow command in-process, but most writes need stable selectors, guard fields, prompt policy, and disposable-campaign verification before they are safe.
-- Expected output: A ranked easy-win list, common command envelope, prompt/save/idempotency policy, source-backed blockers for unsafe workflows, and follow-up child issues for the first one or two command endpoints.
-- Handoff notes: Planning note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Active handoff: `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`. Early ranking favors command-readiness/selector discovery and campaign status/note mutation before high-risk workflows like unit-market purchase.
+- Expected output: Completed with updated `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. The source-backed recommendation is to implement a guarded campaign status/report note first, because `Campaign#addReport(...)` is lower risk than finance, market, personnel, contract, medical, repair, or scenario mutations.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`. Follow-up implementation issue: `#50`.
 - Dependencies: Completed live read-only API epic `#38`; Advance Day control API issue `#35`; source branch `external/src/mekhq` on `codex/mekhq-advance-day-control-api`; disposable campaign data for any mutation tests.
-- Open questions: Where should MEK-RPG campaign status/note mutations live in MekHQ? Should command selectors be live-session ephemeral or durable across save/reload? Which first endpoint gives the best value/risk tradeoff?
+- Open questions: Which `DailyReportType` values should V1 status-note allow? Should the note be plain text only, or source-generated sanitized HTML with MEK-RPG audit context?
 
 ### Epic: Guarded live MekHQ command API for MEK-RPG
 
@@ -493,15 +493,16 @@ Use this shape for entries that may become GitHub issues:
 - Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
 - Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
 - Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Feature tracking snapshot: `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
-- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, current discovery issue `#43`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
+- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, next implementation issue `#50`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
 - Child issues:
-  - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. This remains the broad discovery/ranking child and should feed implementation sequencing.
+  - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
   - `#46`: Implement live MekHQ command readiness and selector discovery. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
+  - `#50`: Implement guarded live MekHQ campaign status-note command. Active handoff: `docs/handoffs/active/implement-live-mekhq-status-note-command.md`.
   - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
-- Recommended sequence: Refresh `#43` easy-win ranking now that `#45` and `#46` are complete. Then source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase.
+- Recommended sequence: Implement `#50` as the first low-risk non-day-advance mutation, then source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase.
 - Open questions: Where should MEK-RPG status notes be stored in MekHQ? Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -529,6 +530,19 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
 - Dependencies: Issue `#45` command envelope is complete. Future domain command issues must use the readiness output and keep unit-market purchase blocked until selectors are safe.
 - Open questions: Future command-specific selectors still need a durability decision: opaque live-session tokens tied to `state_revision`, durable ids that survive save/reload, or a mix by domain.
+
+### Implement guarded live MekHQ campaign status-note command
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#50`
+- Owner: `Codex`
+- Goal: Add the first low-risk non-day-advance guarded command by letting MEK-RPG append an auditable campaign status/report note through MekHQ report logic.
+- Why it matters: This proves the shared command envelope, idempotency, dry-run, opt-in save policy, and before/after response shape without touching finances, units, personnel status, markets, contracts, medical state, repairs, or scenarios.
+- Expected output: `POST /campaign/command/status-note` or equivalent source endpoint using `Campaign#addReport(...)`, with dry-run validation, report-category/text guards, prompt/save facts, before/after report counts, updated readiness output, docs, and fixture updates.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-status-note-command.md`.
+- Dependencies: Issues `#43`, `#45`, and `#46`; MekHQ source around `LocalControlService`, `LocalCommandReadinessExporter`, `Campaign#addReport(...)`, and `DailyReportType`.
+- Open questions: Whether V1 should allow only `GENERAL` notes or a small report-type allowlist; whether note content should be plain text only or source-sanitized HTML.
 
 ### Design live MekHQ personnel death and status command API
 
