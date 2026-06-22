@@ -398,3 +398,74 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: This was a close-out bookkeeping issue related to closed workspace issue `#36`, not a new source/API feature and not related to any currently open workspace issue.
 - Dependencies: Workspace commit `6756a70`; MEK-RPG issues `#104` and `#106`.
 - Open questions: None for this tracking issue.
+
+### Epic: Expand live MekHQ campaign API for MEK-RPG
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#38`
+- Owner: `Mixed`
+- Goal: Turn MEK-RPG's live adapter feedback into producer-side MegaMek/MekHQ live API work so MEK-RPG can load and refresh an active MekHQ campaign from `GET /campaign/summary` and `GET /campaign/state` without parsing `.cpnx`, `.cpnx.gz`, or XML saves.
+- Why it matters: MEK-RPG issue `#107` proved the consumer should use the live local read-only API for loaded campaigns, but its change request identifies producer-side gaps in trust metadata, dirty-state reporting, location labels, unsupported entries, finance/personnel/unit depth, contracts/scenarios, logistics/reports, and display-only market safeguards.
+- Expected output: A decomposed live API workstream with immediate adapter-proven hardening first, followed by richer operational sections and fixtures. The read-only, loopback-only, disabled-by-default API boundary remains intact.
+- Handoff notes: MEK-RPG handoff source is `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_LIVE_API_CHANGE_REQUEST.md`. This is an epic, not a direct implementation task. Use child issues `#39` through `#42` for execution.
+- Dependencies: Completed issue `#36` live API prototype, follow-up issue `#37` selected-section `bridge_metadata` lesson, and the MekHQ source branch/commits recorded in the issue `#36` roadmap entry. Source push to upstream `MegaMek/mekhq` remains blocked unless a writable fork/remote is configured.
+- Child issues:
+  - `#39`: Harden live API trust envelope, dirty state, and location labels. Active handoff: `docs/handoffs/active/harden-live-api-trust-envelope-location.md`.
+  - `#40`: Deepen live API finance, personnel, and unit sections. Active handoff: `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`.
+  - `#41`: Add live API contract and scenario depth with fixtures. Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
+  - `#42`: Deepen live API logistics, reports, and market safeguards. Active handoff: `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`.
+- Recommended sequence: Start with issue `#39`; it stabilizes trust, location, selected-section metadata, and unsupported-entry shape that later section-deepening issues should reuse. Issues `#40`, `#41`, and `#42` can follow once that shape is settled and representative disposable campaign data is available for fixtures.
+- Open questions: Can MekHQ expose a source-confirmed dirty/unsaved campaign state safely? Which disposable campaign should provide non-empty active contract, scenario, damage/repair, and market examples for richer fixtures? Should a writable MekHQ fork/remote be configured for source branch publication?
+
+### Harden live API trust envelope, dirty state, and location labels
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#39`
+- Owner: `Codex`
+- Goal: Harden the existing read-only live MekHQ campaign API around `bridge_metadata`, dirty/unsaved-state reporting, selected-section metadata, structured unsupported entries, and stable current system/location labels.
+- Why it matters: MEK-RPG now validates live API responses through `bridge_metadata`; sparse responses or object-string location values make the adapter less reliable and can push consumers toward stale save-derived context.
+- Expected output: Source/API update or source-backed plan for dirty-state reporting, stable human-readable location/system fields in full and sparse state responses, selected-section docs/fixtures that include `bridge_metadata`, and structured unsupported entries with owner/evidence/blocking metadata.
+- Handoff notes: Active handoff: `docs/handoffs/active/harden-live-api-trust-envelope-location.md`.
+- Dependencies: Epic `#38`; current live API prototype from issue `#36`; MEK-RPG issue `#107` adapter behavior and issue `#109` change request package.
+- Open questions: Is there a safe MekHQ source owner for dirty/unsaved state, or should V1 keep `Unknown` with a stronger unsupported entry?
+
+### Deepen live API finance, personnel, and unit sections
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#40`
+- Owner: `Codex`
+- Goal: Expose richer method-backed finance, personnel, and unit context through the live read-only API.
+- Why it matters: MEK-RPG needs active campaign operational context such as balance/debt, personnel availability/injuries/pay, and unit condition/crew/repair/transport links without reading raw saves.
+- Expected output: Source-backed field mapping, safe DTO/output expansion or structured unsupported entries, fixture updates for non-empty finance/personnel/unit examples, and documentation of provenance and limitations.
+- Handoff notes: Active handoff: `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`.
+- Dependencies: Epic `#38`; preferably issue `#39` first so the trust envelope and unsupported-entry shape are settled.
+- Open questions: Which personnel injury/fatigue/pay and unit repair/transport details are safely method-backed in the current MekHQ source branch?
+
+### Add live API contract and scenario depth with fixtures
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#41`
+- Owner: `Codex`
+- Goal: Expand live read-only API coverage for active contracts and scenarios and add richer live fixtures for MEK-RPG adapter tests.
+- Why it matters: MEK-RPG needs contract/scenario context for real operational play, including employer/enemy, locations, deadlines, payment/salvage summaries, scenario links, participants, objectives, reports, and tactical-result pointers where available.
+- Expected output: Source-backed contract/scenario field mapping, API DTO/output expansion or unsupported entries, at least one sanitized active-contract/scenario-rich fixture or a documented blocker, and docs for empty vs unavailable vs unsupported state.
+- Handoff notes: Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
+- Dependencies: Epic `#38`; preferably issue `#39` first; disposable campaign data with active contract/scenario context.
+- Open questions: Which copied/disposable campaign should be used for a non-empty contract/scenario fixture, and how much tactical-result context is available before scenario resolution?
+
+### Deepen live API logistics, reports, and market safeguards
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#42`
+- Owner: `Codex`
+- Goal: Deepen repairs/logistics/report coverage while keeping market data display-only with explicit automation safeguards.
+- Why it matters: MEK-RPG needs repair/acquisition pressure and categorized reports for tabletop context, but action-adjacent market data must not imply purchase, hire/fire, accept/decline, repair execution, save, or writeback support.
+- Expected output: Source-backed field map, safe read-only DTO/output expansion, structured unsupported entries for gaps, fixture/docs with repair/logistics/report warnings, and market entries that remain `automation_ready: false` unless command semantics are intentionally designed later.
+- Handoff notes: Active handoff: `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`.
+- Dependencies: Epic `#38`; preferably issue `#39` first; representative disposable campaign data with damage, repairs, acquisition pressure, reports, or market entries.
+- Open questions: Are stable repair work item ids and market offer selectors available enough for read-only display, and how should duplicate-looking market offers be guarded?

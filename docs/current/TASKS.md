@@ -45,14 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Run MekHQ quickstart roster UI validation.
+1. Harden live API trust envelope, dirty state, and location labels.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Apply MEK-RPG's immediate adapter-proven live API requests by stabilizing `bridge_metadata`, selected-section metadata, dirty/unsaved-state reporting or unsupported metadata, structured unsupported entries, and human-readable current system/location labels.
+   - Output: GitHub issue `#39` completed with source-backed API/docs/fixture updates or a documented source blocker.
+   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/harden-live-api-trust-envelope-location.md`; should run before deeper live API section issues `#40` through `#42`.
+
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -96,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Reviewed MEK-RPG live API change request `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_LIVE_API_CHANGE_REQUEST.md`, created MegaMek workspace epic `#38` and child issues `#39` through `#42`, added roadmap entries and active handoffs for producer-side live API hardening, and queued issue `#39` as the next agent task.
 - `2026-06-22`: Closed follow-up GitHub issue `#37` for workspace commit `6756a70`, which recorded live smoke-test evidence for the issue `#36` read-only MekHQ campaign-state API. The follow-up confirms a user-assisted disposable-campaign smoke test from MEK-RPG issue `#104`, no observed save prompt or visible write/save side effect from read-only GET requests, and the MEK-RPG issue `#106` lesson that selected-section dashboard/context calls must include `bridge_metadata` unless `sections` is omitted.
 - `2026-06-22`: Completed GitHub issue `#36` by adding `GET /campaign/summary` and `GET /campaign/state?sections=...` to the existing local MekHQ control API in source commit `7d3b345327`. The V1 live API keeps checkpoint grouping, trust envelopes, read-only/local-only guardrails, unknown dirty-state warnings, and structured unsupported entries for action-adjacent gaps. Workspace docs and sanitized fixtures are in `MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md` and `docs/templates/mekhq-live-campaign-*.fixture.json`. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; follow-up workspace commit `6756a70` later recorded the user-assisted disposable-campaign smoke test. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and the authenticated account lacks push permission.
 - `2026-06-22`: Drafted `MEK_RPG_LIVE_MEKHQ_API_FEEDBACK_MEMO.md` for MEK-RPG review. The memo asks whether the existing save/checkpoint import contract should shift toward a live localhost MekHQ read-only state API, preserves the known MEK-RPG field priorities and trust-boundary fields, and requests feedback on endpoints, first-use fields, warning behavior, and durability semantics.
