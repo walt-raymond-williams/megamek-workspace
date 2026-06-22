@@ -415,21 +415,21 @@ Use this shape for entries that may become GitHub issues:
   - `#40`: Deepen live API finance, personnel, and unit sections. Active handoff: `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`.
   - `#41`: Add live API contract and scenario depth with fixtures. Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
   - `#42`: Deepen live API logistics, reports, and market safeguards. Active handoff: `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`.
-- Recommended sequence: Start with issue `#39`; it stabilizes trust, location, selected-section metadata, and unsupported-entry shape that later section-deepening issues should reuse. Issues `#40`, `#41`, and `#42` can follow once that shape is settled and representative disposable campaign data is available for fixtures.
-- Open questions: Can MekHQ expose a source-confirmed dirty/unsaved campaign state safely? Which disposable campaign should provide non-empty active contract, scenario, damage/repair, and market examples for richer fixtures? Should a writable MekHQ fork/remote be configured for source branch publication?
+- Recommended sequence: Issue `#39` is complete; continue with issue `#40` next, then `#41` and `#42` once representative disposable campaign data is available for fixtures.
+- Open questions: Which disposable campaign should provide non-empty active contract, scenario, damage/repair, and market examples for richer fixtures? Should a writable MekHQ fork/remote be configured for source branch publication?
 
 ### Harden live API trust envelope, dirty state, and location labels
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#39`
 - Owner: `Codex`
 - Goal: Harden the existing read-only live MekHQ campaign API around `bridge_metadata`, dirty/unsaved-state reporting, selected-section metadata, structured unsupported entries, and stable current system/location labels.
 - Why it matters: MEK-RPG now validates live API responses through `bridge_metadata`; sparse responses or object-string location values make the adapter less reliable and can push consumers toward stale save-derived context.
-- Expected output: Source/API update or source-backed plan for dirty-state reporting, stable human-readable location/system fields in full and sparse state responses, selected-section docs/fixtures that include `bridge_metadata`, and structured unsupported entries with owner/evidence/blocking metadata.
-- Handoff notes: Active handoff: `docs/handoffs/active/harden-live-api-trust-envelope-location.md`.
+- Expected output: Completed with MekHQ source commit `dc214d946d`, which keeps dirty state explicit `Unknown` with stronger unsupported metadata, builds location labels from `Campaign#getCurrentLocation()` and `AbstractLocation` methods instead of `toString()`, adds `current_location_display_name`, `table_safe_location_label`, `current_planet_name`, and expanded `travel_state` fields, and updates live API fixtures/docs.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/harden-live-api-trust-envelope-location.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`.
 - Dependencies: Epic `#38`; current live API prototype from issue `#36`; MEK-RPG issue `#107` adapter behavior and issue `#109` change request package.
-- Open questions: Is there a safe MekHQ source owner for dirty/unsaved state, or should V1 keep `Unknown` with a stronger unsupported entry?
+- Open questions: No campaign-wide dirty/unsaved flag was found in this pass; future source work can revisit if MekHQ later exposes one.
 
 ### Deepen live API finance, personnel, and unit sections
 

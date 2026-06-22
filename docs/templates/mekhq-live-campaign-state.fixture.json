@@ -15,9 +15,9 @@
       "value": "Unknown",
       "evidence": "Unknown",
       "method_backed": false,
-      "source_owner": "Unknown",
+      "source_owner": "MekHQ GUI save-state tracking",
       "warnings": [
-        "Dirty/unsaved state is not source-confirmed in this V1 endpoint."
+        "Dirty/unsaved state is not source-confirmed in this V1 endpoint; consumers should treat live responses as snapshots, not save-clean guarantees."
       ]
     },
     "evidence": "Confirmed from MekHQ export",
@@ -81,6 +81,48 @@
         "evidence": "Confirmed from MekHQ export",
         "method_backed": true,
         "source_owner": "Campaign#getCurrentSystem()",
+        "warnings": []
+      },
+      "current_location": {
+        "value": "Galatea",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Campaign#getCurrentLocation(); AbstractLocation travel-state methods",
+        "warnings": []
+      },
+      "current_location_display_name": {
+        "value": "Galatea",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Campaign#getCurrentLocation(); AbstractLocation travel-state methods",
+        "warnings": []
+      },
+      "table_safe_location_label": {
+        "value": "Galatea",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Campaign#getCurrentSystem(); Campaign#getCurrentLocation(); AbstractLocation travel-state methods",
+        "warnings": []
+      },
+      "current_planet_name": {
+        "value": "Galatea",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Campaign#getCurrentLocation().getPlanet()",
+        "warnings": []
+      },
+      "travel_state": {
+        "value": {
+          "is_in_transit": false,
+          "is_on_planet": true,
+          "is_at_jump_point": false,
+          "is_jump_zenith": true,
+          "percentage_transit": 1.0,
+          "transit_time_days": 0.0
+        },
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "AbstractLocation travel-state methods",
         "warnings": []
       }
     }
@@ -226,9 +268,9 @@
     {
       "area": "bridge_metadata.dirty_state",
       "field": "unsaved_changes",
-      "reason": "No source-confirmed dirty/unsaved campaign flag was found in the initial source pass.",
+      "reason": "Source search found editor-local unsaved state, but no campaign-wide dirty/unsaved flag exposed for the loaded MekHQ campaign.",
       "evidence": "Unsupported",
-      "recommended_owner": "Future MekHQ source inspection",
+      "recommended_owner": "MekHQ GUI save-state tracking",
       "blocks_automation": false
     }
   ]

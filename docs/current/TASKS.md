@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Harden live API trust envelope, dirty state, and location labels.
+1. Deepen live API finance, personnel, and unit sections.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Apply MEK-RPG's immediate adapter-proven live API requests by stabilizing `bridge_metadata`, selected-section metadata, dirty/unsaved-state reporting or unsupported metadata, structured unsupported entries, and human-readable current system/location labels.
-   - Output: GitHub issue `#39` completed with source-backed API/docs/fixture updates or a documented source blocker.
-   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/harden-live-api-trust-envelope-location.md`; should run before deeper live API section issues `#40` through `#42`.
+   - Goal: Expand the live read-only MekHQ campaign API with richer method-backed finance, personnel, and unit context requested by MEK-RPG.
+   - Output: GitHub issue `#40` completed with source-backed API/docs/fixture updates or documented source blockers.
+   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`; follows completed issue `#39`.
 
 2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
@@ -103,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#39` by hardening the live MekHQ campaign API trust/location metadata in MekHQ source commit `dc214d946d`. Dirty state remains explicit `Unknown` with stronger unsupported metadata because source search found no loaded-campaign dirty flag; location labels now come from `Campaign#getCurrentLocation()` and `AbstractLocation` methods instead of relying on `toString()`. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq`.
 - `2026-06-22`: Reviewed MEK-RPG live API change request `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_LIVE_API_CHANGE_REQUEST.md`, created MegaMek workspace epic `#38` and child issues `#39` through `#42`, added roadmap entries and active handoffs for producer-side live API hardening, and queued issue `#39` as the next agent task.
 - `2026-06-22`: Closed follow-up GitHub issue `#37` for workspace commit `6756a70`, which recorded live smoke-test evidence for the issue `#36` read-only MekHQ campaign-state API. The follow-up confirms a user-assisted disposable-campaign smoke test from MEK-RPG issue `#104`, no observed save prompt or visible write/save side effect from read-only GET requests, and the MEK-RPG issue `#106` lesson that selected-section dashboard/context calls must include `bridge_metadata` unless `sections` is omitted.
 - `2026-06-22`: Completed GitHub issue `#36` by adding `GET /campaign/summary` and `GET /campaign/state?sections=...` to the existing local MekHQ control API in source commit `7d3b345327`. The V1 live API keeps checkpoint grouping, trust envelopes, read-only/local-only guardrails, unknown dirty-state warnings, and structured unsupported entries for action-adjacent gaps. Workspace docs and sanitized fixtures are in `MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md` and `docs/templates/mekhq-live-campaign-*.fixture.json`. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; follow-up workspace commit `6756a70` later recorded the user-assisted disposable-campaign smoke test. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and the authenticated account lacks push permission.

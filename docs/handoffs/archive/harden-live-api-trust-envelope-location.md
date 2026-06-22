@@ -72,3 +72,11 @@ Run Gradle commands from `external/src/mekhq`. Record exact blockers if source v
 
 - Is there a safe MekHQ source owner for dirty/unsaved campaign state?
 - What exact fields should be used for a table-safe current location label when the campaign has travel or system context but no richer location object?
+
+## Completion Notes
+
+- Completed on `2026-06-22` for GitHub issue `#39`.
+- MekHQ source commit: `dc214d946d` (`Harden live campaign state metadata`).
+- Verification passed from `external/src/mekhq`: `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`.
+- Dirty/unsaved state remains `Unknown`; source search found editor-local unsaved state but no campaign-wide dirty flag for the loaded campaign.
+- Location output now avoids relying on `AbstractLocation#toString()` as the only display value and adds `current_location_display_name`, `table_safe_location_label`, `current_planet_name`, and expanded `travel_state` fields.
