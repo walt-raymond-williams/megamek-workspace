@@ -280,6 +280,7 @@ $body = @{
   command = 'advanceDayOnce'
   expectedCampaignName = 'The Learning Ropes'
   expectedDate = '3025-07-20'
+  dismissAdvanceDayNags = $true
   saveAfterSuccess = $false
 } | ConvertTo-Json
 
@@ -296,8 +297,10 @@ Current verification state:
 - `Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ with the control API enabled on `2026-06-22`; `/status` returned `ready` and no loaded campaign.
 - `Confirmed locally with user present`: `POST /advance-day` advanced `The Learning Ropes` from `3025-04-08` to `3025-04-09` with `saveAfterSuccess=false`; the response returned `advanced`, `newDayReturned=true`, `visibleDialogs=0`, and `saveAttempted=false`.
 - `Confirmed by user`: dialogs were visible during that `/advance-day` call and were manually dismissed. Treat `visibleDialogs=0` as a final snapshot, not proof that no prompts appeared during the command.
+- `Confirmed from source`: `dismissAdvanceDayNags` is available in source commit `17207baa90` and defaults to true. It suppresses MekHQ's daily `NagController.triggerDailyNags(...)` sequence for the current API command only.
+- `Confirmed locally`: after adding `dismissAdvanceDayNags`, `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed on `2026-06-22`.
 - `Confirmed locally`: fallback `javac` checks for `LocalControlService.java` and modified `MekHQ.java` passed against installed MekHQ `0.51.00` jars on `2026-06-22`.
-- `Not run`: refused-date guard test and save-after-success test to an explicit disposable output path.
+- `Not run`: live test of `dismissAdvanceDayNags`, refused-date guard test, and save-after-success test to an explicit disposable output path.
 
 ## Check Logs
 

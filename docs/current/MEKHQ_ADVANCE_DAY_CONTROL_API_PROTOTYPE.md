@@ -17,11 +17,13 @@ Source branch:
 Source commit:
 
 - `9046a8075e` (`Add local advance day control API prototype`)
+- `17207baa90` (`Allow local API to suppress advance day nags`)
 
 Files changed:
 
 - `MekHQ/src/mekhq/service/LocalControlService.java`
 - `MekHQ/src/mekhq/MekHQ.java`
+- `MekHQ/src/mekhq/gui/dialog/nagDialogs/NagController.java`
 
 `Confirmed from source`: the prototype adds a disabled-by-default local HTTP service owned by the running `MekHQ` application instance. The service starts only when the JVM property `mekhq.controlApi.enabled` is true.
 
@@ -62,6 +64,7 @@ $body = @{
   command = 'advanceDayOnce'
   expectedCampaignName = 'The Learning Ropes'
   expectedDate = '3025-07-20'
+  dismissAdvanceDayNags = $true
   saveAfterSuccess = $false
 } | ConvertTo-Json
 
@@ -80,6 +83,7 @@ Request fields:
 - `expectedDate`: required ISO date guard, for example `3025-07-20`.
 - `saveAfterSuccess`: defaults to false when omitted.
 - `savePath`: required only when `saveAfterSuccess` is true.
+- `dismissAdvanceDayNags`: optional boolean; defaults to true. When true, the local API temporarily suppresses MekHQ's daily advance-time nag sequence for this one command, equivalent to choosing the continue/advance-anyway path for those nag warnings.
 
 At least one of `expectedCampaignName` or `expectedCampaignId` is required.
 
@@ -99,6 +103,7 @@ Response statuses:
 - `Confirmed from source`: requires expected date.
 - `Confirmed from source`: requires expected campaign name or id.
 - `Confirmed from source`: invokes `Campaign#newDay()` on the Swing event dispatch thread.
+- `Confirmed from source`: `dismissAdvanceDayNags` defaults to true and temporarily suppresses only `NagController.triggerDailyNags(...)` for the current local API command.
 - `Confirmed from source`: checks that the date advanced by exactly one day.
 - `Confirmed from source`: does not auto-answer dialogs.
 - `Confirmed from source`: save-after-success is opt-in and requires an explicit path.
@@ -116,6 +121,8 @@ Observed state on `2026-06-22`: after installing portable JDK 17 at `C:\Users\wa
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ with `JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'` on `2026-06-22`. `GET /status` returned `ready` and reported no loaded campaign.
 
+`Confirmed locally`: after adding `dismissAdvanceDayNags`, `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` both passed on `2026-06-22`.
+
 `Confirmed locally`: fallback `javac` syntax/type checks passed against the installed MekHQ `0.51.00` jars:
 
 ```powershell
@@ -131,6 +138,8 @@ The `MekHQ.java` fallback check emitted one unrelated existing deprecation warni
 `Confirmed locally with user present`: live `/advance-day` endpoint test passed on `2026-06-22` against loaded campaign `The Learning Ropes` (`ea0d334a-1582-459a-9084-b349f0baca5a`). The request guarded on expected date `3025-04-08` with `saveAfterSuccess=false`; the response returned `advanced`, `newDayReturned=true`, `dateBefore=3025-04-08`, `dateAfter=3025-04-09`, `visibleDialogs=0`, and `saveAttempted=false`. A follow-up `/status` call reported the campaign at `3025-04-09`.
 
 `Confirmed by user`: dialogs were visible during the live `/advance-day` call and were manually dismissed by the user. Therefore, the `visibleDialogs=0` response should be interpreted only as "no dialogs detected when the response was assembled," not proof that the advance completed without prompts.
+
+`Not yet live-tested`: the newer `dismissAdvanceDayNags` behavior requires restarting the source-built MekHQ app so it loads source commit `17207baa90`.
 
 ## User-Assisted Live Test Plan
 
@@ -152,6 +161,8 @@ Do not test against the real campaign save until the disposable campaign test is
 ## Remaining Work
 
 - Try one refused call with an intentionally wrong expected date.
+- Restart source-built MekHQ and test another one-day advance with default `dismissAdvanceDayNags=true`.
+- Test `dismissAdvanceDayNags=false` to confirm nag prompts still appear when requested.
 - Test `saveAfterSuccess=true` to an explicit disposable output path.
-- Improve prompt/dialog reporting so dialogs that appeared and were user-dismissed during the command are not lost by the final `visibleDialogs` snapshot.
+- Decide whether to add broader prompt/dialog reporting so non-nag dialogs that appeared and were user-dismissed during the command are not lost by the final `visibleDialogs` snapshot.
 - Decide whether this prototype should stay local-only or move to a more polished feature branch/PR shape.
