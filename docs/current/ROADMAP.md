@@ -359,3 +359,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Archived handoff: `docs/handoffs/archive/spike-mekhq-advance-day-gui-control-seam.md`. The source path is `CampaignGUI#initTopPanel()` -> `AdvanceTimePanel` -> `CampaignController#advanceDay()` -> `Campaign#newDay()` -> `CampaignNewDayManager#newDay()`. Recommendation: proceed with a narrow local-only in-process MekHQ GUI command prototype, not a detached headless helper.
 - Dependencies: Future prototype validation should use copied/disposable saves, preferably after or alongside user task `#23`. Source build/test verification may still be blocked by the Java 17 Gradle daemon/toolchain issue. Existing issues `#10`, `#13`, and `#17` remain separate and blocked on live UI/user validation.
 - Open questions: What exact local transport should expose the in-process command, and which copied save should be used for the first prototype validation?
+
+### Implement local MekHQ Advance Day control API prototype
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#35`
+- Owner: `Codex`
+- Goal: Implement or precisely prototype-plan a narrow local-only MekHQ source control API that can be called while MekHQ is already open with a campaign loaded, invoking exactly one real `Campaign#newDay()` path inside the loaded GUI app.
+- Why it matters: Issue `#34` proved the concept is viable but brittle. The next useful step is to turn that conclusion into a callable local control seam so Codex or another local helper can drive MekHQ through source-owned logic instead of screen coordinates or save editing, while preserving MekHQ as the hard campaign ledger.
+- Expected output: A source-backed implementation or prototype plan plus `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, documenting the API transport, input/output contract, source files touched, safety checks, verification status, and live user-assisted test instructions. Initial implementation plan: `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`. The prototype should prefer a local-only in-process endpoint or command seam attached to the running MekHQ app. It should not treat `CampaignController#advanceDay()` as sufficient unless that path is changed to surface the `Campaign#newDay()` result.
+- Dependencies: MekHQ must already be open with a campaign loaded for live testing. Live prototype testing should wait for the user to be present. Source build/test verification may still be blocked by the Java 17 Gradle daemon/toolchain issue. Use only copied/disposable saves for execution tests.
+- Open questions: Should the first transport be localhost HTTP, loopback socket, a local file/command queue, JMX/debug hook, or a simpler developer command entry point? Can visible modal/prompt detection be made reliable enough without a general prompt policy layer?
