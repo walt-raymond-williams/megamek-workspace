@@ -114,6 +114,8 @@ Response statuses:
 
 Observed state on `2026-06-22`: after installing portable JDK 17 at `C:\Users\waltr\.jdks\temurin-17` and configuring user-level Gradle discovery, `.\gradlew.bat :MekHQ:compileJava` completed successfully from `external/src/mekhq` in about 199 seconds. The command emitted existing deprecation and unchecked-operation warnings, including one warning in modified `MekHQ.java` for pre-existing `AtBGameThread` usage, but no compile errors.
 
+`Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ with `JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'` on `2026-06-22`. `GET /status` returned `ready` and reported no loaded campaign.
+
 `Confirmed locally`: fallback `javac` syntax/type checks passed against the installed MekHQ `0.51.00` jars:
 
 ```powershell
@@ -126,7 +128,7 @@ javac -d analysis\tmp\issue-35-compile -cp 'analysis\tmp\issue-35-compile;extern
 
 The `MekHQ.java` fallback check emitted one unrelated existing deprecation warning for `AtBGameThread`.
 
-`Not run`: live endpoint test, because the user asked to be present for live testing.
+`Not run`: live `/advance-day` endpoint test, because the user asked to be present for live testing.
 
 ## User-Assisted Live Test Plan
 

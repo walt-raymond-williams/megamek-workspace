@@ -229,7 +229,7 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:assemble` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch. It produced `MekHQ\build\distributions\MekHQ-0.51.01.tar.gz` and `MekHQ\build\libs\MekHQ.jar`. The build emitted non-fatal image-atlas/logging errors and warnings, but Gradle returned `BUILD SUCCESSFUL`.
 
-`Not run`: `.\gradlew.bat :MekHQ:run`; this launches the GUI and should be run when the user is ready for a visible MekHQ window.
+`Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch when started with `JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'`. The local control API reported `ready` at `http://127.0.0.1:32180/status` with no campaign loaded.
 
 MegaMekLab:
 
@@ -293,8 +293,9 @@ Invoke-RestMethod `
 Current verification state:
 
 - `Confirmed locally`: `.\gradlew.bat :MekHQ:compileJava` passed on `2026-06-22` after installing JDK 17 and configuring Gradle toolchain discovery.
+- `Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ with the control API enabled on `2026-06-22`; `/status` returned `ready` and no loaded campaign.
 - `Confirmed locally`: fallback `javac` checks for `LocalControlService.java` and modified `MekHQ.java` passed against installed MekHQ `0.51.00` jars on `2026-06-22`.
-- `Not run`: live endpoint test; wait for the user and use copied/disposable saves only.
+- `Not run`: live `/advance-day` endpoint test; wait for the user and use copied/disposable saves only.
 
 ## Check Logs
 
