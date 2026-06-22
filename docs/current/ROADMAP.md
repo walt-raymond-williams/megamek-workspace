@@ -469,3 +469,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/deepen-live-api-logistics-reports-markets.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`.
 - Dependencies: Epic `#38`; preferably issue `#39` first; representative disposable campaign data with damage, repairs, acquisition pressure, reports, or market entries.
 - Open questions: Stable repair work item ids and market offer selectors remain unavailable for automation; future command work needs a separate selector and prompt-policy design.
+
+### Discover first guarded live MekHQ command API easy wins for MEK-RPG
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#43`
+- Owner: `Codex`
+- Goal: Convert the post-read-only strategy shift into a source-backed plan for guarded live MekHQ command endpoints that can mutate the already-loaded campaign through MekHQ-owned logic.
+- Why it matters: MEK-RPG wants to move beyond read-only freshness into player/RPG-driven actions such as campaign status updates and market purchases. The Advance Day prototype proves MekHQ can safely run a narrow command in-process, but most writes need stable selectors, guard fields, prompt policy, and disposable-campaign verification before they are safe.
+- Expected output: A ranked easy-win list, common command envelope, prompt/save/idempotency policy, source-backed blockers for unsafe workflows, and follow-up child issues for the first one or two command endpoints.
+- Handoff notes: Planning note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Active handoff: `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`. Early ranking favors command-readiness/selector discovery and campaign status/note mutation before high-risk workflows like unit-market purchase.
+- Dependencies: Completed live read-only API epic `#38`; Advance Day control API issue `#35`; source branch `external/src/mekhq` on `codex/mekhq-advance-day-control-api`; disposable campaign data for any mutation tests.
+- Open questions: Where should MEK-RPG campaign status/note mutations live in MekHQ? Should command selectors be live-session ephemeral or durable across save/reload? Which first endpoint gives the best value/risk tradeoff?

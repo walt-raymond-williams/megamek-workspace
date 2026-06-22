@@ -45,14 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Run MekHQ quickstart roster UI validation.
+1. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-check and rank the first safe write-side live MekHQ API endpoints after the read-only live state work, with a command envelope and follow-up implementation tickets.
+   - Output: GitHub issue, active handoff, and updated `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md` with easy-win ranking and blockers.
+   - Notes: GitHub issue `#43`; active handoff `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`; new post-`#38` MEK-RPG strategy shift. Initial candidates are command readiness/selector discovery, campaign status/note mutation, GM-only funds adjustment, contract decision, personnel hire, and unit-market purchase after stable selectors.
+
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
