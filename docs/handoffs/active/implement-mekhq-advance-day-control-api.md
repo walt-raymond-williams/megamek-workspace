@@ -28,6 +28,19 @@ Read these first:
 - Source changes in `external/src/mekhq` if the chosen seam is feasible in this pass.
 - Workspace docs updated with the selected API shape, source files touched, verification status, and live user-assisted test instructions.
 
+Current progress:
+
+- Source prototype added in `external/src/mekhq`:
+  - `MekHQ/src/mekhq/service/LocalControlService.java`
+  - `MekHQ/src/mekhq/MekHQ.java`
+- Source branch: `codex/mekhq-advance-day-control-api`
+- Source commit: `9046a8075e` (`Add local advance day control API prototype`)
+- Workspace prototype note added:
+  - `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`
+- Gradle compile remains blocked by the Java 17 daemon/toolchain issue.
+- Fallback `javac` checks against installed MekHQ `0.51.00` jars passed for the new service and modified `MekHQ.java`.
+- Live endpoint testing has not run and should wait for the user.
+
 ## Files And Areas
 
 Likely source files to inspect or edit:
@@ -93,6 +106,6 @@ Current docs record that Gradle execution may fail because the daemon requests J
 
 ## Open Questions
 
-- Should the first transport be a localhost HTTP endpoint, loopback socket, local file/command queue, JVM/JMX hook, or simpler developer/debug command entry point?
-- Is there already a MekHQ-supported local service or debug hook to extend, or should this remain a local-only patch?
+- Should the current disabled-by-default localhost HTTP service remain the first transport after live validation?
+- Is there already a better MekHQ-supported local service or debug hook to extend, or should this remain a local-only patch?
 - Can modal/prompt detection be made reliable enough for the first prototype without adding a general dialog policy layer?

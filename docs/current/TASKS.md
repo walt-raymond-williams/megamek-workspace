@@ -43,23 +43,23 @@ Use this shape for active and queued work:
    - Output: Report the save path, campaign name, roster/transport/support setup, important UI paths/prompts, any errors, and whether the save is safe for Codex to copy and inspect.
    - Notes: GitHub issue `#23`; child of epic `#14`; active checklist `docs/handoffs/active/user-real-unit-campaign-setup.md`; this should happen before the issue `#10` manual battle-record MUL import pass.
 
+2. Implement local MekHQ Advance Day control API prototype.
+   - Status: `In progress`
+   - Owner: `Codex`
+   - Goal: Add a local-only in-process MekHQ control API that can be called while MekHQ is open and a campaign is loaded, invoking exactly one real `Campaign#newDay()` path with campaign/date guardrails and structured results.
+   - Output: GitHub issue `#35`; handoff `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`; implementation plan `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`; prototype note `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`.
+   - Notes: Source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; live testing should wait for the user to be present. Gradle compile remains blocked by the Java 17 daemon/toolchain issue, but fallback `javac` checks against installed jars passed.
+
 ## Next
 
-1. Implement local MekHQ Advance Day control API prototype.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Add or precisely prototype-plan a local-only in-process MekHQ control API that can be called while MekHQ is open and a campaign is loaded, invoking exactly one real `Campaign#newDay()` path with campaign/date guardrails and structured results.
-   - Output: GitHub issue `#35`; handoff `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`; implementation plan `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`; expected prototype note `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`.
-   - Notes: Follows issue `#34`; live testing should wait for the user to be present. Use only copied/disposable saves. Do not add prompt auto-answering, direct save mutation, or multi-day automation.
-
-2. Run MekHQ quickstart roster UI validation.
+1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Turn this repo into an AI-ready project workflow demo.
+2. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 

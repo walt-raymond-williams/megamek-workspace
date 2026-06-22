@@ -226,6 +226,49 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data
 
 After a command succeeds locally, update this section from `Blocked` to `Verified` for that command and record the date.
 
+## MekHQ Local Advance Day Control API Prototype
+
+Issue `#35` adds a source prototype under `external/src/mekhq` that is disabled by default. When a locally modified MekHQ build can be launched, enable the local-only endpoint with this JVM property:
+
+```powershell
+-Dmekhq.controlApi.enabled=true
+```
+
+Optional port override:
+
+```powershell
+-Dmekhq.controlApi.port=32180
+```
+
+Call status:
+
+```powershell
+Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/status'
+```
+
+Advance exactly one day against an already-open copied/disposable campaign:
+
+```powershell
+$body = @{
+  command = 'advanceDayOnce'
+  expectedCampaignName = 'The Learning Ropes'
+  expectedDate = '3025-07-20'
+  saveAfterSuccess = $false
+} | ConvertTo-Json
+
+Invoke-RestMethod `
+  -Method Post `
+  -Uri 'http://127.0.0.1:32180/advance-day' `
+  -ContentType 'application/json' `
+  -Body $body
+```
+
+Current verification state:
+
+- `Blocked`: `.\gradlew.bat :MekHQ:compileJava` still fails on the Java 17 Gradle daemon/toolchain blocker.
+- `Confirmed locally`: fallback `javac` checks for `LocalControlService.java` and modified `MekHQ.java` passed against installed MekHQ `0.51.00` jars on `2026-06-22`.
+- `Not run`: live endpoint test; wait for the user and use copied/disposable saves only.
+
 ## Check Logs
 
 ```powershell
