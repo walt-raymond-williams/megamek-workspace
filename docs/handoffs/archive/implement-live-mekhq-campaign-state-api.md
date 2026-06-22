@@ -73,8 +73,10 @@ Optional live smoke, user-assisted:
 $env:JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'
 .\gradlew.bat :MekHQ:run
 Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/summary' -TimeoutSec 10 | ConvertTo-Json -Depth 8
-Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/state?sections=campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported' -TimeoutSec 30 | ConvertTo-Json -Depth 12
+Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported' -TimeoutSec 30 | ConvertTo-Json -Depth 12
 ```
+
+Follow-up workspace commit `6756a70` recorded that a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against disposable campaign `The Learning Ropes-test.cpnx`. MEK-RPG issue `#106` then confirmed that selected-section dashboard/context validation should include `bridge_metadata`; omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
 
 ## Constraints
 

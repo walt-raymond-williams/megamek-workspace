@@ -382,6 +382,19 @@ Use this shape for entries that may become GitHub issues:
 - Goal: Extend the local-only MekHQ control API with read-only live campaign-state endpoints for MEK-RPG: `GET /campaign/summary` and `GET /campaign/state?sections=...`.
 - Why it matters: The Advance Day prototype proved MekHQ can expose a local in-process API while the GUI app is open. MEK-RPG's response memo confirms it wants live API data as a freshness layer over save/checkpoint imports, preserving MekHQ as the hard ledger while reducing stale reads and save-before-refresh friction.
 - Expected output: Completed with MekHQ source commit `7d3b345327` and `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`, plus sanitized fixtures under `docs/templates/mekhq-live-campaign-*.fixture.json`.
-- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-campaign-state-api.md`. The API remains disabled by default, loopback-only, read-only for live state, and grouped like the checkpoint export. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed. Source push is blocked by lack of write permission to upstream `MegaMek/mekhq`.
-- Dependencies: Existing source branch `codex/mekhq-advance-day-control-api`; source commits `9046a8075e`, `17207baa90`, and `7d3b345327`. Live endpoint smoke still requires the user to load a copied/disposable campaign in the source-built MekHQ app.
-- Open questions: A source-confirmed dirty/unsaved flag remains unknown, so V1 reports dirty state as `Unknown` with a warning. A future pass should live-smoke the endpoints against a disposable campaign and decide whether to deepen full injuries, skills, cargo/transport, markets, and stable repair selectors.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-campaign-state-api.md`. The API remains disabled by default, loopback-only, read-only for live state, and grouped like the checkpoint export. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed. Follow-up issue `#37` tracks the workspace close-out for commit `6756a70`, which recorded the later user-assisted disposable-campaign smoke test and the selected-section `bridge_metadata` lesson from MEK-RPG issue `#106`. Source push is blocked by lack of write permission to upstream `MegaMek/mekhq`.
+- Dependencies: Existing source branch `codex/mekhq-advance-day-control-api`; source commits `9046a8075e`, `17207baa90`, and `7d3b345327`. The first user-assisted live endpoint smoke test is recorded in `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`.
+- Open questions: A source-confirmed dirty/unsaved flag remains unknown, so V1 reports dirty state as `Unknown` with a warning. Future passes should decide whether to deepen full injuries, skills, cargo/transport, markets, and stable repair selectors.
+
+### Record live MekHQ API smoke-test follow-up
+
+- Status: `Done`
+- Priority: `Medium`
+- Issue: `#37`
+- Owner: `Codex`
+- Goal: Track and close the after-the-fact documentation cleanup for workspace commit `6756a70`, which recorded live smoke-test evidence for the issue `#36` read-only MekHQ campaign-state API.
+- Why it matters: The roadmap and task board should not keep telling future agents that the live API still lacks any disposable-campaign smoke test after MEK-RPG issue `#104` and follow-up issue `#106` provided that evidence.
+- Expected output: Completed by updating `docs/current/TASKS.md`, this roadmap, and the archived issue `#36` handoff to reflect the live smoke result and the need to include `bridge_metadata` in selected-section MEK-RPG dashboard/context requests.
+- Handoff notes: This was a close-out bookkeeping issue related to closed workspace issue `#36`, not a new source/API feature and not related to any currently open workspace issue.
+- Dependencies: Workspace commit `6756a70`; MEK-RPG issues `#104` and `#106`.
+- Open questions: None for this tracking issue.

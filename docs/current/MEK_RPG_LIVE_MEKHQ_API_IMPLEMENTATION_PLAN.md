@@ -114,7 +114,7 @@ Do not implement in this issue:
 Produce sanitized fixtures or fixture snippets for:
 
 - `GET /campaign/summary`
-- `GET /campaign/state?sections=campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported`
+- `GET /campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported`
 - dirty/unsaved state when source-confirmed or an explicit `Unknown` dirty-state warning if not available
 - sparse/warning-heavy output
 
