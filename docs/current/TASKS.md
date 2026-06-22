@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Add live API contract and scenario depth with fixtures.
+1. Deepen live API logistics, reports, and market safeguards.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Expand the live read-only MekHQ campaign API with richer active contract and scenario context requested by MEK-RPG.
-   - Output: GitHub issue `#41` completed with source-backed API/docs/fixture updates or documented source blockers.
-   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`; follows completed issues `#39` and `#40`.
+   - Goal: Expand the live read-only MekHQ campaign API with richer repairs/logistics/report context while keeping market data display-only and automation guarded.
+   - Output: GitHub issue `#42` completed with source-backed API/docs/fixture updates or documented source blockers.
+   - Notes: Child of epic `#38`; active handoff `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`; follows completed issues `#39`, `#40`, and `#41`.
 
 2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
@@ -103,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#41` by deepening live API contract and scenario sections in MekHQ source commit `495b58faef`. Added contract description/date/travel/payment/salvage/rental/scenario-link fields and scenario description/link/map/conditions/player-force/salvage/objective/bot-force/tactical-result context. Updated live API docs and active-contract/scenario-rich fixture; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#40` by deepening live API finance, personnel, and unit sections in MekHQ source commit `d38a500960`. Added loan/default/warning summaries, personnel assignment/leadership/injury-summary/current-personnel fields, and unit availability/deployability/maintenance/transport summaries. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#39` by hardening the live MekHQ campaign API trust/location metadata in MekHQ source commit `dc214d946d`. Dirty state remains explicit `Unknown` with stronger unsupported metadata because source search found no loaded-campaign dirty flag; location labels now come from `Campaign#getCurrentLocation()` and `AbstractLocation` methods instead of relying on `toString()`. Updated live API docs and fixtures; verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq`.
 - `2026-06-22`: Reviewed MEK-RPG live API change request `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_LIVE_API_CHANGE_REQUEST.md`, created MegaMek workspace epic `#38` and child issues `#39` through `#42`, added roadmap entries and active handoffs for producer-side live API hardening, and queued issue `#39` as the next agent task.

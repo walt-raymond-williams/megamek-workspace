@@ -316,8 +316,194 @@
       }
     }
   ],
-  "contracts": [],
-  "scenarios": [],
+  "contracts": [
+    {
+      "id": 1,
+      "display_name": "Example Security Contract",
+      "type": "Contract",
+      "status": {
+        "raw_code": "ACTIVE",
+        "label": "Active",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Mission#getStatus()",
+        "warnings": []
+      },
+      "system_id": "galatea",
+      "system_name": "Galatea",
+      "warnings": [],
+      "description": "Example sanitized contract description.",
+      "employer": "Example Employer",
+      "enemy": "Unknown",
+      "start_date": "3025-04-01",
+      "end_date": "3025-07-01",
+      "length_months": 3,
+      "months_left": 2,
+      "active_on_campaign_date": true,
+      "travel_days": 0,
+      "terms": {
+        "advance_pct": 25,
+        "advance_amount": "250,000 C-bills",
+        "monthly_payout": "1,000,000 C-bills",
+        "transport_comp": "Full Transport",
+        "command_rights": "Independent",
+        "salvage_pct": "50%",
+        "straight_support": "Battle Loss Compensation",
+        "support_amount": "100,000 C-bills",
+        "source_owner": "Contract getters"
+      },
+      "payment_summary": {
+        "base_amount": "3,000,000 C-bills",
+        "total_amount": "3,000,000 C-bills",
+        "total_amount_plus_fees": "2,850,000 C-bills",
+        "total_amount_plus_fees_and_bonuses": "3,100,000 C-bills",
+        "monthly_payout": "1,000,000 C-bills",
+        "total_monthly_payout": "1,000,000 C-bills",
+        "advance_amount": "250,000 C-bills",
+        "total_advance_amount": "250,000 C-bills",
+        "fee_amount": "150,000 C-bills",
+        "overhead_amount": "50,000 C-bills",
+        "support_amount": "100,000 C-bills",
+        "transit_amount": "0 C-bills",
+        "transport_amount": "0 C-bills",
+        "signing_bonus_amount": "250,000 C-bills",
+        "estimated_total_profit": "1,500,000 C-bills",
+        "source_owner": "Contract payment getters"
+      },
+      "salvage_summary": {
+        "salvage_pct": 50,
+        "salvage_pct_label": "50%",
+        "current_salvage_pct": 50,
+        "salvage_exchange": false,
+        "salvaged_by_unit": "0 C-bills",
+        "salvaged_by_employer": "0 C-bills",
+        "battle_loss_comp": "50%",
+        "shares_percent": 0,
+        "source_owner": "Contract salvage and battle-loss getters"
+      },
+      "rental_summary": {
+        "hospital_beds": 0,
+        "kitchens": 0,
+        "holding_cells": 0,
+        "source_owner": "Contract rental getters"
+      },
+      "scenario_ids": [
+        101
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": 101,
+      "mission_id": 1,
+      "display_name": "Example Convoy Intercept",
+      "description": "Example sanitized scenario description.",
+      "status": {
+        "raw_code": "CURRENT",
+        "label": "Current",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Scenario#getStatus()",
+        "warnings": []
+      },
+      "date": "3025-04-09",
+      "linked_scenario_id": -1,
+      "stratcon_scenario_type": "Patrol",
+      "crisis": false,
+      "cloaked": false,
+      "map": {
+        "board_type": "Ground",
+        "map": "Generated",
+        "using_fixed_map": false,
+        "map_size_x": 32,
+        "map_size_y": 34,
+        "starting_position": 0,
+        "source_owner": "Scenario map getters"
+      },
+      "planetary_conditions": {
+        "light": "Daylight",
+        "weather": "Clear",
+        "wind": "Calm",
+        "fog": "None",
+        "atmosphere": "Standard",
+        "temperature": 25,
+        "gravity": 1.0,
+        "emi": "None",
+        "blowing_sand": "None",
+        "source_owner": "Scenario planetary condition getters"
+      },
+      "report": {
+        "text": "Example sanitized pre-resolution report.",
+        "sanitized": true,
+        "source_owner": "Scenario#getReport()"
+      },
+      "player_force": {
+        "formation_id": 0,
+        "force_ids": [
+          12
+        ],
+        "individual_unit_ids": [
+          "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+        ],
+        "all_unit_ids": [
+          "bbbbbbbb-cccc-dddd-eeee-ffffffffffff"
+        ],
+        "source_owner": "Scenario#getForces(Campaign)"
+      },
+      "salvage_assignments": {
+        "formation_ids": [],
+        "tech_ids": [],
+        "source_owner": "Scenario#getSalvageFormations(); Scenario#getSalvageTechs()"
+      },
+      "objectives": [
+        {
+          "criterion": "Preserve",
+          "description": "Keep the convoy alive.",
+          "short_label": "Preserve 75%",
+          "amount_type": "Percentage",
+          "percentage": 75,
+          "fixed_amount": "Unknown",
+          "destination_edge": "NONE",
+          "time_limit_type": "None",
+          "time_limit": "Unknown",
+          "associated_force_names": [
+            "Convoy"
+          ],
+          "associated_unit_ids": [],
+          "success_effects": [
+            "ScenarioVictory"
+          ],
+          "failure_effects": [
+            "ScenarioDefeat"
+          ],
+          "details": [],
+          "source_owner": "ScenarioObjective getters"
+        }
+      ],
+      "bot_forces": [
+        {
+          "name": "Example Raiders",
+          "team": 1,
+          "template_name": "Example Template",
+          "fixed_entity_count": 2,
+          "full_entity_count": 2,
+          "total_bv": 1800,
+          "traitor_person_count": 0,
+          "source_owner": "BotForce getters"
+        }
+      ],
+      "bot_force_stubs": [],
+      "tactical_result": {
+        "status": "Current",
+        "has_report": true,
+        "report_source_owner": "Scenario#getReport()",
+        "warnings": [
+          "This is read-only scenario context; tactical result application remains out of scope."
+        ]
+      },
+      "warnings": []
+    }
+  ],
   "repairs_and_logistics": {
     "repair_pressure": {
       "value": {

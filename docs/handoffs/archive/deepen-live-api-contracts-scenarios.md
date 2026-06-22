@@ -73,3 +73,12 @@ Run Gradle commands from `external/src/mekhq`. Record exact blockers if source v
 
 - Which copied/disposable campaign should supply active contract/scenario fixture data?
 - Which tactical-result pointers exist before a scenario has been resolved?
+
+## Completion Notes
+
+- Completed on `2026-06-22` for GitHub issue `#41`.
+- MekHQ source commit: `495b58faef` (`Deepen live campaign contract scenario state`).
+- Verification passed from `external/src/mekhq`: `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`.
+- JSON fixture parsing passed with PowerShell `ConvertFrom-Json`.
+- Contract output now includes description, dates, travel days, payment summaries, salvage summaries, rental summaries, and scenario links.
+- Scenario output now includes description, linked scenario id, StratCon type, map and planetary condition summaries, player force ids/unit ids, salvage assignments, objective summaries, bot-force summaries, bot-force stubs, and read-only tactical-result context.

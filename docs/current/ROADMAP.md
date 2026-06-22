@@ -413,9 +413,9 @@ Use this shape for entries that may become GitHub issues:
 - Child issues:
   - `#39`: Harden live API trust envelope, dirty state, and location labels. Active handoff: `docs/handoffs/active/harden-live-api-trust-envelope-location.md`.
   - `#40`: Deepen live API finance, personnel, and unit sections. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/deepen-live-api-finance-personnel-units.md`.
-  - `#41`: Add live API contract and scenario depth with fixtures. Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
+  - `#41`: Add live API contract and scenario depth with fixtures. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/deepen-live-api-contracts-scenarios.md`.
   - `#42`: Deepen live API logistics, reports, and market safeguards. Active handoff: `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`.
-- Recommended sequence: Issues `#39` and `#40` are complete; continue with issue `#41` next, then `#42` once representative disposable campaign data is available for fixtures.
+- Recommended sequence: Issues `#39`, `#40`, and `#41` are complete; continue with issue `#42` next.
 - Open questions: Which disposable campaign should provide non-empty active contract, scenario, damage/repair, and market examples for richer fixtures? Should a writable MekHQ fork/remote be configured for source branch publication?
 
 ### Harden live API trust envelope, dirty state, and location labels
@@ -446,16 +446,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Add live API contract and scenario depth with fixtures
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#41`
 - Owner: `Codex`
 - Goal: Expand live read-only API coverage for active contracts and scenarios and add richer live fixtures for MEK-RPG adapter tests.
 - Why it matters: MEK-RPG needs contract/scenario context for real operational play, including employer/enemy, locations, deadlines, payment/salvage summaries, scenario links, participants, objectives, reports, and tactical-result pointers where available.
-- Expected output: Source-backed contract/scenario field mapping, API DTO/output expansion or unsupported entries, at least one sanitized active-contract/scenario-rich fixture or a documented blocker, and docs for empty vs unavailable vs unsupported state.
-- Handoff notes: Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
+- Expected output: Completed with MekHQ source commit `495b58faef`, which adds contract description/date/travel/payment/salvage/rental/scenario-link fields and scenario description/link/map/conditions/player-force/salvage/objective/bot-force/tactical-result context. Updated live API docs and active-contract/scenario-rich fixture examples.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/deepen-live-api-contracts-scenarios.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`.
 - Dependencies: Epic `#38`; preferably issue `#39` first; disposable campaign data with active contract/scenario context.
-- Open questions: Which copied/disposable campaign should be used for a non-empty contract/scenario fixture, and how much tactical-result context is available before scenario resolution?
+- Open questions: Tactical result application remains out of scope; live scenario context reports status/report/objective pointers only.
 
 ### Deepen live API logistics, reports, and market safeguards
 

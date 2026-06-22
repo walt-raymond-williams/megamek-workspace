@@ -19,6 +19,7 @@ Source commit:
 - `7d3b345327` (`Add local live campaign state API`)
 - `dc214d946d` (`Harden live campaign state metadata`)
 - `d38a500960` (`Deepen live campaign personnel unit finance state`)
+- `495b58faef` (`Deepen live campaign contract scenario state`)
 
 Files changed:
 
@@ -94,6 +95,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `d38a500960` deepens the finance, personnel, and unit sections. Finance output now includes loan defaults, active loan summaries, and derived warnings for negative balance, overdue loans, and loan defaults. Personnel output now includes assignment dates, deployed/employed flags, compact injury counts/severity, leadership markers, and current-personnel market membership. Unit output now includes availability/deployability, commander id, maintenance site, and read-only transport assignment/carried-unit summaries.
 
+`Confirmed from source`: source commit `495b58faef` deepens contract and scenario output. Contract DTOs now include descriptions, dates, travel days, payment summaries, salvage summaries, rental summaries, and scenario links. Scenario DTOs now include descriptions, linked scenario ids, StratCon type, map and planetary condition summaries, player force ids/unit ids, salvage assignments, objective summaries, bot-force summaries, bot-force stubs, and a read-only tactical-result context block.
+
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
 `Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, full cargo/transport semantics, personnel injuries/skills, or write/action surfaces. Markets are intentionally display-only/empty with automation-blocking unsupported entries.
@@ -136,6 +139,15 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 ```
 
 `Confirmed locally`: after source commit `d38a500960`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
+`Confirmed locally`: after source commit `495b58faef`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
 
 ```powershell
 $env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
