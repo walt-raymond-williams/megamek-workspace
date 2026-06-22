@@ -218,6 +218,7 @@ MekHQ:
 ```powershell
 cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 .\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:assemble
 .\gradlew.bat :MekHQ:test
 .\gradlew.bat :MekHQ:testAll
 .\gradlew.bat :MekHQ:run
@@ -225,6 +226,10 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 ```
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:compileJava` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch with the local Advance Day control API prototype.
+
+`Confirmed locally`: `.\gradlew.bat :MekHQ:assemble` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch. It produced `MekHQ\build\distributions\MekHQ-0.51.01.tar.gz` and `MekHQ\build\libs\MekHQ.jar`. The build emitted non-fatal image-atlas/logging errors and warnings, but Gradle returned `BUILD SUCCESSFUL`.
+
+`Not run`: `.\gradlew.bat :MekHQ:run`; this launches the GUI and should be run when the user is ready for a visible MekHQ window.
 
 MegaMekLab:
 

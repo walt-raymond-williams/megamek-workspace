@@ -92,7 +92,7 @@ Use this shape for active and queued work:
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
    - Output: Mark source build/test commands as verified in `KNOWN_COMMANDS.md`.
-   - Notes: Current shell resolves Java 21, portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and Gradle toolchain discovery is configured for both JDKs. The previous missing-JDK-17 daemon blocker is resolved. `.\gradlew.bat :MekHQ:compileJava` passed from `external/src/mekhq` on `2026-06-22`; the broader build/test matrix still needs full successful reruns.
+   - Notes: Current shell resolves Java 21, portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and Gradle toolchain discovery is configured for both JDKs. The previous missing-JDK-17 daemon blocker is resolved. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:assemble` passed from `external/src/mekhq` on `2026-06-22`; the broader build/test matrix still needs full successful reruns.
 
 ## Done
 
