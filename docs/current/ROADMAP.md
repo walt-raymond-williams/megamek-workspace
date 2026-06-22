@@ -412,10 +412,10 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: Completed issue `#36` live API prototype, follow-up issue `#37` selected-section `bridge_metadata` lesson, and the MekHQ source branch/commits recorded in the issue `#36` roadmap entry. Source push to upstream `MegaMek/mekhq` remains blocked unless a writable fork/remote is configured.
 - Child issues:
   - `#39`: Harden live API trust envelope, dirty state, and location labels. Active handoff: `docs/handoffs/active/harden-live-api-trust-envelope-location.md`.
-  - `#40`: Deepen live API finance, personnel, and unit sections. Active handoff: `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`.
+  - `#40`: Deepen live API finance, personnel, and unit sections. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/deepen-live-api-finance-personnel-units.md`.
   - `#41`: Add live API contract and scenario depth with fixtures. Active handoff: `docs/handoffs/active/deepen-live-api-contracts-scenarios.md`.
   - `#42`: Deepen live API logistics, reports, and market safeguards. Active handoff: `docs/handoffs/active/deepen-live-api-logistics-reports-markets.md`.
-- Recommended sequence: Issue `#39` is complete; continue with issue `#40` next, then `#41` and `#42` once representative disposable campaign data is available for fixtures.
+- Recommended sequence: Issues `#39` and `#40` are complete; continue with issue `#41` next, then `#42` once representative disposable campaign data is available for fixtures.
 - Open questions: Which disposable campaign should provide non-empty active contract, scenario, damage/repair, and market examples for richer fixtures? Should a writable MekHQ fork/remote be configured for source branch publication?
 
 ### Harden live API trust envelope, dirty state, and location labels
@@ -433,16 +433,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Deepen live API finance, personnel, and unit sections
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#40`
 - Owner: `Codex`
 - Goal: Expose richer method-backed finance, personnel, and unit context through the live read-only API.
 - Why it matters: MEK-RPG needs active campaign operational context such as balance/debt, personnel availability/injuries/pay, and unit condition/crew/repair/transport links without reading raw saves.
-- Expected output: Source-backed field mapping, safe DTO/output expansion or structured unsupported entries, fixture updates for non-empty finance/personnel/unit examples, and documentation of provenance and limitations.
-- Handoff notes: Active handoff: `docs/handoffs/active/deepen-live-api-finance-personnel-units.md`.
+- Expected output: Completed with MekHQ source commit `d38a500960`, which adds finance loan/default/warning summaries, personnel assignment/leadership/injury-summary/current-personnel membership fields, and unit availability/deployability/maintenance/transport summaries. Updated live API docs and fixtures.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/deepen-live-api-finance-personnel-units.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`.
 - Dependencies: Epic `#38`; preferably issue `#39` first so the trust envelope and unsupported-entry shape are settled.
-- Open questions: Which personnel injury/fatigue/pay and unit repair/transport details are safely method-backed in the current MekHQ source branch?
+- Open questions: Full personnel skill export, detailed injury objects/recovery timelines, and write-side transport reassignment remain deferred.
 
 ### Add live API contract and scenario depth with fixtures
 

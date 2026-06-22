@@ -18,6 +18,7 @@ Source commit:
 
 - `7d3b345327` (`Add local live campaign state API`)
 - `dc214d946d` (`Harden live campaign state metadata`)
+- `d38a500960` (`Deepen live campaign personnel unit finance state`)
 
 Files changed:
 
@@ -91,6 +92,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `dc214d946d` hardens location output so the summary and `campaign.location` fields use `Campaign#getCurrentSystem()`, `Campaign#getCurrentLocation()`, and `AbstractLocation` travel-state methods instead of relying on `AbstractLocation#toString()` as the only display representation. The state payload now includes `current_location_display_name`, `table_safe_location_label`, `current_planet_name`, and expanded travel-state fields.
 
+`Confirmed from source`: source commit `d38a500960` deepens the finance, personnel, and unit sections. Finance output now includes loan defaults, active loan summaries, and derived warnings for negative balance, overdue loans, and loan defaults. Personnel output now includes assignment dates, deployed/employed flags, compact injury counts/severity, leadership markers, and current-personnel market membership. Unit output now includes availability/deployability, commander id, maintenance site, and read-only transport assignment/carried-unit summaries.
+
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
 `Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, full cargo/transport semantics, personnel injuries/skills, or write/action surfaces. Markets are intentionally display-only/empty with automation-blocking unsupported entries.
@@ -124,6 +127,15 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 The Checkstyle run emitted one existing warning in `MekHQ.java` for deprecated `AtBGameThread` usage; it was not introduced by the live state API work.
 
 `Confirmed locally`: after source commit `dc214d946d`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
+
+```powershell
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+.\gradlew.bat :MekHQ:compileJava
+.\gradlew.bat :MekHQ:checkstyleMain
+```
+
+`Confirmed locally`: after source commit `d38a500960`, both Gradle checks passed from `external/src/mekhq` on `2026-06-22`:
 
 ```powershell
 $env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'

@@ -73,3 +73,13 @@ Run Gradle commands from `external/src/mekhq`. Record exact blockers if source v
 
 - Which personnel injury/fatigue/pay fields are safe and stable in source?
 - Which unit crew, tech, damage, repair, transport, cargo, and scenario assignment fields are available without creating action semantics?
+
+## Completion Notes
+
+- Completed on `2026-06-22` for GitHub issue `#40`.
+- MekHQ source commit: `d38a500960` (`Deepen live campaign personnel unit finance state`).
+- Verification passed from `external/src/mekhq`: `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`.
+- JSON fixture parsing passed with PowerShell `ConvertFrom-Json`.
+- Finance output now includes loan defaults, active loan summaries, and derived warnings.
+- Personnel output now includes assignment dates, deployed/employed flags, compact injury summary, leadership markers, and current-personnel market membership.
+- Unit output now includes availability/deployability, commander id, maintenance site, and read-only transport assignment/carried-unit summaries.

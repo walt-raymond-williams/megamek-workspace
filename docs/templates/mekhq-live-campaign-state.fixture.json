@@ -151,7 +151,16 @@
       "source_owner": "Finances#hasActiveLoans()",
       "warnings": []
     },
-    "recent_transactions": []
+    "loan_defaults": {
+      "value": 0,
+      "evidence": "Confirmed from MekHQ export",
+      "method_backed": true,
+      "source_owner": "Finances#getLoanDefaults()",
+      "warnings": []
+    },
+    "active_loans": [],
+    "recent_transactions": [],
+    "financial_warnings": []
   },
   "personnel": [
     {
@@ -182,6 +191,14 @@
         "warnings": []
       },
       "unit_id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+      "assignments": {
+        "unit_id": "bbbbbbbb-cccc-dddd-eeee-ffffffffffff",
+        "deployed": false,
+        "employed": true,
+        "joined_campaign": "3025-01-01",
+        "recruitment_date": "3025-01-01",
+        "source_owner": "Person#getUnit(); Person#isDeployed(); Person#isEmployed(); Person#getJoinedCampaign(); Person#getRecruitment()"
+      },
       "fatigue": {
         "value": 0,
         "evidence": "Confirmed from MekHQ export",
@@ -195,6 +212,33 @@
         "method_backed": true,
         "source_owner": "Person#getHits()",
         "warnings": []
+      },
+      "injury_summary": {
+        "hits": 0,
+        "total_injury_count": 0,
+        "non_permanent_injury_count": 0,
+        "permanent_injury_count": 0,
+        "prosthetic_injury_count": 0,
+        "active_injury_type_count": 0,
+        "total_injury_severity": 0,
+        "non_permanent_injury_severity": 0,
+        "source_owner": "Person injury summary methods",
+        "warnings": [
+          "Full injury objects and recovery timelines are deferred until a narrower medical export pass."
+        ]
+      },
+      "leadership": {
+        "flagged_commander": true,
+        "effective_commander": true,
+        "second_in_command": false,
+        "founder": true,
+        "rank_numeric": 5,
+        "source_owner": "Person leadership flags; Campaign#getCommander(); Person#getRankNumeric()"
+      },
+      "market_membership": {
+        "is_current_personnel": true,
+        "is_personnel_market_applicant": false,
+        "source_owner": "Campaign#getAllPersonnel()"
       }
     }
   ],
@@ -217,15 +261,58 @@
         "source_owner": "Unit#getStatus()",
         "warnings": []
       },
+      "availability": {
+        "available": true,
+        "serviceable": true,
+        "deployed": false,
+        "mothballed": false,
+        "mothballing": false,
+        "deployable": true,
+        "deployment_blocker": "None",
+        "source_owner": "Unit availability/deployment methods"
+      },
       "crew": [
         "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
       ],
+      "commander_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
+      "maintenance_site": {
+        "raw_code": "0",
+        "label": "Maintenance: Field Workshop",
+        "evidence": "Confirmed from MekHQ export",
+        "method_backed": true,
+        "source_owner": "Unit#getSite(); Unit#getCurrentSiteName()",
+        "warnings": []
+      },
       "damage_state": {
         "value": "Undamaged",
         "evidence": "Confirmed from MekHQ export",
         "method_backed": true,
         "source_owner": "Unit#getDamageState()",
         "warnings": []
+      },
+      "transport": {
+        "assignments": [
+          {
+            "transport_type": "SHIP_TRANSPORT",
+            "has_assignment": true,
+            "transport_unit_id": "cccccccc-dddd-eeee-ffff-000000000000",
+            "transport_unit_name": "Example Leopard",
+            "transporter_type": "MEK_BAY",
+            "transported_in_bay": true,
+            "source_owner": "Unit#getTransportAssignment(CampaignTransportType)"
+          }
+        ],
+        "carried_units": [
+          {
+            "transport_type": "SHIP_TRANSPORT",
+            "count": 0,
+            "unit_ids": [],
+            "source_owner": "Unit#getTransportedUnits(CampaignTransportType)"
+          }
+        ],
+        "warnings": [
+          "Transport output is read-only context; it does not expose loading, unloading, or reassignment commands."
+        ]
       }
     }
   ],
