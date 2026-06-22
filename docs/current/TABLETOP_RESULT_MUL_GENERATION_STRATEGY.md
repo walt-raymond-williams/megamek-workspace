@@ -108,7 +108,7 @@ Create `codex/tabletop-result-mul-dev` and a compact feature tracking doc only i
 
 ## Follow-Up Decisions
 
-- Issue `#12`: proceed only as a narrowed workspace helper if the user wants generated battle-record MULs before live MekHQ import validation is complete. Otherwise, comment and close `#12` as unnecessary for the first campaign.
+- Issue `#12`: closed as unnecessary for the first campaign on `2026-06-22`. Reopen or create a new issue only if the user wants generated battle-record MULs after the built-in/manual workflow is documented or proves too slow.
 - Issue `#10`: remains blocked on live Resolve Manually import validation, preferably after user task `#23` creates a realistic disposable campaign target.
 - Issue `#13`: should document the built-in manual workflow either way, including exact UI steps, battlefield-control prompt, scenario status choice, salvage dialogs, and post-closeout checks.
 

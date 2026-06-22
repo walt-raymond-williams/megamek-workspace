@@ -35,8 +35,8 @@ Updated:
 - `docs/current/KNOWN_COMMANDS.md`
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
-- `docs/handoffs/active/implement-tabletop-battle-record-mul-generator.md`
+- `docs/handoffs/archive/implement-tabletop-battle-record-mul-generator.md`
 
 ## Remaining Notes
 
-Issue `#10` remains blocked on live MekHQ Resolve Manually import validation. Issue `#12` should either proceed only as the narrowed workspace helper or be closed as unnecessary if built-in/manual workflow is enough for the first real campaign.
+Issue `#10` remains blocked on live MekHQ Resolve Manually import validation. Issue `#12` was closed as unnecessary for the first campaign; reopen only if built-in/manual workflow proves too slow.

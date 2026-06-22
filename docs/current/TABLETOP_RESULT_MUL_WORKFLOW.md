@@ -136,5 +136,5 @@ Open issue: issue `#7` still needs to document the salvage rules and options in 
 - `#10` round-trip validation should compare a generated `<record>` file against MekHQ import behavior, especially friendly unit matching, crew hits/ejection, salvage, retreated units, devastated units, and kill credit.
 - `#10` has completed the installed-jar writer/parser part of that validation in `BATTLE_RECORD_MUL_ROUND_TRIP_VALIDATION.md`; live campaign import remains blocked on UI automation or user-operated validation.
 - `#11` generation strategy should prefer using MegaMek/MekHQ serialization APIs or generated entities over hand-written XML where possible, because entity XML is broad and source-owned.
-- `#12` implementation must preserve entity and crew external ids.
+- Any future generated-MUL helper must preserve entity and crew external ids.
 - `#13` manual verification should include Resolve Manually with a selected battle-record MUL, wizard review, scenario status selection, salvage dialogs, and post-closeout campaign inspection.

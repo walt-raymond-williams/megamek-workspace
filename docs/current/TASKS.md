@@ -89,6 +89,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Closed GitHub issue `#12` as unnecessary for the first campaign after issue `#11` selected MekHQ Resolve Manually as the baseline. Future generated-MUL work should reopen as a narrowed workspace installed-jar helper only if manual workflow proves too slow.
 - `2026-06-22`: Completed GitHub issue `#11` by adding `TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`. Decision: use MekHQ Resolve Manually as the baseline; if custom generation is needed, narrow issue `#12` to a workspace Java helper using installed MegaMek/MekHQ jars and native serialization/parser validation, with no feature branch or source change yet.
 - `2026-06-22`: Completed GitHub issue `#4` by adding `HELP_FILE_WORKFLOW.md`, linking it from current workspace/profile/workflow docs, adding local help/glossary/PDF extraction commands, and superseding `HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 - `2026-06-22`: Completed GitHub issue `#3` by mapping MekHQ campaign save/load source classes. `SAVE_FORMAT_NOTES.md`, `SOURCE_CODE_GUIDE.md`, and `KNOWN_COMMANDS.md` now record gzip magic-byte load detection, manual save extension/gzip behavior, always-gzipped autosaves, parser ownership, and the main source files.
