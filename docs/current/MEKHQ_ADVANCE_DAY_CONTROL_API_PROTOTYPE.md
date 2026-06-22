@@ -130,6 +130,8 @@ The `MekHQ.java` fallback check emitted one unrelated existing deprecation warni
 
 `Confirmed locally with user present`: live `/advance-day` endpoint test passed on `2026-06-22` against loaded campaign `The Learning Ropes` (`ea0d334a-1582-459a-9084-b349f0baca5a`). The request guarded on expected date `3025-04-08` with `saveAfterSuccess=false`; the response returned `advanced`, `newDayReturned=true`, `dateBefore=3025-04-08`, `dateAfter=3025-04-09`, `visibleDialogs=0`, and `saveAttempted=false`. A follow-up `/status` call reported the campaign at `3025-04-09`.
 
+`Confirmed by user`: dialogs were visible during the live `/advance-day` call and were manually dismissed by the user. Therefore, the `visibleDialogs=0` response should be interpreted only as "no dialogs detected when the response was assembled," not proof that the advance completed without prompts.
+
 ## User-Assisted Live Test Plan
 
 When the user is present:
@@ -143,7 +145,7 @@ When the user is present:
 7. Try one refused call with an intentionally wrong expected date.
 8. Only after the no-save call succeeds, test `saveAfterSuccess=true` to an explicit disposable output path.
 
-Steps 1-6 were completed successfully on `2026-06-22` against `The Learning Ropes`, advancing from `3025-04-08` to `3025-04-09` without saving.
+Steps 1-6 were completed successfully on `2026-06-22` against `The Learning Ropes`, advancing from `3025-04-08` to `3025-04-09` without saving. The user manually dismissed visible dialogs during the call.
 
 Do not test against the real campaign save until the disposable campaign test is understood and accepted.
 
@@ -151,4 +153,5 @@ Do not test against the real campaign save until the disposable campaign test is
 
 - Try one refused call with an intentionally wrong expected date.
 - Test `saveAfterSuccess=true` to an explicit disposable output path.
+- Improve prompt/dialog reporting so dialogs that appeared and were user-dismissed during the command are not lost by the final `visibleDialogs` snapshot.
 - Decide whether this prototype should stay local-only or move to a more polished feature branch/PR shape.
