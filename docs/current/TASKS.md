@@ -45,14 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Run MekHQ quickstart roster UI validation.
+1. Spike source-level MekHQ GUI control seam for Advance Day.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Determine whether a locally modified MekHQ build can expose a safe control seam that invokes the real Advance Day GUI/business-logic path without coordinate clicking, direct save editing, or reimplementing daily lifecycle logic.
+   - Output: GitHub issue `#34`; handoff `docs/handoffs/active/spike-mekhq-advance-day-gui-control-seam.md`; expected spike note `docs/current/MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md`.
+   - Notes: Separate from issue `#23`; should run after or alongside the real-life campaign setup and before broad write-side automation. Use only copied/disposable saves if a prototype is attempted.
+
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
