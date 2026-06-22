@@ -48,7 +48,7 @@ Use this shape for active and queued work:
    - Owner: `Codex`
    - Goal: Add a local-only in-process MekHQ control API that can be called while MekHQ is open and a campaign is loaded, invoking exactly one real `Campaign#newDay()` path with campaign/date guardrails and structured results.
    - Output: GitHub issue `#35`; handoff `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`; implementation plan `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`; prototype note `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`.
-   - Notes: Source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; live testing should wait for the user to be present. Gradle compile remains blocked by the Java 17 daemon/toolchain issue, but fallback `javac` checks against installed jars passed.
+   - Notes: Source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; live testing should wait for the user to be present. Portable JDK 17 is installed and Gradle now starts with the requested daemon/toolchain paths, but `:MekHQ:compileJava` exceeded a 304-second timeout and was stopped; fallback `javac` checks against installed jars passed.
 
 ## Next
 
@@ -99,7 +99,7 @@ Use this shape for active and queued work:
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
    - Output: Mark source build/test commands as verified in `KNOWN_COMMANDS.md`.
-   - Notes: Current shell resolves Java 8, JDK 21 is installed separately, and Gradle wrapper execution fails because `gradle/gradle-daemon-jvm.properties` requests daemon `toolchainVersion=17` with no local JDK 17/toolchain download configured.
+   - Notes: Current shell resolves Java 21, portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and Gradle toolchain discovery is configured for both JDKs. The previous missing-JDK-17 daemon blocker is resolved, but source Gradle commands still need full successful reruns; `:MekHQ:compileJava` exceeded a 304-second timeout and was stopped on `2026-06-22`.
 
 ## Done
 

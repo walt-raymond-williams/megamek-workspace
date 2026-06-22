@@ -37,7 +37,7 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:run --args='' -Dmekhq.controlApi.enabled=true
 ```
 
-`Unknown`: the exact launch command may need adjustment once the Gradle Java 17 daemon/toolchain blocker is fixed. The important JVM property is:
+`Unknown`: the exact launch command still needs live validation with the user present. The important JVM property is:
 
 ```text
 -Dmekhq.controlApi.enabled=true
@@ -106,17 +106,13 @@ Response statuses:
 
 ## Verification
 
-`Blocked`: Gradle verification remains blocked:
+`Attempted`: Gradle verification is no longer blocked by missing JDK 17, but full compile verification has not completed:
 
 ```text
 .\gradlew.bat :MekHQ:compileJava
 ```
 
-Observed failure:
-
-```text
-Unable to download toolchain matching the requirements ({languageVersion=17, vendor=any vendor, implementation=vendor-specific, nativeImageCapable=false}) from 'null'
-```
+Observed state on `2026-06-22`: after installing portable JDK 17 at `C:\Users\waltr\.jdks\temurin-17` and configuring user-level Gradle discovery, `.\gradlew.bat :MekHQ:compileJava` started with a JDK 17 Gradle daemon and JDK 21 worker. It exceeded a 304-second session timeout and was stopped with `.\gradlew.bat --stop`.
 
 `Confirmed locally`: fallback `javac` syntax/type checks passed against the installed MekHQ `0.51.00` jars:
 
@@ -149,8 +145,7 @@ Do not test against the real campaign save until the disposable campaign test is
 
 ## Remaining Work
 
-- Fix or work around the Gradle Java 17 daemon/toolchain blocker.
-- Run source build/checkstyle through Gradle.
+- Rerun source build/checkstyle through Gradle with a longer timeout.
 - Launch the locally modified MekHQ build.
 - Perform the user-assisted live endpoint test.
 - Decide whether this prototype should stay local-only or move to a more polished feature branch/PR shape.

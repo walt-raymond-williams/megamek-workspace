@@ -25,8 +25,26 @@ Expected Java major version for running the installed suite: `21`.
 
 Current local note:
 
-- `Confirmed locally`: `java -version` and `javac -version` currently resolve to Java 8 from the shell.
+- `Confirmed locally`: `java -version` and `javac -version` currently resolve to Java 21 from the shell.
+- `Confirmed locally`: portable JDK 17 exists at `C:\Users\waltr\.jdks\temurin-17`.
 - `Confirmed locally`: JDK 21 exists at `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
+
+User-level Gradle toolchain discovery is configured in `C:\Users\waltr\.gradle\gradle.properties` with both JDK paths:
+
+```properties
+org.gradle.java.installations.auto-detect=true
+org.gradle.java.installations.auto-download=false
+org.gradle.java.installations.paths=C:/Users/waltr/.jdks/temurin-17,C:/Program Files/Eclipse Adoptium/jdk-21.0.11.10-hotspot
+```
+
+Use this in a PowerShell session when a command needs JDK 17 first on `PATH`:
+
+```powershell
+$env:JAVA_HOME='C:\Users\waltr\.jdks\temurin-17'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+java -version
+javac -version
+```
 
 Use this in a PowerShell session when a command needs JDK 21 first on `PATH`:
 
@@ -176,13 +194,14 @@ Last observed state on `2026-06-18`:
 
 The source repos are Gradle-wrapper projects.
 
-Current blocker:
+Current environment:
 
 - `Confirmed from source`: `megamek`, `mekhq`, `megameklab`, and `mm-data` build files configure Java toolchain 21.
 - `Confirmed from source`: each repo contains `gradle\gradle-daemon-jvm.properties` with `toolchainVersion=17`.
-- `Confirmed locally`: running `.\gradlew.bat tasks --all` currently fails because Gradle cannot resolve/download daemon toolchain 17 on this Windows machine.
+- `Confirmed locally`: portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and user-level Gradle discovery includes both JDK 17 and JDK 21.
+- `Confirmed locally`: on `2026-06-22`, `.\gradlew.bat :MekHQ:compileJava` started with a JDK 17 Gradle daemon and JDK 21 worker, resolving the earlier missing-JDK-17 blocker. The command exceeded a 304-second session timeout and was stopped with `.\gradlew.bat --stop`; rerun before marking Gradle compilation verified.
 
-Commands below are intended commands based on local Gradle build files. Treat them as `Blocked` until the Java 17 daemon issue is resolved and the command is rerun successfully.
+Commands below are intended commands based on local Gradle build files. Treat them as `Not yet verified` until each command succeeds locally and the result is recorded.
 
 MegaMek:
 
@@ -224,7 +243,7 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mm-data
 .\gradlew.bat stageMMLFiles
 ```
 
-After a command succeeds locally, update this section from `Blocked` to `Verified` for that command and record the date.
+After a command succeeds locally, update this section from `Not yet verified` to `Verified` for that command and record the date.
 
 ## MekHQ Local Advance Day Control API Prototype
 
@@ -265,7 +284,7 @@ Invoke-RestMethod `
 
 Current verification state:
 
-- `Blocked`: `.\gradlew.bat :MekHQ:compileJava` still fails on the Java 17 Gradle daemon/toolchain blocker.
+- `Attempted`: `.\gradlew.bat :MekHQ:compileJava` started after installing JDK 17 and configuring Gradle toolchain discovery, but exceeded a 304-second session timeout and was stopped with `.\gradlew.bat --stop`.
 - `Confirmed locally`: fallback `javac` checks for `LocalControlService.java` and modified `MekHQ.java` passed against installed MekHQ `0.51.00` jars on `2026-06-22`.
 - `Not run`: live endpoint test; wait for the user and use copied/disposable saves only.
 

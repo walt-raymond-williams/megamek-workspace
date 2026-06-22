@@ -54,12 +54,14 @@ At minimum, a source change should record:
 
 Current known environment issue:
 
-- `Confirmed locally`: the shell currently resolves `java` and `javac` to Java 8.
+- `Confirmed locally`: the shell currently resolves `java` and `javac` to Java 21.
+- `Confirmed locally`: portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`.
 - `Confirmed locally`: JDK 21 is installed at `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
 - `Confirmed from source`: the checked-in Gradle build files use Java toolchain 21.
-- `Confirmed locally`: Gradle wrapper task discovery currently fails because `gradle/gradle-daemon-jvm.properties` requests daemon `toolchainVersion=17`, and no local JDK 17 or toolchain download URL is configured.
+- `Confirmed locally`: user-level Gradle discovery is configured in `C:\Users\waltr\.gradle\gradle.properties` with both JDK 17 and JDK 21 paths.
+- `Confirmed locally`: the previous missing-JDK-17 Gradle daemon blocker is resolved, but `.\gradlew.bat :MekHQ:compileJava` exceeded a 304-second timeout on `2026-06-22` and was stopped with `.\gradlew.bat --stop`.
 
-Until that environment issue is resolved, mark Gradle build/test commands as blocked rather than verified.
+Until a Gradle command completes successfully, mark it as attempted or not yet verified rather than verified.
 
 ## Documentation Follow-Through
 
@@ -84,5 +86,4 @@ Do not mix source checkout changes into this workspace repo. `external/` is igno
 
 ## Open Questions
 
-- Should this workspace standardize on installing JDK 17 for Gradle daemon compatibility, or updating/removing generated daemon JVM settings in the source checkouts?
 - Which Gradle commands should be treated as the default verification set once local execution is unblocked?
