@@ -45,21 +45,14 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Spike source-level MekHQ GUI control seam for Advance Day.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Determine whether a locally modified MekHQ build can expose a safe control seam that invokes the real Advance Day GUI/business-logic path without coordinate clicking, direct save editing, or reimplementing daily lifecycle logic.
-   - Output: GitHub issue `#34`; handoff `docs/handoffs/active/spike-mekhq-advance-day-gui-control-seam.md`; expected spike note `docs/current/MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md`.
-   - Notes: Separate from issue `#23`; should run after or alongside the real-life campaign setup and before broad write-side automation. Use only copied/disposable saves if a prototype is attempted.
-
-2. Run MekHQ quickstart roster UI validation.
+1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Turn this repo into an AI-ready project workflow demo.
+2. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -103,6 +96,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#34` by adding `MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md`. Recommendation: source-level Advance Day control is viable as a narrow in-process MekHQ GUI command that calls `Campaign#newDay()` in the loaded app with campaign/date verification, one-day-only execution, no prompt auto-answering, and optional explicit disposable save-after-success. Do not treat it as a detached headless helper yet because `CampaignNewDayManager` still depends on `CampaignGUI`, event subscribers, and Swing dialogs.
 - `2026-06-22`: Closed GitHub issue `#12` as unnecessary for the first campaign after issue `#11` selected MekHQ Resolve Manually as the baseline. Future generated-MUL work should reopen as a narrowed workspace installed-jar helper only if manual workflow proves too slow.
 - `2026-06-22`: Completed GitHub issue `#11` by adding `TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`. Decision: use MekHQ Resolve Manually as the baseline; if custom generation is needed, narrow issue `#12` to a workspace Java helper using installed MegaMek/MekHQ jars and native serialization/parser validation, with no feature branch or source change yet.
 - `2026-06-22`: Completed GitHub issue `#4` by adding `HELP_FILE_WORKFLOW.md`, linking it from current workspace/profile/workflow docs, adding local help/glossary/PDF extraction commands, and superseding `HELP_FILE_USAGE_GUIDANCE_STATE.md`.

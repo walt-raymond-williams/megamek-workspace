@@ -349,13 +349,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Spike source-level MekHQ GUI control seam for Advance Day
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#34`
 - Owner: `Codex`
 - Goal: Determine whether a locally modified MekHQ build can expose a safe, source-level control seam that invokes the real Advance Day GUI action path without coordinate clicking, direct save editing, or reimplementing campaign business logic.
 - Why it matters: Advance Day exercises MekHQ's actual daily campaign lifecycle, including repairs, maintenance, healing, personnel changes, payroll, procurement, contract events, market changes, reports/logging, scenario or StratCon progression, and prompts requiring user decisions. This is the right first write-side automation spike because MekHQ should remain the hard campaign ledger.
-- Expected output: `docs/current/MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md` covering the source files/classes involved, actual GUI action path, GUI dependencies, direct invocation viability, blocking-dialog detection, save-after-success safety, risks, and a clear recommendation on whether to proceed with a prototype implementation.
-- Handoff notes: Active handoff: `docs/handoffs/active/spike-mekhq-advance-day-gui-control-seam.md`. The spike should prefer invoking the underlying Swing `Action`, action listener, command handler, or direct handler over `JButton.doClick()`. It should verify a campaign is loaded and, when provided, expected campaign name/date before triggering exactly one Advance Day action.
-- Dependencies: Do not disrupt user task `#23`; a realistic copied/disposable save from that task would make prototype validation more valuable. Local MekHQ source is under `external/src/mekhq`; source build/test verification may still be blocked by the Java 17 Gradle daemon/toolchain issue. Existing issues `#10`, `#13`, and `#17` remain separate and blocked on live UI/user validation.
-- Open questions: Is Advance Day exposed through a clean action/handler boundary? Can blocking prompts be detected without auto-answering them? Is source-level GUI control viable now, viable after a small refactor, better replaced by a headless command layer, or too coupled to pursue?
+- Expected output: Completed with `docs/current/MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md`.
+- Handoff notes: Archived handoff: `docs/handoffs/archive/spike-mekhq-advance-day-gui-control-seam.md`. The source path is `CampaignGUI#initTopPanel()` -> `AdvanceTimePanel` -> `CampaignController#advanceDay()` -> `Campaign#newDay()` -> `CampaignNewDayManager#newDay()`. Recommendation: proceed with a narrow local-only in-process MekHQ GUI command prototype, not a detached headless helper.
+- Dependencies: Future prototype validation should use copied/disposable saves, preferably after or alongside user task `#23`. Source build/test verification may still be blocked by the Java 17 Gradle daemon/toolchain issue. Existing issues `#10`, `#13`, and `#17` remain separate and blocked on live UI/user validation.
+- Open questions: What exact local transport should expose the in-process command, and which copied save should be used for the first prototype validation?
