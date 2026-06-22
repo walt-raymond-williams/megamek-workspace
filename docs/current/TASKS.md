@@ -52,32 +52,53 @@ Use this shape for active and queued work:
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Inspect the active demo campaign save without modifying it.
+2. Reconcile MegaMek checkpoint docs with completed MEK-RPG feedback.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Replace pending-feedback language with concrete results from completed MEK-RPG issues `#84` through `#89`.
+   - Output: Updated checkpoint docs, roadmap/task notes, and handoff close-out.
+   - Notes: GitHub issue `#31`; child of checkpoint hardening epic `#30`; active handoff `docs/handoffs/active/reconcile-mekhq-checkpoint-feedback.md`.
+
+3. Harden jar-backed MekHQ checkpoint exporter output against MEK-RPG feedback.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Improve prototype output shape and checks based on MEK-RPG consumed-field mapping.
+   - Output: Hardened read-only prototype output where practical, smoke verification or exact blocker, and updated prototype/schema docs.
+   - Notes: GitHub issue `#32`; child of checkpoint hardening epic `#30`; depends on checkpoint doc reconciliation `#31`; active handoff `docs/handoffs/active/harden-mekhq-checkpoint-exporter-output.md`.
+
+4. Decide production ownership path for MekHQ checkpoint exporter.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Decide whether the checkpoint exporter should move into MekHQ source, remain a workspace helper, or stay experimental for now.
+   - Output: Decision note or updated checkpoint export doc with tradeoffs and follow-up issue recommendation.
+   - Notes: GitHub issue `#33`; child of checkpoint hardening epic `#30`; depends on exporter hardening `#32`; active handoff `docs/handoffs/active/decide-mekhq-checkpoint-production-ownership.md`.
+
+5. Inspect the active demo campaign save without modifying it.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Extract a factual campaign snapshot from `campaigns/demo/ai-ready-demo.cpnx.gz`.
    - Output: Update `ACTIVE_CAMPAIGN.md`, `SAVE_FORMAT_NOTES.md`, and a first campaign status report.
    - Notes: GitHub issue `#2`; active handoff `docs/handoffs/active/inspect-demo-campaign-save.md`.
 
-3. Identify MekHQ save/load source classes.
+6. Identify MekHQ save/load source classes.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Confirm how `.cpnx.gz` files are loaded and saved in the local MekHQ source.
    - Output: Update `SAVE_FORMAT_NOTES.md` and `SOURCE_CODE_GUIDE.md`.
    - Notes: GitHub issue `#3`; active handoff `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
 
-4. Create help-file usage guidance for agents.
+7. Create help-file usage guidance for agents.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Decide how future agents should use local MekHQ/MegaMek help files, in-app glossary resources, installed documentation, and source code.
    - Output: A durable workflow note or skill-style guide under `docs/current/`.
    - Notes: GitHub issue `#4`; active handoff `docs/handoffs/active/create-help-file-usage-guidance.md`; resume from `docs/current/HELP_FILE_USAGE_GUIDANCE_STATE.md`.
 
-5. Turn this repo into an AI-ready project workflow demo.
+8. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-6. Produce the first campaign status report.
+9. Produce the first campaign status report.
    - Goal: Practice the full campaign-analysis workflow on the active sample campaign.
    - Output: A report under `campaigns/demo/reports/`.
 
