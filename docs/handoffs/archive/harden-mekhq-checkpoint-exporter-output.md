@@ -10,6 +10,16 @@
 
 Improve the workspace jar-backed read-only checkpoint exporter and repeatable checks so its output better matches MEK-RPG's completed consumed-field mapping and warning policy.
 
+## Result
+
+Completed on `2026-06-22`.
+
+- Hardened `campaign.location.current_location` from an object-string value into stable display/id fields with transit and source-owner metadata.
+- Added method-backed core `Contract` getter terms for `Contract` missions, including command rights, salvage, support, transport, advance, payout, and travel fields.
+- Preserved market offers as display/opportunity-only and kept automation-blocking `unsupported` entries.
+- Added repeatable smoke check `tools/mekhq-checkpoint-exporter/test-mekhq-checkpoint-exporter.ps1`.
+- Updated prototype, schema, known-command, roadmap, and task docs.
+
 ## Required Context
 
 Read these first:

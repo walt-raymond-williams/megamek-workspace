@@ -80,7 +80,13 @@ $json = powershell -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-exporter
 $parsed = $json | ConvertFrom-Json
 ```
 
-Verified on `2026-06-21` against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`.
+Smoke check the hardened prototype output:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-exporter\test-mekhq-checkpoint-exporter.ps1
+```
+
+Verified on `2026-06-21` against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`; hardened smoke check passed on `2026-06-22`.
 
 ## Search Source
 

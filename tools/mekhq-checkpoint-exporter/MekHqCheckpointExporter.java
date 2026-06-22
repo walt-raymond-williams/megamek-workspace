@@ -16,11 +16,13 @@ import megamek.common.loaders.MekSummaryCache;
 import megamek.common.units.Entity;
 import mekhq.MHQStaticDirectoryManager;
 import mekhq.MekHQ;
+import mekhq.campaign.AbstractLocation;
 import mekhq.campaign.Campaign;
 import mekhq.campaign.CampaignFactory;
 import mekhq.campaign.finances.CurrencyManager;
 import mekhq.campaign.finances.financialInstitutions.FinancialInstitutions;
 import mekhq.campaign.market.unitMarket.UnitMarketOffer;
+import mekhq.campaign.mission.Contract;
 import mekhq.campaign.mission.Mission;
 import mekhq.campaign.mission.Scenario;
 import mekhq.campaign.mission.atb.AtBScenarioModifier;
@@ -33,6 +35,8 @@ import mekhq.campaign.personnel.ranks.Ranks;
 import mekhq.campaign.personnel.skills.SkillType;
 import mekhq.campaign.unit.Unit;
 import mekhq.campaign.universe.Factions;
+import mekhq.campaign.universe.Planet;
+import mekhq.campaign.universe.PlanetarySystem;
 import mekhq.campaign.universe.Systems;
 import mekhq.campaign.universe.eras.Eras;
 
@@ -133,7 +137,7 @@ public class MekHqCheckpointExporter {
         out.append("    \"location\": {\n");
         valueObject(out, 3, "current_system_id", safe(() -> campaign.getCurrentSystem().getId(), "Unknown"), EVIDENCE_EXPORT, true, "Campaign#getCurrentSystem()", true);
         valueObject(out, 3, "current_system_name", safe(() -> campaign.getCurrentSystem().getName(campaign.getLocalDate()), "Unknown"), EVIDENCE_EXPORT, true, "Campaign#getCurrentSystem()", true);
-        valueObject(out, 3, "current_location", safe(() -> campaign.getCurrentLocation().toString(), "Unknown"), EVIDENCE_EXPORT, true, "Campaign#getCurrentLocation()", true);
+        locationObject(out, campaign, true);
         valueObject(out, 3, "travel_state", "Unknown", EVIDENCE_NEEDS, false, "Location/LocationNode", false);
         out.append("    }\n");
         out.append(indent).append("},\n");
@@ -227,11 +231,11 @@ public class MekHqCheckpointExporter {
             rawLabel(out, 3, "status", String.valueOf(m.getStatus()), String.valueOf(m.getStatus()), "Mission#getStatus()", true);
             field(out, 3, "system_id", m.getSystemId(), true);
             field(out, 3, "system_name", safe(() -> m.getSystemName(campaign.getLocalDate()), "Unknown"), true);
-            field(out, 3, "employer", "Unknown", true);
+            field(out, 3, "employer", contractString(m, c -> c.getEmployer(), "Unknown"), true);
             field(out, 3, "enemy", "Unknown", true);
-            field(out, 3, "start_date", "Unknown", true);
-            field(out, 3, "end_date", "Unknown", true);
-            out.append("      \"terms\": {\"source_owner\": \"Contract getters\", \"warnings\": [\"Prototype emits generic Mission fields only unless mission is a Contract subclass.\"]},\n");
+            field(out, 3, "start_date", contractString(m, c -> String.valueOf(c.getStartDate()), "Unknown"), true);
+            field(out, 3, "end_date", contractString(m, c -> String.valueOf(c.getEndingDate()), "Unknown"), true);
+            contractTerms(out, m, campaign);
             out.append("      \"scenario_ids\": [");
             for (int j = 0; j < m.getScenarios().size(); j++) {
                 out.append(m.getScenarios().get(j).getId()).append(j + 1 < m.getScenarios().size() ? ", " : "");
@@ -315,8 +319,94 @@ public class MekHqCheckpointExporter {
         out.append("  \"unsupported\": [\n");
         out.append("    {\"area\": \"markets.unit_offers\", \"field\": \"stable_offer_id\", \"reason\": \"UnitMarketOffer#writeToXML(...) does not expose a unique offer UUID.\", \"evidence\": \"Unsupported\", \"recommended_owner\": \"MekHQ exporter or future source change\", \"blocks_automation\": true},\n");
         out.append("    {\"area\": \"repairs_and_logistics.cargo\", \"field\": \"exact_cargo_pressure\", \"reason\": \"Prototype does not validate cargo pressure.\", \"evidence\": \"Needs MekHQ inspection\", \"recommended_owner\": \"MekHQ exporter validation pass\", \"blocks_automation\": false},\n");
+        out.append("    {\"area\": \"contracts.enemy\", \"field\": \"enemy\", \"reason\": \"Generic Contract does not expose enemy identity; AtB-specific enemy fields need a source-owned exporter pass.\", \"evidence\": \"Needs MekHQ inspection\", \"recommended_owner\": \"MekHQ exporter hardening or source-owned exporter\", \"blocks_automation\": false},\n");
         out.append("    {\"area\": \"write_commands\", \"field\": \"all\", \"reason\": \"Prototype is read-only and implements no save writeback or campaign actions.\", \"evidence\": \"Unsupported\", \"recommended_owner\": \"Future explicit write-command issue, if approved\", \"blocks_automation\": true}\n");
         out.append("  ]\n");
+    }
+
+    private static void locationObject(StringBuilder out, Campaign campaign, boolean comma) {
+        AbstractLocation location = campaign.getCurrentLocation();
+        PlanetarySystem system = safeObj(() -> campaign.getCurrentSystem(), null);
+        Planet planet = safeObj(() -> location == null ? null : location.getPlanet(), null);
+        String display = stableLocationDisplay(campaign, location, system, planet);
+        indent(out, 3).append("\"current_location\": {\n");
+        field(out, 4, "display_name", display, true);
+        field(out, 4, "system_id", system == null ? "Unknown" : system.getId(), true);
+        field(out, 4, "system_name", system == null ? "Unknown" : system.getName(campaign.getLocalDate()), true);
+        field(out, 4, "planet_id", planet == null ? "Unknown" : planet.getId(), true);
+        field(out, 4, "planet_name", planet == null ? "Unknown" : planet.getName(campaign.getLocalDate()), true);
+        field(out, 4, "location_type", location == null ? "Unknown" : location.getClass().getSimpleName(), true);
+        boolField(out, 4, "is_on_planet", location != null && location.isOnPlanet(), true);
+        boolField(out, 4, "is_at_jump_point", location != null && location.isAtJumpPoint(), true);
+        boolField(out, 4, "is_in_transit", location != null && location.isInTransit(), true);
+        boolField(out, 4, "is_jump_zenith", location != null && location.isJumpZenith(), true);
+        field(out, 4, "transit_time_days", location == null ? "Unknown" : String.valueOf(location.getTransitTime()), true);
+        field(out, 4, "percentage_transit", location == null ? "Unknown" : String.valueOf(location.getPercentageTransit()), true);
+        field(out, 4, "evidence", EVIDENCE_EXPORT, true);
+        boolField(out, 4, "method_backed", true, true);
+        field(out, 4, "source_owner", "Campaign#getCurrentLocation(); AbstractLocation; PlanetarySystem; Planet", true);
+        arrayOfStrings(out, 4, "warnings", List.of(
+              "Location route/base semantics remain advisory until disposable-save UI validation."), false);
+        indent(out, 3).append("}").append(comma ? "," : "").append("\n");
+    }
+
+    private static String stableLocationDisplay(Campaign campaign, AbstractLocation location, PlanetarySystem system,
+          Planet planet) {
+        if (location == null || system == null) {
+            return "Unknown";
+        }
+        String systemName = system.getName(campaign.getLocalDate());
+        if (location.isInTransit()) {
+            return "In transit near " + systemName;
+        }
+        if (location.isAtJumpPoint()) {
+            return (location.isJumpZenith() ? "Zenith" : "Nadir") + " jump point, " + systemName;
+        }
+        if (location.isOnPlanet() && planet != null) {
+            return planet.getName(campaign.getLocalDate()) + ", " + systemName;
+        }
+        return systemName;
+    }
+
+    private static void contractTerms(StringBuilder out, Mission mission, Campaign campaign) {
+        indent(out, 3).append("\"terms\": {\n");
+        if (mission instanceof Contract contract) {
+            field(out, 4, "source_owner", "Contract getters", true);
+            numberField(out, 4, "length_months", contract.getLength(), true);
+            field(out, 4, "command_rights", String.valueOf(contract.getCommandRights()), true);
+            numberField(out, 4, "transport_comp_pct", contract.getTransportComp(), true);
+            field(out, 4, "transport_comp", contract.getTransportCompString(), true);
+            numberField(out, 4, "support_pct", contract.getStraightSupport(), true);
+            field(out, 4, "support", contract.getStraightSupportString(), true);
+            numberField(out, 4, "battle_loss_comp_pct", contract.getBattleLossComp(), true);
+            field(out, 4, "battle_loss_comp", contract.getBattleLossCompString(), true);
+            numberField(out, 4, "salvage_pct", contract.getSalvagePct(), true);
+            field(out, 4, "salvage", contract.getSalvagePctString(), true);
+            boolField(out, 4, "salvage_exchange", contract.isSalvageExchange(), true);
+            boolField(out, 4, "can_salvage", contract.canSalvage(), true);
+            numberField(out, 4, "advance_pct", contract.getAdvancePct(), true);
+            numberField(out, 4, "signing_bonus_pct", contract.getSigningBonusPct(), true);
+            boolField(out, 4, "mrbc_fee", contract.payMRBCFee(), true);
+            field(out, 4, "base_amount", String.valueOf(contract.getBaseAmount()), true);
+            field(out, 4, "support_amount", String.valueOf(contract.getSupportAmount()), true);
+            field(out, 4, "transport_amount", String.valueOf(contract.getTransportAmount()), true);
+            field(out, 4, "advance_amount", String.valueOf(contract.getAdvanceAmount()), true);
+            field(out, 4, "total_advance_amount", String.valueOf(contract.getTotalAdvanceAmount()), true);
+            field(out, 4, "monthly_payout", String.valueOf(contract.getMonthlyPayOut()), true);
+            numberField(out, 4, "travel_days", safeInt(() -> contract.getTravelDays(campaign), -1), true);
+            field(out, 4, "evidence", EVIDENCE_EXPORT, true);
+            boolField(out, 4, "method_backed", true, true);
+            arrayOfStrings(out, 4, "warnings", List.of(
+                  "Contract enemy identity remains unsupported for generic Contract output.",
+                  "Contract accept/decline remains out of scope for this read-only exporter."), false);
+        } else {
+            field(out, 4, "source_owner", "Mission; Contract getters unavailable", true);
+            field(out, 4, "evidence", EVIDENCE_NEEDS, true);
+            boolField(out, 4, "method_backed", false, true);
+            arrayOfStrings(out, 4, "warnings", List.of(
+                  "Mission is not a Contract subclass; prototype emits generic Mission fields only."), false);
+        }
+        indent(out, 3).append("},\n");
     }
 
     private static void reportArray(StringBuilder out, String name, List<String> reports, String owner, boolean comma) {
@@ -403,7 +493,48 @@ public class MekHqCheckpointExporter {
         }
     }
 
+    private static <T> T safeObj(ThrowingObjectSupplier<T> supplier, T fallback) {
+        try {
+            T value = supplier.get();
+            return value == null ? fallback : value;
+        } catch (Exception ex) {
+            return fallback;
+        }
+    }
+
+    private static int safeInt(ThrowingIntSupplier supplier, int fallback) {
+        try {
+            return supplier.get();
+        } catch (Exception ex) {
+            return fallback;
+        }
+    }
+
+    private static String contractString(Mission mission, ThrowingContractSupplier supplier, String fallback) {
+        if (!(mission instanceof Contract contract)) {
+            return fallback;
+        }
+        try {
+            String value = supplier.get(contract);
+            return value == null || value.isBlank() ? fallback : value;
+        } catch (Exception ex) {
+            return fallback;
+        }
+    }
+
     private interface ThrowingSupplier {
         String get() throws Exception;
+    }
+
+    private interface ThrowingObjectSupplier<T> {
+        T get() throws Exception;
+    }
+
+    private interface ThrowingIntSupplier {
+        int get() throws Exception;
+    }
+
+    private interface ThrowingContractSupplier {
+        String get(Contract contract) throws Exception;
     }
 }

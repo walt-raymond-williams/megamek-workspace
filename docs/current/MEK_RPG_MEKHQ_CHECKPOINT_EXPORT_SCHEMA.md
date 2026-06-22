@@ -341,6 +341,9 @@ Completed MegaMek-side checks:
 1. Sanitized fixture: `docs/templates/mekhq-read-only-checkpoint.fixture.json`.
 2. Disposable-save/helper/source validation: `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_VALIDATION.md`.
 3. Method-backed jar prototype: `tools/mekhq-checkpoint-exporter/` and `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_PROTOTYPE.md`.
+4. Hardened prototype smoke check: `tools/mekhq-checkpoint-exporter/test-mekhq-checkpoint-exporter.ps1`.
+
+`Confirmed locally` on `2026-06-22`: the hardened prototype smoke check passed against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`. It guards stable location display/id fields, method-backed `Contract` terms, market selector warnings, mandatory `unsupported` entries, and the read-only boundary.
 
 Do not start write automation from this schema. Any future write-side probe must be a separate issue with explicit scope and selectors.
 
