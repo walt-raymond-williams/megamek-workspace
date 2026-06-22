@@ -5,6 +5,7 @@
 - GitHub issue: `#43`
 - Roadmap entry: `Discover first guarded live MekHQ command API easy wins for MEK-RPG`
 - Priority: `High`
+- Parent epic: `#44`
 
 ## Goal
 

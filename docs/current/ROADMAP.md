@@ -482,3 +482,89 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Planning note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Active handoff: `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`. Early ranking favors command-readiness/selector discovery and campaign status/note mutation before high-risk workflows like unit-market purchase.
 - Dependencies: Completed live read-only API epic `#38`; Advance Day control API issue `#35`; source branch `external/src/mekhq` on `codex/mekhq-advance-day-control-api`; disposable campaign data for any mutation tests.
 - Open questions: Where should MEK-RPG campaign status/note mutations live in MekHQ? Should command selectors be live-session ephemeral or durable across save/reload? Which first endpoint gives the best value/risk tradeoff?
+
+### Epic: Guarded live MekHQ command API for MEK-RPG
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#44`
+- Owner: `Mixed`
+- Goal: Build a guarded write-side local MekHQ command API so MEK-RPG can request high-level campaign mutations while MekHQ remains the source-owned campaign ledger.
+- Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
+- Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
+- Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
+- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, current discovery issue `#43`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
+- Child issues:
+  - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. This remains the broad discovery/ranking child and should feed implementation sequencing.
+  - `#45`: Define guarded live MekHQ command envelope and prompt policy. Active handoff: `docs/handoffs/active/design-live-mekhq-command-envelope.md`.
+  - `#46`: Implement live MekHQ command readiness and selector discovery. Active handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`.
+  - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+  - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+  - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
+- Recommended sequence: Start with `#45` so every command uses one safety envelope. Then run `#46` so MEK-RPG can know which commands/selectors are available. In parallel or after that, source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase. Use `#43` to keep the easy-win ranking and spawn narrower implementation issues.
+- Open questions: Where should MEK-RPG status notes be stored in MekHQ? Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
+
+### Define guarded live MekHQ command envelope and prompt policy
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#45`
+- Owner: `Codex`
+- Goal: Define the common request/response contract for all mutating MekHQ local API commands.
+- Why it matters: A shared envelope prevents command endpoints from drifting into inconsistent safety behavior around campaign identity, retries, dry-runs, saves, and prompts.
+- Expected output: Command fields, response statuses, idempotency behavior, dry-run behavior, save-after-success policy, prompt/dialog handling, and reusable implementation acceptance criteria.
+- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-command-envelope.md`.
+- Dependencies: Issues `#35`, `#38`, `#43`, and epic `#44`.
+- Open questions: Should idempotency be in-memory only or recorded in MekHQ reports/metadata? Should dry-run be mandatory or command-specific?
+
+### Implement live MekHQ command readiness and selector discovery
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#46`
+- Owner: `Codex`
+- Goal: Expose which commands are available, blocked, or unsupported for the currently loaded MekHQ campaign, including safe selectors where available.
+- Why it matters: MEK-RPG should show action buttons from MekHQ-provided readiness, not by guessing from display-only state rows.
+- Expected output: Endpoint or section design, likely `GET /campaign/commands`, with command readiness rows, machine-readable blockers, and selector policy for market offers, personnel, units, contracts, repairs, and medical targets.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`.
+- Dependencies: Issue `#45` should be read first. Unit-market purchase remains blocked until selectors are safe.
+- Open questions: Should selectors be opaque live-session tokens tied to `stateRevision`, or durable ids that survive save/reload?
+
+### Design live MekHQ personnel death and status command API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#47`
+- Owner: `Codex`
+- Goal: Design guarded commands for RPG-side personnel status changes such as death, disappearance, capture, retirement, recovery, or other non-scenario status events.
+- Why it matters: Characters can die or change status during RPG play outside a MekHQ tactical scenario. MekHQ still needs to own roster state, unit crew cleanup, reports, payroll/availability, and consistency.
+- Expected output: Source-backed transition map, endpoint proposal, guard fields, refusal rules, side effects, and a narrowed implementation issue if safe.
+- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+- Dependencies: Issue `#45`; MekHQ personnel source around `Person#changeStatus(...)`, `PersonnelStatus`, unit crew links, and scenario casualty handling.
+- Open questions: Which MEK-RPG outcomes map to MekHQ statuses, and which should remain narrative notes or scenario-result imports?
+
+### Design live MekHQ medical treatment and prosthetic command API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#48`
+- Owner: `Codex`
+- Goal: Design guarded commands for RPG-side medical treatment, prosthetic application, injury recovery, fatigue/hit recovery, and medical expenses.
+- Why it matters: MEK-RPG can resolve character-level care outside MekHQ daily processing, but MekHQ should remain the hard ledger for injuries, recovery, prosthetics, and availability.
+- Expected output: Source-backed map of injury/prosthetic/fatigue APIs, endpoint proposal, option-dependent refusal rules, verification facts, and a narrowed implementation issue if safe.
+- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+- Dependencies: Issue `#45`; MekHQ source under `campaign/personnel/medical`.
+- Open questions: How does the active MekHQ ruleset represent prosthetics? Which RPG medical outcomes belong in structured MekHQ medical state versus narrative notes?
+
+### Design live MekHQ unit-market purchase command API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#49`
+- Owner: `Codex`
+- Goal: Design a guarded unit-market purchase command for MEK-RPG actions such as buying a DropShip from the live MekHQ market.
+- Why it matters: Unit and transport purchases are high-value RPG decisions, but they must route through MekHQ price, finance, unit-add/delivery, report, and market-offer removal logic.
+- Expected output: Source-backed selector design, endpoint proposal, guard fields, duplicate-offer refusal rules, before/after verification facts, and a narrowed implementation issue if safe.
+- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
+- Dependencies: Issues `#45` and `#46`; MekHQ source around `UnitMarketOffer`, `AbstractUnitMarket`, and `UnitMarketPane#purchaseSelectedOffers()`.
+- Open questions: Can unit-market offers get safe live selectors without durable source fields? How should instant delivery versus transit delivery be handled?

@@ -45,21 +45,56 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
+1. Define guarded live MekHQ command envelope and prompt policy.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Establish the shared request/response safety contract for future mutating MekHQ command endpoints.
+   - Output: Updated command API strategy with guard fields, idempotency, dry-run, save policy, prompt/dialog behavior, and reusable implementation acceptance criteria.
+   - Notes: GitHub issue `#45`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-command-envelope.md`; this should precede implementation of status, medical, unit-market, or selector endpoints.
+
+2. Implement live MekHQ command readiness and selector discovery.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Let MEK-RPG ask MekHQ which mutating commands are currently available and why blocked commands are blocked.
+   - Output: Endpoint/section design, selector policy, and implementation or follow-up implementation issue.
+   - Notes: GitHub issue `#46`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`; depends on reading issue `#45`.
+
+3. Discover first guarded live MekHQ command API easy wins for MEK-RPG.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check and rank the first safe write-side live MekHQ API endpoints after the read-only live state work, with a command envelope and follow-up implementation tickets.
    - Output: GitHub issue, active handoff, and updated `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md` with easy-win ranking and blockers.
-   - Notes: GitHub issue `#43`; active handoff `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`; new post-`#38` MEK-RPG strategy shift. Initial candidates are command readiness/selector discovery, campaign status/note mutation, GM-only funds adjustment, contract decision, personnel hire, and unit-market purchase after stable selectors.
+   - Notes: GitHub issue `#43`; child of epic `#44`; active handoff `docs/handoffs/active/discover-live-mekhq-command-api-easy-wins.md`; new post-`#38` MEK-RPG strategy shift. Initial candidates are command readiness/selector discovery, campaign status/note mutation, personnel death/status, medical/prosthetics, GM-only funds adjustment, contract decision, personnel hire, and unit-market purchase after stable selectors.
 
-2. Run MekHQ quickstart roster UI validation.
+4. Design personnel death/status command API.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-check how MEK-RPG narrative death, capture, disappearance, retirement, or recovery should mutate MekHQ personnel state.
+   - Output: Design note, endpoint proposal, refusal rules, verification facts, and a narrowed implementation issue if safe.
+   - Notes: GitHub issue `#47`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+
+5. Design medical treatment and prosthetic command API.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-check how MEK-RPG medical treatment, prosthetics, injury recovery, fatigue/hit recovery, and medical expenses should mutate MekHQ medical state.
+   - Output: Design note, endpoint proposal, option-dependent refusal rules, verification facts, and a narrowed implementation issue if safe.
+   - Notes: GitHub issue `#48`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+
+6. Design unit-market purchase command API.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-check safe selectors and workflow for MEK-RPG-driven unit or DropShip purchases from MekHQ's live market.
+   - Output: Selector design, endpoint proposal, duplicate-offer refusal rules, verification facts, and a narrowed implementation issue if safe.
+   - Notes: GitHub issue `#49`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`; do not implement purchase by row index or display name.
+
+7. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Turn this repo into an AI-ready project workflow demo.
+8. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
