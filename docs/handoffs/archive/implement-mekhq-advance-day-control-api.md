@@ -28,16 +28,16 @@ Read these first:
 - Source changes in `external/src/mekhq` if the chosen seam is feasible in this pass.
 - Workspace docs updated with the selected API shape, source files touched, verification status, and live user-assisted test instructions.
 
-Current progress:
+Completed result:
 
 - Source prototype added in `external/src/mekhq`:
   - `MekHQ/src/mekhq/service/LocalControlService.java`
   - `MekHQ/src/mekhq/MekHQ.java`
 - Source branch: `codex/mekhq-advance-day-control-api`
 - Source commit: `9046a8075e` (`Add local advance day control API prototype`)
-- Workspace prototype note added:
+- Workspace prototype note added and updated with compile verification:
   - `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`
-- Gradle compile remains blocked by the Java 17 daemon/toolchain issue.
+- `.\gradlew.bat :MekHQ:compileJava` passed on `2026-06-22` after local JDK 17 setup.
 - Fallback `javac` checks against installed MekHQ `0.51.00` jars passed for the new service and modified `MekHQ.java`.
 - Live endpoint testing has not run and should wait for the user.
 

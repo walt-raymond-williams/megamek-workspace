@@ -362,13 +362,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement local MekHQ Advance Day control API prototype
 
-- Status: `In progress`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#35`
 - Owner: `Codex`
 - Goal: Implement or precisely prototype-plan a narrow local-only MekHQ source control API that can be called while MekHQ is already open with a campaign loaded, invoking exactly one real `Campaign#newDay()` path inside the loaded GUI app.
 - Why it matters: Issue `#34` proved the concept is viable but brittle. The next useful step is to turn that conclusion into a callable local control seam so Codex or another local helper can drive MekHQ through source-owned logic instead of screen coordinates or save editing, while preserving MekHQ as the hard campaign ledger.
-- Expected output: Source-backed prototype plus `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, documenting the API transport, input/output contract, source files touched, safety checks, verification status, and live user-assisted test instructions. Initial implementation plan: `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`.
-- Handoff notes: Active handoff: `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`. Local source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; it adds `mekhq.service.LocalControlService` and wires it into `MekHQ`, starts only with `-Dmekhq.controlApi.enabled=true`, binds to `127.0.0.1`, and exposes `/status` plus `POST /advance-day`.
-- Dependencies: MekHQ must already be open with a campaign loaded for live testing. Live prototype testing should wait for the user to be present. Source build/test verification may still be blocked by the Java 17 Gradle daemon/toolchain issue. Use only copied/disposable saves for execution tests.
+- Expected output: Completed with source-backed prototype plus `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, documenting the API transport, input/output contract, source files touched, safety checks, Gradle compile verification, and live user-assisted test instructions. Initial implementation plan: `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`.
+- Handoff notes: Archived handoff: `docs/handoffs/archive/implement-mekhq-advance-day-control-api.md`. Local source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; it adds `mekhq.service.LocalControlService` and wires it into `MekHQ`, starts only with `-Dmekhq.controlApi.enabled=true`, binds to `127.0.0.1`, and exposes `/status` plus `POST /advance-day`. `.\gradlew.bat :MekHQ:compileJava` passed on `2026-06-22`.
+- Dependencies: MekHQ must already be open with a campaign loaded for live endpoint validation. Live prototype testing should wait for the user to be present. Use only copied/disposable saves for execution tests.
 - Open questions: Can visible modal/prompt detection be made reliable enough without a general prompt policy layer? Should this prototype stay local-only after live validation, or become the first member of a broader local control API?

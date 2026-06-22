@@ -43,13 +43,6 @@ Use this shape for active and queued work:
    - Output: Report the save path, campaign name, roster/transport/support setup, important UI paths/prompts, any errors, and whether the save is safe for Codex to copy and inspect.
    - Notes: GitHub issue `#23`; child of epic `#14`; active checklist `docs/handoffs/active/user-real-unit-campaign-setup.md`; this should happen before the issue `#10` manual battle-record MUL import pass.
 
-2. Implement local MekHQ Advance Day control API prototype.
-   - Status: `In progress`
-   - Owner: `Codex`
-   - Goal: Add a local-only in-process MekHQ control API that can be called while MekHQ is open and a campaign is loaded, invoking exactly one real `Campaign#newDay()` path with campaign/date guardrails and structured results.
-   - Output: GitHub issue `#35`; handoff `docs/handoffs/active/implement-mekhq-advance-day-control-api.md`; implementation plan `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_IMPLEMENTATION_PLAN.md`; prototype note `docs/current/MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`.
-   - Notes: Source prototype committed in `external/src/mekhq` on branch `codex/mekhq-advance-day-control-api` at `9046a8075e`; live testing should wait for the user to be present. Portable JDK 17 is installed and Gradle now starts with the requested daemon/toolchain paths, but `:MekHQ:compileJava` exceeded a 304-second timeout and was stopped; fallback `javac` checks against installed jars passed.
-
 ## Next
 
 1. Run MekHQ quickstart roster UI validation.
@@ -99,10 +92,11 @@ Use this shape for active and queued work:
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
    - Output: Mark source build/test commands as verified in `KNOWN_COMMANDS.md`.
-   - Notes: Current shell resolves Java 21, portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and Gradle toolchain discovery is configured for both JDKs. The previous missing-JDK-17 daemon blocker is resolved, but source Gradle commands still need full successful reruns; `:MekHQ:compileJava` exceeded a 304-second timeout and was stopped on `2026-06-22`.
+   - Notes: Current shell resolves Java 21, portable JDK 17 is installed at `C:\Users\waltr\.jdks\temurin-17`, and Gradle toolchain discovery is configured for both JDKs. The previous missing-JDK-17 daemon blocker is resolved. `.\gradlew.bat :MekHQ:compileJava` passed from `external/src/mekhq` on `2026-06-22`; the broader build/test matrix still needs full successful reruns.
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#35` by adding a local-only MekHQ Advance Day control API prototype in `external/src/mekhq` source commit `9046a8075e`, documenting the API in `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and verifying `.\gradlew.bat :MekHQ:compileJava` after local JDK 17 setup. The endpoint remains disabled by default and live endpoint testing should wait for the user with copied/disposable saves.
 - `2026-06-22`: Completed GitHub issue `#34` by adding `MEKHQ_ADVANCE_DAY_GUI_CONTROL_SEAM_SPIKE.md`. Recommendation: source-level Advance Day control is viable as a narrow in-process MekHQ GUI command that calls `Campaign#newDay()` in the loaded app with campaign/date verification, one-day-only execution, no prompt auto-answering, and optional explicit disposable save-after-success. Do not treat it as a detached headless helper yet because `CampaignNewDayManager` still depends on `CampaignGUI`, event subscribers, and Swing dialogs.
 - `2026-06-22`: Closed GitHub issue `#12` as unnecessary for the first campaign after issue `#11` selected MekHQ Resolve Manually as the baseline. Future generated-MUL work should reopen as a narrowed workspace installed-jar helper only if manual workflow proves too slow.
 - `2026-06-22`: Completed GitHub issue `#11` by adding `TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`. Decision: use MekHQ Resolve Manually as the baseline; if custom generation is needed, narrow issue `#12` to a workspace Java helper using installed MegaMek/MekHQ jars and native serialization/parser validation, with no feature branch or source change yet.

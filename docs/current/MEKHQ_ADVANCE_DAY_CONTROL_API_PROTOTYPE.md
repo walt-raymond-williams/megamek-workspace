@@ -2,7 +2,7 @@
 
 ## Status
 
-`In progress`: issue `#35` has a source prototype in the local MekHQ checkout. Live validation is intentionally deferred until the user is present.
+`Complete for issue #35`: the local MekHQ checkout has a disabled-by-default source prototype, Gradle compile verification now passes, and live endpoint validation is intentionally deferred until the user is present.
 
 ## Source Changes
 
@@ -37,7 +37,7 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:run --args='' -Dmekhq.controlApi.enabled=true
 ```
 
-`Unknown`: the exact launch command still needs live validation with the user present. The important JVM property is:
+`Unknown`: the exact source launch command still needs live validation with the user present. The important JVM property is:
 
 ```text
 -Dmekhq.controlApi.enabled=true
@@ -106,13 +106,13 @@ Response statuses:
 
 ## Verification
 
-`Attempted`: Gradle verification is no longer blocked by missing JDK 17, but full compile verification has not completed:
+`Confirmed locally`: Gradle compile verification passed on `2026-06-22`:
 
 ```text
 .\gradlew.bat :MekHQ:compileJava
 ```
 
-Observed state on `2026-06-22`: after installing portable JDK 17 at `C:\Users\waltr\.jdks\temurin-17` and configuring user-level Gradle discovery, `.\gradlew.bat :MekHQ:compileJava` started with a JDK 17 Gradle daemon and JDK 21 worker. It exceeded a 304-second session timeout and was stopped with `.\gradlew.bat --stop`.
+Observed state on `2026-06-22`: after installing portable JDK 17 at `C:\Users\waltr\.jdks\temurin-17` and configuring user-level Gradle discovery, `.\gradlew.bat :MekHQ:compileJava` completed successfully from `external/src/mekhq` in about 199 seconds. The command emitted existing deprecation and unchecked-operation warnings, including one warning in modified `MekHQ.java` for pre-existing `AtBGameThread` usage, but no compile errors.
 
 `Confirmed locally`: fallback `javac` syntax/type checks passed against the installed MekHQ `0.51.00` jars:
 
@@ -145,7 +145,6 @@ Do not test against the real campaign save until the disposable campaign test is
 
 ## Remaining Work
 
-- Rerun source build/checkstyle through Gradle with a longer timeout.
 - Launch the locally modified MekHQ build.
 - Perform the user-assisted live endpoint test.
 - Decide whether this prototype should stay local-only or move to a more polished feature branch/PR shape.

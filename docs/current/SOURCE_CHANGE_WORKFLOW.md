@@ -59,7 +59,7 @@ Current known environment issue:
 - `Confirmed locally`: JDK 21 is installed at `C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot`.
 - `Confirmed from source`: the checked-in Gradle build files use Java toolchain 21.
 - `Confirmed locally`: user-level Gradle discovery is configured in `C:\Users\waltr\.gradle\gradle.properties` with both JDK 17 and JDK 21 paths.
-- `Confirmed locally`: the previous missing-JDK-17 Gradle daemon blocker is resolved, but `.\gradlew.bat :MekHQ:compileJava` exceeded a 304-second timeout on `2026-06-22` and was stopped with `.\gradlew.bat --stop`.
+- `Confirmed locally`: the previous missing-JDK-17 Gradle daemon blocker is resolved, and `.\gradlew.bat :MekHQ:compileJava` passed from `external/src/mekhq` on `2026-06-22` after local JDK 17 setup. The broader source build/test matrix still needs successful reruns before all Gradle commands are marked verified.
 
 Until a Gradle command completes successfully, mark it as attempted or not yet verified rather than verified.
 
