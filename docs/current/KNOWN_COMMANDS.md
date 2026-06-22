@@ -231,6 +231,8 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch when started with `JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'`. The local control API reported `ready` at `http://127.0.0.1:32180/status` with no campaign loaded.
 
+`Confirmed locally`: `.\gradlew.bat :MekHQ:test` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch in about 7 minutes 40 seconds. The run completed `checkstyleMain`, `compileTestJava`, `test`, and `jacocoTestReport`; it emitted Mockito dynamic-agent, deprecation, unchecked-operation, logging, and one data-quality warning, but Gradle returned `BUILD SUCCESSFUL`.
+
 MegaMekLab:
 
 ```powershell
