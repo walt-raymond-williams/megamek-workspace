@@ -8,9 +8,9 @@
 
 ## Goal
 
-If issue `#11` confirms custom generation is necessary, implement the first robust generator that converts structured tabletop battle results into MekHQ-compatible battle-record MUL files.
+Issue `#11` completed on `2026-06-22`. It did not authorize a MekHQ source feature or broad implementation. If custom generation is still needed, implement the first generator as a narrowed workspace experimental helper that converts structured tabletop battle results into MekHQ-compatible battle-record MUL files using installed MegaMek/MekHQ jars and native serialization/parser APIs.
 
-If issue `#11` concludes MekHQ's built-in manual result-entry/import workflow is sufficient, do not start this implementation as written. Narrow or close this issue and route the remaining work to documentation/verification instead.
+If MekHQ's built-in manual result-entry/import workflow is sufficient for the first campaign, do not start this implementation. Comment and close this issue as unnecessary for now, then route remaining work to documentation/verification issue `#13`.
 
 ## Required Context
 
@@ -21,8 +21,9 @@ Read these first:
 - `docs/current/TASKS.md`
 - `docs/current/SOURCE_CHANGE_WORKFLOW.md`
 - `docs/current/KNOWN_COMMANDS.md`
+- `docs/current/TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`
 - `docs/handoffs/active/robust-tabletop-battle-result-mul-workflow.md`
-- `docs/handoffs/active/choose-tabletop-result-mul-generation-strategy.md`
+- `docs/handoffs/archive/choose-tabletop-result-mul-generation-strategy.md`
 - `docs/handoffs/archive/define-tabletop-result-input-schema.md`
 - `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`
 
@@ -35,7 +36,7 @@ Read these first:
 
 ## Files And Areas
 
-- To be determined by issue `#11`.
+- Recommended first location if this proceeds: `tools/tabletop-result-mul-helper/`.
 - `analysis/` for disposable examples.
 - `docs/current/KNOWN_COMMANDS.md`
 
@@ -49,7 +50,8 @@ Add implementation-specific commands after `#11` records the strategy.
 
 ## Constraints
 
-- Start only after the generation strategy is chosen and custom implementation is explicitly confirmed.
+- Start only if custom generation is still explicitly desired after reading `TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`.
+- Do not modify MegaMek/MekHQ source for this issue.
 - Use MegaMek/MekHQ structured APIs where practical instead of hand-rolled XML.
 - Follow `docs/current/SOURCE_CHANGE_WORKFLOW.md` before modifying any source checkout.
 
@@ -61,6 +63,6 @@ Add implementation-specific commands after `#11` records the strategy.
 
 ## Open Questions
 
-- Will `#11` confirm this implementation is needed, or will it recommend built-in MekHQ workflow plus documentation?
-- If implementation is needed, which implementation location and branch will `#11` select?
+- Is built-in MekHQ workflow plus documentation enough for the first campaign, making this issue unnecessary for now?
+- If implementation is needed, can the helper stay as a small workspace installed-jar tool without a feature branch?
 - What validation should be mandatory before a generated MUL is loaded into MekHQ?

@@ -89,7 +89,7 @@ The unverified part of issue `#10` is the live MekHQ import pass:
 
 `Confirmed locally`: custom generation does not need to hand-write full entity XML if it can construct MegaMek `Entity` objects and let `EntityListFile.writeEntityList(...)` serialize each bucket.
 
-`Inferred`: issue `#11` should compare two practical strategies:
+`Confirmed by workflow decision`: issue `#11` completed in `TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`. It selected MekHQ's built-in Resolve Manually workflow as the baseline, with a narrowed workspace installed-jar helper as the first custom path if generation is needed. The helper strategy is based on these two practical approaches:
 
 - a small Java helper that loads setup MUL entities, applies tabletop result changes, and writes a battle-record `<record>` file with native MegaMek serialization
 - a manual workflow that edits or reviews an exported MegaMek battle-record file, if the user can obtain one from a test game

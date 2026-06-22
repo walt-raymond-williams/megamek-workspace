@@ -88,6 +88,20 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\mekhq-checkpoint-expor
 
 Verified on `2026-06-21` against copied save `analysis/tmp/issue-22/Autosave-1-The Learning Ropes-30250720.cpnx.gz`; hardened smoke check passed on `2026-06-22`.
 
+## Validate Battle-Record MUL Writer/Parser Round Trip
+
+This ignored scratch proof writes a controlled battle-record `<record>` MUL with native MegaMek serialization and parses it back with `MULParser`.
+
+```powershell
+cd C:\Users\waltr\Documents\megamek-workspace\external\installs\MekHQ-0.51.00
+$env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
+$env:Path="$env:JAVA_HOME\bin;$env:Path"
+javac -cp 'MegaMek.jar;MekHQ.jar;lib/*' 'C:\Users\waltr\Documents\megamek-workspace\analysis\tmp\Issue10BattleRecordRoundTrip.java'
+java -cp 'MegaMek.jar;MekHQ.jar;lib/*;C:\Users\waltr\Documents\megamek-workspace\analysis\tmp' Issue10BattleRecordRoundTrip 'C:\Users\waltr\Documents\megamek-workspace\analysis\tmp\issue-10-battle-record-round-trip.mul'
+```
+
+Verified on `2026-06-22`: expected survivor, salvage, retreated, devastated, kill, external id, crew external id, and crew hit checks passed.
+
 ## Inspect The Demo Campaign Fixture
 
 Use a copied save and the read-only checkpoint exporter for method-backed summary facts:

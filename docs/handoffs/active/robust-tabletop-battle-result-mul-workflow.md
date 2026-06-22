@@ -10,7 +10,7 @@
 
 Coordinate the decomposed epic for a robust workflow where MekHQ generates a scenario, the user plays the tactical battle by hand on the tabletop, and the results are fed back through MekHQ's built-in manual scenario resolution/import capabilities.
 
-Current posture: this is a learning and workflow-discovery effort. The existing discovery remains valuable even if the final recommendation is to use MekHQ's built-in workflow with documentation and no custom generator. Do not treat custom implementation as locked in before strategy issue `#11`.
+Current posture: this is a learning and workflow-discovery effort. The existing discovery remains valuable even if the final recommendation is to use MekHQ's built-in workflow with documentation and no custom generator. Strategy issue `#11` is complete and recommends MekHQ's built-in Resolve Manually workflow as the baseline, with any custom generation narrowed to a workspace installed-jar helper.
 
 ## Required Context
 
@@ -42,7 +42,7 @@ Source references already identified:
 ## Expected Output
 
 - Child GitHub issues for discovery, prototype, strategy, possible implementation, verification, and documentation. Created issues: `#7` through `#13`.
-- Clear recommendation on whether the work should use a feature integration branch and feature tracking doc. Current recommendation: defer branch/tracking creation until strategy issue `#11`; create `codex/tabletop-result-mul-dev` before `#12` if implementation spans source changes or multiple commits.
+- Clear recommendation on whether the work should use a feature integration branch and feature tracking doc. Current recommendation from issue `#11`: do not create a branch/tracking doc now; create `codex/tabletop-result-mul-dev` only if `#12` expands into source changes, a multi-commit helper, or coordinated `#12`/`#13` implementation work.
 - A durable design note under `docs/current/` if decomposition confirms architecture or workflow decisions that future agents need.
 - Updated `ROADMAP.md` and `TASKS.md` reflecting the decomposed plan.
 
@@ -63,13 +63,13 @@ Source references already identified:
 - `#10`: Prototype battle-record MUL round-trip validation against MekHQ.
   - Handoff: `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`
 - `#11`: Choose MUL generation strategy for tabletop result workflow.
-  - Handoff: `docs/handoffs/active/choose-tabletop-result-mul-generation-strategy.md`
+  - Completed on `2026-06-22`; decision: `docs/current/TABLETOP_RESULT_MUL_GENERATION_STRATEGY.md`; archived handoff: `docs/handoffs/archive/choose-tabletop-result-mul-generation-strategy.md`
 - `#12`: Implement robust tabletop battle-record MUL generator.
   - Handoff: `docs/handoffs/active/implement-tabletop-battle-record-mul-generator.md`
 - `#13`: Verify and document tabletop result entry workflow for MekHQ.
   - Handoff: `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`
 
-Recommended sequence: `#8`, `#7`, and `#9` are complete. Start `#10` next, then proceed through `#11`. Issue `#11` must explicitly decide whether `#12` should proceed, shrink to a documentation/helper task, or be closed as unnecessary because MekHQ's built-in workflow is sufficient. Finish with `#13` UI/manual documentation.
+Recommended sequence: `#8`, `#7`, `#9`, `#22`, and `#11` are complete. Issue `#10` has a native writer/parser proof but remains blocked on live MekHQ Resolve Manually import validation. Next decide whether to execute `#12` as the narrowed workspace helper or close it as unnecessary for the first campaign, then finish with `#13` UI/manual documentation.
 
 Source workflow confirmation from `#8`: MekHQ exports scenario setup MULs as ordinary `<unit>` files, but imports manual battle results through a battle-record `<record>` MUL with `survivors`, `allies`, `salvage`, `retreated`, `devastated`, and `kills` sections. Friendly campaign unit matching depends on entity `externalId` values matching campaign `Unit` UUIDs; personnel matching depends on crew external ids matching `Person` UUIDs.
 
@@ -118,7 +118,7 @@ Known blocker:
 ## Acceptance Criteria
 
 - The epic has been split into child issues with clear goals, dependencies, and verification expectations. Completed with issues `#7` through `#13`.
-- The child issue sequence covers at least source confirmation, minimal round-trip proof, result input schema, a strategy decision between built-in workflow and custom generation, manual/UI verification, and user-facing workflow documentation. Covered by `#8`, `#10`, `#9`, `#11`/`#12`, and `#13`.
+- The child issue sequence covers at least source confirmation, minimal round-trip proof, result input schema, a strategy decision between built-in workflow and custom generation, manual/UI verification, and user-facing workflow documentation. Covered by `#8`, `#10`, `#9`, completed `#11`, optional/narrowed `#12`, and `#13`.
 - Roadmap and task-board entries point to the decomposed issue set.
 - Any durable source findings are recorded in `docs/current/`, not only in GitHub issues.
 
@@ -128,4 +128,4 @@ Known blocker:
 - If custom generation is necessary, should the generator be a standalone Java helper using MegaMek/MekHQ jars, a MekHQ source feature, or a workspace script that invokes MegaMek classes?
 - What is the minimum tabletop result schema that covers the user's likely first campaign battles without overbuilding?
 - How should we validate generated battle-record MULs before loading them into MekHQ?
-- Should this use a feature integration branch such as `codex/tabletop-result-mul-dev` before implementation issue `#12`?
+- Should issue `#12` proceed as the narrowed workspace helper, or should the built-in/manual workflow be documented first through `#13`?

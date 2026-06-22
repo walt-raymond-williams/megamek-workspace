@@ -4,7 +4,7 @@ This note defines the minimum practical tabletop result schema for GitHub issue 
 
 1. Entering results through MekHQ's built-in manual resolution UI.
 2. Editing or reviewing a battle-record MUL exported from MegaMek.
-3. Later generating a battle-record MUL if issue `#11` decides custom tooling is justified.
+3. Later generating a battle-record MUL if the issue `#11` strategy decision's narrowed workspace-helper path is needed.
 
 Evidence labels follow `DOCUMENTATION_WORKFLOW.md`.
 
@@ -278,7 +278,7 @@ Capture these even if no custom tool is ever written:
 
 ## Only Required For Custom Generation
 
-These can wait until issue `#11` decides a generator is needed:
+These can wait until a narrowed workspace helper is actually needed:
 
 - exact `unit_external_id` and `crew_external_ids` copied from MekHQ/MegaMek exports
 - exact armor/internal values for every location
