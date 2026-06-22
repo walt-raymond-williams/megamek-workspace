@@ -114,6 +114,15 @@ rg "MULParser|MtfFile|BLKFile|ScenarioLoader" C:\Users\waltr\Documents\megamek-w
 
 When a source search answers a durable question, update the relevant `docs/current/` file with the file or class reference.
 
+Trace MekHQ campaign save/load behavior:
+
+```powershell
+rg "cpnx|CampaignXml|load.*campaign|save.*campaign" C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq\MekHQ\src -g "*.java"
+rg "GZIPInputStream|GZIPOutputStream|writeToXML|CampaignXmlParser" C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq\MekHQ\src -g "*.java"
+```
+
+Verified on `2026-06-22` for source-backed campaign save/load notes.
+
 ## Source Repo Status
 
 Check all source repo worktrees before source investigation or edits:

@@ -97,16 +97,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Identify MekHQ save/load source classes
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Medium`
 - Issue: `#3`
 - Owner: `Codex`
 - Goal: Confirm how `.cpnx.gz` files are loaded and saved in local MekHQ source.
 - Why it matters: Save-file interpretation should be grounded in implementation behavior.
-- Expected output: Updates to `SAVE_FORMAT_NOTES.md`, `SOURCE_CODE_GUIDE.md`, and relevant roadmap entries.
-- Handoff notes: Use `rg "cpnx"` and related source searches from `KNOWN_COMMANDS.md`. Active handoff: `docs/handoffs/active/identify-mekhq-save-load-source-classes.md`.
-- Dependencies: Local MekHQ source checkout path must be valid or discovered.
-- Open questions: Should source checkouts remain under `external/src` or become configurable via a project profile?
+- Expected output: Completed with source-backed updates to `SAVE_FORMAT_NOTES.md`, `SOURCE_CODE_GUIDE.md`, and `KNOWN_COMMANDS.md`.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/identify-mekhq-save-load-source-classes.md`. Source inspection confirmed `CampaignFactory` gzip magic-byte detection, `CampaignXmlParser` parse ownership, `CampaignGUI` manual save gzip behavior, `FileDialogs`/`FileType` extension handling, `AutosaveService` gzip autosaves, and `Campaign#writeToXML(...)` major serialized sections.
+- Dependencies: None for close-out.
+- Open questions: Should source checkout paths remain fixed under `external/src` or become configurable through a project profile?
 
 ### Create help-file usage guidance
 
