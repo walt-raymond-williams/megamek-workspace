@@ -2,7 +2,7 @@
 
 ## Status
 
-`Complete for issue #35`: the local MekHQ checkout has a disabled-by-default source prototype, Gradle compile verification now passes, and live endpoint validation is intentionally deferred until the user is present.
+`Validated locally`: the local MekHQ checkout has a disabled-by-default source prototype, Gradle compile verification passes, the source build can launch MekHQ with the control API enabled, and a user-assisted live `/advance-day` test advanced a loaded campaign exactly one day without saving.
 
 ## Source Changes
 
@@ -128,7 +128,7 @@ javac -d analysis\tmp\issue-35-compile -cp 'analysis\tmp\issue-35-compile;extern
 
 The `MekHQ.java` fallback check emitted one unrelated existing deprecation warning for `AtBGameThread`.
 
-`Not run`: live `/advance-day` endpoint test, because the user asked to be present for live testing.
+`Confirmed locally with user present`: live `/advance-day` endpoint test passed on `2026-06-22` against loaded campaign `The Learning Ropes` (`ea0d334a-1582-459a-9084-b349f0baca5a`). The request guarded on expected date `3025-04-08` with `saveAfterSuccess=false`; the response returned `advanced`, `newDayReturned=true`, `dateBefore=3025-04-08`, `dateAfter=3025-04-09`, `visibleDialogs=0`, and `saveAttempted=false`. A follow-up `/status` call reported the campaign at `3025-04-09`.
 
 ## User-Assisted Live Test Plan
 
@@ -143,10 +143,12 @@ When the user is present:
 7. Try one refused call with an intentionally wrong expected date.
 8. Only after the no-save call succeeds, test `saveAfterSuccess=true` to an explicit disposable output path.
 
+Steps 1-6 were completed successfully on `2026-06-22` against `The Learning Ropes`, advancing from `3025-04-08` to `3025-04-09` without saving.
+
 Do not test against the real campaign save until the disposable campaign test is understood and accepted.
 
 ## Remaining Work
 
-- Launch the locally modified MekHQ build.
-- Perform the user-assisted live endpoint test.
+- Try one refused call with an intentionally wrong expected date.
+- Test `saveAfterSuccess=true` to an explicit disposable output path.
 - Decide whether this prototype should stay local-only or move to a more polished feature branch/PR shape.
