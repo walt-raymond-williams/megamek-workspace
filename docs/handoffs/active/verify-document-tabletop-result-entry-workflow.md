@@ -10,6 +10,8 @@
 
 Verify the end-to-end user workflow for generating, validating, and importing tabletop battle results into MekHQ, then document it for future campaign use.
 
+Current status on `2026-06-22`: blocked. Source and installed-jar validation exist, but this issue requires live/user-operated MekHQ Resolve Manually import observations before it can be completed.
+
 ## Required Context
 
 Read these first:
@@ -28,6 +30,13 @@ Read these first:
 - User-facing workflow documentation under `docs/current/` or `docs/templates/`.
 - Manual verification notes for MekHQ Resolve Manually, including precise UI paths or screenshots if useful.
 - Updated `TASKS.md`, `ROADMAP.md`, active handoffs, and any feature tracking doc to reflect what remains.
+
+## Current Blocker
+
+- Issue `#10` has not completed the live MekHQ Resolve Manually import pass.
+- Computer Use/UI automation remains unavailable in this environment.
+- User task `#23` should create the realistic campaign target before destructive/import validation resumes.
+- Without exact UI/manual observations, any workflow doc would be source-guided but not verified enough to satisfy this issue.
 
 ## Files And Areas
 

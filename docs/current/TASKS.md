@@ -80,7 +80,14 @@ Use this shape for active and queued work:
    - Output: `QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md` has source-confirmed steps, safe-copy verification, and the remaining UI validation gap.
    - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; live UI click-through remains blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. User-owned unblocker is issue `#21` with checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`.
 
-3. Verify Gradle build/test commands in local source repos.
+3. Verify and document tabletop result entry workflow.
+   - Status: `Blocked`
+   - Owner: `Mixed`
+   - Goal: Document the end-to-end tabletop result entry workflow from scenario export to MekHQ Resolve Manually import and closeout.
+   - Output: User-facing workflow documentation with exact UI paths, input files, date/version, and observed campaign effects.
+   - Notes: GitHub issue `#13`; child of epic `#6`; active handoff `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`; blocked until issue `#10` live Resolve Manually import validation can be performed by the user or a future UI-control-capable session, preferably after user task `#23` creates the real-life unit campaign.
+
+4. Verify Gradle build/test commands in local source repos.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
