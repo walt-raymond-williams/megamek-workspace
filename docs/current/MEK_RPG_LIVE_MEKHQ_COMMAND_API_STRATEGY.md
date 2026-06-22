@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: initial planning note for guarded write-side expansion, created `2026-06-22`.
+Status: command envelope defined for issue `#45` on `2026-06-22`; command readiness and domain command designs remain open under epic `#44`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -38,26 +38,109 @@ Core child tracks:
 
 ## Common Command Envelope
 
-Every mutating endpoint should require:
+`Decision`: every mutating endpoint should use a shared request/response envelope unless a later source implementation issue records a narrower exception. This contract is intentionally more explicit than the existing `/advance-day` prototype so future endpoints do not quietly drift on retry, prompt, save, or campaign-identity behavior.
+
+### Request Fields
+
+Every mutating request should require:
 
 - `command`: exact command name/version.
-- `idempotencyKey`: MEK-RPG-generated key for safe retry detection.
-- `expectedCampaignId` or `expectedCampaignName`.
+- `commandVersion`: integer or semantic version for request-shape compatibility.
+- `idempotencyKey`: MEK-RPG-generated key for safe retry detection; required for all non-read-only commands.
+- `expectedCampaignId` or `expectedCampaignName`; prefer id when MEK-RPG has already read it from the live API.
 - `expectedDate`: current MekHQ campaign date.
-- target ids and guard fields, such as person id, unit id, offer selector, expected status, expected balance, expected price, or expected injury state.
-- `dryRun`: when supported, validate and return the intended side effects without mutating.
-- `saveAfterSuccess`: explicit save policy; default should remain no save while prototyping.
-- `clientContext`: MEK-RPG source/action reference for audit reports.
+- `expectedStateRevision`: preferred once command readiness exposes a state revision; until then commands must use target-specific guard fields.
+- target selectors and guard fields, such as person id, unit id, offer selector, expected status, expected balance, expected price, expected injury state, or expected market membership.
+- `dryRun`: required field for every endpoint; endpoints may refuse with `dry_run_unsupported` only when source behavior cannot be validated safely without mutation.
+- `saveAfterSuccess`: explicit save policy; default must remain false while prototyping.
+- `savePath`: required only when `saveAfterSuccess` is true; use MekHQ's save path, not raw XML writing.
+- `promptPolicy`: explicit policy for UI prompts, using values such as `refuse_if_prompt`, `suppress_known_safe_nags`, or a later endpoint-specific policy.
+- `clientContext`: MEK-RPG source/action reference for audit reports, including actor label, source scene/session id when available, and user-facing reason.
+
+For high-risk commands, require additional before-state guards. Examples:
+
+- funds commands: expected balance and transaction type
+- unit-market purchases: offer selector, expected unit display name/type, expected price, expected transit/delivery behavior, and expected current balance
+- personnel status commands: person id, expected name, expected current status, expected unit assignment, and RPG event source
+- medical commands: person id, expected injury/fatigue/prosthetic state, treatment type, cost policy, and active medical-system assumptions
+
+### Response Fields
 
 Responses should include:
 
-- status such as `applied`, `dry_run`, `refused`, `blocked`, or `failed`
-- before/after campaign date and selected target facts
-- side effects applied or side effects that would be applied
-- reports/transactions/unit/personnel ids created or changed
-- warnings and unsupported blockers
-- visible dialog/prompt count or prompt refusal reason
-- save attempt/result when requested
+- `status`: one of `applied`, `dry_run`, `refused`, `blocked`, or `failed`; legacy prototype statuses such as `advanced` should be treated as command-specific aliases, not the long-term shared shape.
+- `statusReason`: machine-readable code such as `wrong_campaign`, `stale_state`, `missing_selector`, `prompt_required`, `dry_run_unsupported`, or `source_exception`.
+- `message`: short user-facing explanation.
+- `command`, `commandVersion`, and `idempotencyKey`.
+- before/after campaign date, campaign name/id, and state revision when available.
+- before/after target facts for the selected person, unit, market offer, contract, transaction, or medical state.
+- side effects applied or side effects that would be applied during dry-run.
+- reports, transactions, units, personnel, contracts, market offers, or medical entries created, removed, or changed.
+- `warnings` and `unsupported` arrays using the read-only live API style where possible.
+- prompt/dialog facts: policy requested, prompts suppressed, prompts detected, prompt refusal reason, and final visible dialog count.
+- save result: whether save was requested, attempted, path, success, and failure message.
+- audit context echoed from `clientContext` after validation/sanitization.
+
+### Idempotency
+
+`Decision`: implement idempotency in memory first, scoped to the live MekHQ process and command name. Do not persist idempotency keys into campaign saves or reports until there is a specific source-backed reason.
+
+Minimum behavior:
+
+- If the same `idempotencyKey` repeats while the original command is still running, return `blocked` with a duplicate-running reason.
+- If the same key repeats after a successful command in the same process and the command/target guards match, return the cached command result without mutating again when feasible.
+- If the same key repeats with different command text, target selector, or guard fields, return `refused` for idempotency-key conflict.
+- Idempotency cache lifetime may be process-local and bounded; the response must disclose when retry memory is process-local.
+- Commands must still require before-state guards because a restarted MekHQ process will not remember earlier keys.
+
+### Dry-Run
+
+`Decision`: `dryRun` must be present for every mutating command request so callers make mutation intent explicit. Support is endpoint-specific:
+
+- For simple validation-only commands, dry-run should validate guards and report intended side effects without mutation.
+- For commands whose source-owned workflow cannot preview side effects safely, return `refused` with `dry_run_unsupported` and explain the missing preview path.
+- A command that supports dry-run must use the same validation path as apply mode where practical, then stop before mutation.
+- Dry-run responses must not create reports, transactions, market removals, unit/personnel changes, saves, or prompt side effects.
+
+### Save Policy
+
+`Decision`: save-after-success remains explicit and opt-in for all guarded commands while this is a local prototype.
+
+Rules:
+
+- `saveAfterSuccess` defaults to false.
+- `savePath` is required when `saveAfterSuccess` is true.
+- Saving must use MekHQ's source-owned save path, such as `CampaignGUI.saveCampaign(...)`, not direct XML or gzip writes from MEK-RPG.
+- Failed, refused, blocked, or dry-run commands must not save.
+- A command response must say whether a save was requested, attempted, succeeded, failed, or skipped.
+
+### Prompt And Dialog Policy
+
+`Confirmed from local prototype`: `/advance-day` originally reported only final visible dialog count, which missed dialogs the user manually dismissed during the command. `dismissAdvanceDayNags=true` later added a narrow source-owned nag suppression path through `NagController.withDailyNagsSuppressed(...)`.
+
+`Decision`: future commands should default to `promptPolicy=refuse_if_prompt` unless the implementation has a source-confirmed, endpoint-specific way to suppress or answer only known-safe prompts.
+
+Prompt rules:
+
+- Do not auto-answer arbitrary Swing dialogs.
+- Do not proceed when a command would require a confirmation, faction, rental, medical, market, save, or other UI prompt unless the endpoint has an explicit source-backed prompt policy.
+- If a known safe prompt is suppressed, report its category and count in the response.
+- If an unexpected prompt is detected, return `blocked` or `failed` and leave enough detail for user/manual follow-up.
+- Track prompt behavior during the command, not just final visible dialog count, whenever source implementation can do so.
+
+### Reusable Implementation Acceptance Criteria
+
+Every future command implementation issue under epic `#44` should prove or explicitly refuse these points:
+
+- API remains disabled by default and loopback-only.
+- Mutating work runs on the Swing event dispatch thread when it touches GUI-owned campaign state.
+- Only one mutating command can run at a time unless a later source design proves safe concurrency.
+- Request validates campaign identity, date, state/target guards, command version, idempotency key, dry-run intent, save policy, prompt policy, and client audit context.
+- Response uses the shared statuses and includes before/after facts, side effects, warnings/unsupported blockers, prompt facts, save facts, and audit context.
+- Dry-run either works without mutation or refuses explicitly.
+- Save-after-success is opt-in, never happens for dry-run/refused/blocked/failed commands, and uses MekHQ save logic.
+- Selectors are stable enough for the command scope; otherwise the command is blocked until `GET /campaign/commands` or equivalent can expose safe selectors.
+- Verification includes at least source inspection and compile/checkstyle where source changes occur; live mutation tests must use copied or disposable campaign saves.
 
 ## Candidate Command Classes
 

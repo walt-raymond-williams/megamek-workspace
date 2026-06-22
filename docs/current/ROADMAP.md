@@ -485,18 +485,18 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Guarded live MekHQ command API for MEK-RPG
 
-- Status: `Issue created`
+- Status: `In progress`
 - Priority: `High`
 - Issue: `#44`
 - Owner: `Mixed`
 - Goal: Build a guarded write-side local MekHQ command API so MEK-RPG can request high-level campaign mutations while MekHQ remains the source-owned campaign ledger.
 - Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
 - Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
-- Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
+- Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Feature tracking snapshot: `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
 - Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, current discovery issue `#43`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
 - Child issues:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. This remains the broad discovery/ranking child and should feed implementation sequencing.
-  - `#45`: Define guarded live MekHQ command envelope and prompt policy. Active handoff: `docs/handoffs/active/design-live-mekhq-command-envelope.md`.
+  - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
   - `#46`: Implement live MekHQ command readiness and selector discovery. Active handoff: `docs/handoffs/active/implement-live-mekhq-command-readiness-selectors.md`.
   - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
@@ -506,16 +506,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Define guarded live MekHQ command envelope and prompt policy
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#45`
 - Owner: `Codex`
 - Goal: Define the common request/response contract for all mutating MekHQ local API commands.
 - Why it matters: A shared envelope prevents command endpoints from drifting into inconsistent safety behavior around campaign identity, retries, dry-runs, saves, and prompts.
-- Expected output: Command fields, response statuses, idempotency behavior, dry-run behavior, save-after-success policy, prompt/dialog handling, and reusable implementation acceptance criteria.
-- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-command-envelope.md`.
+- Expected output: Completed with `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md` updates that define the shared request and response envelope, process-local idempotency policy, endpoint-specific dry-run rules, explicit opt-in save policy, prompt/dialog defaults, and reusable implementation acceptance criteria for epic `#44`.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
 - Dependencies: Issues `#35`, `#38`, `#43`, and epic `#44`.
-- Open questions: Should idempotency be in-memory only or recorded in MekHQ reports/metadata? Should dry-run be mandatory or command-specific?
+- Open questions: Future implementation issues still need source-specific proof for state revision, selector stability, and prompt capture. The issue `#45` policy starts with process-local idempotency and requires explicit `dryRun` in every mutating request.
 
 ### Implement live MekHQ command readiness and selector discovery
 
