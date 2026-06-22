@@ -375,13 +375,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement live read-only MekHQ campaign state API for MEK-RPG
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#36`
 - Owner: `Codex`
 - Goal: Extend the local-only MekHQ control API with read-only live campaign-state endpoints for MEK-RPG: `GET /campaign/summary` and `GET /campaign/state?sections=...`.
 - Why it matters: The Advance Day prototype proved MekHQ can expose a local in-process API while the GUI app is open. MEK-RPG's response memo confirms it wants live API data as a freshness layer over save/checkpoint imports, preserving MekHQ as the hard ledger while reducing stale reads and save-before-refresh friction.
-- Expected output: Source implementation in `external/src/mekhq` plus workspace docs covering endpoint contract, source files touched, trust-envelope behavior, unsupported fields, verification, and any live-test blockers.
-- Handoff notes: GitHub issue `#36` created on `2026-06-22`. Active handoff: `docs/handoffs/active/implement-live-mekhq-campaign-state-api.md`. Implementation plan: `docs/current/MEK_RPG_LIVE_MEKHQ_API_IMPLEMENTATION_PLAN.md`. MEK-RPG response memo: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEK_RPG_LIVE_MEKHQ_API_RESPONSE_MEMO.md`.
-- Dependencies: Existing source branch `codex/mekhq-advance-day-control-api`; source commits `9046a8075e` and `17207baa90`; local Java/Gradle setup now supports MekHQ compile, Checkstyle, assemble, and tests. Live endpoint smoke still requires the user to load a campaign in the source-built MekHQ app.
-- Open questions: Is there a source-confirmed dirty/unsaved flag? Is there a campaign revision value, or should V1 generate a live snapshot id? Which full-state sections should be complete in V1 versus partial with structured unsupported entries?
+- Expected output: Completed with MekHQ source commit `7d3b345327` and `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`, plus sanitized fixtures under `docs/templates/mekhq-live-campaign-*.fixture.json`.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-campaign-state-api.md`. The API remains disabled by default, loopback-only, read-only for live state, and grouped like the checkpoint export. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed. Source push is blocked by lack of write permission to upstream `MegaMek/mekhq`.
+- Dependencies: Existing source branch `codex/mekhq-advance-day-control-api`; source commits `9046a8075e`, `17207baa90`, and `7d3b345327`. Live endpoint smoke still requires the user to load a copied/disposable campaign in the source-built MekHQ app.
+- Open questions: A source-confirmed dirty/unsaved flag remains unknown, so V1 reports dirty state as `Unknown` with a warning. A future pass should live-smoke the endpoints against a disposable campaign and decide whether to deepen full injuries, skills, cargo/transport, markets, and stable repair selectors.

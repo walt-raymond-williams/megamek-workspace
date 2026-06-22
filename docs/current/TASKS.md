@@ -45,13 +45,6 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Implement live read-only MekHQ campaign state API for MEK-RPG.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Add `GET /campaign/summary` and `GET /campaign/state?sections=...` to the existing local MekHQ control API so MEK-RPG can refresh live campaign context without requiring a save first.
-   - Output: Source implementation in `external/src/mekhq`, updated endpoint docs/fixtures, compile/checkstyle verification, source commit, and workspace docs commit.
-   - Notes: GitHub issue `#36`; roadmap entry created from MEK-RPG response memo; active handoff `docs/handoffs/active/implement-live-mekhq-campaign-state-api.md`.
-
 1. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
@@ -103,6 +96,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#36` by adding `GET /campaign/summary` and `GET /campaign/state?sections=...` to the existing local MekHQ control API in source commit `7d3b345327`. The V1 live API keeps checkpoint grouping, trust envelopes, read-only/local-only guardrails, unknown dirty-state warnings, and structured unsupported entries for action-adjacent gaps. Workspace docs and sanitized fixtures are in `MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md` and `docs/templates/mekhq-live-campaign-*.fixture.json`. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live endpoint smoke still needs a user-loaded disposable campaign. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and the authenticated account lacks push permission.
 - `2026-06-22`: Drafted `MEK_RPG_LIVE_MEKHQ_API_FEEDBACK_MEMO.md` for MEK-RPG review. The memo asks whether the existing save/checkpoint import contract should shift toward a live localhost MekHQ read-only state API, preserves the known MEK-RPG field priorities and trust-boundary fields, and requests feedback on endpoints, first-use fields, warning behavior, and durability semantics.
 - `2026-06-22`: Completed GitHub issue `#35` by adding a local-only MekHQ Advance Day control API prototype in `external/src/mekhq` source commit `9046a8075e`, documenting the API in `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and verifying `.\gradlew.bat :MekHQ:compileJava` after local JDK 17 setup. The endpoint remains disabled by default and live endpoint testing should wait for the user with copied/disposable saves.
 - `2026-06-22`: User-assisted live test of the issue `#35` prototype succeeded. The source-built MekHQ app launched with `mekhq.controlApi.enabled=true`; `/status` saw loaded campaign `The Learning Ropes`; `POST /advance-day` advanced exactly one day from `3025-04-08` to `3025-04-09` with `saveAfterSuccess=false` and no save attempt. User confirmed dialogs appeared during the call and were manually dismissed, so future work should improve prompt/dialog reporting beyond the final `visibleDialogs` snapshot.

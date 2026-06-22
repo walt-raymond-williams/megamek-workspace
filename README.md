@@ -76,5 +76,6 @@ Start here when orienting a new session:
 - `docs/current/SOURCE_CODE_GUIDE.md`: source inspection strategy and important source areas.
 - `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT.md`: read-only MekHQ checkpoint export contract for MEK-RPG bridge work.
 - `docs/current/MEK_RPG_MEKHQ_CHECKPOINT_EXPORT_SCHEMA.md`: draft JSON schema aligned to MEK-RPG's consumer contract for future checkpoint exporter work.
+- `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`: live read-only local MekHQ campaign-state API contract and verification notes for MEK-RPG.
 
 When a discovery will matter again, record it in `docs/current/` instead of leaving it only in chat.
