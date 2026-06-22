@@ -120,7 +120,9 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 
 The Checkstyle run emitted one existing warning in `MekHQ.java` for deprecated `AtBGameThread` usage; it was not introduced by the live state API work.
 
-`Not yet live-tested`: no user-assisted running MekHQ campaign smoke test was performed in this issue. Use a copied/disposable campaign and the source-built GUI before treating live output as validated against the UI.
+`Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
+
+`Confirmed locally`: follow-up MEK-RPG issue `#106` verified that selected-section state requests must include `bridge_metadata` when the response is intended for MEK-RPG dashboard/context validation. Omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
 
 Suggested smoke commands after launching source-built MekHQ with a disposable campaign loaded:
 
@@ -129,7 +131,7 @@ Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/summary' -Ti
   ConvertTo-Json -Depth 8
 
 Invoke-RestMethod -Method Get `
-  -Uri 'http://127.0.0.1:32180/campaign/state?sections=campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported' `
+  -Uri 'http://127.0.0.1:32180/campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,reports,unsupported' `
   -TimeoutSec 30 |
   ConvertTo-Json -Depth 12
 ```
