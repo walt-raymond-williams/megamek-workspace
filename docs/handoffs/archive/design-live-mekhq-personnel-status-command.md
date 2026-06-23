@@ -60,8 +60,8 @@ Completed on `2026-06-22`.
 Output:
 
 - Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
-- Implementation follow-up: GitHub issue `#51`
-- Active implementation handoff: `docs/handoffs/active/implement-live-mekhq-personnel-status-command.md`
+- Implementation follow-up: GitHub issue `#51`, completed on `2026-06-22`
+- Archived implementation handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`
 
 Summary:
 
