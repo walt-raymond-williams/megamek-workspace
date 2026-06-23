@@ -24,6 +24,7 @@ Source commit:
 - `e19740b110` (`Expose command readiness endpoint`)
 - `4429d99ea2` (`Add guarded status note command`)
 - `0451eb53d4` (`Add guarded contract accept command`)
+- `0a00859b1a` (`Add local control API readiness tests`)
 
 Files changed:
 
@@ -138,6 +139,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `0451eb53d4` adds `POST /campaign/command/contracts/accept`. Apply mode credits advance and transport payments as `TransactionType.CONTRACT_PAYMENT`, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the offer from `AbstractContractMarket`, can append a `GENERAL` MEK-RPG audit report, and returns the new mission id assigned by `Campaign#addMission(...)`. Known prompt choices are explicit: accept known contract challenge confirmations, acknowledge known informational prompts without showing dialogs, decline travel/mothball automation, decline rentals, and refuse unknown prompts. Live disposable-campaign smoke testing is still not run.
 
+`Confirmed locally`: source commit `0a00859b1a` adds unit-test coverage for the local command readiness API surface. `LocalCommandReadinessExporterTest` asserts the expected command rows/endpoints/statuses are present, contract selectors expose guard facts and prompt choices, and `state_revision` changes when contract-market state changes.
+
 ## Fixtures
 
 Sanitized examples:
@@ -219,6 +222,13 @@ $env:JAVA_HOME='C:\Program Files\Eclipse Adoptium\jdk-21.0.11.10-hotspot'
 $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:compileJava
 .\gradlew.bat :MekHQ:checkstyleMain
+```
+
+`Confirmed locally`: after source commit `0a00859b1a`, local control API readiness regression tests and the full MekHQ test task passed from `external/src/mekhq` on `2026-06-23`:
+
+```powershell
+.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest
+.\gradlew.bat :MekHQ:test
 ```
 
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
