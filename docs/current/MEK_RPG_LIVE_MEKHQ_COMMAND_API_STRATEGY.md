@@ -295,8 +295,15 @@ Why this matters:
 
 Blockers:
 
-- Source review must confirm the right status transition APIs, report behavior, unit-crew cleanup behavior, and any dependent systems such as pay, assignments, prisoners, marriage/dependents, or personnel removal.
-- Not all RPG outcomes map to simple MekHQ statuses; the command should refuse ambiguous requests.
+- Completed source design: `MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`.
+- Implementation follow-up: issue `#51`.
+
+Design result:
+
+- V1 should use `Person#changeStatus(Campaign, LocalDate, PersonnelStatus)`, not direct `setStatus(...)`, because `changeStatus(...)` owns personnel reports, service logs, retirement/death dates, unit crew cleanup, doctor/tech-job cleanup, command-role cleanup, genealogy effects, education cleanup, and `PersonStatusChangedEvent`.
+- V1 should allow only source-reviewed single-person narrative status changes: `MIA`, `POW`, recovery to `ACTIVE` from absent states, non-payout `RETIRED`/`RESIGNED`/`LEFT`, explicit `DEFECTED`/`DESERTED`, and non-tactical death causes such as `HOMICIDE`, `ACCIDENTAL`, `NATURAL_CAUSES`, `UNDETERMINED`, or `SUICIDE`.
+- V1 should refuse tactical casualties, tactical `KIA`, crew-hit/ejection/salvage/kill-credit facts, medical/prosthetic/fatigue outcomes, prisoner status changes and prisoner release/execution/removal flows, retirement payouts, and resurrection from dead statuses.
+- `POW` is appropriate for captured player personnel outside tactical resolution; separate `PrisonerStatus.PRISONER` workflows are used for NPC prisoners and need a different command design.
 
 ### Medical Treatment / Prosthetics
 
@@ -381,7 +388,7 @@ Completed ordering:
 ## Current Easy-Win Ranking
 
 1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-2. Personnel death/status command design for RPG events that are not MekHQ tactical results.
+2. Implement V1 `POST /campaign/command/personnel/status` from issue `#51`.
 3. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
 4. Contract-market accept/decline by contract id, after prompt-policy review.
 5. Personnel hire by applicant id, after market-style review.

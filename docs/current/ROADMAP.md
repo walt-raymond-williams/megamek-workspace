@@ -499,10 +499,11 @@ Use this shape for entries that may become GitHub issues:
   - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
   - `#46`: Implement live MekHQ command readiness and selector discovery. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
   - `#50`: Implement guarded live MekHQ campaign status-note command. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`.
-  - `#47`: Design live MekHQ personnel death and status command API. Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+  - `#47`: Design live MekHQ personnel death and status command API. Completed on `2026-06-22`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`.
+  - `#51`: Implement guarded live MekHQ personnel status command. Active handoff: `docs/handoffs/active/implement-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
-- Recommended sequence: Source-design the high-value domain commands: `#47` personnel death/status, `#48` medical/prosthetics, and `#49` unit-market purchase. Start with `#47`.
+- Recommended sequence: Implement the conservative V1 personnel status command from issue `#51` or continue source-designing the remaining high-value domain commands with `#48` medical/prosthetics and `#49` unit-market purchase. If implementation momentum is preferred, start with `#51`.
 - Open questions: Where should MEK-RPG status notes be stored in MekHQ? Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -546,16 +547,29 @@ Use this shape for entries that may become GitHub issues:
 
 ### Design live MekHQ personnel death and status command API
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#47`
 - Owner: `Codex`
 - Goal: Design guarded commands for RPG-side personnel status changes such as death, disappearance, capture, retirement, recovery, or other non-scenario status events.
 - Why it matters: Characters can die or change status during RPG play outside a MekHQ tactical scenario. MekHQ still needs to own roster state, unit crew cleanup, reports, payroll/availability, and consistency.
-- Expected output: Source-backed transition map, endpoint proposal, guard fields, refusal rules, side effects, and a narrowed implementation issue if safe.
-- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+- Expected output: Completed with `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md` and implementation follow-up issue `#51`.
+- Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`. Source review found that V1 should call `Person#changeStatus(...)`, allow only conservative single-person narrative transitions, and refuse tactical casualties, medical/prosthetic outcomes, prisoner operations, retirement payouts, and resurrection.
 - Dependencies: Issue `#45`; MekHQ personnel source around `Person#changeStatus(...)`, `PersonnelStatus`, unit crew links, and scenario casualty handling.
-- Open questions: Which MEK-RPG outcomes map to MekHQ statuses, and which should remain narrative notes or scenario-result imports?
+- Open questions: Full prisoner command design, retirement payout/turnover design, and GM resurrection remain deferred outside V1.
+
+### Implement guarded live MekHQ personnel status command
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#51`
+- Owner: `Codex`
+- Goal: Implement `POST /campaign/command/personnel/status` from the issue `#47` design so MEK-RPG can apply conservative RPG-side personnel status events through MekHQ-owned logic.
+- Why it matters: This is the next guarded mutation after status-note and gives MEK-RPG a practical way to record narrative disappearance, capture, recovery, departure, betrayal, or non-tactical death without direct save edits.
+- Expected output: MekHQ source endpoint, command readiness row, shared envelope validation, dry-run and apply behavior through `Person#changeStatus(...)`, refusal rules, compile/checkstyle verification, and disposable live-campaign smoke tests.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-personnel-status-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`.
+- Dependencies: Issues `#45`, `#46`, `#47`, and `#50`; MekHQ source branch `codex/mekhq-advance-day-control-api`.
+- Open questions: Live smoke testing requires a copied/disposable campaign loaded in source-built MekHQ with the control API enabled.
 
 ### Design live MekHQ medical treatment and prosthetic command API
 

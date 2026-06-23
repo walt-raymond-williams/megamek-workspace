@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design personnel death/status command API.
+1. Implement guarded live MekHQ personnel status command.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Source-check how MEK-RPG narrative death, capture, disappearance, retirement, or recovery should mutate MekHQ personnel state.
-   - Output: Design note, endpoint proposal, refusal rules, verification facts, and a narrowed implementation issue if safe.
-   - Notes: GitHub issue `#47`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-personnel-status-command.md`.
+   - Goal: Implement the conservative V1 `POST /campaign/command/personnel/status` endpoint from the issue `#47` design.
+   - Output: MekHQ source endpoint, command readiness row, dry-run/apply behavior through `Person#changeStatus(...)`, refusal rules, compile/checkstyle verification, and disposable live smoke-test notes if possible.
+   - Notes: GitHub issue `#51`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-personnel-status-command.md`; design note `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`.
 
 2. Design medical treatment and prosthetic command API.
    - Status: `Not started`
@@ -117,6 +117,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-22`: Completed GitHub issue `#47` by adding `MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md` and creating follow-up implementation issue `#51`. Source review found V1 should call `Person#changeStatus(...)`, allow only conservative single-person narrative transitions (`MIA`, `POW`, recovery to `ACTIVE`, non-payout departures, betrayal/desertion, and non-tactical death causes), and refuse tactical casualties, medical/prosthetic outcomes, prisoner operations, retirement payouts, and resurrection. Archived handoff: `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`.
 - `2026-06-22`: Completed GitHub issue `#50` by adding `POST /campaign/command/status-note` in local MekHQ source commit `4429d99ea2`. V1 appends plain-text MEK-RPG audit notes to the `GENERAL` campaign report through `Campaign#addReport(DailyReportType.GENERAL, ...)`, validates the shared command envelope, supports dry-run, blocks visible dialogs under `promptPolicy=refuse_if_prompt`, rejects HTML, reports before/after report counts and prompt/save facts, updates `GET /campaign/commands`, and keeps save-after-success opt-in. Verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.
 - `2026-06-22`: Completed GitHub issue `#43` by refreshing the guarded live MekHQ command easy-win ranking after issues `#45` and `#46`. Source review selected campaign status/report note as the first low-risk non-day-advance mutation because `Campaign#addReport(...)` appends through MekHQ-owned report logic and current reports are serialized by `Campaign#writeToXML(...)`. Created follow-up implementation issue `#50`, now completed and archived at `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`; kept funds adjustment, personnel hire/status, medical, contract decision, unit purchase, and repair/procurement behind their specific blockers.
 - `2026-06-22`: Completed GitHub issue `#46` by adding MekHQ source endpoint `GET /campaign/commands` in local source commit `e19740b110` for read-only command readiness and selector discovery. The endpoint reports `advanceDayOnce` as the only available mutating command; exposes campaign/person/unit/applicant/contract candidate selectors from source-backed ids; and blocks status-note, funds adjustment, personnel status, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save with machine-readable reason codes. Unit-market purchase remains blocked with `stable_offer_selector_missing`. Verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.

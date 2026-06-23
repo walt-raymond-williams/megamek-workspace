@@ -52,3 +52,19 @@ Likely files to read or edit:
 
 - What is the correct MekHQ status for each MEK-RPG outcome: dead, captured, missing, retired, defected, medically unavailable, or recovered?
 - Should a personnel status command also add a campaign report/note by default?
+
+## Close-Out
+
+Completed on `2026-06-22`.
+
+Output:
+
+- Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
+- Implementation follow-up: GitHub issue `#51`
+- Active implementation handoff: `docs/handoffs/active/implement-live-mekhq-personnel-status-command.md`
+
+Summary:
+
+- V1 should call `Person#changeStatus(Campaign, LocalDate, PersonnelStatus)`, not direct `setStatus(...)`.
+- V1 should allow only conservative single-person narrative transitions.
+- V1 should refuse tactical casualties, medical/prosthetic outcomes, prisoner operations, retirement payouts, and resurrection.
