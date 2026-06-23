@@ -127,6 +127,21 @@ Prompt rules:
 - If a known safe prompt is suppressed, report its category and count in the response.
 - If an unexpected prompt is detected, return `blocked` or `failed` and leave enough detail for user/manual follow-up.
 - Track prompt behavior during the command, not just final visible dialog count, whenever source implementation can do so.
+- For source workflows that normally show known UI prompts, prefer explicit API choice fields over blanket refusal when the choice can be represented safely. The API should still use MekHQ-owned business logic; it should replace only the interactive decision source, not the campaign mechanics.
+- Unknown or unmodeled prompts must still be refused rather than guessed.
+
+### Failure Isolation
+
+`Decision`: local API command failures must not crash MekHQ or stop the local control server.
+
+Implementation rules:
+
+- Wrap command execution in endpoint-level exception handling.
+- Return structured `refused`, `blocked`, or `failed` responses instead of allowing validation errors or source exceptions to escape the HTTP handler.
+- Log unexpected exceptions with command name, idempotency key, and sanitized target facts.
+- Clear running-command and idempotency-in-progress state in `finally` blocks.
+- Never save after failed, refused, blocked, or dry-run responses.
+- Verification for new command endpoints should include a negative request followed by `/status` or `GET /campaign/commands` to prove the server remains alive.
 
 ### Reusable Implementation Acceptance Criteria
 
@@ -252,8 +267,10 @@ Design result:
 - Issue `#52` completed the source design in `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md` and created follow-up implementation issue `#55`.
 - Contract-market offer ids are stable while the offer remains in the market because `AbstractContractMarket` assigns ids with `lastId++`, serializes `lastId`, and writes each offer through `Mission#writeToXMLBegin(...)`; `Mission.generateInstanceFromXML(...)` restores the id.
 - The market offer id is not the final active mission id. `Campaign#addMission(...)` assigns a new mission id during acceptance, so the response must return both the accepted market contract id and the new active mission id.
-- V1 should use `POST /campaign/command/contracts/accept`, select one current market offer by id plus full expected term guards, and refuse before mutation whenever the equivalent UI path would show confirmation, faction-standing, StratCon start, travel/mothball, transit, or rental dialogs.
-- V1 should not call `ContractMarketDialog#acceptContract(...)` directly because that method can apply finance and mission side effects before later prompts. The implementation should extract or add a source-owned non-dialog helper that preserves the non-dialog side effects and prompt preflight checks.
+- V1 should use `POST /campaign/command/contracts/accept`, select one current market offer by id plus full expected term guards, and make known UI branch choices explicit in the request.
+- The implementation should share or extract the source-owned acceptance workflow behind `ContractMarketDialog#acceptContract(...)`; the goal is to let MekHQ process the button's business logic, not to reimplement contract acceptance externally.
+- V1 may accept or acknowledge known prompt branches only when the request supplies supported policies, such as accepting a known contract challenge, acknowledging known informational prompts, declining travel automation, declining automated mothballing, or declining rentals. It should refuse unknown prompts or unsupported choices before mutation.
+- Contract command implementation must include endpoint-level exception handling so malformed or failed API calls do not crash MekHQ or stop the local control server.
 
 ### Personnel Market Hire
 

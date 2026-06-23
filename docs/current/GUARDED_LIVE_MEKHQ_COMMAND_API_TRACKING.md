@@ -33,7 +33,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 ## Recommended Next Step
 
 - Issue: `#55`
-- Why next: Contract selection design is complete; the next slice is implementing one prompt-free guarded contract accept command using source-owned finance, mission insertion, contract acceptance, market removal, prompt preflight refusal, and readiness selectors.
+- Why next: Contract selection design is complete; the next slice is implementing guarded contract accept using MekHQ-owned acceptance logic, source-owned finance, mission insertion, contract acceptance, market removal, explicit known prompt choices, failure isolation, and readiness selectors.
 - Handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`
 
 ## Verification State

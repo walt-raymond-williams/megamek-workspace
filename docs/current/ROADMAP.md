@@ -508,7 +508,7 @@ Use this shape for entries that may become GitHub issues:
   - `#52`: Design live MekHQ contract selection command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`.
   - `#55`: Implement guarded live MekHQ contract accept command. Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`.
 - Recommended sequence: Continue with implementation issue `#55`. Issues `#51`, `#53`, `#54`, and future `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
-- Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Should contract acceptance eventually support explicit travel/rental/faction-standing policies after V1 prompt-free acceptance?
+- Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Which contract prompt choices should V1 support beyond accepting known confirmations, acknowledging informational prompts, and declining optional travel/rental automation?
 
 ### Define guarded live MekHQ command envelope and prompt policy
 
@@ -636,7 +636,7 @@ Use this shape for entries that may become GitHub issues:
 - Goal: Design a guarded command that lets MEK-RPG ask the loaded MekHQ campaign to accept a specific available contract from the contract market.
 - Why it matters: MEK-RPG can already read available contracts, but selecting one is a strategic campaign mutation with finances, transport, reporting, faction, mission, and prompt side effects that must stay inside MekHQ-owned logic.
 - Expected output: Completed with `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md` and follow-up implementation issue `#55`.
-- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`. Source review found market contract ids are stable while an offer remains in the market, but `Campaign#addMission(...)` assigns a new active mission id on acceptance. V1 should implement `POST /campaign/command/contracts/accept` for one prompt-free offer and refuse before mutation when confirmation, faction-standing, StratCon start, travel/mothball, transit, or rental prompts would be required.
+- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`. Source review found market contract ids are stable while an offer remains in the market, but `Campaign#addMission(...)` assigns a new active mission id on acceptance. V1 should implement `POST /campaign/command/contracts/accept` by sharing or extracting MekHQ-owned acceptance logic, making known prompt choices explicit in the request, and refusing unknown or unsupported prompt branches before mutation.
 - Dependencies: Issues `#45` and `#46`; MekHQ source around `ContractMarketDialog#acceptContract(...)`, `AbstractContractMarket#getContracts()`, `Contract#acceptContract(...)`, mission insertion, advance/transport funds, rentals, faction standing, and local command readiness.
 - Open questions: Later versions need explicit source services before supporting contract confirmation choices, faction-standing dialog behavior, travel automation, rentals, decline, negotiation, or market refresh.
 
@@ -646,9 +646,9 @@ Use this shape for entries that may become GitHub issues:
 - Priority: `High`
 - Issue: `#55`
 - Owner: `Codex`
-- Goal: Implement `POST /campaign/command/contracts/accept` for one prompt-free current contract-market offer selected by source id plus guard fields.
+- Goal: Implement `POST /campaign/command/contracts/accept` for one current contract-market offer selected by source id plus guard fields, using MekHQ-owned acceptance logic and explicit known prompt choices.
 - Why it matters: Contract choice is the next strategic MEK-RPG-to-MekHQ mutation after unit purchase. MekHQ must own finance credits, mission insertion, StratCon initialization, reports, market removal, and save behavior.
-- Expected output: Source-generated readiness metadata and selector guard facts, guarded dry-run/apply endpoint, prompt preflight refusal before mutation, process-local idempotency, optional audit report, opt-in save policy, and compile/checkstyle verification.
+- Expected output: Source-generated readiness metadata and selector guard facts, guarded dry-run/apply endpoint, explicit known prompt choice policies, prompt/choice preflight refusal before mutation for unsupported branches, process-local idempotency, optional audit report, opt-in save policy, endpoint-level failure isolation, and compile/checkstyle verification.
 - Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`.
 - Dependencies: Issues `#45`, `#46`, and `#52`; existing source command API patterns from `#50`, `#51`, `#53`, and `#54`; MekHQ source branch `codex/mekhq-advance-day-control-api`.
-- Open questions: Live smoke testing requires a copied/disposable campaign with a prompt-free selectable contract offer loaded in a source-built MekHQ instance.
+- Open questions: Live smoke testing requires a copied/disposable campaign with a selectable contract offer loaded in a source-built MekHQ instance. Negative smoke testing should also prove a failed API call leaves the local control server running.
