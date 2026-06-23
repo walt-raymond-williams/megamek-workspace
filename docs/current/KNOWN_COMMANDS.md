@@ -263,6 +263,18 @@ After a command succeeds locally, update this section from `Not yet verified` to
 
 Issue `#35` adds a source prototype under `external/src/mekhq` that is disabled by default. When a locally modified MekHQ build can be launched, enable the local-only endpoint with this JVM property:
 
+Build and start the current local source-built MekHQ with the control API enabled:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-api.ps1
+```
+
+Skip the build when the assembled install is already current:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-api.ps1 -NoBuild
+```
+
 ```powershell
 -Dmekhq.controlApi.enabled=true
 ```
