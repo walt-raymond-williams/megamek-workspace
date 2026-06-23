@@ -233,9 +233,9 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:test` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch in about 7 minutes 40 seconds. The run completed `checkstyleMain`, `compileTestJava`, `test`, and `jacocoTestReport`; it emitted Mockito dynamic-agent, deprecation, unchecked-operation, logging, and one data-quality warning, but Gradle returned `BUILD SUCCESSFUL`.
 
-`Confirmed locally`: after adding local control API readiness regression tests in source commit `0a00859b1a`, `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest` passed on `2026-06-23`. The targeted tests cover command readiness rows/endpoints/statuses, contract selector guard facts and prompt choices, and state revision changes when contract-market state changes.
+`Confirmed locally`: after adding local control API regression tests in source commit `51dbfbe645`, `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest` passed on `2026-06-23`. The targeted tests cover command readiness rows/endpoints/statuses, contract selector guard facts and prompt choices, state revision changes when contract-market state changes, HTTP `/status`, no-campaign blocking for campaign endpoints, invalid contract-accept JSON, and post-failure server availability.
 
-`Confirmed locally`: `.\gradlew.bat :MekHQ:test` passed again on `2026-06-23` after source commit `0a00859b1a` in about 6 minutes. The run completed `checkstyleMain`, `compileTestJava`, `test`, and `jacocoTestReport`; it emitted the existing Mockito dynamic-agent/logging warnings and one data-quality warning, but Gradle returned `BUILD SUCCESSFUL`.
+`Confirmed locally`: `.\gradlew.bat :MekHQ:test` passed again on `2026-06-23` after source commit `51dbfbe645` in about 7 minutes. The run completed `checkstyleMain`, `compileTestJava`, `test`, and `jacocoTestReport`; it emitted the existing Mockito dynamic-agent/logging warnings and one data-quality warning, but Gradle returned `BUILD SUCCESSFUL`.
 
 MegaMekLab:
 

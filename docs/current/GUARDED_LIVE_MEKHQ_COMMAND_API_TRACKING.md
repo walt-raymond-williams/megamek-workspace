@@ -52,7 +52,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#54`.
   - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#55`.
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#55`.
-  - `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest` from `external/src/mekhq` after adding local control API readiness regression tests.
+  - `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest` from `external/src/mekhq` after adding local control API regression tests.
   - `.\gradlew.bat :MekHQ:test` from `external/src/mekhq` after adding local control API readiness regression tests.
 - Source commits:
   - `e19740b110` in `external/src/mekhq`: `Expose command readiness endpoint`.
@@ -61,7 +61,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `ef6ef99ef9` in `external/src/mekhq`: `Add guarded personnel fatigue command`.
   - `78890ba458` in `external/src/mekhq`: `Add guarded unit market purchase command`.
   - `0451eb53d4` in `external/src/mekhq`: `Add guarded contract accept command`.
-  - `0a00859b1a` in `external/src/mekhq`: `Add local control API readiness tests`.
+  - `51dbfbe645` in `external/src/mekhq`: `Add local control API readiness tests`.
 - Manual checks:
   - Read issue `#45`, the active handoff, `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and `LocalControlService.java`.
   - Read issue `#46`, `UnitMarketOffer.java`, `LocalCampaignStateExporter.java`, and source-confirmed selector methods before implementing `GET /campaign/commands`.

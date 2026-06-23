@@ -280,7 +280,7 @@ Implemented result:
 - Dry-run returns intended side effects without mutation. Apply mode credits advance and transport funds as `TransactionType.CONTRACT_PAYMENT`, creates AtB liaison/opponent facts where the UI path would, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the contract-market offer, and returns the new mission id.
 - V1 replaces known UI prompts with explicit request choices: accept known contract challenge confirmations, acknowledge faction-standing or StratCon start information without showing dialogs, decline travel and mothball automation, decline rentals, and refuse unknown prompts.
 - Required compile/checkstyle verification passed. Live disposable-campaign smoke testing is still not run because it requires a source-built MekHQ instance with a copied campaign and selectable contract offer loaded.
-- Source commit `0a00859b1a` adds local command readiness regression tests covering the command rows/endpoints/statuses, contract selector guard facts and prompt choices, and state-revision changes when contract-market state changes. Both the targeted test class and full `:MekHQ:test` passed locally.
+- Source commit `51dbfbe645` adds local command API regression tests covering command rows/endpoints/statuses, contract selector guard facts and prompt choices, state-revision changes when contract-market state changes, HTTP `/status`, no-campaign blocking, invalid contract-accept JSON refusal, and post-failure server availability. The targeted local-control tests and full `:MekHQ:test` passed locally.
 
 ### Personnel Market Hire
 

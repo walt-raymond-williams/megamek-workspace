@@ -24,7 +24,7 @@ Source commit:
 - `e19740b110` (`Expose command readiness endpoint`)
 - `4429d99ea2` (`Add guarded status note command`)
 - `0451eb53d4` (`Add guarded contract accept command`)
-- `0a00859b1a` (`Add local control API readiness tests`)
+- `51dbfbe645` (`Add local control API readiness tests`)
 
 Files changed:
 
@@ -139,7 +139,7 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `0451eb53d4` adds `POST /campaign/command/contracts/accept`. Apply mode credits advance and transport payments as `TransactionType.CONTRACT_PAYMENT`, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the offer from `AbstractContractMarket`, can append a `GENERAL` MEK-RPG audit report, and returns the new mission id assigned by `Campaign#addMission(...)`. Known prompt choices are explicit: accept known contract challenge confirmations, acknowledge known informational prompts without showing dialogs, decline travel/mothball automation, decline rentals, and refuse unknown prompts. Live disposable-campaign smoke testing is still not run.
 
-`Confirmed locally`: source commit `0a00859b1a` adds unit-test coverage for the local command readiness API surface. `LocalCommandReadinessExporterTest` asserts the expected command rows/endpoints/statuses are present, contract selectors expose guard facts and prompt choices, and `state_revision` changes when contract-market state changes.
+`Confirmed locally`: source commit `51dbfbe645` adds unit-test coverage for the local command API surface. `LocalCommandReadinessExporterTest` asserts the expected command rows/endpoints/statuses are present, contract selectors expose guard facts and prompt choices, and `state_revision` changes when contract-market state changes. `LocalControlServiceHttpTest` starts the loopback HTTP service with no campaign loaded and verifies `/status`, no-campaign blocking, invalid contract-accept JSON refusal, and post-failure server availability.
 
 ## Fixtures
 
@@ -224,10 +224,10 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat :MekHQ:checkstyleMain
 ```
 
-`Confirmed locally`: after source commit `0a00859b1a`, local control API readiness regression tests and the full MekHQ test task passed from `external/src/mekhq` on `2026-06-23`:
+`Confirmed locally`: after source commit `51dbfbe645`, local control API regression tests and the full MekHQ test task passed from `external/src/mekhq` on `2026-06-23`:
 
 ```powershell
-.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest
+.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest
 .\gradlew.bat :MekHQ:test
 ```
 
