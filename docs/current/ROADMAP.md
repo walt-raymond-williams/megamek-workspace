@@ -491,7 +491,7 @@ Use this shape for entries that may become GitHub issues:
 - Owner: `Mixed`
 - Goal: Build a guarded write-side local MekHQ command API so MEK-RPG can request high-level campaign mutations while MekHQ remains the source-owned campaign ledger.
 - Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
-- Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
+- Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, contract selection, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
 - Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Feature tracking snapshot: `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
 - Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, completed first command issue `#50`, completed personnel status command issue `#51`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
 - Child issues:
@@ -503,8 +503,9 @@ Use this shape for entries that may become GitHub issues:
   - `#51`: Implement guarded live MekHQ personnel status command. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
-- Recommended sequence: Continue source-designing the remaining high-value domain commands with `#48` medical/prosthetics and `#49` unit-market purchase. Issue `#51` is complete but still needs live disposable-campaign smoke testing when a source-built MekHQ instance is available.
-- Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes?
+  - `#52`: Design live MekHQ contract selection command API. Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`.
+- Recommended sequence: Continue source-designing the remaining high-value domain commands with `#48` medical/prosthetics, `#49` unit-market purchase, and the contract selection design issue. Issue `#51` is complete but still needs live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+- Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes? Which contract acceptance prompts can be detected or refused before mutation?
 
 ### Define guarded live MekHQ command envelope and prompt policy
 
@@ -596,3 +597,16 @@ Use this shape for entries that may become GitHub issues:
 - Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
 - Dependencies: Issues `#45` and `#46`; MekHQ source around `UnitMarketOffer`, `AbstractUnitMarket`, and `UnitMarketPane#purchaseSelectedOffers()`.
 - Open questions: Can unit-market offers get safe live selectors without durable source fields? How should instant delivery versus transit delivery be handled?
+
+### Design live MekHQ contract selection command API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#52`
+- Owner: `Codex`
+- Goal: Design a guarded command that lets MEK-RPG ask the loaded MekHQ campaign to accept a specific available contract from the contract market.
+- Why it matters: MEK-RPG can already read available contracts, but selecting one is a strategic campaign mutation with finances, transport, reporting, faction, mission, and prompt side effects that must stay inside MekHQ-owned logic.
+- Expected output: Source-backed contract acceptance path, endpoint proposal, request/response API contract, selector and guard-field rules, prompt refusal policy, readiness-update requirements, memo-ready MEK-RPG integration guidance, and a narrowed implementation issue if safe.
+- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`. The likely endpoint is `POST /campaign/command/contracts/accept`, but the design should confirm naming from source and existing local API conventions.
+- Dependencies: Issues `#45` and `#46`; MekHQ source around `ContractMarketDialog#acceptContract(...)`, `AbstractContractMarket#getContracts()`, `Contract#acceptContract(...)`, mission insertion, advance/transport funds, rentals, faction standing, and local command readiness.
+- Open questions: Are contract ids stable enough for command selectors? Which acceptance prompts can be pre-detected or safely refused? Should V1 accept only a single contract and leave decline, negotiation, and market refresh for future commands?

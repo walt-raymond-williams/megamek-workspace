@@ -59,14 +59,21 @@ Use this shape for active and queued work:
    - Output: Selector design, endpoint proposal, duplicate-offer refusal rules, verification facts, and a narrowed implementation issue if safe.
    - Notes: GitHub issue `#49`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`; do not implement purchase by row index or display name.
 
-3. Run MekHQ quickstart roster UI validation.
+3. Design contract selection command API.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-check how MEK-RPG should ask MekHQ to accept a selected available contract from the live contract market.
+   - Output: Contract acceptance endpoint proposal, selector and guard-field policy, prompt refusal rules, readiness-update requirements, memo-ready MEK-RPG integration guidance, and a narrowed implementation issue if safe.
+   - Notes: GitHub issue `#52`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`; do not accept contracts by display name, market row, or direct save edit.
+
+4. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-4. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 

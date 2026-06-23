@@ -23,6 +23,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - Open:
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
   - `#49`: Design live MekHQ unit-market purchase command API.
+  - `#52`: Design live MekHQ contract selection command API.
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
 - Blocked: none yet for this epic.
 
@@ -64,6 +65,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
+- `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
 - `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`
