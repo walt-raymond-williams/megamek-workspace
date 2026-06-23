@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design unit-market purchase command API.
+1. Implement guarded live MekHQ unit-market purchase command.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Source-check safe selectors and workflow for MEK-RPG-driven unit or DropShip purchases from MekHQ's live market.
-   - Output: Selector design, endpoint proposal, duplicate-offer refusal rules, verification facts, and a narrowed implementation issue if safe.
-   - Notes: GitHub issue `#49`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`; do not implement purchase by row index or display name.
+   - Goal: Add source-generated live-session selectors and a guarded purchase command for one unique non-black-market unit-market offer.
+   - Output: `GET /campaign/commands` selector candidates, `POST /campaign/command/markets/unit-offers/purchase`, duplicate/stale/black-market refusal rules, and compile/checkstyle verification.
+   - Notes: GitHub issue `#54`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`; design completed in `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`.
 
 2. Design contract selection command API.
    - Status: `Not started`
@@ -110,6 +110,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-23`: Completed GitHub issue `#49` by adding `MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md` and creating follow-up implementation issue `#54`. Source review found no durable unique id in `UnitMarketOffer#writeToXML()`, so V1 should use MekHQ-generated live-session offer selectors scoped to current readiness state, full guard facts, and duplicate exact-offer refusal. The safe first implementation slice is one unique non-black-market offer through `POST /campaign/command/markets/unit-offers/purchase`, preserving MekHQ price, finance, unit creation, delivery, report, and offer-removal logic. Archived handoff: `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`.
 - `2026-06-23`: Completed GitHub issue `#53` by adding `POST /campaign/command/personnel/fatigue` in local MekHQ source commit `ef6ef99ef9`. V1 validates the shared command envelope, person/name/status/prisoner/unit guards, expected raw/adjusted/permanent fatigue guards, `dryRun`, `promptPolicy=refuse_if_prompt`, process-local idempotency, opt-in save, plain-text audit context, and conservative refusal rules. Apply mode calls `Person#changeFatigue(...)`, can append a `GENERAL` MEK-RPG audit report, and readiness now reports `personnel.fatigue` with fatigue guard facts while keeping broad medical/prosthetic commands blocked. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable-campaign smoke tests were not run because no source-built MekHQ instance with a copied campaign was loaded in this shell. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned 403. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`.
 - `2026-06-23`: Completed GitHub issue `#48` by adding `MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md` and creating follow-up implementation issue `#53`. Source review found MekHQ medical state is split across classic hits, Advanced Medical injuries, Alternate Advanced Medical prosthetic/implant injury records, fatigue, finance transactions, and medical/patient logs. Broad medical treatment and prosthetic surgery remain blocked until source-owned non-dialog services exist; the safe first slice is `POST /campaign/command/personnel/fatigue` using `Person#changeFatigue(...)`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`.
 - `2026-06-22`: Completed GitHub issue `#51` by adding `POST /campaign/command/personnel/status` in local MekHQ source commit `32366b64a0`. V1 validates the shared command envelope, target person/name/status/prisoner/unit guards, `promptPolicy=refuse_if_prompt`, process-local idempotency, dry-run, opt-in save, and conservative status/refusal rules. Apply mode calls `Person#changeStatus(Campaign, LocalDate, PersonnelStatus)` and can append a `GENERAL` MEK-RPG audit report. Readiness now reports `personnel.status` available with allowed statuses and refusal codes. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable campaign smoke tests were not run because no source-built MekHQ instance with a copied campaign was loaded in this shell. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`.

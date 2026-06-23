@@ -22,17 +22,18 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#51`: Implement guarded live MekHQ personnel status command.
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
   - `#53`: Implement guarded live MekHQ personnel fatigue command.
-- Open:
   - `#49`: Design live MekHQ unit-market purchase command API.
+- Open:
+  - `#54`: Implement guarded live MekHQ unit-market purchase command.
   - `#52`: Design live MekHQ contract selection command API.
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
 - Blocked: none yet for this epic.
 
 ## Recommended Next Step
 
-- Issue: `#49`
-- Why next: `#53` completed the safe first medical-adjacent mutation. Unit-market purchase is the next listed high-value domain command design, but stable offer selectors remain the central source question.
-- Handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`
+- Issue: `#54`
+- Why next: `#49` found a safe narrow V1 only if MekHQ first exposes source-generated live-session unit-market offer selectors and refuses duplicate exact offer fingerprints.
+- Handoff: `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`
 
 ## Verification State
 
@@ -60,6 +61,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#51`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Person#changeStatus(...)`, `PersonnelStatus`, and command-envelope docs before implementing `POST /campaign/command/personnel/status`.
   - Read issue `#48`, `MedicalController`, `InjuryUtil`, `AdvancedMedicalAlternateHealing`, `AdvancedReplacementLimbDialog`, `PersonnelTableMouseAdapter#replaceLimb(...)`, `Person` injury/fatigue APIs, `Injury`, `InjuryType`, `InjurySubType`, and `ProstheticType` before designing `personnel.fatigue`, `personnel.medical-treatment`, and `personnel.prosthetic-surgery`.
   - Read issue `#53`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Person#changeFatigue(...)`, `Person#getFatigueDirect()`, `Person#getAdjustedFatigue()`, `Person#getPermanentFatigue()`, and issue `#48` medical design before implementing `POST /campaign/command/personnel/fatigue`.
+  - Read issue `#49`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketPane.java`, `UnitMarketTableModel.java`, `UnitMarketType.java`, `Campaign#addNewUnit(...)`, `LocalCommandReadinessExporter.java`, and `LocalCampaignStateExporter.java` before designing `POST /campaign/command/markets/unit-offers/purchase`.
 - Known blockers:
   - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commit `ef6ef99ef9`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
@@ -73,7 +75,8 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`
-- `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`
+- `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`
 - `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
@@ -83,3 +86,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`
 - `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`
 - `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`
+- `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`

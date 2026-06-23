@@ -6,6 +6,7 @@
 - Roadmap entry: `Design live MekHQ unit-market purchase command API`
 - Priority: `High`
 - Parent epic: `#44`
+- Status: `Completed on 2026-06-23`
 
 ## Goal
 
@@ -27,6 +28,8 @@ Read these first:
 - Proposed endpoint shape, likely `POST /campaign/command/markets/unit-offers/purchase`.
 - Guard fields for offer selector, expected unit name/type, expected price, expected transit duration, expected balance, and delivery policy.
 - Refusal rules for duplicate or ambiguous offers.
+- Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`
+- Follow-up implementation handoff: `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`
 
 ## Files And Areas
 
