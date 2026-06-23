@@ -7,7 +7,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 ## Workstream Shape
 
 - Parent epic: `#56`, "Epic: Investigate richer MekHQ activity history API"
-- Status: `Planned`
+- Status: `In progress`
 - Integration branch: use the active local MekHQ API branch unless a later source implementation slice needs a new branch.
 - Human review required before merge to `master`: `Yes`, if source changes land.
 
@@ -17,29 +17,31 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 - `Confirmed from source`: `HistoricalDailyReportDialog` views bounded historical daily report windows and uses `MHQConstants.MAX_HISTORICAL_LOG_DAYS`.
 - `Confirmed from source`: `Person` serializes and reads six log families: `personnelLog`/personal, `medicalLog`, `patientLog`, `scenarioLog`, `assignmentLog`, and `performanceLog`.
 - `Confirmed from source`: `Finances` owns serialized `Transaction` rows through `Finances#getTransactions()` and `Transaction#writeToXML(...)`.
-- `Inferred`: historical daily reports are likely the safest first export slice, while per-person medical and patient logs need explicit privacy and target-filter rules before implementation.
+- `Confirmed from source`: `Campaign.inMemoryLogHistory` is live-session memory; source search found no save serialization path for that list.
+- `Inferred`: historical daily reports are likely the safest first export slice only if the API design accepts memory-only history metadata; per-person medical and patient logs need explicit privacy and target-filter rules before implementation.
 
 ## Issue Snapshot
 
 - Last refreshed: `2026-06-23`
+- Closed:
+  - `#57`: Audit MekHQ activity-history source owners. Audit note: `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`; archived handoff: `docs/handoffs/archive/audit-mekhq-activity-history-sources.md`.
 - Open:
-  - `#57`: Audit MekHQ activity-history source owners.
   - `#58`: Design read-only MekHQ activity-history API.
   - `#59`: Implement historical daily report activity export.
   - `#60`: Implement MekHQ per-person activity log export.
   - `#61`: Add MekHQ activity-history fixtures and tests.
 - Blocked:
-  - `#59`, `#60`, and `#61` should wait for `#57` and `#58`.
+  - `#59`, `#60`, and `#61` should wait for `#58`.
 
 ## Recommended Next Step
 
-- Issue: `#57`
-- Why next: the audit must classify source owners, serialization, UI consumers, date semantics, text/HTML behavior, privacy risk, and payload risk before API shape or implementation.
-- Handoff: `docs/handoffs/active/audit-mekhq-activity-history-sources.md`
+- Issue: `#58`
+- Why next: the source audit is complete, and the workstream now needs endpoint shape, default limits, date windows, filters, sanitization, privacy defaults, unsupported entries, and duplicate handling before implementation.
+- Handoff: `docs/handoffs/active/design-mekhq-activity-history-api.md`
 
 ## Verification State
 
-- Commands passed: none yet for this workstream.
+- Commands passed: source audit used `rg` and targeted source reads; no build/test commands were required because no source code changed.
 - Manual checks: none yet.
 - Known blockers: source implementation smoke tests will need a disposable campaign with representative historical daily logs and personnel logs.
 
@@ -48,4 +50,5 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 - `docs/current/ROADMAP.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`
 - `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`
-- `docs/handoffs/active/audit-mekhq-activity-history-sources.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`
+- `docs/handoffs/active/design-mekhq-activity-history-api.md`

@@ -18,7 +18,7 @@ Read these first:
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_API_TRACKING.md`
-- The audit note produced by issue `#57`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`
 
 ## Expected Output
