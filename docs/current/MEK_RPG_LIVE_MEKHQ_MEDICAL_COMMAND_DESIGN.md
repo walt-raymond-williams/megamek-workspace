@@ -132,13 +132,19 @@ V1 should refuse:
 
 `GET /campaign/commands` should continue reporting broad `personnel.medical_treatment` as blocked until a source-owned treatment service exists.
 
-Recommended readiness rows for follow-up issue `#53`:
+Implemented readiness rows from issue `#53`:
 
-- `personnel.fatigue`: available only when a campaign is loaded, a person selector exists, and fatigue rules are enabled.
+- `personnel.fatigue`: available when a campaign is loaded and fatigue rules are enabled; otherwise blocked with `fatigue_rules_disabled`.
 - `personnel.medical_treatment`: blocked with `source_service_missing` or `option_aware_design_required`.
 - `personnel.prosthetic_surgery`: blocked with `prosthetic_service_missing` until dialog logic is extracted.
 - `personnel.medical_expense`: blocked unless a future GM expense command is accepted.
 
 ## Follow-Up
 
-Follow-up issue `#53` implements `POST /campaign/command/personnel/fatigue`. It should update MekHQ local source only, add readiness output for `personnel.fatigue`, and verify with `.\gradlew.bat :MekHQ:compileJava` plus `.\gradlew.bat :MekHQ:checkstyleMain`. Live smoke testing should use a copied or disposable campaign loaded in source-built MekHQ with the control API enabled.
+Issue `#53` implemented `POST /campaign/command/personnel/fatigue` in local MekHQ source commit `ef6ef99ef9`.
+
+`Confirmed from source`: V1 calls `Person#changeFatigue(...)`, validates the shared command envelope, requires person/name/status/prisoner/unit and fatigue guards, refuses disabled fatigue rules, inactive or dead personnel, visible dialogs, mixed medical/prosthetic/expense/status effects, permanent-fatigue mutation, unsupported prompt/save policy, and stale target facts.
+
+`Confirmed locally`: `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`.
+
+`Unknown`: live disposable-campaign smoke testing has not run. It requires a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied campaign loaded.
