@@ -505,9 +505,10 @@ Use this shape for entries that may become GitHub issues:
   - `#53`: Implement guarded live MekHQ personnel fatigue command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`.
   - `#54`: Implement guarded live MekHQ unit-market purchase command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`.
-  - `#52`: Design live MekHQ contract selection command API. Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`.
-- Recommended sequence: Continue with the contract selection design issue. Issues `#51`, `#53`, and `#54` are complete but still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
-- Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Which contract acceptance prompts can be detected or refused before mutation?
+  - `#52`: Design live MekHQ contract selection command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`.
+  - `#55`: Implement guarded live MekHQ contract accept command. Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`.
+- Recommended sequence: Continue with implementation issue `#55`. Issues `#51`, `#53`, `#54`, and future `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+- Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Should contract acceptance eventually support explicit travel/rental/faction-standing policies after V1 prompt-free acceptance?
 
 ### Define guarded live MekHQ command envelope and prompt policy
 
@@ -628,13 +629,26 @@ Use this shape for entries that may become GitHub issues:
 
 ### Design live MekHQ contract selection command API
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#52`
 - Owner: `Codex`
 - Goal: Design a guarded command that lets MEK-RPG ask the loaded MekHQ campaign to accept a specific available contract from the contract market.
 - Why it matters: MEK-RPG can already read available contracts, but selecting one is a strategic campaign mutation with finances, transport, reporting, faction, mission, and prompt side effects that must stay inside MekHQ-owned logic.
-- Expected output: Source-backed contract acceptance path, endpoint proposal, request/response API contract, selector and guard-field rules, prompt refusal policy, readiness-update requirements, memo-ready MEK-RPG integration guidance, and a narrowed implementation issue if safe.
-- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`. The likely endpoint is `POST /campaign/command/contracts/accept`, but the design should confirm naming from source and existing local API conventions.
+- Expected output: Completed with `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md` and follow-up implementation issue `#55`.
+- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`. Source review found market contract ids are stable while an offer remains in the market, but `Campaign#addMission(...)` assigns a new active mission id on acceptance. V1 should implement `POST /campaign/command/contracts/accept` for one prompt-free offer and refuse before mutation when confirmation, faction-standing, StratCon start, travel/mothball, transit, or rental prompts would be required.
 - Dependencies: Issues `#45` and `#46`; MekHQ source around `ContractMarketDialog#acceptContract(...)`, `AbstractContractMarket#getContracts()`, `Contract#acceptContract(...)`, mission insertion, advance/transport funds, rentals, faction standing, and local command readiness.
-- Open questions: Are contract ids stable enough for command selectors? Which acceptance prompts can be pre-detected or safely refused? Should V1 accept only a single contract and leave decline, negotiation, and market refresh for future commands?
+- Open questions: Later versions need explicit source services before supporting contract confirmation choices, faction-standing dialog behavior, travel automation, rentals, decline, negotiation, or market refresh.
+
+### Implement guarded live MekHQ contract accept command
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#55`
+- Owner: `Codex`
+- Goal: Implement `POST /campaign/command/contracts/accept` for one prompt-free current contract-market offer selected by source id plus guard fields.
+- Why it matters: Contract choice is the next strategic MEK-RPG-to-MekHQ mutation after unit purchase. MekHQ must own finance credits, mission insertion, StratCon initialization, reports, market removal, and save behavior.
+- Expected output: Source-generated readiness metadata and selector guard facts, guarded dry-run/apply endpoint, prompt preflight refusal before mutation, process-local idempotency, optional audit report, opt-in save policy, and compile/checkstyle verification.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`.
+- Dependencies: Issues `#45`, `#46`, and `#52`; existing source command API patterns from `#50`, `#51`, `#53`, and `#54`; MekHQ source branch `codex/mekhq-advance-day-control-api`.
+- Open questions: Live smoke testing requires a copied/disposable campaign with a prompt-free selectable contract offer loaded in a source-built MekHQ instance.

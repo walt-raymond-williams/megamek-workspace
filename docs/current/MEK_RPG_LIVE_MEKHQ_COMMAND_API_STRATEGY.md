@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, unit-market purchase source design, and guarded unit-market purchase command completed through issue `#54` on `2026-06-23`.
+Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, unit-market purchase source design, guarded unit-market purchase command, and contract accept source design completed through issue `#52` on `2026-06-23`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -247,9 +247,13 @@ Why this may be a good early real workflow:
 - Contract offers are strategic MEK-RPG-facing decisions.
 - Contract ids appear more stable than unit market offer selectors.
 
-Blocker:
+Design result:
 
-- Prompt policy needs source review. Contract acceptance can open confirmation, start, rental, and faction-standing dialogs.
+- Issue `#52` completed the source design in `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md` and created follow-up implementation issue `#55`.
+- Contract-market offer ids are stable while the offer remains in the market because `AbstractContractMarket` assigns ids with `lastId++`, serializes `lastId`, and writes each offer through `Mission#writeToXMLBegin(...)`; `Mission.generateInstanceFromXML(...)` restores the id.
+- The market offer id is not the final active mission id. `Campaign#addMission(...)` assigns a new mission id during acceptance, so the response must return both the accepted market contract id and the new active mission id.
+- V1 should use `POST /campaign/command/contracts/accept`, select one current market offer by id plus full expected term guards, and refuse before mutation whenever the equivalent UI path would show confirmation, faction-standing, StratCon start, travel/mothball, transit, or rental dialogs.
+- V1 should not call `ContractMarketDialog#acceptContract(...)` directly because that method can apply finance and mission side effects before later prompts. The implementation should extract or add a source-owned non-dialog helper that preserves the non-dialog side effects and prompt preflight checks.
 
 ### Personnel Market Hire
 
@@ -414,8 +418,8 @@ Completed ordering:
 
 ## Current Easy-Win Ranking
 
-1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-2. Contract-market accept/decline by contract id, after prompt-policy review.
+1. Implement `POST /campaign/command/contracts/accept` for one prompt-free market offer by source id and guard fields.
+2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
 3. Personnel hire by applicant id, after market-style review.
 4. Repair/procurement execution, after stable work ids and repair prompt policy exist.
 5. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.

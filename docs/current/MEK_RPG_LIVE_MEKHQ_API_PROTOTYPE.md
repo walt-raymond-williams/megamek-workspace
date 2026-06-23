@@ -125,7 +125,9 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Unknown`: no source-confirmed dirty/unsaved campaign flag was found in this V1 pass. Source search found editor-local unsaved state, but not a campaign-wide dirty flag for the loaded campaign, so `dirtyState` remains explicit `Unknown` with a warning and a structured unsupported entry naming `MekHQ GUI save-state tracking` as the recommended owner.
 
-`Unsupported`: V1 does not expose stable market offer selectors, stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, unit purchase, personnel hire/fire, contract accept/decline, market refresh, negotiation, standalone save, or broad writeback commands. Market rows and repair/acquisition rows are display-only context and must not be treated as durable selectors.
+`Unsupported`: V1 does not expose stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, personnel hire/fire, contract accept/decline, market refresh, negotiation, standalone save, or broad writeback commands. Unit-market purchase now has source-generated live-session selectors in the local source branch, but repair/acquisition rows remain display-only and must not be treated as durable selectors.
+
+`Confirmed from source`: issue `#52` designed `POST /campaign/command/contracts/accept` in `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`. Contract-market offer ids are stable while an offer remains in the market, but `Campaign#addMission(...)` assigns a new active mission id during acceptance. The command should stay blocked until issue `#55` implements prompt-free acceptance with pre-mutation refusal for confirmation, faction-standing, StratCon start, travel/mothball, transit, and rental prompts.
 
 ## Fixtures
 

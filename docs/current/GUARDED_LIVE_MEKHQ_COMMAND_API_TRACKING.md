@@ -24,16 +24,17 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#53`: Implement guarded live MekHQ personnel fatigue command.
   - `#49`: Design live MekHQ unit-market purchase command API.
   - `#54`: Implement guarded live MekHQ unit-market purchase command.
-- Open:
   - `#52`: Design live MekHQ contract selection command API.
+- Open:
+  - `#55`: Implement guarded live MekHQ contract accept command.
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
 - Blocked: none yet for this epic.
 
 ## Recommended Next Step
 
-- Issue: `#52`
-- Why next: Unit-market purchase V1 is implemented; contract selection is the next strategic guarded command that still needs source review for selectors, funds, mission insertion, rentals, faction effects, and prompt refusal.
-- Handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
+- Issue: `#55`
+- Why next: Contract selection design is complete; the next slice is implementing one prompt-free guarded contract accept command using source-owned finance, mission insertion, contract acceptance, market removal, prompt preflight refusal, and readiness selectors.
+- Handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`
 
 ## Verification State
 
@@ -66,8 +67,9 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#53`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Person#changeFatigue(...)`, `Person#getFatigueDirect()`, `Person#getAdjustedFatigue()`, `Person#getPermanentFatigue()`, and issue `#48` medical design before implementing `POST /campaign/command/personnel/fatigue`.
   - Read issue `#49`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketPane.java`, `UnitMarketTableModel.java`, `UnitMarketType.java`, `Campaign#addNewUnit(...)`, `LocalCommandReadinessExporter.java`, and `LocalCampaignStateExporter.java` before designing `POST /campaign/command/markets/unit-offers/purchase`.
   - Read issue `#54`, `MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`, `LocalCommandReadinessExporter.java`, `LocalControlService.java`, `UnitMarketPane.java`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketType.java`, and `Campaign#addNewUnit(...)` before implementing source-generated live-session unit-market offer selectors and guarded single-offer purchase.
+  - Read issue `#52`, `ContractMarketDialog.java`, `AbstractContractMarket.java`, `AtbMonthlyContractMarket.java`, `CamOpsContractMarket.java`, `Mission.java`, `Campaign#addMission(...)`, `Contract.java`, `AtBContract.java`, `ContractAutomation.java`, `FacilityRentals.java`, `FactionStandingGreeting.java`, and `DialogContractStart.java` before designing `POST /campaign/command/contracts/accept`.
 - Known blockers:
-- Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commits `ef6ef99ef9` and `78890ba458`.
+  - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commits `ef6ef99ef9` and `78890ba458`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.status smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.fatigue smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
@@ -81,7 +83,8 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`
-- `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`
+- `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
 - `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`
@@ -92,3 +95,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`
 - `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`
 - `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`
+- `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`
