@@ -501,10 +501,11 @@ Use this shape for entries that may become GitHub issues:
   - `#50`: Implement guarded live MekHQ campaign status-note command. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`.
   - `#47`: Design live MekHQ personnel death and status command API. Completed on `2026-06-22`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`.
   - `#51`: Implement guarded live MekHQ personnel status command. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`.
-  - `#48`: Design live MekHQ medical treatment and prosthetic command API. Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+  - `#48`: Design live MekHQ medical treatment and prosthetic command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`.
+  - `#53`: Implement guarded live MekHQ personnel fatigue command. Active handoff: `docs/handoffs/active/implement-live-mekhq-personnel-fatigue-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Active handoff: `docs/handoffs/active/design-live-mekhq-unit-market-purchase-command.md`.
   - `#52`: Design live MekHQ contract selection command API. Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`.
-- Recommended sequence: Continue source-designing the remaining high-value domain commands with `#48` medical/prosthetics, `#49` unit-market purchase, and the contract selection design issue. Issue `#51` is complete but still needs live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+- Recommended sequence: Implement `#53` as the safe first medical-adjacent command identified by issue `#48`, then continue source-designing the remaining high-value domain commands with `#49` unit-market purchase and the contract selection design issue. Issue `#51` is complete but still needs live disposable-campaign smoke testing when a source-built MekHQ instance is available.
 - Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes? Which contract acceptance prompts can be detected or refused before mutation?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -574,16 +575,29 @@ Use this shape for entries that may become GitHub issues:
 
 ### Design live MekHQ medical treatment and prosthetic command API
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#48`
 - Owner: `Codex`
 - Goal: Design guarded commands for RPG-side medical treatment, prosthetic application, injury recovery, fatigue/hit recovery, and medical expenses.
 - Why it matters: MEK-RPG can resolve character-level care outside MekHQ daily processing, but MekHQ should remain the hard ledger for injuries, recovery, prosthetics, and availability.
-- Expected output: Source-backed map of injury/prosthetic/fatigue APIs, endpoint proposal, option-dependent refusal rules, verification facts, and a narrowed implementation issue if safe.
-- Handoff notes: Active handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+- Expected output: Completed with `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md` and follow-up implementation issue `#53`.
+- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`. Source review found that broad medical treatment and prosthetic surgery should remain blocked until source-owned non-dialog services exist, while `Person#changeFatigue(...)` is safe enough for a narrow guarded fatigue command.
 - Dependencies: Issue `#45`; MekHQ source under `campaign/personnel/medical`.
-- Open questions: How does the active MekHQ ruleset represent prosthetics? Which RPG medical outcomes belong in structured MekHQ medical state versus narrative notes?
+- Open questions: Future prosthetic implementation needs source service extraction from `AdvancedReplacementLimbDialog`; future structured treatment needs exact injury UUID guards and a safe source-owned treatment path.
+
+### Implement guarded live MekHQ personnel fatigue command
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#53`
+- Owner: `Codex`
+- Goal: Implement `POST /campaign/command/personnel/fatigue` as the first safe medical-adjacent command.
+- Why it matters: MEK-RPG can apply RPG-side rest, exhaustion, and fatigue recovery events while MekHQ keeps fatigue scaling, clamping, roster state, and audit reports under source-owned logic.
+- Expected output: MekHQ source endpoint, readiness row, shared envelope validation, dry-run/apply behavior through `Person#changeFatigue(...)`, audit report option, compile/checkstyle verification, and workspace close-out docs.
+- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-personnel-fatigue-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`.
+- Dependencies: Issues `#45`, `#46`, `#48`, and existing local API patterns from `#50` and `#51`.
+- Open questions: Live smoke testing requires a copied/disposable campaign loaded in source-built MekHQ with the control API enabled.
 
 ### Design live MekHQ unit-market purchase command API
 

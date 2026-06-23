@@ -121,6 +121,6 @@ Implementation issue should be source-only plus disposable-campaign verified:
 ## Deferred Work
 
 - Full tactical casualty application remains with issue `#10` and the Resolve Manually/battle-record MUL workflow.
-- Medical injury/prosthetic/fatigue outcomes belong to issue `#48`.
+- Medical injury/prosthetic/fatigue outcomes were source-designed in issue `#48`; fatigue implementation is tracked by issue `#53`, while broad treatment and prosthetic surgery remain blocked until source-owned medical/prosthetic services exist.
 - Prisoner status changes, prisoner release/execution/removal, bondsman conversion, and faction-standing consequences need a separate prisoner command design.
 - Retirement payouts and employee-turnover processing need a separate retirement/turnover command design if MEK-RPG needs those exact economics.

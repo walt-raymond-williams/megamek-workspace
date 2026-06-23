@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design medical treatment and prosthetic command API.
+1. Implement guarded live MekHQ personnel fatigue command.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Source-check how MEK-RPG medical treatment, prosthetics, injury recovery, fatigue/hit recovery, and medical expenses should mutate MekHQ medical state.
-   - Output: Design note, endpoint proposal, option-dependent refusal rules, verification facts, and a narrowed implementation issue if safe.
-   - Notes: GitHub issue `#48`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`.
+   - Goal: Implement `POST /campaign/command/personnel/fatigue` as the safe first medical-adjacent command identified by issue `#48`.
+   - Output: MekHQ source endpoint, readiness row, shared envelope validation, dry-run/apply behavior through `Person#changeFatigue(...)`, audit report option, and compile/checkstyle verification.
+   - Notes: GitHub issue `#53`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-personnel-fatigue-command.md`; do not implement injury healing, prosthetic surgery, medical expenses, permanent fatigue mutation, or broad medical treatment in this issue.
 
 2. Design unit-market purchase command API.
    - Status: `Not started`
@@ -117,6 +117,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-23`: Completed GitHub issue `#48` by adding `MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md` and creating follow-up implementation issue `#53`. Source review found MekHQ medical state is split across classic hits, Advanced Medical injuries, Alternate Advanced Medical prosthetic/implant injury records, fatigue, finance transactions, and medical/patient logs. Broad medical treatment and prosthetic surgery remain blocked until source-owned non-dialog services exist; the safe first slice is `POST /campaign/command/personnel/fatigue` using `Person#changeFatigue(...)`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`.
 - `2026-06-22`: Completed GitHub issue `#51` by adding `POST /campaign/command/personnel/status` in local MekHQ source commit `32366b64a0`. V1 validates the shared command envelope, target person/name/status/prisoner/unit guards, `promptPolicy=refuse_if_prompt`, process-local idempotency, dry-run, opt-in save, and conservative status/refusal rules. Apply mode calls `Person#changeStatus(Campaign, LocalDate, PersonnelStatus)` and can append a `GENERAL` MEK-RPG audit report. Readiness now reports `personnel.status` available with allowed statuses and refusal codes. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable campaign smoke tests were not run because no source-built MekHQ instance with a copied campaign was loaded in this shell. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`.
 - `2026-06-22`: Completed GitHub issue `#47` by adding `MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md` and creating follow-up implementation issue `#51`. Source review found V1 should call `Person#changeStatus(...)`, allow only conservative single-person narrative transitions (`MIA`, `POW`, recovery to `ACTIVE`, non-payout departures, betrayal/desertion, and non-tactical death causes), and refuse tactical casualties, medical/prosthetic outcomes, prisoner operations, retirement payouts, and resurrection. Archived handoff: `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`.
 - `2026-06-22`: Completed GitHub issue `#50` by adding `POST /campaign/command/status-note` in local MekHQ source commit `4429d99ea2`. V1 appends plain-text MEK-RPG audit notes to the `GENERAL` campaign report through `Campaign#addReport(DailyReportType.GENERAL, ...)`, validates the shared command envelope, supports dry-run, blocks visible dialogs under `promptPolicy=refuse_if_prompt`, rejects HTML, reports before/after report counts and prompt/save facts, updates `GET /campaign/commands`, and keeps save-after-success opt-in. Verified `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain`, and JSON fixture parsing.

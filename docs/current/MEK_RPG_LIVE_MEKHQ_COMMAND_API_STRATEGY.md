@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope, readiness discovery, guarded status-note command, and guarded personnel status command implemented for issues `#45`, `#46`, `#50`, and `#51` on `2026-06-22`.
+Status: command envelope, readiness discovery, guarded status-note command, and guarded personnel status command implemented for issues `#45`, `#46`, `#50`, and `#51` on `2026-06-22`; medical/prosthetic source design completed for issue `#48` on `2026-06-23`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -333,6 +333,14 @@ Blockers:
 - MekHQ medical behavior is option-dependent. A prosthetic may be a structured injury outcome, equipment/status marker, or medical-system-specific state rather than a simple note.
 - Source work must identify exact APIs and safe refusal cases before any endpoint mutates injuries.
 
+Design result:
+
+- Issue `#48` completed the source design in `MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`.
+- Medical state is split across classic hits, Advanced Medical injuries, Alternate Advanced Medical prosthetic/implant injury records, fatigue, finance transactions, and medical/patient logs.
+- Prosthetics and implants are structured permanent-modification `Injury` records with possible pilot/personnel option side effects; they must not be represented as plain notes.
+- Broad `personnel.medical-treatment` and `personnel.prosthetic-surgery` commands should remain blocked until source exposes a non-dialog service or future source work extracts the reusable logic currently held inside `AdvancedReplacementLimbDialog`.
+- The lowest-risk first medical-adjacent implementation is `POST /campaign/command/personnel/fatigue`, using `Person#changeFatigue(...)` with expected raw/adjusted/permanent fatigue guards. Follow-up issue `#53` owns that implementation.
+
 ### Unit Market Purchase
 
 Near-term value: high for MEK-RPG.
@@ -389,12 +397,13 @@ Completed ordering:
 
 ## Current Easy-Win Ranking
 
-1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-2. Medical treatment/prosthetic command design, after source review of injury and prosthetic state.
+1. `POST /campaign/command/personnel/fatigue`, because source review found it can use `Person#changeFatigue(...)` without injury, prosthetic, surgery, payment, or prompt side effects.
+2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
 3. Contract-market accept/decline by contract id, after prompt-policy review.
 4. Personnel hire by applicant id, after market-style review.
 5. Unit-market purchase by stable offer id, after selector design.
 6. Repair/procurement execution, after stable work ids and repair prompt policy exist.
+7. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.
 
 ## Guardrail For MEK-RPG
 

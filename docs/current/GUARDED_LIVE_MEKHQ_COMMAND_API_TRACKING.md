@@ -12,7 +12,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Issue Snapshot
 
-- Last refreshed: `2026-06-22`
+- Last refreshed: `2026-06-23`
 - Closed:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy.
@@ -20,8 +20,9 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#50`: Implement guarded live MekHQ campaign status-note command.
   - `#47`: Design live MekHQ personnel death and status command API.
   - `#51`: Implement guarded live MekHQ personnel status command.
-- Open:
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
+- Open:
+  - `#53`: Implement guarded live MekHQ personnel fatigue command.
   - `#49`: Design live MekHQ unit-market purchase command API.
   - `#52`: Design live MekHQ contract selection command API.
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
@@ -29,9 +30,9 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Recommended Next Step
 
-- Issue: `#48`
-- Why next: `#51` implemented the conservative personnel status command. The next unresolved high-value write-side domain is medical treatment and prosthetics, which needs source design before any mutation endpoint is safe.
-- Handoff: `docs/handoffs/active/design-live-mekhq-medical-prosthetic-command.md`
+- Issue: `#53`
+- Why next: `#48` found broad medical treatment and prosthetic surgery too option-dependent for an immediate endpoint, but identified `Person#changeFatigue(...)` as a safe first medical-adjacent mutation with simple before/after guards.
+- Handoff: `docs/handoffs/active/implement-live-mekhq-personnel-fatigue-command.md`
 
 ## Verification State
 
@@ -54,6 +55,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#50`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Campaign#addReport(...)`, and `DailyReportType` before implementing `POST /campaign/command/status-note`.
   - Read issue `#47`, `Person#changeStatus(...)`, `PersonnelStatus`, `Person#setPrisonerStatus(...)`, `PrisonerStatus`, `Unit#remove(...)`, `CampaignEventProcessor`, `ResolveScenarioTracker`, `CapturePrisoners`, and personnel-table status/prisoner UI commands before designing issue `#51`.
   - Read issue `#51`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Person#changeStatus(...)`, `PersonnelStatus`, and command-envelope docs before implementing `POST /campaign/command/personnel/status`.
+  - Read issue `#48`, `MedicalController`, `InjuryUtil`, `AdvancedMedicalAlternateHealing`, `AdvancedReplacementLimbDialog`, `PersonnelTableMouseAdapter#replaceLimb(...)`, `Person` injury/fatigue APIs, `Injury`, `InjuryType`, `InjurySubType`, and `ProstheticType` before designing `personnel.fatigue`, `personnel.medical-treatment`, and `personnel.prosthetic-surgery`.
 - Known blockers:
   - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
@@ -65,6 +67,8 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`
+- `docs/handoffs/active/implement-live-mekhq-personnel-fatigue-command.md`
 - `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
@@ -72,3 +76,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/handoffs/archive/implement-live-mekhq-status-note-command.md`
 - `docs/handoffs/archive/design-live-mekhq-personnel-status-command.md`
 - `docs/handoffs/archive/implement-live-mekhq-personnel-status-command.md`
+- `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`
