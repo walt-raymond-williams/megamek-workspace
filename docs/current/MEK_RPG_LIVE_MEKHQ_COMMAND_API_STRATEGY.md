@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, and unit-market purchase source design completed through issue `#49` on `2026-06-23`.
+Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, unit-market purchase source design, and guarded unit-market purchase command completed through issue `#54` on `2026-06-23`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -375,6 +375,14 @@ Design result:
 - V1 should preserve the current purchase side effects from `UnitMarketPane`: price calculation through `UnitMarketOffer#getPrice()`, funds debit as `TransactionType.UNIT_PURCHASE`, unit creation through `Campaign#addNewUnit(...)`, delivery report/state, offer removal, normal acquisition/finance reports, and optional MEK-RPG audit report.
 - Black-market purchases should stay blocked in V1 because the current source path includes random swindle behavior that can debit money without adding the unit.
 
+Implemented result:
+
+- Issue `#54` implemented `POST /campaign/command/markets/unit-offers/purchase` in local MekHQ source commit `78890ba458`.
+- `GET /campaign/commands` now exposes opaque live-session unit-market offer selectors scoped to the current process and `stateRevision`, with canonical source-owned fingerprints, duplicate counts, guard facts, and non-selectable refusal reasons.
+- V1 validates selector state revision, fingerprint, unit name/type, market type, price percent, final price, transit duration, instant-delivery, mothball-delivery, random-quality, current balance, `dryRun`, `promptPolicy=refuse_if_prompt`, process-local idempotency, plain-text audit context, and opt-in save policy.
+- Apply mode loads the entity through `UnitMarketOffer#getEntity()`, debits `TransactionType.UNIT_PURCHASE`, adds the unit through `Campaign#addNewUnit(...)`, preserves delivery/report/offer-removal behavior, and can append a `GENERAL` MEK-RPG audit report.
+- V1 refuses duplicate exact offers, stale selectors, stale guards, entity-load failures, insufficient funds, black-market offers, delivery-policy mismatches, exact quality guards, and visible prompts.
+
 ### Repair / Procurement Commands
 
 Near-term value: medium.
@@ -409,9 +417,8 @@ Completed ordering:
 1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
 2. Contract-market accept/decline by contract id, after prompt-policy review.
 3. Personnel hire by applicant id, after market-style review.
-4. Unit-market purchase by source-generated live offer selector, after implementation.
-5. Repair/procurement execution, after stable work ids and repair prompt policy exist.
-6. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.
+4. Repair/procurement execution, after stable work ids and repair prompt policy exist.
+5. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.
 
 ## Guardrail For MEK-RPG
 

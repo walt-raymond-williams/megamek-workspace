@@ -23,17 +23,17 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#48`: Design live MekHQ medical treatment and prosthetic command API.
   - `#53`: Implement guarded live MekHQ personnel fatigue command.
   - `#49`: Design live MekHQ unit-market purchase command API.
-- Open:
   - `#54`: Implement guarded live MekHQ unit-market purchase command.
+- Open:
   - `#52`: Design live MekHQ contract selection command API.
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
 - Blocked: none yet for this epic.
 
 ## Recommended Next Step
 
-- Issue: `#54`
-- Why next: `#49` found a safe narrow V1 only if MekHQ first exposes source-generated live-session unit-market offer selectors and refuses duplicate exact offer fingerprints.
-- Handoff: `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`
+- Issue: `#52`
+- Why next: Unit-market purchase V1 is implemented; contract selection is the next strategic guarded command that still needs source review for selectors, funds, mission insertion, rentals, faction effects, and prompt refusal.
+- Handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
 
 ## Verification State
 
@@ -47,11 +47,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#51`.
   - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#53`.
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#53`.
+  - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#54`.
+  - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#54`.
 - Source commits:
   - `e19740b110` in `external/src/mekhq`: `Expose command readiness endpoint`.
   - `4429d99ea2` in `external/src/mekhq`: `Add guarded status note command`.
   - `32366b64a0` in `external/src/mekhq`: `Add guarded personnel status command`.
   - `ef6ef99ef9` in `external/src/mekhq`: `Add guarded personnel fatigue command`.
+  - `78890ba458` in `external/src/mekhq`: `Add guarded unit market purchase command`.
 - Manual checks:
   - Read issue `#45`, the active handoff, `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and `LocalControlService.java`.
   - Read issue `#46`, `UnitMarketOffer.java`, `LocalCampaignStateExporter.java`, and source-confirmed selector methods before implementing `GET /campaign/commands`.
@@ -62,11 +65,13 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#48`, `MedicalController`, `InjuryUtil`, `AdvancedMedicalAlternateHealing`, `AdvancedReplacementLimbDialog`, `PersonnelTableMouseAdapter#replaceLimb(...)`, `Person` injury/fatigue APIs, `Injury`, `InjuryType`, `InjurySubType`, and `ProstheticType` before designing `personnel.fatigue`, `personnel.medical-treatment`, and `personnel.prosthetic-surgery`.
   - Read issue `#53`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `Person#changeFatigue(...)`, `Person#getFatigueDirect()`, `Person#getAdjustedFatigue()`, `Person#getPermanentFatigue()`, and issue `#48` medical design before implementing `POST /campaign/command/personnel/fatigue`.
   - Read issue `#49`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketPane.java`, `UnitMarketTableModel.java`, `UnitMarketType.java`, `Campaign#addNewUnit(...)`, `LocalCommandReadinessExporter.java`, and `LocalCampaignStateExporter.java` before designing `POST /campaign/command/markets/unit-offers/purchase`.
+  - Read issue `#54`, `MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`, `LocalCommandReadinessExporter.java`, `LocalControlService.java`, `UnitMarketPane.java`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketType.java`, and `Campaign#addNewUnit(...)` before implementing source-generated live-session unit-market offer selectors and guarded single-offer purchase.
 - Known blockers:
-  - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commit `ef6ef99ef9`.
+- Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commits `ef6ef99ef9` and `78890ba458`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.status smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.fatigue smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
+  - Live unit-market purchase smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with representative unit-market offers, ideally including a DropShip offer.
 
 ## Related Docs
 
@@ -76,7 +81,6 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`
-- `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`
 - `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
@@ -87,3 +91,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`
 - `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`
 - `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`
+- `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`

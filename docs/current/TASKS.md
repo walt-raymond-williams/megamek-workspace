@@ -45,28 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Implement guarded live MekHQ unit-market purchase command.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Add source-generated live-session selectors and a guarded purchase command for one unique non-black-market unit-market offer.
-   - Output: `GET /campaign/commands` selector candidates, `POST /campaign/command/markets/unit-offers/purchase`, duplicate/stale/black-market refusal rules, and compile/checkstyle verification.
-   - Notes: GitHub issue `#54`; child of epic `#44`; active handoff `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`; design completed in `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`.
-
-2. Design contract selection command API.
+1. Design contract selection command API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-check how MEK-RPG should ask MekHQ to accept a selected available contract from the live contract market.
    - Output: Contract acceptance endpoint proposal, selector and guard-field policy, prompt refusal rules, readiness-update requirements, memo-ready MEK-RPG integration guidance, and a narrowed implementation issue if safe.
    - Notes: GitHub issue `#52`; child of epic `#44`; active handoff `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`; do not accept contracts by display name, market row, or direct save edit.
 
-3. Run MekHQ quickstart roster UI validation.
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-4. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -110,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-23`: Completed GitHub issue `#54` by adding source-generated live-session unit-market offer selectors and `POST /campaign/command/markets/unit-offers/purchase` in local MekHQ source commit `78890ba458`. V1 supports one unique non-black-market offer, validates selector state revision, canonical fingerprint, unit/market/price/delivery/balance guards, `dryRun`, `promptPolicy=refuse_if_prompt`, process-local idempotency, optional audit report, and opt-in save. Apply mode debits `TransactionType.UNIT_PURCHASE`, calls `Campaign#addNewUnit(...)`, preserves delivery/report/offer-removal side effects, and refuses duplicate, stale, unloadable, unaffordable, and black-market offers. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable-campaign smoke tests were not run because no source-built MekHQ instance with representative unit-market offers was loaded in this shell. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned 403. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`.
 - `2026-06-23`: Completed GitHub issue `#49` by adding `MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md` and creating follow-up implementation issue `#54`. Source review found no durable unique id in `UnitMarketOffer#writeToXML()`, so V1 should use MekHQ-generated live-session offer selectors scoped to current readiness state, full guard facts, and duplicate exact-offer refusal. The safe first implementation slice is one unique non-black-market offer through `POST /campaign/command/markets/unit-offers/purchase`, preserving MekHQ price, finance, unit creation, delivery, report, and offer-removal logic. Archived handoff: `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`.
 - `2026-06-23`: Completed GitHub issue `#53` by adding `POST /campaign/command/personnel/fatigue` in local MekHQ source commit `ef6ef99ef9`. V1 validates the shared command envelope, person/name/status/prisoner/unit guards, expected raw/adjusted/permanent fatigue guards, `dryRun`, `promptPolicy=refuse_if_prompt`, process-local idempotency, opt-in save, plain-text audit context, and conservative refusal rules. Apply mode calls `Person#changeFatigue(...)`, can append a `GENERAL` MEK-RPG audit report, and readiness now reports `personnel.fatigue` with fatigue guard facts while keeping broad medical/prosthetic commands blocked. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable-campaign smoke tests were not run because no source-built MekHQ instance with a copied campaign was loaded in this shell. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned 403. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`.
 - `2026-06-23`: Completed GitHub issue `#48` by adding `MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md` and creating follow-up implementation issue `#53`. Source review found MekHQ medical state is split across classic hits, Advanced Medical injuries, Alternate Advanced Medical prosthetic/implant injury records, fatigue, finance transactions, and medical/patient logs. Broad medical treatment and prosthetic surgery remain blocked until source-owned non-dialog services exist; the safe first slice is `POST /campaign/command/personnel/fatigue` using `Person#changeFatigue(...)`. Archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`.

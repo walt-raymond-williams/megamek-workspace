@@ -493,7 +493,7 @@ Use this shape for entries that may become GitHub issues:
 - Why it matters: MEK-RPG needs more than read-only state: RPG-side play can buy units or DropShips, change character status, kill a character, resolve medical treatment, apply prosthetics, accept opportunities, or make GM corrections. These actions must use MekHQ logic instead of direct save edits or generic state patches.
 - Expected output: A common command envelope, command-readiness/selector discovery, and source-backed command designs for campaign notes, contract selection, unit-market purchase, personnel death/status, and medical/prosthetic treatment, followed by narrow implementation issues once safe selectors and prompt policies are known.
 - Handoff notes: Epic handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`. Strategy note: `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`. Feature tracking snapshot: `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`. This epic should not be implemented directly; child issues own discovery/design/implementation slices.
-- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, completed first command issue `#50`, completed personnel status command issue `#51`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
+- Dependencies: Completed Advance Day command prototype `#35`, completed live read-only API epic `#38`, completed discovery issue `#43`, completed first command issue `#50`, completed personnel status command issue `#51`, completed personnel fatigue command issue `#53`, completed unit-market purchase command issue `#54`, MekHQ source branch `codex/mekhq-advance-day-control-api`, and disposable campaign data for mutating tests.
 - Child issues:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy. Completed on `2026-06-22`; archived handoff: `docs/handoffs/archive/design-live-mekhq-command-envelope.md`.
@@ -504,10 +504,10 @@ Use this shape for entries that may become GitHub issues:
   - `#48`: Design live MekHQ medical treatment and prosthetic command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-medical-prosthetic-command.md`.
   - `#53`: Implement guarded live MekHQ personnel fatigue command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-personnel-fatigue-command.md`.
   - `#49`: Design live MekHQ unit-market purchase command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`.
-  - `#54`: Implement guarded live MekHQ unit-market purchase command. Active handoff: `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`.
+  - `#54`: Implement guarded live MekHQ unit-market purchase command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`.
   - `#52`: Design live MekHQ contract selection command API. Active handoff: `docs/handoffs/active/design-live-mekhq-contract-selection-command.md`.
-- Recommended sequence: Implement the narrow unit-market V1 from issue `#49` after creating source-generated live-session offer selectors, then continue with the contract selection design issue. Issues `#51` and `#53` are complete but still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
-- Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Can unit-market offers get stable selectors without source model changes? Which contract acceptance prompts can be detected or refused before mutation?
+- Recommended sequence: Continue with the contract selection design issue. Issues `#51`, `#53`, and `#54` are complete but still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+- Open questions: Which selectors must be durable across save/reload? Which medical/prosthetic state is available under the user's active MekHQ options? Which contract acceptance prompts can be detected or refused before mutation?
 
 ### Define guarded live MekHQ command envelope and prompt policy
 
@@ -530,10 +530,10 @@ Use this shape for entries that may become GitHub issues:
 - Owner: `Codex`
 - Goal: Expose which commands are available, blocked, or unsupported for the currently loaded MekHQ campaign, including safe selectors where available.
 - Why it matters: MEK-RPG should show action buttons from MekHQ-provided readiness, not by guessing from display-only state rows.
-- Expected output: Completed with MekHQ source endpoint `GET /campaign/commands`, which reports command readiness rows, machine-readable blockers, selector policy, and safe selector candidates for campaign/person/unit/applicant/contract ids. Unit-market purchase remains blocked with `stable_offer_selector_missing`.
+- Expected output: Completed with MekHQ source endpoint `GET /campaign/commands`, which reports command readiness rows, machine-readable blockers, selector policy, and safe selector candidates for campaign/person/unit/applicant/contract ids. Issue `#54` later added live-session unit-market offer selectors.
 - Handoff notes: Completed on `2026-06-22`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-command-readiness-selectors.md`.
 - Dependencies: Issue `#45` command envelope is complete. Future domain command issues must use the readiness output and keep unit-market purchase blocked until selectors are safe.
-- Open questions: Future command-specific selectors still need a durability decision: opaque live-session tokens tied to `state_revision`, durable ids that survive save/reload, or a mix by domain.
+- Open questions: Future command-specific selectors still need a durability decision: opaque live-session tokens tied to `state_revision`, durable ids that survive save/reload, or a mix by domain. Unit-market purchase V1 uses opaque live-session selectors because offers lack durable save-file ids.
 
 ### Implement guarded live MekHQ campaign status-note command
 
@@ -615,14 +615,14 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement guarded live MekHQ unit-market purchase command
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#54`
 - Owner: `Codex`
 - Goal: Implement source-generated live-session unit-market offer selectors and `POST /campaign/command/markets/unit-offers/purchase` for one guarded non-black-market offer.
 - Why it matters: MEK-RPG needs high-value logistics actions such as buying a DropShip, but MekHQ must own the price, finance transaction, unit creation, delivery state, reports, and market removal.
-- Expected output: Selector candidates in `GET /campaign/commands`; guarded dry-run/apply endpoint for one unique non-black-market offer; refusal rules for duplicate, stale, unaffordable, unloadable, and black-market offers; compile/checkstyle verification.
-- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-unit-market-purchase-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`.
+- Expected output: Completed with local MekHQ source commit `78890ba458`, which adds source-generated live-session offer selectors to `GET /campaign/commands` and `POST /campaign/command/markets/unit-offers/purchase` for one unique non-black-market offer. V1 validates selector state revision, canonical offer fingerprint, expected unit/market/price/delivery/balance guards, `dryRun`, `promptPolicy=refuse_if_prompt`, process-local idempotency, optional audit report, and opt-in save; apply mode debits `TransactionType.UNIT_PURCHASE`, calls `Campaign#addNewUnit(...)`, writes reports, and removes the purchased offer.
+- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`; source push is blocked because `origin` is upstream `MegaMek/mekhq` and the authenticated account lacks push permission.
 - Dependencies: Issues `#45`, `#46`, and `#49`; MekHQ source branch `codex/mekhq-advance-day-control-api`.
 - Open questions: Live smoke testing requires a copied/disposable campaign with representative unit-market offers, ideally including a DropShip offer.
 
