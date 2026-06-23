@@ -23,6 +23,7 @@ Source commit:
 - `911a338788` (`Deepen live campaign logistics market reports`)
 - `e19740b110` (`Expose command readiness endpoint`)
 - `4429d99ea2` (`Add guarded status note command`)
+- `0451eb53d4` (`Add guarded contract accept command`)
 
 Files changed:
 
@@ -60,6 +61,12 @@ Status-note command:
 POST /campaign/command/status-note
 ```
 
+Contract accept command:
+
+```http
+POST /campaign/command/contracts/accept
+```
+
 Supported state sections:
 
 ```text
@@ -74,6 +81,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 `GET /campaign/commands` follows the same loaded-campaign rule. It returns read-only command readiness and selector metadata; it does not mutate the campaign.
 
 `POST /campaign/command/status-note` follows the shared guarded command-envelope posture. It appends a plain-text MEK-RPG audit note to the loaded campaign's `GENERAL` report through `Campaign#addReport(...)`; supports dry-run validation; requires campaign id/name/date guards, idempotency key, explicit `dryRun`, `promptPolicy=refuse_if_prompt`, client audit context, and plain-text note text; and refuses unsupported report categories, HTML, visible dialogs, stale campaign guards, or missing save paths.
+
+`POST /campaign/command/contracts/accept` follows the shared guarded command-envelope posture with `promptPolicy=explicit_known_choices`. It accepts one current contract-market offer selected by source `Mission#getId()` plus `expectedStateRevision` and guard facts from `GET /campaign/commands`; supports dry-run validation; uses process-local idempotency; keeps save-after-success explicit and opt-in; and refuses visible dialogs, stale guards, unsupported prompt choices, or unknown prompt branches before mutation.
 
 ## Output Contract
 
@@ -127,7 +136,7 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Unsupported`: V1 does not expose stable repair-work ids, repair execution, repair assignment, shopping-list purchase/priority mutation, personnel hire/fire, contract accept/decline, market refresh, negotiation, standalone save, or broad writeback commands. Unit-market purchase now has source-generated live-session selectors in the local source branch, but repair/acquisition rows remain display-only and must not be treated as durable selectors.
 
-`Confirmed from source`: issue `#52` designed `POST /campaign/command/contracts/accept` in `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`. Contract-market offer ids are stable while an offer remains in the market, but `Campaign#addMission(...)` assigns a new active mission id during acceptance. The command should stay blocked until issue `#55` implements prompt-free acceptance with pre-mutation refusal for confirmation, faction-standing, StratCon start, travel/mothball, transit, and rental prompts.
+`Confirmed from source`: source commit `0451eb53d4` adds `POST /campaign/command/contracts/accept`. Apply mode credits advance and transport payments as `TransactionType.CONTRACT_PAYMENT`, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the offer from `AbstractContractMarket`, can append a `GENERAL` MEK-RPG audit report, and returns the new mission id assigned by `Campaign#addMission(...)`. Known prompt choices are explicit: accept known contract challenge confirmations, acknowledge known informational prompts without showing dialogs, decline travel/mothball automation, decline rentals, and refuse unknown prompts. Live disposable-campaign smoke testing is still not run.
 
 ## Fixtures
 

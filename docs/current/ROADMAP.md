@@ -195,7 +195,7 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Investigate photo-assisted record sheet parsing
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `Low`
 - Issue: `#15`
 - Owner: `Mixed`
@@ -208,7 +208,6 @@ Use this shape for entries that may become GitHub issues:
 
 ### Explore MEK-RPG and MekHQ campaign bridge
 
-- Status: `Done`
 - Priority: `Medium`
 - Issue: `#24`
 - Owner: `Mixed`
@@ -506,8 +505,8 @@ Use this shape for entries that may become GitHub issues:
   - `#49`: Design live MekHQ unit-market purchase command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`.
   - `#54`: Implement guarded live MekHQ unit-market purchase command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`.
   - `#52`: Design live MekHQ contract selection command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`.
-  - `#55`: Implement guarded live MekHQ contract accept command. Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`.
-- Recommended sequence: Continue with implementation issue `#55`. Issues `#51`, `#53`, `#54`, and future `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+  - `#55`: Implement guarded live MekHQ contract accept command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-contract-accept-command.md`.
+- Recommended sequence: The implemented guarded command slice now covers status-note, personnel status, personnel fatigue, unit-market purchase, and contract accept. Issues `#51`, `#53`, `#54`, and `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
 - Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Which contract prompt choices should V1 support beyond accepting known confirmations, acknowledging informational prompts, and declining optional travel/rental automation?
 
 ### Define guarded live MekHQ command envelope and prompt policy
@@ -642,13 +641,13 @@ Use this shape for entries that may become GitHub issues:
 
 ### Implement guarded live MekHQ contract accept command
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#55`
 - Owner: `Codex`
 - Goal: Implement `POST /campaign/command/contracts/accept` for one current contract-market offer selected by source id plus guard fields, using MekHQ-owned acceptance logic and explicit known prompt choices.
 - Why it matters: Contract choice is the next strategic MEK-RPG-to-MekHQ mutation after unit purchase. MekHQ must own finance credits, mission insertion, StratCon initialization, reports, market removal, and save behavior.
-- Expected output: Source-generated readiness metadata and selector guard facts, guarded dry-run/apply endpoint, explicit known prompt choice policies, prompt/choice preflight refusal before mutation for unsupported branches, process-local idempotency, optional audit report, opt-in save policy, endpoint-level failure isolation, and compile/checkstyle verification.
-- Handoff notes: Active handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`.
+- Expected output: Completed with local MekHQ source commit `0451eb53d4`, which adds `POST /campaign/command/contracts/accept` and source-generated contract-market selector guard facts to `GET /campaign/commands`. V1 validates source contract id, `expectedStateRevision`, campaign/date/location guards, expected contract terms, current balance, market-offer and active-mission counts, explicit known prompt choices, process-local idempotency, optional audit report, and opt-in save. Dry-run validates without mutation; apply mode credits advance and transport funds, calls `Campaign#addMission(...)`, invokes `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the market offer, and returns the new mission id.
+- Handoff notes: Completed on `2026-06-23`. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-contract-accept-command.md`. Design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`. `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain` passed from `external/src/mekhq`; source push is blocked because `origin` is upstream `MegaMek/mekhq` and the authenticated account lacks push permission.
 - Dependencies: Issues `#45`, `#46`, and `#52`; existing source command API patterns from `#50`, `#51`, `#53`, and `#54`; MekHQ source branch `codex/mekhq-advance-day-control-api`.
 - Open questions: Live smoke testing requires a copied/disposable campaign with a selectable contract offer loaded in a source-built MekHQ instance. Negative smoke testing should also prove a failed API call leaves the local control server running.

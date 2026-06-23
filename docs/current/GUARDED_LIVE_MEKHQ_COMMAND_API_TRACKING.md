@@ -25,16 +25,16 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#49`: Design live MekHQ unit-market purchase command API.
   - `#54`: Implement guarded live MekHQ unit-market purchase command.
   - `#52`: Design live MekHQ contract selection command API.
-- Open:
   - `#55`: Implement guarded live MekHQ contract accept command.
+- Open:
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
 - Blocked: none yet for this epic.
 
 ## Recommended Next Step
 
-- Issue: `#55`
-- Why next: Contract selection design is complete; the next slice is implementing guarded contract accept using MekHQ-owned acceptance logic, source-owned finance, mission insertion, contract acceptance, market removal, explicit known prompt choices, failure isolation, and readiness selectors.
-- Handoff: `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`
+- Issue: `#44`
+- Why next: The guarded command slice now includes status-note, personnel status, personnel fatigue, unit-market purchase, and contract accept. The next management step is to decide whether this epic is ready for PR-readiness review or whether another child issue, likely GM funds adjustment or personnel hire design, should be opened first.
+- Handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`
 
 ## Verification State
 
@@ -50,12 +50,15 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#53`.
   - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#54`.
   - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#54`.
+  - `.\gradlew.bat :MekHQ:compileJava` from `external/src/mekhq` for issue `#55`.
+  - `.\gradlew.bat :MekHQ:checkstyleMain` from `external/src/mekhq` for issue `#55`.
 - Source commits:
   - `e19740b110` in `external/src/mekhq`: `Expose command readiness endpoint`.
   - `4429d99ea2` in `external/src/mekhq`: `Add guarded status note command`.
   - `32366b64a0` in `external/src/mekhq`: `Add guarded personnel status command`.
   - `ef6ef99ef9` in `external/src/mekhq`: `Add guarded personnel fatigue command`.
   - `78890ba458` in `external/src/mekhq`: `Add guarded unit market purchase command`.
+  - `0451eb53d4` in `external/src/mekhq`: `Add guarded contract accept command`.
 - Manual checks:
   - Read issue `#45`, the active handoff, `MEKHQ_ADVANCE_DAY_CONTROL_API_PROTOTYPE.md`, and `LocalControlService.java`.
   - Read issue `#46`, `UnitMarketOffer.java`, `LocalCampaignStateExporter.java`, and source-confirmed selector methods before implementing `GET /campaign/commands`.
@@ -68,12 +71,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#49`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketPane.java`, `UnitMarketTableModel.java`, `UnitMarketType.java`, `Campaign#addNewUnit(...)`, `LocalCommandReadinessExporter.java`, and `LocalCampaignStateExporter.java` before designing `POST /campaign/command/markets/unit-offers/purchase`.
   - Read issue `#54`, `MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`, `LocalCommandReadinessExporter.java`, `LocalControlService.java`, `UnitMarketPane.java`, `UnitMarketOffer.java`, `AbstractUnitMarket.java`, `UnitMarketType.java`, and `Campaign#addNewUnit(...)` before implementing source-generated live-session unit-market offer selectors and guarded single-offer purchase.
   - Read issue `#52`, `ContractMarketDialog.java`, `AbstractContractMarket.java`, `AtbMonthlyContractMarket.java`, `CamOpsContractMarket.java`, `Mission.java`, `Campaign#addMission(...)`, `Contract.java`, `AtBContract.java`, `ContractAutomation.java`, `FacilityRentals.java`, `FactionStandingGreeting.java`, and `DialogContractStart.java` before designing `POST /campaign/command/contracts/accept`.
+  - Read issue `#55`, `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, `ContractMarketDialog.java`, `AbstractContractMarket.java`, `ContractAutomation.java`, `FacilityRentals.java`, `Contract.java`, and `AtBContract.java` before implementing guarded contract accept selectors and endpoint.
 - Known blockers:
   - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commits `ef6ef99ef9` and `78890ba458`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.status smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.fatigue smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live unit-market purchase smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with representative unit-market offers, ideally including a DropShip offer.
+  - Live contract accept smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with at least one selectable contract-market offer.
 
 ## Related Docs
 
@@ -96,3 +101,4 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/handoffs/archive/design-live-mekhq-unit-market-purchase-command.md`
 - `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`
 - `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`
+- `docs/handoffs/archive/implement-live-mekhq-contract-accept-command.md`

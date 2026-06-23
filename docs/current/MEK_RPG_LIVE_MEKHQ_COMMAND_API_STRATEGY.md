@@ -1,6 +1,6 @@
 # MEK-RPG Live MekHQ Command API Strategy
 
-Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, unit-market purchase source design, guarded unit-market purchase command, and contract accept source design completed through issue `#52` on `2026-06-23`.
+Status: command envelope, readiness discovery, guarded status-note command, guarded personnel status command, medical/prosthetic source design, guarded personnel fatigue command, unit-market purchase source design, guarded unit-market purchase command, contract accept source design, and guarded contract accept command completed through issue `#55` on `2026-06-23`.
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
@@ -209,7 +209,7 @@ Implemented result:
 
 - `advanceDayOnce` is reported as available, using the legacy `/advance-day` prototype.
 - Campaign/person/unit/applicant/contract selector candidates are exposed from source-backed ids and must still be paired with command-specific guard fields.
-- `campaign.status_note` and `personnel.status` are now reported as available; funds adjustment, medical treatment, contract acceptance, personnel hire, unit purchase, repair/procurement, and standalone save remain blocked with machine-readable reason codes.
+- `campaign.status_note`, `personnel.status`, `personnel.fatigue`, `markets.unit_offers.purchase`, and `contracts.accept` are now reported as available when command-specific rules are satisfied; funds adjustment, medical treatment, personnel hire, repair/procurement, and standalone save remain blocked with machine-readable reason codes.
 - Unit-market purchase remains blocked with `stable_offer_selector_missing`; `UnitMarketOffer#writeToXML()` serializes no unique stable offer id, so MEK-RPG must not select offers by display name or row index.
 
 Remaining source question:
@@ -271,6 +271,15 @@ Design result:
 - The implementation should share or extract the source-owned acceptance workflow behind `ContractMarketDialog#acceptContract(...)`; the goal is to let MekHQ process the button's business logic, not to reimplement contract acceptance externally.
 - V1 may accept or acknowledge known prompt branches only when the request supplies supported policies, such as accepting a known contract challenge, acknowledging known informational prompts, declining travel automation, declining automated mothballing, or declining rentals. It should refuse unknown prompts or unsupported choices before mutation.
 - Contract command implementation must include endpoint-level exception handling so malformed or failed API calls do not crash MekHQ or stop the local control server.
+
+Implemented result:
+
+- Issue `#55` implemented `POST /campaign/command/contracts/accept` in local MekHQ source commit `0451eb53d4`.
+- `GET /campaign/commands` now exposes contract-market selector guard facts and marks `contracts.accept` available when at least one current contract-market offer has valid destination and guard facts.
+- V1 validates the shared envelope, source contract id, `expectedStateRevision`, campaign/date/location guards, expected payment and term guards, current balance, market-offer count, active-mission count, explicit known prompt choices, process-local idempotency, plain-text audit context, optional `GENERAL` audit report, and opt-in save policy.
+- Dry-run returns intended side effects without mutation. Apply mode credits advance and transport funds as `TransactionType.CONTRACT_PAYMENT`, creates AtB liaison/opponent facts where the UI path would, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the contract-market offer, and returns the new mission id.
+- V1 replaces known UI prompts with explicit request choices: accept known contract challenge confirmations, acknowledge faction-standing or StratCon start information without showing dialogs, decline travel and mothball automation, decline rentals, and refuse unknown prompts.
+- Required compile/checkstyle verification passed. Live disposable-campaign smoke testing is still not run because it requires a source-built MekHQ instance with a copied campaign and selectable contract offer loaded.
 
 ### Personnel Market Hire
 
@@ -435,11 +444,10 @@ Completed ordering:
 
 ## Current Easy-Win Ranking
 
-1. Implement `POST /campaign/command/contracts/accept` for one prompt-free market offer by source id and guard fields.
-2. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
-3. Personnel hire by applicant id, after market-style review.
-4. Repair/procurement execution, after stable work ids and repair prompt policy exist.
-5. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.
+1. GM-only `POST /campaign/command/adjust-funds`, explicitly for manual correction rather than normal gameplay purchases.
+2. Personnel hire by applicant id, after market-style review.
+3. Repair/procurement execution, after stable work ids and repair prompt policy exist.
+4. Broad medical treatment/prosthetic surgery, after a source-owned non-dialog medical/prosthetic service exists.
 
 ## Guardrail For MEK-RPG
 
