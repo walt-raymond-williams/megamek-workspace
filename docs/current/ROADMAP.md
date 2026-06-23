@@ -471,21 +471,21 @@ Use this shape for entries that may become GitHub issues:
 
 ### Epic: Investigate richer MekHQ activity history API
 
-- Status: `Issue created`
+- Status: `In progress`
 - Priority: `Medium`
 - Issue: `#56`
 - Owner: `Mixed`
 - Goal: Investigate and plan how the local MekHQ API should expose richer campaign activity histories beyond the current daily report samples.
 - Why it matters: MEK-RPG and campaign-assistant workflows need more than the current report slice: they need timeline-aware history for campaign reports, personnel service/medical/scenario/assignment/performance events, finance transactions, scenario outcomes, maintenance notes, and other activity sources without parsing raw saves or confusing campaign ledger data with application/debug logs.
 - Expected output: A source-backed design and child issue queue for exposing activity histories through the local MekHQ API while preserving the local-only, read-only safety posture. The investigation should decide which histories belong in `GET /campaign/state`, which deserve separate endpoints, and what date ranges, limits, filters, sanitization, evidence labels, and unsupported entries are required.
-- Handoff notes: Created as broad epic issue `#56`; do not assign an agent to implement it directly. First child work should audit source owners and serialization/UI behavior for history-like data before designing endpoints.
+- Handoff notes: Created as broad epic issue `#56`; do not assign an agent to implement it directly. Expanded on `2026-06-23` with tracking note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_API_TRACKING.md` and child issues `#57` through `#61`. Start with audit issue `#57`.
 - Dependencies: Completed live read-only API epic `#38`, current guarded command epic `#44`, and source patterns in `LocalCampaignStateExporter`, `Campaign#addReport(...)`, `HistoricalDailyReportDialog`, `Person` log getters, and `LogEntryType`.
-- Candidate child issues:
-  - Audit MekHQ campaign-history sources and classify them as daily reports, historical daily logs, per-person logs, finance transactions, scenario reports, maintenance notes, market/procurement history, or application/debug logs.
-  - Design read-only activity-history API shape with date range, category/type filters, target filters, limits, sanitization, trust metadata, and unsupported entries.
-  - Implement historical daily report export if option-gated behavior and in-memory/save behavior are safe.
-  - Implement per-person log export for personal/service, medical, patient, scenario, assignment, performance, award, and custom entries if privacy, payload-size, and target-filter concerns are handled.
-  - Add fixtures and tests with representative historical/personnel log data.
+- Child issues:
+  - `#57`: Audit MekHQ activity-history source owners. Next recommended agent issue; active handoff: `docs/handoffs/active/audit-mekhq-activity-history-sources.md`.
+  - `#58`: Design read-only MekHQ activity-history API. Wait for `#57`; active handoff: `docs/handoffs/active/design-mekhq-activity-history-api.md`.
+  - `#59`: Implement historical daily report activity export. Wait for `#57` and `#58`; active handoff: `docs/handoffs/active/implement-mekhq-historical-daily-report-history.md`.
+  - `#60`: Implement MekHQ per-person activity log export. Wait for `#57` and `#58`, preferably after `#59`; active handoff: `docs/handoffs/active/implement-mekhq-person-activity-log-export.md`.
+  - `#61`: Add MekHQ activity-history fixtures and tests. Wait for `#58` and implementation slices unless folded into each implementation issue; active handoff: `docs/handoffs/active/add-mekhq-activity-history-fixtures-tests.md`.
 - Open questions: Should activity history be a new `history` state section, a dedicated `/campaign/history` endpoint, or both? How far back should default exports go? Should per-person medical and patient logs require opt-in sections or explicit target filters?
 
 ### Discover first guarded live MekHQ command API easy wins for MEK-RPG

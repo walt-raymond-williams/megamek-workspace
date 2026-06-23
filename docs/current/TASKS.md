@@ -45,14 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Run MekHQ quickstart roster UI validation.
+1. Audit MekHQ activity-history source owners.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-audit the history-like MekHQ campaign data behind epic `#56`, including daily reports, historical logs, person logs, finance transactions, scenario reports, logistics/maintenance report activity, market/procurement records, and application/debug log boundaries.
+   - Output: A source-backed `docs/current/` audit note plus roadmap/task updates that recommend the next activity-history API issue.
+   - Notes: GitHub issue `#57`; child of epic `#56`; active checklist `docs/handoffs/active/audit-mekhq-activity-history-sources.md`; should precede API design issue `#58`.
+
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-2. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -96,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-23`: Expanded GitHub epic `#56`, "Investigate richer MekHQ activity history API," into child issues `#57` through `#61`; added tracking note `MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_API_TRACKING.md`; and created active handoffs for source audit, API design, historical daily report export, per-person log export, and fixtures/tests. Next recommended issue is `#57`, the source-owner audit.
 - `2026-06-23`: Created GitHub epic `#56`, "Investigate richer MekHQ activity history API," and recorded it in `ROADMAP.md`. The epic covers source-backed discovery and future child issues for historical daily logs, per-person logs, finance/scenario/maintenance activity, filtering, sanitization, fixtures, and the boundary between campaign ledger history and application/debug logs.
 - `2026-06-23`: Added local control API regression tests in MekHQ source commit `51dbfbe645`. `LocalCommandReadinessExporterTest` covers command rows/endpoints/statuses, contract selector guard facts and explicit prompt choices, and state-revision changes when contract-market state changes. `LocalControlServiceHttpTest` covers loopback `/status`, no-campaign blocking, invalid contract-accept JSON refusal, and post-failure server availability. Verified `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest`, `.\gradlew.bat :MekHQ:compileJava`, `.\gradlew.bat :MekHQ:checkstyleMain :MekHQ:checkstyleTest`, `.\gradlew.bat :MekHQ:checkstyleTest`, and full `.\gradlew.bat :MekHQ:test`. Source push remains blocked by upstream `MegaMek/mekhq` 403.
 - `2026-06-23`: Completed GitHub issue `#55` by adding `POST /campaign/command/contracts/accept` and contract-market selector guard facts in local MekHQ source commit `0451eb53d4`. V1 selects one current market contract by source id plus `expectedStateRevision`, validates contract, campaign, balance, mission-count, market-count, date/location, payment, and prompt-policy guards, supports dry-run, process-local idempotency, optional `GENERAL` audit report, and opt-in save. Apply mode credits advance and transport payments as `TransactionType.CONTRACT_PAYMENT`, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the market offer, and reports the new mission id. V1 explicitly supports accepting known contract challenge confirmations, acknowledging known informational prompts without showing dialogs, and declining travel/mothball/rental automation; it refuses unknown or unsupported prompt branches before mutation. Verified `.\gradlew.bat :MekHQ:compileJava` and `.\gradlew.bat :MekHQ:checkstyleMain`; live disposable-campaign smoke tests were not run because no source-built MekHQ instance with a selectable contract offer was loaded in this shell. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub previously returned 403. Archived handoff: `docs/handoffs/archive/implement-live-mekhq-contract-accept-command.md`.
