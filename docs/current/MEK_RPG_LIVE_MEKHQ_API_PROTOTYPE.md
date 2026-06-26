@@ -27,6 +27,7 @@ Source commit:
 - `51dbfbe645` (`Add local control API readiness tests`)
 - `5effaa5517` (`Instrument local control API read paths`)
 - `72424e4d9c` (`Make local campaign state export partial`)
+- `ba865793c5` (`Expose pending deployment API`)
 
 Files changed:
 
@@ -50,6 +51,14 @@ State:
 
 ```http
 GET /campaign/state?sections=bridge_metadata,campaign,finances,personnel,units,contracts,scenarios,repairs_and_logistics,markets,reports,unsupported
+```
+
+Pending deployments:
+
+```http
+GET /campaign/pending-deployments
+GET /campaign/pending-deployments?personName=Moreno
+GET /campaign/pending-deployments?personId=<person-uuid>
 ```
 
 Command readiness:
@@ -83,6 +92,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `GET /campaign/commands` follows the same loaded-campaign rule. It returns read-only command readiness and selector metadata; it does not mutate the campaign.
 
+`GET /campaign/pending-deployments` follows the same loaded-campaign rule. It returns only current/pending `ScenarioStatus.CURRENT` scenario facts, source-confirmed player unit links, current unit crew ids/names/roles/statuses, optional person-id or person-name commitment lookup, collector timing, endpoint timing, warnings, and unsupported metadata. It is read-only and does not inspect markets, reports, repairs, finances, or broad personnel/unit state.
+
 `POST /campaign/command/status-note` follows the shared guarded command-envelope posture. It appends a plain-text MEK-RPG audit note to the loaded campaign's `GENERAL` report through `Campaign#addReport(...)`; supports dry-run validation; requires campaign id/name/date guards, idempotency key, explicit `dryRun`, `promptPolicy=refuse_if_prompt`, client audit context, and plain-text note text; and refuses unsupported report categories, HTML, visible dialogs, stale campaign guards, or missing save paths.
 
 `POST /campaign/command/contracts/accept` follows the shared guarded command-envelope posture with `promptPolicy=explicit_known_choices`. It accepts one current contract-market offer selected by source `Mission#getId()` plus `expectedStateRevision` and guard facts from `GET /campaign/commands`; supports dry-run validation; uses process-local idempotency; keeps save-after-success explicit and opt-in; and refuses visible dialogs, stale guards, unsupported prompt choices, or unknown prompt branches before mutation.
@@ -104,6 +115,7 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 - `dirtyState`
 - `stateRevision`
 - `snapshotId`
+- `pendingDeployments`
 - `warnings`
 - `unsupported`
 - `response_status`
@@ -153,6 +165,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 
 `Confirmed from source`: source commit `72424e4d9c` makes `GET /campaign/state?sections=...` partial-response capable for section collector failures. Requested sections are still collected lazily in section order, and narrowed requests do not traverse unrequested personnel/unit/scenario collections. If a requested section collector throws a runtime exception, already-collected sections are returned with HTTP `200`, `response_status: "partial"`, `partial_response: true`, a structured top-level warning, a failed-section placeholder with `reason_code: "section_collector_failed"`, an `unsupported` entry for the missing section payload, and failed collector timing. Java-level per-section timeout cancellation is intentionally deferred because a timed-out background worker could keep reading live campaign state concurrently.
 
+`Confirmed from source`: source commit `ba865793c5` adds `GET /campaign/pending-deployments` and embeds the same compact `pendingDeployments` object in `GET /campaign/summary`. The endpoint filters `Campaign#getScenarios()` to `ScenarioStatus#isCurrent()`, reports scenario id/mission id/name/date/status/type, force ids, individual unit ids, all assigned unit ids from `Scenario#getForces(Campaign)`, unit rows from `Campaign#getUnit(UUID)`, and crew rows from `Unit#getCrew()`. Optional `personId` and `personName` query parameters return source-confirmed commitments when a matching crew member is assigned to a current scenario unit. MekHQ UI-selected/viewpoint person state remains explicitly unsupported because no source-confirmed selected-person bridge is exposed in this API layer.
+
 ## Fixtures
 
 Sanitized examples:
@@ -161,6 +175,7 @@ Sanitized examples:
 - `docs/templates/mekhq-live-campaign-state.fixture.json`
 - `docs/templates/mekhq-live-campaign-warning-heavy.fixture.json`
 - `docs/templates/mekhq-live-campaign-commands.fixture.json`
+- `docs/templates/mekhq-live-pending-deployments.fixture.json`
 
 These are fake data only. They preserve the live API shape, trust-envelope fields, dirty-state warning, and unsupported/blocking entries without exposing local save paths or real campaign details.
 
@@ -258,6 +273,14 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 .\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest
 ```
 
+`Confirmed locally`: after source commit `ba865793c5`, pending-deployment exporter and HTTP routing tests plus compile/checkstyle passed from `external/src/mekhq` on `2026-06-26`:
+
+```powershell
+.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest
+.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalControlServiceHttpTest
+.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest
+```
+
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.
 
 `Confirmed locally`: follow-up MEK-RPG issue `#106` verified that selected-section state requests must include `bridge_metadata` when the response is intended for MEK-RPG dashboard/context validation. Omitting `sections` also returns `bridge_metadata` because it requests all supported sections.
@@ -274,6 +297,11 @@ Invoke-RestMethod -Method Get `
   ConvertTo-Json -Depth 12
 
 Invoke-RestMethod -Method Get -Uri 'http://127.0.0.1:32180/campaign/commands' -TimeoutSec 10 |
+  ConvertTo-Json -Depth 12
+
+Invoke-RestMethod -Method Get `
+  -Uri 'http://127.0.0.1:32180/campaign/pending-deployments?personName=Moreno' `
+  -TimeoutSec 10 |
   ConvertTo-Json -Depth 12
 
 $body = @{
