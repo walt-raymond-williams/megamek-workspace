@@ -45,21 +45,28 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design read-only MekHQ activity-history API.
+1. Audit live MekHQ API timeout sources.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Start reliability epic `#62` by mapping which live MekHQ API collectors or readiness paths can stall and deciding what timing instrumentation or bounded behavior should land first.
+   - Output: Source-backed timeout map, tracking-doc update, and either minimal timing instrumentation or a clear implementation plan.
+   - Notes: GitHub issue `#63`; active checklist `docs/handoffs/active/audit-live-mekhq-api-timeouts.md`; incident source `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`.
+
+2. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-2. Run MekHQ quickstart roster UI validation.
+3. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-3. Turn this repo into an AI-ready project workflow demo.
+4. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -103,6 +110,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-26`: Read MEK-RPG reliability handoff `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`, created GitHub epic `#62` and child issues `#63` through `#67`, added tracking note `MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_TRACKING.md`, and created active handoffs for timeout audit, bounded summary/commands, lazy/partial state sections, pending deployment data, and reliability tests. Next recommended issue is `#63`.
 - `2026-06-23`: Completed GitHub issue `#57` by adding source audit `MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`. The audit classifies current daily reports, memory-only historical daily logs, six serialized per-person log families, finance transactions, scenario reports, maintenance/logistics reports, current market/procurement state, and application/debug logs. Recommendation: run design issue `#58` next before implementation; medical/patient logs need explicit target filters/opt-in; application/debug logs should stay unsupported. Archived handoff: `docs/handoffs/archive/audit-mekhq-activity-history-sources.md`.
 - `2026-06-23`: Expanded GitHub epic `#56`, "Investigate richer MekHQ activity history API," into child issues `#57` through `#61`; added tracking note `MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_API_TRACKING.md`; and created active handoffs for source audit, API design, historical daily report export, per-person log export, and fixtures/tests. The source-owner audit later completed as issue `#57`; next recommended issue is `#58`, the API design.
 - `2026-06-23`: Created GitHub epic `#56`, "Investigate richer MekHQ activity history API," and recorded it in `ROADMAP.md`. The epic covers source-backed discovery and future child issues for historical daily logs, per-person logs, finance/scenario/maintenance activity, filtering, sanitization, fixtures, and the boundary between campaign ledger history and application/debug logs.

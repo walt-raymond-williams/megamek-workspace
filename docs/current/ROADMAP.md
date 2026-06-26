@@ -417,6 +417,26 @@ Use this shape for entries that may become GitHub issues:
 - Recommended sequence: Complete. Future live API expansion should be opened as narrower follow-up issues after MEK-RPG consumes these fields against a real campaign.
 - Open questions: Should a writable MekHQ fork/remote be configured for source branch publication?
 
+### Epic: Stabilize live MekHQ API reliability for MEK-RPG play
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#62`
+- Owner: `Mixed`
+- Goal: Make the local MekHQ control API reliable enough for live MEK-RPG play, especially for fast current-state facts that prevent stale scene framing.
+- Why it matters: During live MEK-RPG play on `2026-06-26`, `/campaign/summary`, narrowed `/campaign/state` reads, and `/campaign/commands` timed out. That blocked confirmation of current pending operations, Michelle "Double-M" Moreno's operation commitment, unit/repair pressure, and command readiness. The table had to fall back to stale notes until the player corrected the current operations.
+- Expected output: A decomposed reliability workstream covering source-backed timeout diagnosis, bounded summary/commands behavior, lazy or partial state section collection, a lightweight pending-deployments read path, and regression/live-smoke verification.
+- Handoff notes: MEK-RPG incident source is `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`. Tracking note: `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_TRACKING.md`. This is an epic, not a direct implementation task; start with child issue `#63`.
+- Dependencies: Completed live read-only API epic `#38`, guarded command API work `#44` through `#55`, current activity-history epic `#56`, and local MekHQ source under `external/src/mekhq`. Source pushes from `external/src/mekhq` may still need a writable fork/remote.
+- Child issues:
+  - `#63`: Audit live MekHQ API timeout sources and add collector timing instrumentation. Start here; active handoff: `docs/handoffs/active/audit-live-mekhq-api-timeouts.md`.
+  - `#64`: Keep MekHQ summary and command readiness endpoints fast and bounded. Consult `#63` when practical; active handoff: `docs/handoffs/active/bound-mekhq-summary-commands-endpoints.md`.
+  - `#65`: Make live MekHQ state section filtering lazy and partial-response capable. Consult `#63`; active handoff: `docs/handoffs/active/lazy-mekhq-state-sections-partial-responses.md`.
+  - `#66`: Expose lightweight pending scenario and deployment commitment data. Consult `#63` and `#64`; active handoff: `docs/handoffs/active/expose-mekhq-pending-deployments-endpoint.md`.
+  - `#67`: Add live MekHQ API reliability regression tests and smoke checklist. Run after at least one implementation slice or fold into each child issue; active handoff: `docs/handoffs/active/add-live-mekhq-api-reliability-tests.md`.
+- Recommended sequence: Start with `#63` to identify the actual stall points, then harden `/campaign/summary` and `/campaign/commands` through `#64`, fix narrowed state behavior through `#65`, add the purpose-built pending-deployment read path through `#66`, and use `#67` to lock in regression and live-smoke coverage.
+- Open questions: Should timing metadata be visible in API responses, local logs, or both? Is Java-level per-section timeout handling safe in the current local control service, or should the first reliability pass only make collection lazy and bounded? Should pending deployment data be a new endpoint, a summary subsection, or a narrow state section?
+
 ### Harden live API trust envelope, dirty state, and location labels
 
 - Status: `Done`
