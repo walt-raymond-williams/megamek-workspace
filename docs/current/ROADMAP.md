@@ -433,9 +433,9 @@ Use this shape for entries that may become GitHub issues:
   - `#64`: Keep MekHQ summary and command readiness endpoints fast and bounded. Completed on `2026-06-26`; archived handoff: `docs/handoffs/archive/bound-mekhq-summary-commands-endpoints.md`; source commit `9ad8fa5f4a`.
   - `#65`: Make live MekHQ state section filtering lazy and partial-response capable. Completed on `2026-06-26`; archived handoff: `docs/handoffs/archive/lazy-mekhq-state-sections-partial-responses.md`; source commit `72424e4d9c`.
   - `#66`: Expose lightweight pending scenario and deployment commitment data. Completed on `2026-06-26`; archived handoff: `docs/handoffs/archive/expose-mekhq-pending-deployments-endpoint.md`; source commit `ba865793c5`.
-  - `#67`: Add live MekHQ API reliability regression tests and smoke checklist. Run after at least one implementation slice or fold into each child issue; active handoff: `docs/handoffs/active/add-live-mekhq-api-reliability-tests.md`.
-- Recommended sequence: Issues `#64` and `#65` bounded command readiness and made narrowed state responses partial for section collector failures. Issue `#66` added the purpose-built pending-deployment read path. Next, use `#67` to lock in regression and live-smoke coverage.
-- Open questions: Java-level per-section timeout cancellation remains deferred because timed-out background collectors could keep reading live campaign state concurrently. Should pending deployment data be a new endpoint, a summary subsection, or a narrow state section?
+  - `#67`: Add live MekHQ API reliability regression tests and smoke checklist. Completed on `2026-06-26`; archived handoff: `docs/handoffs/archive/add-live-mekhq-api-reliability-tests.md`; source commit `81afcee70a`; smoke checklist: `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`.
+- Recommended sequence: Complete pending human review and source publication. Issues `#64` and `#65` bounded command readiness and made narrowed state responses partial for section collector failures, issue `#66` added the purpose-built pending-deployment read path, and issue `#67` locked in regression/smoke coverage.
+- Open questions: Java-level per-section timeout cancellation remains deferred because timed-out background collectors could keep reading live campaign state concurrently. Source pushes from `external/src/mekhq` remain blocked until a writable fork/remote is configured.
 
 ### Harden live API trust envelope, dirty state, and location labels
 

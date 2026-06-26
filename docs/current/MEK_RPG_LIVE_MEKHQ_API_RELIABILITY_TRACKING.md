@@ -7,7 +7,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 ## Workstream Shape
 
 - Parent epic: `#62`, "Epic: Stabilize live MekHQ API reliability for MEK-RPG play"
-- Status: `Issues #63 through #66 complete; reliability hardening queue active`
+- Status: `Issues #63 through #67 complete; reliability hardening queue complete pending human review`
 - Integration branch: use the active local MekHQ API branch unless a later source implementation slice needs a new branch.
 - Human review required before merge to `master`: `Yes`, if source changes land.
 
@@ -27,16 +27,17 @@ GitHub Issues are the execution source of truth. This file is the compact recove
   - `#64`: Keep MekHQ summary and command readiness endpoints fast and bounded.
   - `#65`: Make live MekHQ state section filtering lazy and partial-response capable.
   - `#66`: Expose lightweight pending scenario and deployment commitment data.
-- Open:
   - `#67`: Add live MekHQ API reliability regression tests and smoke checklist.
+- Open:
+  - None.
 - Blocked:
-  - `#66` and `#67` should consult the issue `#63` audit note when practical.
+  - None in this reliability hardening slice.
 
 ## Recommended Next Step
 
-- Issue: `#67`
-- Why next: issue `#66` added the lightweight pending-deployments read path; the remaining reliability slice is regression and live-smoke coverage for the endpoints MEK-RPG depends on during play.
-- Handoff: `docs/handoffs/active/add-live-mekhq-api-reliability-tests.md`
+- Issue: human review / source publication
+- Why next: the reliability child issues are locally complete, but MekHQ source pushes remain blocked by upstream repository permissions.
+- Handoff: archived issue `#67` handoff at `docs/handoffs/archive/add-live-mekhq-api-reliability-tests.md`.
 
 ## Verification State
 
@@ -53,15 +54,18 @@ GitHub Issues are the execution source of truth. This file is the compact recove
   - `9ad8fa5f4a` in `external/src/mekhq`: `Bound local command readiness selectors`.
   - `72424e4d9c` in `external/src/mekhq`: `Make local campaign state export partial`.
   - `ba865793c5` in `external/src/mekhq`: `Expose pending deployment API`.
+  - `81afcee70a` in `external/src/mekhq`: `Add local API reliability regression tests`.
 - Documentation:
   - `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`.
+  - `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`.
 - Completed behavior:
   - `Confirmed from source`: default `GET /campaign/commands` now uses a cheap `commands-lite-*` revision and omits expensive unit-market and contract-market selector construction with machine-readable `selector_generation_deferred` rows.
   - `Confirmed from source`: full market selector guard facts remain available through `GET /campaign/commands?selectorDetail=full` or `includeExpensiveSelectors=true`.
   - `Confirmed from source`: current personnel, current unit, and personnel-market applicant selectors have bounded default limits; oversized groups return `selector_limit_exceeded` instead of unbounded rows.
   - `Confirmed from source`: narrowed `GET /campaign/state?sections=...` requests do not collect unrequested personnel/unit/scenario sections, and requested section collector failures now return partial HTTP `200` payloads with `response_status`, `partial_response`, structured warnings, failed collector timing, and unsupported details.
   - `Confirmed from source`: `GET /campaign/pending-deployments` returns current scenario ids/names/dates/statuses, source-confirmed unit assignments, crew/person ids and roles, optional `personId`/`personName` commitment lookup, and explicit unsupported metadata for UI-selected viewpoint person state. The same compact object is included in `GET /campaign/summary`.
-- Manual checks: none yet.
+  - `Confirmed from source`: source commit `81afcee70a` adds loaded-campaign HTTP regression coverage for `/campaign/summary`, `/campaign/pending-deployments`, default `/campaign/commands`, narrowed `/campaign/state`, bad state-section post-failure availability, and default command readiness deferral of expensive contract guard facts.
+- Manual checks: live GUI smoke checklist added at `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`; not run in this session because no source-built MekHQ GUI with a safe loaded campaign was under agent control.
 - Known blockers: live smoke verification needs a source-built MekHQ app with the control API enabled and a safe loaded campaign. Java-level per-section timeout cancellation remains deferred pending safer Swing/threading design. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq`, and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
 
 ## Related Docs
@@ -70,6 +74,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`
 - `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`
 - `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`
 - `docs/handoffs/archive/audit-live-mekhq-api-timeouts.md`

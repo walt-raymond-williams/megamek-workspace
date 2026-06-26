@@ -321,6 +321,30 @@ Current verification state:
 - `Confirmed locally`: fallback `javac` checks for `LocalControlService.java` and modified `MekHQ.java` passed against installed MekHQ `0.51.00` jars on `2026-06-22`.
 - `Not run`: `dismissAdvanceDayNags=false` prompt comparison, refused-date guard test, and save-after-success test to an explicit disposable output path.
 
+## Smoke Test Live MekHQ API Reliability
+
+Use these read-only probes after launching a source-built MekHQ app with `mekhq.controlApi.enabled=true` and loading a safe copied/disposable campaign. Full checklist and expected behavior are in `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`.
+
+```powershell
+$base = 'http://127.0.0.1:32180'
+
+Invoke-RestMethod -Method Get -Uri "$base/status" -TimeoutSec 5
+Invoke-RestMethod -Method Get -Uri "$base/campaign/summary" -TimeoutSec 15
+Invoke-RestMethod -Method Get -Uri "$base/campaign/pending-deployments" -TimeoutSec 15
+Invoke-RestMethod -Method Get -Uri "$base/campaign/pending-deployments?personName=Moreno" -TimeoutSec 15
+Invoke-RestMethod -Method Get -Uri "$base/campaign/commands" -TimeoutSec 20
+Invoke-RestMethod -Method Get -Uri "$base/campaign/state?sections=bridge_metadata,campaign,contracts,scenarios,reports" -TimeoutSec 45
+Invoke-RestMethod -Method Get -Uri "$base/campaign/state?sections=bridge_metadata,units,repairs_and_logistics" -TimeoutSec 45
+Invoke-RestMethod -Method Get -Uri "$base/campaign/state?sections=bridge_metadata,personnel" -TimeoutSec 45
+```
+
+Current verification state:
+
+- `Confirmed from source`: source commit `81afcee70a` adds automated regression coverage for loaded-campaign HTTP read endpoints, default command selector deferral, bad state-section post-failure availability, narrowed state responses, partial section failures, and pending deployment commitment lookup.
+- `Confirmed locally`: on `2026-06-26`, `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest` passed from `external/src/mekhq`.
+- `Confirmed locally`: on `2026-06-26`, `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest` passed from `external/src/mekhq`.
+- `Not run`: live GUI smoke against a safe loaded campaign, because this session did not control a source-built MekHQ GUI with a disposable campaign loaded.
+
 ## Check Logs
 
 ```powershell

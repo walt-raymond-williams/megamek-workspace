@@ -63,3 +63,13 @@ git status --short --branch
 ## Open Questions
 
 - Should endpoint response-time expectations be documented as hard local thresholds or as "bounded/no full-state traversal" behavior?
+
+## Completion Notes
+
+- Completed on `2026-06-26`.
+- MekHQ source commit: `81afcee70a` (`Add local API reliability regression tests`).
+- Smoke checklist: `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`.
+- Verification passed from `external/src/mekhq`: `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest`.
+- Verification passed from `external/src/mekhq`: `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`.
+- Live GUI smoke was not run because no source-built MekHQ GUI with a safe campaign was under agent control.
+- Source push remains blocked because upstream `MegaMek/mekhq` returned 403 for `walt-raymond-williams`.
