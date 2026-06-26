@@ -343,7 +343,7 @@ Current verification state:
 - `Confirmed from source`: source commit `81afcee70a` adds automated regression coverage for loaded-campaign HTTP read endpoints, default command selector deferral, bad state-section post-failure availability, narrowed state responses, partial section failures, and pending deployment commitment lookup.
 - `Confirmed locally`: on `2026-06-26`, `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest` passed from `external/src/mekhq`.
 - `Confirmed locally`: on `2026-06-26`, `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest` passed from `external/src/mekhq`.
-- `Not run`: live GUI smoke against a safe loaded campaign, because this session did not control a source-built MekHQ GUI with a disposable campaign loaded.
+- `Confirmed locally with user present`: on `2026-06-26`, the live GUI smoke passed against source-built MekHQ with control API enabled and loaded campaign `The Learning Ropes` on `3025-04-08`. `/status`, `/campaign/summary`, `/campaign/pending-deployments`, `/campaign/pending-deployments?personName=Moreno`, default `/campaign/commands`, and narrowed `/campaign/state` reads all returned HTTP `200` before timeout. Default `/campaign/commands` reported `selector_generation_deferred` for expensive contract-market and unit-market selector facts.
 
 ## Check Logs
 

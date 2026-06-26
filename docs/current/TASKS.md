@@ -45,28 +45,21 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Run live MekHQ API reliability smoke checklist.
-   - Status: `Not started`
-   - Owner: `User`
-   - Goal: Validate issue `#62` close-out by running the read-only reliability smoke checklist against a source-built MekHQ GUI with a safe copied/disposable campaign loaded.
-   - Output: Report whether `/status`, `/campaign/summary`, `/campaign/pending-deployments`, default `/campaign/commands`, narrowed `/campaign/state`, and a viewpoint person lookup return before timeout, plus any endpoint/collector timing warnings.
-   - Notes: GitHub issue `#68`; checklist `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`; if successful, close epic `#62`.
-
-2. Design read-only MekHQ activity-history API.
+1. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-3. Run MekHQ quickstart roster UI validation.
+2. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-4. Turn this repo into an AI-ready project workflow demo.
+3. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -110,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-26`: Completed GitHub issue `#68` and closed epic `#62` with a user-assisted live MekHQ API reliability smoke. Source-built MekHQ had the control API enabled and loaded `The Learning Ropes` (`3025-04-08`). `/status`, `/campaign/summary`, `/campaign/pending-deployments`, `/campaign/pending-deployments?personName=Moreno`, default `/campaign/commands`, and narrowed `/campaign/state` all returned HTTP `200` before timeout. Default command readiness deferred expensive market selector facts as intended.
 - `2026-06-26`: Reviewed completed reliability issues `#64` through `#67` for epic `#62`. Recommendation: do not close epic `#62` yet because live GUI smoke was explicitly not run in issue `#67`; created user-task issue `#68` to run `MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md` against a safe loaded campaign before final close-out.
 - `2026-06-26`: Completed GitHub issue `#67` with MekHQ source commit `81afcee70a`, which adds reliability regression coverage for loaded-campaign HTTP reads across `/campaign/summary`, `/campaign/pending-deployments`, default `/campaign/commands`, narrowed `/campaign/state`, bad state-section post-failure availability, and default command readiness deferral of expensive contract guard facts. Added live smoke checklist `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md` and repeatable commands in `KNOWN_COMMANDS.md`. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Live GUI smoke was not run because no source-built MekHQ GUI with a safe campaign was under agent control. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403.
 - `2026-06-26`: Completed GitHub issue `#66` with MekHQ source commit `ba865793c5`, which adds `GET /campaign/pending-deployments` plus a compact `pendingDeployments` object in `GET /campaign/summary`. The read-only path reports current scenario ids/names/dates/statuses, source-confirmed unit assignment rows, crew/person ids and roles, optional `personId`/`personName` commitment lookup for Double-M-style checks, collector/endpoint timing, and explicit unsupported metadata for UI-selected viewpoint person state. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest`, `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalControlServiceHttpTest`, and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Next reliability issue is `#67`.
