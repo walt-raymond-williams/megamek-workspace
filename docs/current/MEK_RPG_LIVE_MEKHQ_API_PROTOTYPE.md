@@ -26,6 +26,7 @@ Source commit:
 - `0451eb53d4` (`Add guarded contract accept command`)
 - `51dbfbe645` (`Add local control API readiness tests`)
 - `5effaa5517` (`Instrument local control API read paths`)
+- `72424e4d9c` (`Make local campaign state export partial`)
 
 Files changed:
 
@@ -105,6 +106,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 - `snapshotId`
 - `warnings`
 - `unsupported`
+- `response_status`
+- `partial_response`
 - `collector_timing`
 - `endpoint_timing`
 
@@ -147,6 +150,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 `Confirmed locally`: source commit `51dbfbe645` adds unit-test coverage for the local command API surface. `LocalCommandReadinessExporterTest` asserts the expected command rows/endpoints/statuses are present, contract selectors expose guard facts and prompt choices, and `state_revision` changes when contract-market state changes. `LocalControlServiceHttpTest` starts the loopback HTTP service with no campaign loaded and verifies `/status`, no-campaign blocking, invalid contract-accept JSON refusal, and post-failure server availability.
 
 `Confirmed from source`: source commit `5effaa5517` adds timing diagnostics for reliability work. `/campaign/summary`, `/campaign/state`, and `/campaign/commands` now include top-level `endpoint_timing`; summary and command readiness include `collector_timing`; state responses include per-requested-section `collector_timing`. `LocalControlService` logs a warning when a read endpoint takes at least `1000` ms.
+
+`Confirmed from source`: source commit `72424e4d9c` makes `GET /campaign/state?sections=...` partial-response capable for section collector failures. Requested sections are still collected lazily in section order, and narrowed requests do not traverse unrequested personnel/unit/scenario collections. If a requested section collector throws a runtime exception, already-collected sections are returned with HTTP `200`, `response_status: "partial"`, `partial_response: true`, a structured top-level warning, a failed-section placeholder with `reason_code: "section_collector_failed"`, an `unsupported` entry for the missing section payload, and failed collector timing. Java-level per-section timeout cancellation is intentionally deferred because a timed-out background worker could keep reading live campaign state concurrently.
 
 ## Fixtures
 
@@ -243,6 +248,14 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 ```powershell
 .\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest
 .\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain
+```
+
+`Confirmed locally`: after source commit `72424e4d9c`, state-exporter and local-control regression tests plus compile/checkstyle passed from `external/src/mekhq` on `2026-06-26`:
+
+```powershell
+.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest
+.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest
+.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest
 ```
 
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.

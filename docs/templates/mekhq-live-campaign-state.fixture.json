@@ -695,5 +695,17 @@
       "recommended_owner": "Future MekHQ command API design",
       "blocks_automation": true
     }
+  ],
+  "response_status": "complete",
+  "partial_response": false,
+  "warnings": [],
+  "collector_timing": [
+    {
+      "collector": "bridge_metadata",
+      "elapsed_ms": 0,
+      "source_owner": "LocalCampaignStateExporter#bridge_metadata section",
+      "warning_threshold_ms": 1000,
+      "status": "complete"
+    }
   ]
 }

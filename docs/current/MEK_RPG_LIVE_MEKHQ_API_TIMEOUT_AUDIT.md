@@ -50,7 +50,7 @@ Next issue: `#64`, keep summary and command readiness fast and bounded.
 
 Start with the timing fields from `5effaa5517` during a live disposable-campaign smoke test. If `/campaign/summary` shows low collector time but high endpoint time after another request, the single-thread queue is the active problem. If `/campaign/commands` shows high `state_revision`, `selectors.unit_market_offers`, or `selectors.contract_market_offers`, cache or bound selector construction before adding more command rows.
 
-Then use issue `#65` to make `/campaign/state` partial-response capable: keep section gating, add per-section bounds or limits for high-cardinality rows, and return warnings instead of making one slow section fail the whole request.
+Issue `#65` later made `/campaign/state` partial-response capable for section collector failures and verified narrowed requests do not traverse unrelated personnel/unit/scenario collections. True per-section timeout cancellation remains deferred because timed-out background collectors could keep reading live campaign state concurrently.
 
 ## Verification
 

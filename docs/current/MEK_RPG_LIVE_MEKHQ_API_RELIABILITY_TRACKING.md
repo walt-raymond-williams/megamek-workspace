@@ -7,7 +7,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 ## Workstream Shape
 
 - Parent epic: `#62`, "Epic: Stabilize live MekHQ API reliability for MEK-RPG play"
-- Status: `Issues #63 and #64 complete; reliability hardening queue active`
+- Status: `Issues #63 through #65 complete; reliability hardening queue active`
 - Integration branch: use the active local MekHQ API branch unless a later source implementation slice needs a new branch.
 - Human review required before merge to `master`: `Yes`, if source changes land.
 
@@ -25,35 +25,39 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 - Closed:
   - `#63`: Audit live MekHQ API timeout sources and add collector timing instrumentation.
   - `#64`: Keep MekHQ summary and command readiness endpoints fast and bounded.
-- Open:
   - `#65`: Make live MekHQ state section filtering lazy and partial-response capable.
+- Open:
   - `#66`: Expose lightweight pending scenario and deployment commitment data.
   - `#67`: Add live MekHQ API reliability regression tests and smoke checklist.
 - Blocked:
-  - `#65`, `#66`, and `#67` should consult the issue `#63` audit note when practical.
+  - `#66` and `#67` should consult the issue `#63` audit note when practical.
 
 ## Recommended Next Step
 
-- Issue: `#65`
-- Why next: issue `#64` bounded default command readiness, but `/campaign/state` can still spend too long inside deep section collectors. Make section filtering partial-response capable before adding more state depth.
-- Handoff: `docs/handoffs/active/lazy-mekhq-state-sections-partial-responses.md`
+- Issue: `#66`
+- Why next: issue `#65` now preserves already-collected state sections when a section collector fails, but MEK-RPG still needs a purpose-built lightweight pending-deployment read path for current operation commitments.
+- Handoff: `docs/handoffs/active/expose-mekhq-pending-deployments-endpoint.md`
 
 ## Verification State
 
 - Commands passed:
   - From `external/src/mekhq`: `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest`.
   - From `external/src/mekhq`: `.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain`.
+  - From `external/src/mekhq`: `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest`.
+  - From `external/src/mekhq`: `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`.
 - Source commits:
   - `5effaa5517` in `external/src/mekhq`: `Instrument local control API read paths`.
   - `9ad8fa5f4a` in `external/src/mekhq`: `Bound local command readiness selectors`.
+  - `72424e4d9c` in `external/src/mekhq`: `Make local campaign state export partial`.
 - Documentation:
   - `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`.
 - Completed behavior:
   - `Confirmed from source`: default `GET /campaign/commands` now uses a cheap `commands-lite-*` revision and omits expensive unit-market and contract-market selector construction with machine-readable `selector_generation_deferred` rows.
   - `Confirmed from source`: full market selector guard facts remain available through `GET /campaign/commands?selectorDetail=full` or `includeExpensiveSelectors=true`.
   - `Confirmed from source`: current personnel, current unit, and personnel-market applicant selectors have bounded default limits; oversized groups return `selector_limit_exceeded` instead of unbounded rows.
+  - `Confirmed from source`: narrowed `GET /campaign/state?sections=...` requests do not collect unrequested personnel/unit/scenario sections, and requested section collector failures now return partial HTTP `200` payloads with `response_status`, `partial_response`, structured warnings, failed collector timing, and unsupported details.
 - Manual checks: none yet.
-- Known blockers: live smoke verification needs a source-built MekHQ app with the control API enabled and a safe loaded campaign. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq`, and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
+- Known blockers: live smoke verification needs a source-built MekHQ app with the control API enabled and a safe loaded campaign. Java-level per-section timeout cancellation remains deferred pending safer Swing/threading design. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq`, and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
 
 ## Related Docs
 

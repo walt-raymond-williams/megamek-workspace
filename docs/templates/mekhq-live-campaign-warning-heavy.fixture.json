@@ -23,6 +23,15 @@
       }
     ]
   },
+  "scenarios": {
+    "status": "unavailable",
+    "partial": true,
+    "reason_code": "section_collector_failed",
+    "requested_section": "scenarios",
+    "warnings": [
+      "Section collector failed; see top-level warnings and unsupported details."
+    ]
+  },
   "markets": {
     "display_only": true,
     "automation_ready": false,
@@ -158,6 +167,34 @@
       "evidence": "Unsupported",
       "recommended_owner": "Future MekHQ command API design",
       "blocks_automation": true
+    },
+    {
+      "area": "scenarios",
+      "field": "section_payload",
+      "reason": "The requested section collector failed with RuntimeException; already-collected sections are still returned.",
+      "evidence": "Unsupported",
+      "recommended_owner": "LocalCampaignStateExporter#scenarios section",
+      "blocks_automation": false
+    }
+  ],
+  "response_status": "partial",
+  "partial_response": true,
+  "warnings": [
+    {
+      "area": "sections.scenarios",
+      "message": "The requested scenarios section could not be collected; this response is partial.",
+      "evidence": "Unknown",
+      "source_owner": "LocalCampaignStateExporter#scenarios section"
+    }
+  ],
+  "collector_timing": [
+    {
+      "collector": "scenarios",
+      "elapsed_ms": 12,
+      "source_owner": "LocalCampaignStateExporter#scenarios section",
+      "warning_threshold_ms": 1000,
+      "status": "failed",
+      "reason_code": "section_collector_failed"
     }
   ]
 }
