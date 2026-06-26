@@ -45,13 +45,6 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Bound MekHQ summary and command readiness endpoints.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Use issue `#63` timing instrumentation and audit results to keep `/campaign/summary` and `/campaign/commands` fast enough for live MEK-RPG play.
-   - Output: Source changes and docs that bound lightweight read paths, reduce selector recomputation where practical, and preserve local-only/read-only safety.
-   - Notes: GitHub issue `#64`; child of reliability epic `#62`; active checklist `docs/handoffs/active/bound-mekhq-summary-commands-endpoints.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`.
-
 2. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
@@ -110,6 +103,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-26`: Completed GitHub issue `#64` with MekHQ source commit `9ad8fa5f4a`, which makes default `GET /campaign/commands` bounded by using a cheap `commands-lite-*` revision, deferring expensive unit-market and contract-market selector guard construction behind `selectorDetail=full` / `includeExpensiveSelectors=true`, reporting `selector_generation_deferred` for market command rows, bounding light selector groups, and caching full selector candidates within one response. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest` plus `.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Next reliability issue is `#65`.
 - `2026-06-26`: Completed GitHub issue `#63` by adding source-backed timeout audit `MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md` and MekHQ source commit `5effaa5517`, which adds response-visible `endpoint_timing` and `collector_timing` diagnostics for `/campaign/summary`, `/campaign/state`, and `/campaign/commands`. Verified targeted local-control tests plus `.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain`. Source push remains blocked by upstream `MegaMek/mekhq` 403. Next reliability issue is `#64`.
 - `2026-06-26`: Read MEK-RPG reliability handoff `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`, created GitHub epic `#62` and child issues `#63` through `#67`, added tracking note `MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_TRACKING.md`, and created active handoffs for timeout audit, bounded summary/commands, lazy/partial state sections, pending deployment data, and reliability tests. Next recommended issue is `#63`.
 - `2026-06-23`: Completed GitHub issue `#57` by adding source audit `MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`. The audit classifies current daily reports, memory-only historical daily logs, six serialized per-person log families, finance transactions, scenario reports, maintenance/logistics reports, current market/procurement state, and application/debug logs. Recommendation: run design issue `#58` next before implementation; medical/patient logs need explicit target filters/opt-in; application/debug logs should stay unsupported. Archived handoff: `docs/handoffs/archive/audit-mekhq-activity-history-sources.md`.

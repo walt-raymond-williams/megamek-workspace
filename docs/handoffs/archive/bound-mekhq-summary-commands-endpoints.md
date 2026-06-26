@@ -5,6 +5,9 @@
 - GitHub issue: `#64`
 - Roadmap entry: `Epic: Stabilize live MekHQ API reliability for MEK-RPG play`
 - Priority: `High`
+- Status: `Done`
+- Completed: `2026-06-26`
+- Source commit: `9ad8fa5f4a` in `external/src/mekhq`
 
 ## Goal
 
@@ -26,6 +29,15 @@ Read these first:
 - Source changes that bound summary and command readiness work.
 - Explicit unavailable/limited readiness rows or warnings for any selector generation that is too expensive.
 - Updated tests or fixtures for normal and fallback behavior.
+
+## Close-Out
+
+- `Confirmed from source`: default `GET /campaign/commands` now uses a cheap `commands-lite-*` revision and defers expensive contract-market and unit-market selector guard facts.
+- `Confirmed from source`: full market selector facts remain available with `GET /campaign/commands?selectorDetail=full` or `includeExpensiveSelectors=true`.
+- `Confirmed from source`: current personnel, current unit, and applicant selector groups are bounded; oversized groups return `selector_limit_exceeded`.
+- `Confirmed locally`: `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest` passed.
+- `Confirmed locally`: `.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest` passed.
+- `Blocked`: source push is blocked because upstream `MegaMek/mekhq` denies `walt-raymond-williams` with HTTP 403.
 
 ## Files And Areas
 
