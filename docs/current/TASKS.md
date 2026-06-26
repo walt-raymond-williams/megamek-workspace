@@ -45,6 +45,13 @@ Use this shape for active and queued work:
 
 ## Next
 
+1. Run live MekHQ API reliability smoke checklist.
+   - Status: `Not started`
+   - Owner: `User`
+   - Goal: Validate issue `#62` close-out by running the read-only reliability smoke checklist against a source-built MekHQ GUI with a safe copied/disposable campaign loaded.
+   - Output: Report whether `/status`, `/campaign/summary`, `/campaign/pending-deployments`, default `/campaign/commands`, narrowed `/campaign/state`, and a viewpoint person lookup return before timeout, plus any endpoint/collector timing warnings.
+   - Notes: GitHub issue `#68`; checklist `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md`; if successful, close epic `#62`.
+
 2. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
@@ -103,6 +110,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-26`: Reviewed completed reliability issues `#64` through `#67` for epic `#62`. Recommendation: do not close epic `#62` yet because live GUI smoke was explicitly not run in issue `#67`; created user-task issue `#68` to run `MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md` against a safe loaded campaign before final close-out.
 - `2026-06-26`: Completed GitHub issue `#67` with MekHQ source commit `81afcee70a`, which adds reliability regression coverage for loaded-campaign HTTP reads across `/campaign/summary`, `/campaign/pending-deployments`, default `/campaign/commands`, narrowed `/campaign/state`, bad state-section post-failure availability, and default command readiness deferral of expensive contract guard facts. Added live smoke checklist `docs/current/MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md` and repeatable commands in `KNOWN_COMMANDS.md`. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Live GUI smoke was not run because no source-built MekHQ GUI with a safe campaign was under agent control. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403.
 - `2026-06-26`: Completed GitHub issue `#66` with MekHQ source commit `ba865793c5`, which adds `GET /campaign/pending-deployments` plus a compact `pendingDeployments` object in `GET /campaign/summary`. The read-only path reports current scenario ids/names/dates/statuses, source-confirmed unit assignment rows, crew/person ids and roles, optional `personId`/`personName` commitment lookup for Double-M-style checks, collector/endpoint timing, and explicit unsupported metadata for UI-selected viewpoint person state. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest`, `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalControlServiceHttpTest`, and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Next reliability issue is `#67`.
 - `2026-06-26`: Completed GitHub issue `#65` with MekHQ source commit `72424e4d9c`, which makes `GET /campaign/state?sections=...` partial-response capable for section collector failures and verifies narrowed `bridge_metadata` requests do not touch unrequested personnel/unit/scenario collections. Failed requested sections now return a structured unavailable placeholder, `response_status: "partial"`, `partial_response: true`, top-level warnings, unsupported details, and failed collector timing while preserving already-collected sections. Java-level per-section timeout cancellation is deferred pending safer Swing/threading design. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest`, `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest --tests mekhq.service.LocalCommandReadinessExporterTest`, and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Next reliability issue is `#66`.
