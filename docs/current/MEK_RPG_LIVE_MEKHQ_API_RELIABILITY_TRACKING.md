@@ -7,7 +7,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 ## Workstream Shape
 
 - Parent epic: `#62`, "Epic: Stabilize live MekHQ API reliability for MEK-RPG play"
-- Status: `Issue created`
+- Status: `Issue #63 complete; reliability hardening queue active`
 - Integration branch: use the active local MekHQ API branch unless a later source implementation slice needs a new branch.
 - Human review required before merge to `master`: `Yes`, if source changes land.
 
@@ -22,33 +22,40 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 ## Issue Snapshot
 
 - Last refreshed: `2026-06-26`
-- Closed: none.
-- Open:
+- Closed:
   - `#63`: Audit live MekHQ API timeout sources and add collector timing instrumentation.
+- Open:
   - `#64`: Keep MekHQ summary and command readiness endpoints fast and bounded.
   - `#65`: Make live MekHQ state section filtering lazy and partial-response capable.
   - `#66`: Expose lightweight pending scenario and deployment commitment data.
   - `#67`: Add live MekHQ API reliability regression tests and smoke checklist.
 - Blocked:
-  - `#64`, `#65`, `#66`, and `#67` should consult `#63` when practical.
+  - `#64`, `#65`, `#66`, and `#67` should consult the issue `#63` audit note when practical.
 
 ## Recommended Next Step
 
-- Issue: `#63`
-- Why next: the endpoint timeout symptoms cross summary, state, and command readiness. A source-backed collector map and timing story should prevent fixes from guessing at the wrong stall point.
-- Handoff: `docs/handoffs/active/audit-live-mekhq-api-timeouts.md`
+- Issue: `#64`
+- Why next: issue `#63` found that summary can be blocked behind another slow request on the single local API executor, and command readiness can spend time in selector/fingerprint construction. Bound these two live-play entry points before deeper partial-state work.
+- Handoff: `docs/handoffs/active/bound-mekhq-summary-commands-endpoints.md`
 
 ## Verification State
 
-- Commands passed: issue creation and documentation-only tracking in this workspace.
+- Commands passed:
+  - From `external/src/mekhq`: `.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest`.
+  - From `external/src/mekhq`: `.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain`.
+- Source commits:
+  - `5effaa5517` in `external/src/mekhq`: `Instrument local control API read paths`.
+- Documentation:
+  - `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`.
 - Manual checks: none yet.
-- Known blockers: live smoke verification needs a source-built MekHQ app with the control API enabled and a safe loaded campaign. Source pushes from `external/src/mekhq` may still need a writable fork/remote.
+- Known blockers: live smoke verification needs a source-built MekHQ app with the control API enabled and a safe loaded campaign. Source push is blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq`, and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams`.
 
 ## Related Docs
 
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_PROTOTYPE.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`
 - `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`
 - `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_API_RELIABILITY_HANDOFF_2026-06-26.md`
-- `docs/handoffs/active/audit-live-mekhq-api-timeouts.md`
+- `docs/handoffs/archive/audit-live-mekhq-api-timeouts.md`

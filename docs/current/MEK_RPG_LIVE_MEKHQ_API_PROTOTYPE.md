@@ -25,6 +25,7 @@ Source commit:
 - `4429d99ea2` (`Add guarded status note command`)
 - `0451eb53d4` (`Add guarded contract accept command`)
 - `51dbfbe645` (`Add local control API readiness tests`)
+- `5effaa5517` (`Instrument local control API read paths`)
 
 Files changed:
 
@@ -104,6 +105,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 - `snapshotId`
 - `warnings`
 - `unsupported`
+- `collector_timing`
+- `endpoint_timing`
 
 `GET /campaign/state` preserves the MEK-RPG checkpoint top-level grouping:
 
@@ -118,6 +121,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 - `markets`
 - `reports`
 - `unsupported`
+- `collector_timing`
+- `endpoint_timing`
 
 `Confirmed from source`: campaign identity/date/location, current balance, loan balance, personnel role/status/fatigue/hits/salary, unit status/damage/repair counts, contract terms, scenario status/report, and classified report buckets are built from MekHQ methods rather than raw XML.
 
@@ -140,6 +145,8 @@ If no campaign is loaded in the MekHQ GUI, both campaign endpoints return HTTP `
 `Confirmed from source`: source commit `0451eb53d4` adds `POST /campaign/command/contracts/accept`. Apply mode credits advance and transport payments as `TransactionType.CONTRACT_PAYMENT`, calls `Campaign#addMission(...)`, calls `Contract#acceptContract(...)`, processes the non-dialog faction-standing report path, removes the offer from `AbstractContractMarket`, can append a `GENERAL` MEK-RPG audit report, and returns the new mission id assigned by `Campaign#addMission(...)`. Known prompt choices are explicit: accept known contract challenge confirmations, acknowledge known informational prompts without showing dialogs, decline travel/mothball automation, decline rentals, and refuse unknown prompts. Live disposable-campaign smoke testing is still not run.
 
 `Confirmed locally`: source commit `51dbfbe645` adds unit-test coverage for the local command API surface. `LocalCommandReadinessExporterTest` asserts the expected command rows/endpoints/statuses are present, contract selectors expose guard facts and prompt choices, and `state_revision` changes when contract-market state changes. `LocalControlServiceHttpTest` starts the loopback HTTP service with no campaign loaded and verifies `/status`, no-campaign blocking, invalid contract-accept JSON refusal, and post-failure server availability.
+
+`Confirmed from source`: source commit `5effaa5517` adds timing diagnostics for reliability work. `/campaign/summary`, `/campaign/state`, and `/campaign/commands` now include top-level `endpoint_timing`; summary and command readiness include `collector_timing`; state responses include per-requested-section `collector_timing`. `LocalControlService` logs a warning when a read endpoint takes at least `1000` ms.
 
 ## Fixtures
 
@@ -229,6 +236,13 @@ $env:Path="$env:JAVA_HOME\bin;$env:Path"
 ```powershell
 .\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest
 .\gradlew.bat :MekHQ:test
+```
+
+`Confirmed locally`: after source commit `5effaa5517`, targeted local-control tests and compile/checkstyle passed from `external/src/mekhq` on `2026-06-26`:
+
+```powershell
+.\gradlew.bat :MekHQ:test --tests mekhq.service.LocalCommandReadinessExporterTest --tests mekhq.service.LocalControlServiceHttpTest
+.\gradlew.bat :MekHQ:compileJava :MekHQ:checkstyleMain
 ```
 
 `Confirmed locally`: a user-assisted running MekHQ campaign smoke test was performed from MEK-RPG issue `#104` on `2026-06-22` against a disposable `The Learning Ropes-test.cpnx` campaign. Both summary and state endpoints responded, and the user observed no MekHQ save prompt or other visible write/save side effect after the read-only GET requests.

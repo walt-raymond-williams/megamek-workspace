@@ -65,3 +65,11 @@ rg -n "LocalCampaignStateExporter|LocalCommandReadinessExporter|LocalControlServ
 
 - Are timeouts caused by one collector, Swing/thread contention, command selector generation, or cumulative full-state export cost?
 - Should timing metadata be response-visible, log-only, or both?
+
+## Close-Out
+
+- Completed on `2026-06-26`.
+- Source commit: `5effaa5517` in `external/src/mekhq`.
+- Durable audit: `docs/current/MEK_RPG_LIVE_MEKHQ_API_TIMEOUT_AUDIT.md`.
+- Result: timing metadata is response-visible for summary/state/commands and read endpoints log a warning above `1000` ms.
+- Next issue: `#64`, bound `/campaign/summary` and `/campaign/commands`.
