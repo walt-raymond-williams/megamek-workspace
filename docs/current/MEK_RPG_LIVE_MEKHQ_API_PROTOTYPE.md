@@ -4,6 +4,8 @@ Status: implemented locally in MekHQ source for GitHub issue `#36`.
 
 Purpose: expose read-only live campaign context from the already-running MekHQ GUI app so MEK-RPG can refresh GM context without requiring a save first.
 
+Consumer contract: use `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md` as the current MEK-RPG-facing API contract. This file remains the implementation history and source-evidence note for the read-side prototype.
+
 ## Source Changes
 
 Target repo:

@@ -4,6 +4,8 @@ Status: command envelope, readiness discovery, guarded status-note command, guar
 
 Purpose: record the strategy shift from read-only live state toward narrowly scoped MekHQ-owned commands that mutate the already-loaded campaign through MekHQ logic, not through save-file edits.
 
+Consumer contract: use `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md` as the current MEK-RPG-facing API contract. This file remains the strategy and source-evidence note for guarded command design.
+
 ## Strategy Shift
 
 `Confirmed locally`: the local MekHQ control API has already proven one write-side command by advancing the loaded GUI campaign exactly one day through `Campaign#newDay()` with campaign/date guard fields.
