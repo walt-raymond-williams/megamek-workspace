@@ -27,6 +27,7 @@ GitHub Issues are the execution source of truth. This file is the compact recove
   - `#57`: Audit MekHQ activity-history source owners. Audit note: `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`; archived handoff: `docs/handoffs/archive/audit-mekhq-activity-history-sources.md`.
 - Open:
   - `#58`: Design read-only MekHQ activity-history API.
+  - `#69`: Investigate All Reports UI warning dependency in MekHQ API.
   - `#59`: Implement historical daily report activity export.
   - `#60`: Implement MekHQ per-person activity log export.
   - `#61`: Add MekHQ activity-history fixtures and tests.
@@ -35,9 +36,9 @@ GitHub Issues are the execution source of truth. This file is the compact recove
 
 ## Recommended Next Step
 
-- Issue: `#58`
-- Why next: the source audit is complete, and the workstream now needs endpoint shape, default limits, date windows, filters, sanitization, privacy defaults, unsupported entries, and duplicate handling before implementation.
-- Handoff: `docs/handoffs/active/design-mekhq-activity-history-api.md`
+- Issue: `#69`, then `#58`
+- Why next: the user observed warning behavior around MekHQ's UI-facing "All Reports" controls, so first verify whether the existing API depends on that path. After that concern is classified, continue issue `#58` to design the activity-history endpoint shape, default limits, date windows, filters, sanitization, privacy defaults, unsupported entries, and duplicate handling.
+- Handoff: `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`, then `docs/handoffs/active/design-mekhq-activity-history-api.md`
 
 ## Verification State
 

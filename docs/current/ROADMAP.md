@@ -505,10 +505,24 @@ Use this shape for entries that may become GitHub issues:
 - Child issues:
   - `#57`: Audit MekHQ activity-history source owners. Completed on `2026-06-23`; audit note: `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`; archived handoff: `docs/handoffs/archive/audit-mekhq-activity-history-sources.md`.
   - `#58`: Design read-only MekHQ activity-history API. Next recommended agent issue; active handoff: `docs/handoffs/active/design-mekhq-activity-history-api.md`.
+  - `#69`: Investigate All Reports UI warning dependency in MekHQ API. Created on `2026-06-27`; active handoff: `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`.
   - `#59`: Implement historical daily report activity export. Wait for `#57` and `#58`; active handoff: `docs/handoffs/active/implement-mekhq-historical-daily-report-history.md`.
   - `#60`: Implement MekHQ per-person activity log export. Wait for `#57` and `#58`, preferably after `#59`; active handoff: `docs/handoffs/active/implement-mekhq-person-activity-log-export.md`.
   - `#61`: Add MekHQ activity-history fixtures and tests. Wait for `#58` and implementation slices unless folded into each implementation issue; active handoff: `docs/handoffs/active/add-mekhq-activity-history-fixtures-tests.md`.
 - Open questions: Should activity history be a new `history` state section, a dedicated `/campaign/history` endpoint, or both? How far back should default exports go? Should per-person medical and patient logs require opt-in sections or explicit target filters?
+
+### Investigate All Reports UI warning dependency in MekHQ API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#69`
+- Owner: `Codex`
+- Goal: Determine whether the local MekHQ API uses the same UI-facing "All Reports" path that the user observed showing warnings over or near its buttons, and whether that dependency creates inefficiency, timeout risk, or UI-warning leakage.
+- Why it matters: The API should expose bounded, source-owned report/history data without driving inefficient UI paths or relying on controls that produce confusing warning overlays in MekHQ.
+- Expected output: A source-backed note under `docs/current/` that says whether any API endpoint relies on the All Reports UI/report path; if yes, identify affected endpoint(s), risk, and safer alternatives; if no, record the evidence and update relevant API docs/handoffs to resolve the concern.
+- Handoff notes: Active handoff: `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`. This was created from user-observed UI behavior only; no source inspection was performed when the issue was created.
+- Dependencies: Related to epic `#56`, issue `#58`, and current live MekHQ API docs. The investigation should inspect source when executed and use disposable/read-only live validation only if needed.
+- Open questions: Is "All Reports" a UI-only aggregation, a shared report collector, or unrelated to the current API? Are any current read endpoints using a broad report path where a bounded purpose-built report/history export would be safer?
 
 ### Discover first guarded live MekHQ command API easy wins for MEK-RPG
 
