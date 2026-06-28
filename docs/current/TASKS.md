@@ -66,14 +66,21 @@ Use this shape for active and queued work:
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-4. Run MekHQ quickstart roster UI validation.
+4. Investigate MegaMek live combat narration bridge.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
+   - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
+   - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
+
+5. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-5. Turn this repo into an AI-ready project workflow demo.
+6. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -117,6 +124,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-28`: Checked roadmap/docs and GitHub issues for a live MegaMek combat observer/narration bot idea; found no duplicate. Created GitHub issue `#78`, added roadmap/task tracking, and created active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`. Brief source pass found plausible feasibility through MegaMek client chat, game listener/report/entity events, bot-client listener patterns, and observer handling, but a running observer proof remains future work.
 - `2026-06-28`: Read MEK-RPG TO&E/pilot assignment handoff `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`, created focused guarded-command epic `#70` and child issues `#71` through `#77`, updated roadmap/tracking/task docs, and created active handoffs for source audit, API design, read selectors, pilot commands, TO&E commands, optional batch design, and fixtures/smoke coverage. Next recommended issue is `#71`.
 - `2026-06-26`: Added `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md` as the consumer-facing live MekHQ API contract for MEK-RPG. It consolidates the read endpoints, command readiness endpoint, guarded command envelope, implemented mutating endpoints, selector rules, warning/unsupported semantics, and live-smoke timeout expectations that were previously spread across prototype, strategy, reliability, and fixture docs.
 - `2026-06-26`: Completed GitHub issue `#68` and closed epic `#62` with a user-assisted live MekHQ API reliability smoke. Source-built MekHQ had the control API enabled and loaded `The Learning Ropes` (`3025-04-08`). `/status`, `/campaign/summary`, `/campaign/pending-deployments`, `/campaign/pending-deployments?personName=Moreno`, default `/campaign/commands`, and narrowed `/campaign/state` all returned HTTP `200` before timeout. Default command readiness deferred expensive market selector facts as intended.

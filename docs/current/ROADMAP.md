@@ -439,6 +439,19 @@ Use this shape for entries that may become GitHub issues:
 - Recommended sequence: Complete. Issues `#64` and `#65` bounded command readiness and made narrowed state responses partial for section collector failures, issue `#66` added the purpose-built pending-deployment read path, issue `#67` locked in automated regression coverage and a smoke checklist, and issue `#68` confirmed the live loaded-campaign read path did not time out.
 - Open questions: Java-level per-section timeout cancellation remains deferred because timed-out background collectors could keep reading live campaign state concurrently. Source pushes from `external/src/mekhq` remain blocked until a writable fork/remote is configured.
 
+### Investigate MegaMek live combat narration bridge
+
+- Status: `Issue created`
+- Priority: `Medium`
+- Issue: `#78`
+- Owner: `Codex`
+- Goal: Determine the best V1 architecture for a MegaMek-side live combat narration bridge that can observe tactical game state and emit concise narration or pilot dialogue into MegaMek chat or an external MEK-RPG consumer.
+- Why it matters: MEK-RPG can now read live MekHQ campaign state, but tactical battles launched into MegaMek are still a separate live runtime. A combat observer/narrator would let the campaign assistant react to movement, attacks, damage, pilot injuries, destruction, phase changes, and victory while the battle is being played.
+- Expected output: A source-backed feasibility/design note under `docs/current/` that compares an external observer client, built-in bot/client mode, server-side hook, MekHQ-launched companion, and any local API option; identifies event/chat entry points; recommends a V1 path; and proposes follow-up issues only if implementation is ready.
+- Handoff notes: Active handoff: `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`. A duplicate check on `2026-06-28` found no open or closed GitHub issue and no roadmap entry specifically for live MegaMek observer/chat narration. Initial source pass found plausible hooks in `AbstractClient#sendChat(...)`, `GameListener`, `GameReportEvent`, bot-client listener patterns, and server observer handling, but no running observer proof yet.
+- Dependencies: Existing MEK-RPG live MekHQ read/command work for campaign context; local MegaMek source under `external/src/megamek`; local MekHQ source under `external/src/mekhq` for launch/entity identity mapping; a future running MegaMek scenario for live smoke validation.
+- Open questions: Can an observer client receive enough event/report detail without violating double-blind expectations? Can MegaMek entities be reliably mapped back to MekHQ campaign units and pilots during a launched scenario? Should V1 write narration into MegaMek chat only, an external stream/log/API only, or both? Should V1 be a general narrator before per-pilot dialogue?
+
 ### Harden live API trust envelope, dirty state, and location labels
 
 - Status: `Done`
