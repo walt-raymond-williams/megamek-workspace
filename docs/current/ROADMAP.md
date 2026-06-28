@@ -561,8 +561,31 @@ Use this shape for entries that may become GitHub issues:
   - `#54`: Implement guarded live MekHQ unit-market purchase command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-unit-market-purchase-command.md`.
   - `#52`: Design live MekHQ contract selection command API. Completed on `2026-06-23`; design note: `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`; archived handoff: `docs/handoffs/archive/design-live-mekhq-contract-selection-command.md`.
   - `#55`: Implement guarded live MekHQ contract accept command. Completed on `2026-06-23`; archived handoff: `docs/handoffs/archive/implement-live-mekhq-contract-accept-command.md`.
-- Recommended sequence: The implemented guarded command slice now covers status-note, personnel status, personnel fatigue, unit-market purchase, and contract accept. Issues `#51`, `#53`, `#54`, and `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
-- Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Which contract prompt choices should V1 support beyond accepting known confirmations, acknowledging informational prompts, and declining optional travel/rental automation?
+  - `#70`: Epic: Add guarded TO&E and pilot assignment commands for MEK-RPG. Created on `2026-06-28`; active handoff: `docs/handoffs/active/toe-pilot-assignment-command-api-epic.md`.
+- Recommended sequence: The implemented guarded command slice now covers status-note, personnel status, personnel fatigue, unit-market purchase, and contract accept. MEK-RPG live play exposed a new command gap for pilot assignment and TO&E edits; use focused epic `#70` and child issues `#71` through `#77` before deciding whether epic `#44` is PR-ready. Issues `#51`, `#53`, `#54`, and `#55` still need live disposable-campaign smoke testing when a source-built MekHQ instance is available.
+- Open questions: Which medical/prosthetic state is available under the user's active MekHQ options? Which contract prompt choices should V1 support beyond accepting known confirmations, acknowledging informational prompts, and declining optional travel/rental automation? For TO&E and pilot assignment, source issue `#71` must confirm whether existing MekHQ UI logic can be reused safely or whether non-dialog source services need extraction first.
+
+### Epic: Add guarded TO&E and pilot assignment commands for MEK-RPG
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#70`
+- Owner: `Mixed`
+- Goal: Add a guarded MekHQ-owned command surface for MEK-RPG to request pilot assignment, pilot unassignment, pilot swaps, and TO&E/force-organization edits without editing saves or duplicating MekHQ validation rules.
+- Why it matters: Live MEK-RPG play for Sharpe's Strikers needs to turn narrative lance planning into hard MekHQ roster and force-organization changes. MekHQ must validate crew eligibility, unit state, force structure, scenario/deployment locks, prompt requirements, and save behavior.
+- Expected output: A decomposed workstream covering source audit, API design, read selector export, guarded pilot assignment commands, guarded TO&E commands, optional batch design, and fixtures/smoke coverage.
+- Handoff notes: Focused child epic under guarded command epic `#44`. MEK-RPG handoff source: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`. Active epic handoff: `docs/handoffs/active/toe-pilot-assignment-command-api-epic.md`. Feature tracking continues in `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`.
+- Dependencies: Completed command envelope issue `#45`; completed command readiness issue `#46`; existing local API source patterns from issues `#50`, `#51`, `#53`, `#54`, and `#55`; local MekHQ source under `external/src/mekhq`; copied/disposable campaign data for mutating tests.
+- Child issues:
+  - `#71`: Audit MekHQ pilot assignment and TO&E source owners. Active handoff: `docs/handoffs/active/audit-mekhq-pilot-toe-source-owners.md`.
+  - `#72`: Design guarded pilot assignment and TO&E command API. Active handoff: `docs/handoffs/active/design-guarded-pilot-toe-command-api.md`.
+  - `#73`: Expose pilot assignment and TO&E read selectors. Active handoff: `docs/handoffs/active/implement-pilot-toe-read-selectors.md`.
+  - `#74`: Implement guarded MekHQ pilot assignment commands. Active handoff: `docs/handoffs/active/implement-guarded-pilot-assignment-commands.md`.
+  - `#75`: Implement guarded MekHQ TO&E force commands. Active handoff: `docs/handoffs/active/implement-guarded-toe-force-commands.md`.
+  - `#76`: Design atomic TO&E and pilot assignment batch command. Active handoff: `docs/handoffs/active/design-toe-pilot-batch-command.md`.
+  - `#77`: Add pilot assignment and TO&E command fixtures and smoke checklist. Active handoff: `docs/handoffs/active/add-pilot-toe-command-fixtures-smoke.md`.
+- Recommended sequence: Start with source audit `#71`, then API design `#72`, then read selectors `#73`. Implement pilot commands `#74` and TO&E commands `#75` after selectors and design are stable. Treat batch issue `#76` as optional and dependent on the individual command designs. Run coverage/smoke issue `#77` after the mutating slices exist.
+- Open questions: Which MekHQ source methods own assignment and force edits? Are pilot assignment and force editing currently too UI-dialog-coupled for direct API use? Which unit/person/force ids are durable enough for command selectors? What exact locks should V1 enforce for deployed, in-transit, mothballed, under-repair, or scenario-committed units?
 
 ### Define guarded live MekHQ command envelope and prompt policy
 

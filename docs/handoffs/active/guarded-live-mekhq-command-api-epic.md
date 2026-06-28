@@ -26,6 +26,7 @@ Read these first:
 - Keep child issues sequenced and scoped.
 - Preserve the disabled-by-default, loopback-only, loaded-GUI-campaign posture while prototyping.
 - Ensure each command family has source-backed selectors, guard fields, prompt policy, and disposable-campaign verification before implementation.
+- Coordinate focused child epic `#70` for pilot assignment and TO&E edits before declaring epic `#44` PR-ready.
 
 ## Files And Areas
 
@@ -48,6 +49,7 @@ Likely files to read or edit:
 ## Acceptance Criteria
 
 - Child issues cover command envelope/readiness, campaign notes, unit purchase selectors, personnel death/status, and medical/prosthetic handling.
+- New child epic `#70` covers pilot assignment and TO&E mutation stories `#71` through `#77`.
 - Roadmap and task board point to the child issue sequence.
 - The epic can close only after enough child work has produced a coherent guarded command API slice or a documented stop decision.
 
@@ -56,3 +58,4 @@ Likely files to read or edit:
 - Which command should be implemented first after discovery?
 - Should command selectors be durable across save/reload or live-session only?
 - What save policy should MEK-RPG use once commands are trusted?
+- For pilot assignment and TO&E edits, can existing MekHQ UI workflows be reused safely, or does the API need source-owned non-dialog services first?

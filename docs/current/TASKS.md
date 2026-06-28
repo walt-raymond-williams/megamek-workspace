@@ -45,28 +45,35 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate All Reports UI warning dependency in MekHQ API.
+1. Audit MekHQ pilot assignment and TO&E source owners.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Identify the MekHQ source classes, services, UI actions, and model methods that own pilot/crew assignment, swaps, and TO&E force edits so MEK-RPG can request those mutations through MekHQ-owned validation.
+   - Output: A source-backed note under `docs/current/`, plus roadmap/tracking updates that recommend the next design or service-extraction step.
+   - Notes: GitHub issue `#71`; child of focused epic `#70` under guarded command epic `#44`; active checklist `docs/handoffs/active/audit-mekhq-pilot-toe-source-owners.md`; MEK-RPG request source is `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`.
+
+2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-2. Design read-only MekHQ activity-history API.
+3. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-3. Run MekHQ quickstart roster UI validation.
+4. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-4. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -110,6 +117,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-28`: Read MEK-RPG TO&E/pilot assignment handoff `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`, created focused guarded-command epic `#70` and child issues `#71` through `#77`, updated roadmap/tracking/task docs, and created active handoffs for source audit, API design, read selectors, pilot commands, TO&E commands, optional batch design, and fixtures/smoke coverage. Next recommended issue is `#71`.
 - `2026-06-26`: Added `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md` as the consumer-facing live MekHQ API contract for MEK-RPG. It consolidates the read endpoints, command readiness endpoint, guarded command envelope, implemented mutating endpoints, selector rules, warning/unsupported semantics, and live-smoke timeout expectations that were previously spread across prototype, strategy, reliability, and fixture docs.
 - `2026-06-26`: Completed GitHub issue `#68` and closed epic `#62` with a user-assisted live MekHQ API reliability smoke. Source-built MekHQ had the control API enabled and loaded `The Learning Ropes` (`3025-04-08`). `/status`, `/campaign/summary`, `/campaign/pending-deployments`, `/campaign/pending-deployments?personName=Moreno`, default `/campaign/commands`, and narrowed `/campaign/state` all returned HTTP `200` before timeout. Default command readiness deferred expensive market selector facts as intended.
 - `2026-06-26`: Reviewed completed reliability issues `#64` through `#67` for epic `#62`. Recommendation: do not close epic `#62` yet because live GUI smoke was explicitly not run in issue `#67`; created user-task issue `#68` to run `MEK_RPG_LIVE_MEKHQ_API_RELIABILITY_SMOKE_CHECKLIST.md` against a safe loaded campaign before final close-out.

@@ -12,7 +12,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Issue Snapshot
 
-- Last refreshed: `2026-06-23`
+- Last refreshed: `2026-06-28`
 - Closed:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy.
@@ -28,13 +28,21 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#55`: Implement guarded live MekHQ contract accept command.
 - Open:
   - `#44`: Epic: Guarded live MekHQ command API for MEK-RPG.
+  - `#70`: Epic: Add guarded TO&E and pilot assignment commands for MEK-RPG.
+  - `#71`: Audit MekHQ pilot assignment and TO&E source owners.
+  - `#72`: Design guarded pilot assignment and TO&E command API.
+  - `#73`: Expose pilot assignment and TO&E read selectors.
+  - `#74`: Implement guarded MekHQ pilot assignment commands.
+  - `#75`: Implement guarded MekHQ TO&E force commands.
+  - `#76`: Design atomic TO&E and pilot assignment batch command.
+  - `#77`: Add pilot assignment and TO&E command fixtures and smoke checklist.
 - Blocked: none yet for this epic.
 
 ## Recommended Next Step
 
-- Issue: `#44`
-- Why next: The guarded command slice now includes status-note, personnel status, personnel fatigue, unit-market purchase, and contract accept. The next management step is to decide whether this epic is ready for PR-readiness review or whether another child issue, likely GM funds adjustment or personnel hire design, should be opened first.
-- Handoff: `docs/handoffs/active/guarded-live-mekhq-command-api-epic.md`
+- Issue: `#71`
+- Why next: MEK-RPG play exposed a concrete command gap for pilot assignment and TO&E edits. Before designing or implementing the commands, source owners and UI/dialog coupling need to be audited so the API can reuse MekHQ validation instead of reimplementing it.
+- Handoff: `docs/handoffs/active/audit-mekhq-pilot-toe-source-owners.md`
 
 ## Verification State
 
@@ -82,6 +90,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Live personnel.fatigue smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live unit-market purchase smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with representative unit-market offers, ideally including a DropShip offer.
   - Live contract accept smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with at least one selectable contract-market offer.
+  - Pilot assignment and TO&E commands are not yet source-audited. Issue `#71` must confirm source owners, selector durability, prompt behavior, and safe mutation paths before implementation issues `#73` through `#75` proceed.
 
 ## Related Docs
 
@@ -92,6 +101,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 - `docs/current/MEK_RPG_LIVE_MEKHQ_MEDICAL_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_UNIT_MARKET_PURCHASE_COMMAND_DESIGN.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`
+- `docs/handoffs/active/toe-pilot-assignment-command-api-epic.md`
+- `docs/handoffs/active/audit-mekhq-pilot-toe-source-owners.md`
+- `docs/handoffs/active/design-guarded-pilot-toe-command-api.md`
+- `docs/handoffs/active/implement-pilot-toe-read-selectors.md`
+- `docs/handoffs/active/implement-guarded-pilot-assignment-commands.md`
+- `docs/handoffs/active/implement-guarded-toe-force-commands.md`
+- `docs/handoffs/active/design-toe-pilot-batch-command.md`
+- `docs/handoffs/active/add-pilot-toe-command-fixtures-smoke.md`
 - `docs/handoffs/active/implement-live-mekhq-contract-accept-command.md`
 - `docs/handoffs/archive/discover-live-mekhq-command-api-easy-wins.md`
 - `docs/handoffs/archive/design-live-mekhq-command-envelope.md`
