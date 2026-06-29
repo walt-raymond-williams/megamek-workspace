@@ -45,12 +45,19 @@ Use this shape for active and queued work:
 
 ## Next
 
+1. Investigate firing-phase unit switching and targeting lag.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Source-map the current MegaMek firing-phase latency where switching between player units and selecting/targeting enemies is very slow.
+   - Output: Source-backed cause candidates, exact hot-path methods, and a prioritized low-risk fix recommendation; do not implement until explicitly approved.
+   - Notes: GitHub issue `#81`; first focused child of performance issue `#80`; active checklist `docs/handoffs/active/investigate-firing-phase-targeting-lag.md`; update `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` with findings.
+
 1. Investigate MegaMek tactical lag and low-risk performance wins.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Source-investigate user-observed MegaMek tactical lag in large battles with many units and Princess/bot AI, then identify low-risk performance candidates before implementation.
    - Output: Source-backed findings, prioritized candidate fixes, and an implementation recommendation; only make source changes after explicit approval.
-   - Notes: GitHub issue `#80`; active checklist `docs/handoffs/active/investigate-megamek-tactical-performance.md`; initial note `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`; current uncommitted `BoardView.java` source edit is an experiment, not an approved fix.
+   - Notes: GitHub issue `#80`; active checklist `docs/handoffs/active/investigate-megamek-tactical-performance.md`; initial note `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`; current uncommitted `BoardView.java` source edit is an experiment, not an approved fix; focused issue `#81` should be handled first.
 
 1. Smoke test contract accept prompts and MekHQ UI refresh.
    - Status: `Not started`

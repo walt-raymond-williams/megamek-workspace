@@ -143,9 +143,11 @@ Use this shape for entries that may become GitHub issues:
 - Goal: Investigate user-observed MegaMek tactical lag and identify low-risk performance improvements for large battles, especially when many units are on the board and Princess/bot AI is active.
 - Why it matters: The tactical game needs to stay responsive enough for campaign play. If UI redraw churn, avoidable EDT work, or obvious repeated calculations are contributing to lag, small targeted fixes may improve playability before deeper AI/pathing optimization is attempted.
 - Expected output: Source-backed findings, a prioritized list of candidate low-risk fixes, and, only after explicit implementation approval, a narrow MegaMek source patch with compile/test verification.
-- Handoff notes: Active handoff: `docs/handoffs/active/investigate-megamek-tactical-performance.md`. Initial findings are in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`. A small uncommitted `BoardView.java` redraw-coalescing experiment exists in `external/src/megamek`; treat it as an experiment to inspect, not an approved finished fix.
+- Handoff notes: Active handoff: `docs/handoffs/active/investigate-megamek-tactical-performance.md`. Initial findings are in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`. Focused bug issue `#81` is the first next investigation and covers firing-phase unit switching and targeting lag. A small uncommitted `BoardView.java` redraw-coalescing experiment exists in `external/src/megamek`; treat it as an experiment to inspect, not an approved finished fix.
 - Dependencies: Local MegaMek source checkout under `external/src/megamek`; likely needs a representative large-unit save/scenario or live reproduction steps before deeper Princess/pathing changes.
-- Open questions: Is the primary slowdown during Princess thinking, board panning/selection, movement animation, firing resolution, minimap rendering, or general redraw? Should the redraw-coalescing experiment be kept, revised, or discarded after review?
+- Open questions: For issue `#81`, is the firing-phase lag triggered by unit selection, next-unit cycling, target hover, target click, weapon toggling, or all of these? More broadly, is the primary slowdown during Princess thinking, board panning/selection, movement animation, firing resolution, minimap rendering, or general redraw? Should the redraw-coalescing experiment be kept, revised, or discarded after review?
+  - Child/focused issues:
+    - `#81`: Investigate firing-phase unit switching and targeting lag. Active handoff: `docs/handoffs/active/investigate-firing-phase-targeting-lag.md`. This should run before the broader performance sweep in `#80`.
 
 ### Epic: Robust tabletop battle result MUL workflow
 

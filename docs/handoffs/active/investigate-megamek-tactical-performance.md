@@ -24,6 +24,7 @@ Read these first:
 
 - Source-backed findings that separate UI/EDT responsiveness from Princess AI/pathing cost.
 - A prioritized list of candidate low-risk fixes.
+- Treat GitHub issue `#81` as the first focused investigation before broader `#80` work: firing-phase unit switching and target selection latency.
 - If implementation is explicitly approved later, a narrow source patch in `external/src/megamek` with verification.
 - If realistic profiling data is needed, a clear request for a representative save/scenario and exact reproduction steps.
 
@@ -33,6 +34,9 @@ Likely files to read or edit:
 
 - `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/BoardView.java`
 - `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/BoardViewPanel.java`
+- `external/src/megamek/megamek/src/megamek/client/ui/panels/phaseDisplay/FiringDisplay.java`
+- `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/LOSModifierCalculator.java`
+- `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/spriteHandler/FiringSolutionSpriteHandler.java`
 - `external/src/megamek/megamek/src/megamek/client/ui/dialogs/minimap/MinimapPanel.java`
 - `external/src/megamek/megamek/src/megamek/client/bot/princess/Princess.java`
 - `external/src/megamek/megamek/src/megamek/client/bot/princess/PathEnumerator.java`
