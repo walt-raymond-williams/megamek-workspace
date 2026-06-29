@@ -45,35 +45,42 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate All Reports UI warning dependency in MekHQ API.
+1. Smoke test contract accept prompts and MekHQ UI refresh.
+   - Status: `Not started`
+   - Owner: `Mixed`
+   - Goal: Run `POST /campaign/command/contracts/accept` against a copied/disposable source-built MekHQ campaign with a selectable contract offer, proving explicit prompt choices, post-command API state refresh, and visible MekHQ UI refresh behavior.
+   - Output: A live-smoke note or tracking update with disposable save path, source commit, dry-run/apply response summaries, prompt facts, `/status`/`/campaign/commands`/`/campaign/state` rereads, visible contract market/briefing/reports/finance observations, and any follow-up source issue for stale UI or unsupported prompts.
+   - Notes: GitHub issue `#79`; child/follow-up of guarded command epic `#44` and implementation issue `#55`; active checklist `docs/handoffs/active/smoke-test-contract-accept-ui-refresh.md`; use copied/disposable saves only.
+
+2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-2. Design read-only MekHQ activity-history API.
+3. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-3. Investigate MegaMek live combat narration bridge.
+4. Investigate MegaMek live combat narration bridge.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
    - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
    - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
 
-4. Run MekHQ quickstart roster UI validation.
+5. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-5. Turn this repo into an AI-ready project workflow demo.
+6. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
