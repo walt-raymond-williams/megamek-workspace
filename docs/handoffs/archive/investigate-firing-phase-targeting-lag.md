@@ -27,6 +27,14 @@ Read these first:
 - A prioritized recommendation for one or more low-risk fixes.
 - No implementation unless the user explicitly approves source changes.
 
+## Completion
+
+- Completed on `2026-06-29` as an investigation-only pass.
+- Findings are recorded in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`.
+- Main source-backed suspect is the default-on firing-solution overlay path: `FiringDisplay.selectEntity(...)` and `ClientGUI.updateFiringArc(...)` can route to `FiringSolutionSpriteHandler.showFiringSolutions(...)`, which scans all entities and calls `WeaponAttackAction.toHit(...)` for viable targets.
+- Recommended first live check: disable View > Firing Solutions and reproduce the firing-phase unit switching and target selection lag.
+- Recommended first source fix, if approved later: remove duplicate/debounce firing-solution rebuilds during unit selection before broader performance changes.
+
 ## Files And Areas
 
 Likely files to inspect first:

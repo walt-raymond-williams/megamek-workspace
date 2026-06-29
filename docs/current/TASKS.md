@@ -45,13 +45,6 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate firing-phase unit switching and targeting lag.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Source-map the current MegaMek firing-phase latency where switching between player units and selecting/targeting enemies is very slow.
-   - Output: Source-backed cause candidates, exact hot-path methods, and a prioritized low-risk fix recommendation; do not implement until explicitly approved.
-   - Notes: GitHub issue `#81`; first focused child of performance issue `#80`; active checklist `docs/handoffs/active/investigate-firing-phase-targeting-lag.md`; update `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` with findings.
-
 1. Investigate MegaMek tactical lag and low-risk performance wins.
    - Status: `Not started`
    - Owner: `Codex`
@@ -138,6 +131,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-29`: Completed GitHub issue `#81` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` map firing unit switching through `FiringDisplay.selectEntity(...)`, `refreshAll()`, `ClientGUI.updateFiringArc(...)`, `FiringSolutionSpriteHandler.showFiringSolutions(...)`, target clicks/cycling through `chooseTarget(...)`, `target(...)`, and `updateTarget()`, plus BoardView ECM/redraw work. Highest-value first check is disabling default-on View > Firing Solutions; recommended first source fix, if approved later, is to remove duplicate/debounce firing-solution rebuilds before broader issue `#80` work. Archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`.
 - `2026-06-29`: Completed GitHub issue `#73` with MekHQ source commit `53741cd082`, which adds pilot assignment and TO&E read selectors. `/campaign/state` now exposes a `forces` section plus richer personnel/unit assignment guards, crew slot facts, and blockers. `/campaign/commands` now exposes `person_assignment_candidates`, `unit_crew_candidates`, `forces`, and blocked readiness rows for `units.assign_pilot`, `units.unassign_pilot`, `units.swap_pilots`, `toe.move_unit`, `toe.create_force`, `toe.rename_force`, `toe.delete_empty_force`, and `toe.batch_update`. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalCommandReadinessExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Archived handoff: `docs/handoffs/archive/implement-pilot-toe-read-selectors.md`.
 - `2026-06-29`: Completed GitHub issue `#72` by adding design note `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`. The design defines readiness rows, selector needs, shared envelope use, V1 request/response shapes, dry-run/save/prompt policy, refusal codes, post-command reread verification, and V1/deferred scope. It keeps mothballed-unit assignment, direct replacement, broad multi-crew assignment, non-empty force delete, and batch updates deferred. Next recommended issue is `#73` for read selectors before mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/design-guarded-pilot-toe-command-api.md`.
 - `2026-06-29`: Completed GitHub issue `#71` by adding source audit `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`. The audit found reusable model mutation methods in `Unit`, `Campaign`, and `Formation`, but role/eligibility validation is mostly embedded in Swing assignment menus and TO&E handlers. Recommendation: proceed to design issue `#72`, require read selectors in `#73`, and extract/shared-use source validators or a command service before implementing mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/audit-mekhq-pilot-toe-source-owners.md`.
