@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design guarded pilot assignment and TO&E command API.
+1. Expose pilot assignment and TO&E read selectors.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Turn the issue `#71` source audit into a concrete guarded command API shape for pilot assignment, unassignment, swaps, and conservative TO&E edits.
-   - Output: A design note under `docs/current/`, plus tracking updates that define selector needs, request/response envelopes, refusal codes, prompt policy, source extraction needs, and implementation sequence.
-   - Notes: GitHub issue `#72`; child of focused epic `#70`; active checklist `docs/handoffs/active/design-guarded-pilot-toe-command-api.md`; source audit `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`.
+   - Goal: Add source-owned live API read context and command readiness selector detail for pilot assignment and TO&E edits.
+   - Output: MekHQ source changes exposing person, unit, crew, assignment, force tree, and blocker facts needed to build safe guarded requests.
+   - Notes: GitHub issue `#73`; child of focused epic `#70`; active checklist `docs/handoffs/active/implement-pilot-toe-read-selectors.md`; design `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`.
 
 2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
@@ -124,6 +124,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-29`: Completed GitHub issue `#72` by adding design note `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`. The design defines readiness rows, selector needs, shared envelope use, V1 request/response shapes, dry-run/save/prompt policy, refusal codes, post-command reread verification, and V1/deferred scope. It keeps mothballed-unit assignment, direct replacement, broad multi-crew assignment, non-empty force delete, and batch updates deferred. Next recommended issue is `#73` for read selectors before mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/design-guarded-pilot-toe-command-api.md`.
 - `2026-06-29`: Completed GitHub issue `#71` by adding source audit `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`. The audit found reusable model mutation methods in `Unit`, `Campaign`, and `Formation`, but role/eligibility validation is mostly embedded in Swing assignment menus and TO&E handlers. Recommendation: proceed to design issue `#72`, require read selectors in `#73`, and extract/shared-use source validators or a command service before implementing mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/audit-mekhq-pilot-toe-source-owners.md`.
 - `2026-06-28`: Checked roadmap/docs and GitHub issues for a live MegaMek combat observer/narration bot idea; found no duplicate. Created GitHub issue `#78`, added roadmap/task tracking, and created active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`. Brief source pass found plausible feasibility through MegaMek client chat, game listener/report/entity events, bot-client listener patterns, and observer handling, but a running observer proof remains future work.
 - `2026-06-28`: Read MEK-RPG TO&E/pilot assignment handoff `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`, created focused guarded-command epic `#70` and child issues `#71` through `#77`, updated roadmap/tracking/task docs, and created active handoffs for source audit, API design, read selectors, pilot commands, TO&E commands, optional batch design, and fixtures/smoke coverage. Next recommended issue is `#71`.

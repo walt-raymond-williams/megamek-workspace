@@ -21,4 +21,4 @@ Key result: MekHQ has reusable model mutation methods for assignment and TO&E ed
 
 ## Next Step
 
-Proceed to issue `#72`: `docs/handoffs/active/design-guarded-pilot-toe-command-api.md`.
+Issue `#72` is now complete. Continue with issue `#73`: `docs/handoffs/active/implement-pilot-toe-read-selectors.md`.

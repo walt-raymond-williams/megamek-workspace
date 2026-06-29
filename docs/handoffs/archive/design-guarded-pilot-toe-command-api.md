@@ -1,5 +1,15 @@
 # Agent Handoff
 
+Archived on `2026-06-29` after completing GitHub issue `#72`.
+
+## Completion Summary
+
+Completed design note: `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`.
+
+Key result: V1 command design requires source-owned read selectors before mutation, uses the shared guarded command envelope, supports dry-run for all V1 commands, refuses arbitrary prompts and implicit saves, defers mothballed-unit assignment/direct replacement/broad multi-crew assignment/non-empty force deletion/batch updates, and requires extracted/shared validation or a narrow command service before implementation calls low-level `Unit` or `Campaign` mutation methods.
+
+Next step: issue `#73`, `docs/handoffs/active/implement-pilot-toe-read-selectors.md`.
+
 ## Issue
 
 - GitHub issue: `#72`
