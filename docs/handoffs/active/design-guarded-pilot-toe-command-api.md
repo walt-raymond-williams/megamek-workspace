@@ -19,7 +19,7 @@ Read these first:
 - `docs/current/TASKS.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
 - `docs/current/GUARDED_LIVE_MEKHQ_COMMAND_API_TRACKING.md`
-- Source audit from issue `#71` once available
+- `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`
 - `C:\Users\waltr\Documents\mek-rpg\docs\current\MEGAMEK_TOE_PILOT_ASSIGNMENT_API_HANDOFF.md`
 
 ## Expected Output
@@ -32,6 +32,7 @@ Read these first:
 Likely files to read or edit:
 
 - `docs/current/MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`
+- `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`
 - new focused design note under `docs/current/`
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
@@ -49,6 +50,7 @@ rg -n "units\\.assign_pilot|toe\\.move_unit|campaign/commands" docs/current exte
 ## Constraints
 
 - Use the shared command envelope from issue `#45`.
+- Treat role and force-edit validation as a first-class design concern; issue `#71` found that much of it is currently embedded in Swing menus rather than a reusable non-dialog service.
 - Do not design a generic save patch endpoint.
 - Do not require MEK-RPG to infer eligibility from display names.
 - Keep `toe.batch_update` optional unless the source audit makes it cheap and safe.
