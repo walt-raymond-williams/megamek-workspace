@@ -170,7 +170,7 @@ Supported sections:
 
 ```text
 bridge_metadata, campaign, finances, personnel, units, contracts, scenarios,
-repairs_and_logistics, markets, reports, unsupported
+forces, repairs_and_logistics, markets, reports, unsupported
 ```
 
 Examples:
@@ -196,6 +196,7 @@ Top-level groups:
 - `finances`
 - `personnel`
 - `units`
+- `forces`
 - `contracts`
 - `scenarios`
 - `repairs_and_logistics`
@@ -290,6 +291,7 @@ Consumer rules:
 - A command row with `reason_code: "selector_generation_deferred"` means the default response intentionally avoided expensive guard facts. Retry with `selectorDetail=full` when the user is actually entering that command workflow.
 - Unit-market offer selectors are live-session selectors scoped to the current process and state revision. MEK-RPG must not cache them across MekHQ restarts or state changes.
 - Contract-market offer ids are more durable while the offer remains in the saved market, but MEK-RPG must still send expected guard facts and `expectedStateRevision`.
+- Pilot assignment and TO&E rows expose read selectors and guard facts through `person_assignment_candidates`, `unit_crew_candidates`, and `forces`, but the mutating endpoints remain blocked until implementation issues `#74` and `#75`.
 
 ## Mutating Command Envelope
 

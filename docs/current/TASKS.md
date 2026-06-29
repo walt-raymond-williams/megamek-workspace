@@ -45,42 +45,35 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Expose pilot assignment and TO&E read selectors.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Add source-owned live API read context and command readiness selector detail for pilot assignment and TO&E edits.
-   - Output: MekHQ source changes exposing person, unit, crew, assignment, force tree, and blocker facts needed to build safe guarded requests.
-   - Notes: GitHub issue `#73`; child of focused epic `#70`; active checklist `docs/handoffs/active/implement-pilot-toe-read-selectors.md`; design `docs/current/MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`.
-
-2. Investigate All Reports UI warning dependency in MekHQ API.
+1. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-3. Design read-only MekHQ activity-history API.
+2. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-4. Investigate MegaMek live combat narration bridge.
+3. Investigate MegaMek live combat narration bridge.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
    - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
    - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
 
-5. Run MekHQ quickstart roster UI validation.
+4. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-6. Turn this repo into an AI-ready project workflow demo.
+5. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -124,6 +117,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-06-29`: Completed GitHub issue `#73` with MekHQ source commit `53741cd082`, which adds pilot assignment and TO&E read selectors. `/campaign/state` now exposes a `forces` section plus richer personnel/unit assignment guards, crew slot facts, and blockers. `/campaign/commands` now exposes `person_assignment_candidates`, `unit_crew_candidates`, `forces`, and blocked readiness rows for `units.assign_pilot`, `units.unassign_pilot`, `units.swap_pilots`, `toe.move_unit`, `toe.create_force`, `toe.rename_force`, `toe.delete_empty_force`, and `toe.batch_update`. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalCommandReadinessExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Archived handoff: `docs/handoffs/archive/implement-pilot-toe-read-selectors.md`.
 - `2026-06-29`: Completed GitHub issue `#72` by adding design note `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`. The design defines readiness rows, selector needs, shared envelope use, V1 request/response shapes, dry-run/save/prompt policy, refusal codes, post-command reread verification, and V1/deferred scope. It keeps mothballed-unit assignment, direct replacement, broad multi-crew assignment, non-empty force delete, and batch updates deferred. Next recommended issue is `#73` for read selectors before mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/design-guarded-pilot-toe-command-api.md`.
 - `2026-06-29`: Completed GitHub issue `#71` by adding source audit `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_SOURCE_AUDIT.md`. The audit found reusable model mutation methods in `Unit`, `Campaign`, and `Formation`, but role/eligibility validation is mostly embedded in Swing assignment menus and TO&E handlers. Recommendation: proceed to design issue `#72`, require read selectors in `#73`, and extract/shared-use source validators or a command service before implementing mutating endpoints `#74` and `#75`. Archived handoff: `docs/handoffs/archive/audit-mekhq-pilot-toe-source-owners.md`.
 - `2026-06-28`: Checked roadmap/docs and GitHub issues for a live MegaMek combat observer/narration bot idea; found no duplicate. Created GitHub issue `#78`, added roadmap/task tracking, and created active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`. Brief source pass found plausible feasibility through MegaMek client chat, game listener/report/entity events, bot-client listener patterns, and observer handling, but a running observer proof remains future work.
