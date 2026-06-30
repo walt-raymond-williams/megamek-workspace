@@ -57,6 +57,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-ap
 | `POST` | `/advance-day` | Legacy guarded one-day advance prototype. | Yes |
 | `GET` | `/campaign/summary` | Fast top-level live campaign summary. | No |
 | `GET` | `/campaign/state` | Sectioned live campaign state payload. | No |
+| `GET` | `/campaign/personnel/detail` | Explicit selected-person/character-sheet detail by person UUID. | No |
 | `GET` | `/campaign/pending-deployments` | Purpose-built current scenario/deployment commitment lookup. | No |
 | `GET` | `/campaign/commands` | Command readiness, selectors, state revision, and blockers. | No |
 | `POST` | `/campaign/command/status-note` | Append a guarded `GENERAL` campaign report note. | Yes |
@@ -252,6 +253,58 @@ Source-backed behavior:
 - If no person match or no current commitment exists, the endpoint should still return HTTP `200` with an empty commitment list.
 
 Known limitation: the API does not expose a source-confirmed currently selected MekHQ UI person. MEK-RPG should send `personId` or `personName`.
+
+## GET /campaign/personnel/detail
+
+Purpose: expose Personnel tab selected-character detail data through a read-only, explicit-person endpoint.
+
+Example:
+
+```powershell
+Invoke-RestMethod -Method Get `
+  -Uri 'http://127.0.0.1:32180/campaign/personnel/detail?personId=<person-uuid>' `
+  -TimeoutSec 15
+```
+
+Optional query parameters:
+
+- `personId`: required exact person UUID.
+- `includeMedical=true`: include the selected person's medical log family.
+- `includePatient=true`: include the selected person's patient log family.
+- `logLimit=<n>`: bounded per-family log limit; defaults to `10` and clamps to `50`.
+
+Important fields:
+
+- `schema_name: "mekhq-live-personnel-detail"`
+- `campaign_id`, `campaign_name`, `campaign_date`
+- `state_revision`
+- `person.identity`
+- `person.status`
+- `person.assignment_context`
+- `person.skills`
+- `person.options_and_abilities`
+- `person.awards`
+- `person.injury_summary`
+- `person.logs`
+- `person.privacy`
+- `warnings`
+- `unsupported`
+
+Source-backed behavior:
+
+- `Confirmed from source`: the endpoint requires `personId` because the local API does not expose a reliable current Swing Personnel tab selection.
+- Missing or invalid `personId` returns HTTP `400`.
+- A person UUID that is not in the loaded campaign returns HTTP `404`.
+- Default log output includes bounded personal, assignment, performance, and scenario log families.
+- Medical and patient log families are excluded by default and require explicit `includeMedical=true` or `includePatient=true` on the same explicit person request.
+- Skills expose source ids/display labels, subtype, roleplay flag, level, bonus, XP progress, natural aptitude, final value, and experience level.
+- Traits/options/special abilities expose stable option ids plus display labels and values. Display labels are presentation text, not selectors.
+
+Known limitations:
+
+- V1 exposes award summary flags/counts, not individual award tooltip/icon/tier metadata.
+- V1 does not expose full injury/treatment objects, family-tree panels, or kill-log rows.
+- Broader roster-wide or cross-domain activity history remains deferred to the activity-history design workstream.
 
 ## GET /campaign/commands
 
@@ -559,6 +612,7 @@ Sanitized example payloads live in `docs/templates/`:
 - `mekhq-live-campaign-warning-heavy.fixture.json`
 - `mekhq-live-campaign-commands.fixture.json`
 - `mekhq-live-pending-deployments.fixture.json`
+- `mekhq-live-personnel-detail.fixture.json`
 
 Fixtures preserve shape and contract semantics but are not real campaign data.
 

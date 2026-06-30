@@ -89,3 +89,15 @@ rg -n "personnelSection|sections=|sanitize|unsupported|state_revision" external/
 - Which MekHQ trait/option values are stable enough to expose as machine-readable identifiers versus display-only labels?
 - Should personal/service/award logs live in the person-detail response, the future history endpoint, or both with shared DTOs?
 - How should API consumers request medical/patient details without accidentally exposing them in dashboard-wide refreshes?
+
+## Close-Out
+
+- Completed on `2026-06-30`.
+- MekHQ source commit: `b68bc1b8ca` (`Expose personnel detail read endpoint`).
+- Implemented V1 as `GET /campaign/personnel/detail?personId=<uuid>`.
+- Medical and patient logs are excluded by default and require `includeMedical=true` or `includePatient=true`.
+- Durable note: `docs/current/MEK_RPG_LIVE_MEKHQ_PERSONNEL_DETAIL_API.md`.
+- Verification passed:
+  - `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalControlServiceHttpTest`
+  - `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`
+- Source push blocker: upstream `MegaMek/mekhq` denied push with HTTP `403`.
