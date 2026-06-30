@@ -539,6 +539,19 @@ Use this shape for entries that may become GitHub issues:
   - `#61`: Add MekHQ activity-history fixtures and tests. Wait for `#58` and implementation slices unless folded into each implementation issue; active handoff: `docs/handoffs/active/add-mekhq-activity-history-fixtures-tests.md`.
 - Open questions: Should activity history be a new `history` state section, a dedicated `/campaign/history` endpoint, or both? How far back should default exports go? Should per-person medical and patient logs require opt-in sections or explicit target filters?
 
+### Expose Personnel tab character details through the live MekHQ API
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#82`
+- Owner: `Codex`
+- Goal: Ensure the local read-only MekHQ API can expose the same character-facing information a user sees when selecting a person in the MekHQ Personnel tab, including identity, role/status, assignments, traits/options, roleplay and combat skills, personal/service logs, medical/assignment/scenario/performance logs where safe, special abilities, awards, and other profile details.
+- Why it matters: MEK-RPG and campaign-assistant workflows need character sheets and roleplay context from MekHQ without requiring direct UI scraping, raw save parsing, or manual copy/paste from the Personnel tab. MekHQ should remain the source-owned roster ledger while consumers get bounded, sanitized, source-backed person detail data.
+- Expected output: A source audit of `PersonViewPanel`/Personnel-tab field owners, a concrete read-only endpoint or `/campaign/state` detail shape, MekHQ source implementation with bounded selectors/filters, fixture and regression coverage, and updates to the consumer-facing live API contract.
+- Handoff notes: GitHub issue `#82`; active handoff: `docs/handoffs/active/expose-personnel-tab-character-details-api.md`. This is related to activity-history epic `#56` and person-log issue `#60`, but it is broader than logs and should cover the selected-character profile/details surface. Coordinate with the issue `#58` history design instead of creating a conflicting person-log contract.
+- Dependencies: Completed live read-only API work, current `LocalCampaignStateExporter` and `/campaign/state` personnel section, activity-history audit `#57`, pending activity-history design `#58`, and local MekHQ source under `external/src/mekhq`.
+- Open questions: Should V1 be a dedicated `GET /campaign/personnel/{personId}` endpoint, a `person_detail` state section, or both? Which Personnel tab subpanels are safe by default, and which logs or medical/patient details require explicit opt-in? How should traits/options and special abilities be represented so MEK-RPG can distinguish display labels from machine-readable identifiers?
+
 ### Investigate All Reports UI warning dependency in MekHQ API
 
 - Status: `Issue created`

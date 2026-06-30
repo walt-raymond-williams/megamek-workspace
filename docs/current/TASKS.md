@@ -73,21 +73,28 @@ Use this shape for active and queued work:
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-4. Investigate MegaMek live combat narration bridge.
+4. Expose Personnel tab character details through the live MekHQ API.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Make selected-character Personnel tab details available through the read-only local MekHQ API, including identity, role/status, assignments, traits/options, roleplay and combat skills, special abilities, and bounded personal/log detail.
+   - Output: Source audit, API design, source implementation if safe, fixtures/tests, and live API contract updates.
+   - Notes: GitHub issue `#82`; active checklist `docs/handoffs/active/expose-personnel-tab-character-details-api.md`; coordinate with activity-history issue `#58` and person-log issue `#60`.
+
+5. Investigate MegaMek live combat narration bridge.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
    - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
    - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
 
-5. Run MekHQ quickstart roster UI validation.
+6. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-6. Turn this repo into an AI-ready project workflow demo.
+7. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
