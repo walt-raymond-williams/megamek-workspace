@@ -12,7 +12,7 @@ GitHub Issues are the execution source of truth. This file is the compact local 
 
 ## Issue Snapshot
 
-- Last refreshed: `2026-06-29`
+- Last refreshed: `2026-07-01`
 - Closed:
   - `#43`: Discover first guarded live MekHQ command API easy wins for MEK-RPG.
   - `#45`: Define guarded live MekHQ command envelope and prompt policy.
@@ -37,13 +37,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - `#76`: Design atomic TO&E and pilot assignment batch command.
   - `#77`: Add pilot assignment and TO&E command fixtures and smoke checklist.
   - `#79`: Smoke test contract accept prompts and MekHQ UI refresh.
-- Blocked: none yet for this epic.
+- Blocked:
+  - `#79`: needs user-available live/full UI testing before continuing. Autonomous attempt on `2026-07-01` launched source-built MekHQ and copied a disposable save to `analysis/tmp/issue-79/issue-79-contract-smoke-demo.cpnx.gz`, but no campaign was loaded and no command mutation was run.
 
 ## Recommended Next Step
 
-- Issue: `#79`
-- Why next: Contract accept is already implemented, but live disposable-campaign smoke has not proven the prompt-choice chain or visible MekHQ UI refresh behavior. This should be checked before relying on API-driven contract acceptance during play. Issue `#74` remains the next implementation slice after this verification pass.
-- Handoff: `docs/handoffs/active/smoke-test-contract-accept-ui-refresh.md`
+- Issue: `#69`
+- Why next: Live/full-UI smoke testing is deferred until the user is available, so issue `#79` is blocked. The next suitable autonomous task is a source-backed investigation that does not require running a live UI smoke.
+- Handoff: `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`
 
 ## Verification State
 
@@ -91,13 +92,14 @@ GitHub Issues are the execution source of truth. This file is the compact local 
   - Read issue `#72`, command envelope docs, issue `#71` audit, MEK-RPG TO&E/pilot handoff, and next implementation handoffs before adding design note `MEK_RPG_LIVE_MEKHQ_PILOT_TOE_COMMAND_DESIGN.md`.
   - Read issue `#73`, issue `#72` design, `LocalCampaignStateExporter.java`, `LocalCommandReadinessExporter.java`, `Unit.java`, `Person.java`, `Formation.java`, and local service tests before exposing pilot assignment and TO&E read selectors.
   - Created issue `#79` after reviewing `MEK_RPG_LIVE_MEKHQ_CONTRACT_ACCEPT_COMMAND_DESIGN.md`, `MEK_RPG_LIVE_MEKHQ_COMMAND_API_STRATEGY.md`, `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`, `LocalControlService.java`, `LocalCommandReadinessExporter.java`, and `LocalContractMarketSelectors.java`; the gap is live proof of prompt handling and visible MekHQ UI refresh after the non-dialog API path.
+  - Attempted issue `#79` on `2026-07-01`: launched source-built MekHQ with the local control API enabled, confirmed `/status` was ready with no loaded campaign, and copied `campaigns/demo/ai-ready-demo.cpnx.gz` to `analysis/tmp/issue-79/issue-79-contract-smoke-demo.cpnx.gz`. The attempt stopped before campaign load or mutation because user/full UI testing should wait until the user is available.
 - Known blockers:
   - Source push for MekHQ itself remains blocked because `external/src/mekhq` points at upstream `MegaMek/mekhq` and GitHub returned `Permission to MegaMek/mekhq.git denied to walt-raymond-williams` when pushing source commit `53741cd082`.
   - Live status-note smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.status smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live personnel.fatigue smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign loaded.
   - Live unit-market purchase smoke testing remains not run; it needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with representative unit-market offers, ideally including a DropShip offer.
-  - Live contract accept smoke testing remains not run; issue `#79` now tracks this explicitly. It needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true` and a copied/disposable campaign with at least one selectable contract-market offer. The smoke must also record whether the visible MekHQ contract market, briefing/active contract view, reports, and finances refresh automatically or need a source follow-up.
+  - Live contract accept smoke testing is blocked by user availability; issue `#79` tracks this explicitly. It needs a source-built MekHQ instance launched with `mekhq.controlApi.enabled=true`, a copied/disposable campaign with at least one selectable contract-market offer, and user-available live/full UI validation. The smoke must also record whether the visible MekHQ contract market, briefing/active contract view, reports, and finances refresh automatically or need a source follow-up.
   - Pilot assignment and TO&E read selectors are available in source commit `53741cd082`, but mutating implementation remains blocked on shared/extracted validation. Role eligibility currently lives mostly in Swing menus, while model methods trust callers after basic location/registration checks.
 
 ## Related Docs

@@ -45,14 +45,7 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Smoke test contract accept prompts and MekHQ UI refresh.
-   - Status: `Not started`
-   - Owner: `Mixed`
-   - Goal: Run `POST /campaign/command/contracts/accept` against a copied/disposable source-built MekHQ campaign with a selectable contract offer, proving explicit prompt choices, post-command API state refresh, and visible MekHQ UI refresh behavior.
-   - Output: A live-smoke note or tracking update with disposable save path, source commit, dry-run/apply response summaries, prompt facts, `/status`/`/campaign/commands`/`/campaign/state` rereads, visible contract market/briefing/reports/finance observations, and any follow-up source issue for stale UI or unsupported prompts.
-   - Notes: GitHub issue `#79`; child/follow-up of guarded command epic `#44` and implementation issue `#55`; active checklist `docs/handoffs/active/smoke-test-contract-accept-ui-refresh.md`; use copied/disposable saves only.
-
-2. Investigate All Reports UI warning dependency in MekHQ API.
+1. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
@@ -94,28 +87,35 @@ Use this shape for active and queued work:
 
 ## Blocked
 
-1. Prototype battle-record MUL round-trip validation.
+1. Smoke test contract accept prompts and MekHQ UI refresh.
+   - Status: `Blocked`
+   - Owner: `Mixed`
+   - Goal: Run `POST /campaign/command/contracts/accept` against a copied/disposable source-built MekHQ campaign with a selectable contract offer, proving explicit prompt choices, post-command API state refresh, and visible MekHQ UI refresh behavior.
+   - Output: A live-smoke note or tracking update with disposable save path, source commit, dry-run/apply response summaries, prompt facts, `/status`/`/campaign/commands`/`/campaign/state` rereads, visible contract market/briefing/reports/finance observations, and any follow-up source issue for stale UI or unsupported prompts.
+   - Notes: GitHub issue `#79`; child/follow-up of guarded command epic `#44` and implementation issue `#55`; active checklist `docs/handoffs/active/smoke-test-contract-accept-ui-refresh.md`; use copied/disposable saves only. Blocked until the user is available for live/full UI testing. A `2026-07-01` autonomous attempt launched source-built MekHQ and copied `campaigns/demo/ai-ready-demo.cpnx.gz` to `analysis/tmp/issue-79/issue-79-contract-smoke-demo.cpnx.gz`, but did not load a campaign or run any mutation before the user deferred UI testing.
+
+2. Prototype battle-record MUL round-trip validation.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Prove that a generated or minimally edited battle-record MUL can be imported through MekHQ Resolve Manually and produces expected campaign-facing effects on disposable data.
    - Output: `BATTLE_RECORD_MUL_ROUND_TRIP_VALIDATION.md` records a successful installed-jar writer/parser round trip, expected MekHQ effects, and the remaining live UI validation gap.
    - Notes: GitHub issue `#10`; child of epic `#6`; active handoff `docs/handoffs/active/prototype-battle-record-mul-round-trip.md`; automated proof generated an ignored scratch `<record>` MUL with `survivors`, `salvage`, `retreated`, `devastated`, and `kills`; live MekHQ Resolve Manually click-through is blocked because the Windows Computer Use helper still reports `Computer Use native pipe path is unavailable`; user task `#23` should set up the real-life unit campaign before this import pass resumes.
 
-2. Verify quickstart roster replacement workflow.
+3. Verify quickstart roster replacement workflow.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Verify the no-source-change workflow for replacing the New Player Quickstart roster in a disposable campaign save.
    - Output: `QUICKSTART_ROSTER_REPLACEMENT_VERIFICATION.md` has source-confirmed steps, safe-copy verification, and the remaining UI validation gap.
    - Notes: GitHub issue `#17`; child of epic `#14`; active handoff `docs/handoffs/active/verify-quickstart-roster-replacement.md`; live UI click-through remains blocked because the Windows Computer Use helper reported `Computer Use native pipe path is unavailable`. User-owned unblocker is issue `#21` with checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`.
 
-3. Verify and document tabletop result entry workflow.
+4. Verify and document tabletop result entry workflow.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Document the end-to-end tabletop result entry workflow from scenario export to MekHQ Resolve Manually import and closeout.
    - Output: User-facing workflow documentation with exact UI paths, input files, date/version, and observed campaign effects.
    - Notes: GitHub issue `#13`; child of epic `#6`; active handoff `docs/handoffs/active/verify-document-tabletop-result-entry-workflow.md`; blocked until issue `#10` live Resolve Manually import validation can be performed by the user or a future UI-control-capable session, preferably after user task `#23` creates the real-life unit campaign.
 
-4. Verify Gradle build/test commands in local source repos.
+5. Verify Gradle build/test commands in local source repos.
    - Status: `Blocked`
    - Owner: `Mixed`
    - Goal: Run Gradle wrapper build/test commands in MegaMek, MekHQ, MegaMekLab, and mm-data.
