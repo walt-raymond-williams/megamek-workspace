@@ -4,6 +4,7 @@ This note tracks the source-backed investigation into user-observed MegaMek tact
 
 ## Current Status
 
+- `Confirmed from source`: issue `#80` is complete as a source investigation. No MegaMek source patch was approved or committed for this issue.
 - `Confirmed by user`: MegaMek can become very laggy and unresponsive during gameplay, especially when there are many units on the board and AI/Princess controls units.
 - `Confirmed by user`: A current concrete reproduction is the firing phase: switching between firing units is slow, and selecting or targeting enemies is slow.
 - `Confirmed from source`: Tactical board rendering is centered around `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/BoardView.java` and `BoardViewPanel.java`.
@@ -33,6 +34,18 @@ An uncommitted experimental source edit exists in `external/src/megamek`:
 5. Princess path enumeration and ranking, including expensive per-entity loops.
 6. ECM/FOV calculations and repeated full-entity scans during board redraw or selection changes.
 
+## Issue 80 Broad Findings
+
+- `Confirmed from source`: `BoardView` game listeners call `updateEcmList()` and redraw paths on entity new/remove/change events. `BoardView.selectEntity(...)` also clears FOV image cache state, calls `updateEcmList()`, and highlights the selected entity.
+- `Confirmed from source`: `BoardView.updateEcmList()` calls `ComputeECM.computeAllEntitiesECMInfo(game.getEntitiesVector())` and then scans `game.getEntitiesVector()` again to build ECM/ECCM overlay maps. This is explicitly documented in the code as expensive and intended to be precalculated only when entity changes occur, but current selection paths can still invoke it.
+- `Confirmed from source`: `BoardView.redrawAllEntities()` rebuilds entity, isometric, wreck, C3, and flyover sprite collections by scanning wrecked entities and `game.getEntitiesVector()`, then calls `updateEcmList()` and schedules redraw.
+- `Confirmed from source`: `BoardView` painting draws hexes, minefields, artillery, deployment overlays, C3, flyover, moving, ghost, attack, movement, path, flight-path, and over-terrain sprite layers. `drawSprites(...)` iterates each sprite collection and `drawHexSpritesForHex(...)` comments that `sprite.getBounds()` can be expensive.
+- `Confirmed from source`: `MinimapPanel.refreshMap()` posts `drawMapable` with `SwingUtilities.invokeLater(...)`. `drawMap()` loops the board dimensions for terrain redraw and, when configured, loops again for height display and unit/symbol overlays. This makes minimap redraw a plausible contributor on large boards, but no source evidence yet ties it directly to the reported firing-phase unit-switch lag.
+- `Confirmed from source`: Princess movement work is not a single repaint problem. `Princess#getMovePathsAndSetNecessaryTargets(...)` clears and updates movable areas, chooses between normal path sets and long-range bulldozer paths, clips/decorates paths, checks LOS to leveling targets, and returns similar precomputed paths for destination behaviors.
+- `Confirmed from source`: `PathEnumerator.recalculateMovesFor(...)` generates movement candidates with different path finders by unit type, including non-aero longest-path, backward, prone, jumping, and long-range paths. `BasicPathRanker` evaluates path danger with LOS and weapon-range checks, sprint exposure, facing, fall, self-preservation, hazards, and related factors.
+- `Inferred`: UI/EDT responsiveness work and Princess AI/pathing work should be handled as separate follow-ups. The first can likely be tested with UI toggles and targeted instrumentation; the second needs representative scenarios and profiling before behavior changes.
+- `Inferred`: the current local `BoardView.java` redraw-worker coalescing experiment is plausible as a queued-EDT pressure reduction, but it does not remove synchronous computation in firing-solution generation, ECM/FOV updates, minimap redraw, or Princess path ranking.
+
 ## Firing Phase Focus
 
 Issue `#81` maps to these source paths:
@@ -57,6 +70,15 @@ Issue `#81` maps to these source paths:
 3. `Recommended second source fix if approved`: cache firing-solution calculations by `(game phase/action revision, attacker id, selected weapon id, selected ammo id, target id)` or rebuild only visible-board/visible-range sprites. This needs profiling because to-hit depends on current actions, spotting, ammo, and attacker state.
 4. `Recommended third source fix if approved`: reduce repeated unit-switch full-entity work by auditing `BoardView.selectEntity(...)`, `BoardView.redrawEntity(...)`, and `updateEcmList()` call frequency. The current local `BoardView.java` redraw-worker coalescing experiment may help queued redraw pressure, but it does not remove the synchronous to-hit/ECM computation that happens before repaint.
 5. `Recommended profiling`: add temporary timing logs around `FiringDisplay.selectEntity(...)`, `refreshAll()`, `ClientGUI.updateFiringArc(...)`, `FiringSolutionSpriteHandler.showFiringSolutions(...)`, `FiringDisplay.updateTarget()`, and `BoardView.updateEcmList()` while reproducing on a large-unit scenario.
+
+## Issue 80 Recommendations
+
+1. `Best immediate player check`: disable View > Firing Solutions and retry the laggy firing phase. If this helps, pursue the issue `#81` duplicate/debounced firing-solution rebuild path before broader renderer or AI work.
+2. `Best first source patch if approved`: instrument first, then remove duplicate firing-solution rebuilds or debounce/lazily rebuild them. This is the smallest candidate tied to the user's concrete reproduction.
+3. `Second UI candidate if approved`: revisit the `BoardView.java` redraw-worker coalescing experiment only after a compile and a live responsiveness comparison. Treat it as reducing queued repaint pressure, not as a complete fix for expensive source-side calculations.
+4. `Third UI candidate`: instrument `BoardView.updateEcmList()`, `BoardView.selectEntity(...)`, and `BoardView.redrawEntity(...)` frequency during unit cycling. If repeated selection-only ECM recomputes are confirmed, consider dirty-state or phase-aware guards.
+5. `Minimap candidate`: test with the minimap closed or hidden during the same large battle before editing `MinimapPanel`; source confirms board-sized redraw loops, but the reproduction evidence is not yet minimap-specific.
+6. `Princess candidate`: collect a representative save/scenario and profile Princess turns before changing `PathEnumerator`, `PathRanker`, or `BasicPathRanker`. Low-risk work here should start with timing and candidate-count logging, not scoring changes.
 
 ## Issue 81 Residual Uncertainty
 

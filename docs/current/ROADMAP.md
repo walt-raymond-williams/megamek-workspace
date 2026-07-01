@@ -136,16 +136,16 @@ Use this shape for entries that may become GitHub issues:
 
 ### Investigate MegaMek tactical lag and low-risk performance wins
 
-- Status: `Issue created`
+- Status: `Done`
 - Priority: `High`
 - Issue: `#80`
 - Owner: `Codex`
 - Goal: Investigate user-observed MegaMek tactical lag and identify low-risk performance improvements for large battles, especially when many units are on the board and Princess/bot AI is active.
 - Why it matters: The tactical game needs to stay responsive enough for campaign play. If UI redraw churn, avoidable EDT work, or obvious repeated calculations are contributing to lag, small targeted fixes may improve playability before deeper AI/pathing optimization is attempted.
-- Expected output: Source-backed findings, a prioritized list of candidate low-risk fixes, and, only after explicit implementation approval, a narrow MegaMek source patch with compile/test verification.
-- Handoff notes: Active handoff: `docs/handoffs/active/investigate-megamek-tactical-performance.md`. Initial and focused firing-phase findings are in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`. Focused bug issue `#81` completed the firing-phase source map and recommends first testing with default-on firing-solution overlays disabled, then only implementing source changes after explicit approval. A small uncommitted `BoardView.java` redraw-coalescing experiment exists in `external/src/megamek`; treat it as an experiment to inspect, not an approved finished fix.
-- Dependencies: Local MegaMek source checkout under `external/src/megamek`; likely needs a representative large-unit save/scenario or live reproduction steps before deeper Princess/pathing changes.
-- Open questions: Does disabling View > Firing Solutions materially improve the firing-phase unit-switching and targeting lag identified in issue `#81`? More broadly, is the primary slowdown during Princess thinking, board panning/selection, movement animation, firing resolution, minimap rendering, or general redraw? Should the redraw-coalescing experiment be kept, revised, or discarded after review?
+- Expected output: Completed with source-backed findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`, separating firing-solution/UI redraw candidates from minimap and Princess/pathing profiling territory. No source patch was approved or committed for this investigation.
+- Handoff notes: Completed on `2026-07-01`; archived handoff: `docs/handoffs/archive/investigate-megamek-tactical-performance.md`. Focused bug issue `#81` completed the firing-phase source map and recommends first testing with default-on firing-solution overlays disabled. A small uncommitted `BoardView.java` redraw-coalescing experiment remains in `external/src/megamek`; treat it as an experiment to inspect, not an approved finished fix.
+- Dependencies: Future implementation needs explicit approval, a representative large-unit save/scenario or live reproduction steps, and targeted timing/profiling before deeper Princess/pathing changes.
+- Open questions: Does disabling View > Firing Solutions materially improve the firing-phase unit-switching and targeting lag identified in issue `#81`? Does closing the minimap, disabling isometric/FOV/shadows/labels/animations, or profiling Princess turns identify a separate dominant lag source?
   - Child/focused issues:
     - `#81`: Investigate firing-phase unit switching and targeting lag. Completed on `2026-06-29`; archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`. Recommended first check is disabling View > Firing Solutions, because source confirms the default-on overlay scans all entities and runs `WeaponAttackAction.toHit(...)` for viable targets on unit/arc updates.
 

@@ -45,13 +45,6 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate MegaMek tactical lag and low-risk performance wins.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Source-investigate user-observed MegaMek tactical lag in large battles with many units and Princess/bot AI, then identify low-risk performance candidates before implementation.
-   - Output: Source-backed findings, prioritized candidate fixes, and an implementation recommendation; only make source changes after explicit approval.
-   - Notes: GitHub issue `#80`; active checklist `docs/handoffs/active/investigate-megamek-tactical-performance.md`; initial note `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md`; current uncommitted `BoardView.java` source edit is an experiment, not an approved fix; focused issue `#81` should be handled first.
-
 1. Smoke test contract accept prompts and MekHQ UI refresh.
    - Status: `Not started`
    - Owner: `Mixed`
@@ -131,6 +124,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-07-01`: Completed GitHub issue `#80` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` separate firing-solution/UI redraw work from minimap and Princess/pathing profiling. Recommended first player check remains disabling View > Firing Solutions, followed by targeted timing around firing-solution rebuilds, `BoardView.updateEcmList()`, minimap redraw, and Princess path enumeration/ranking. No MegaMek source patch was approved or committed; the existing uncommitted `BoardView.java` redraw-coalescing experiment remains an experiment. Archived handoff: `docs/handoffs/archive/investigate-megamek-tactical-performance.md`.
 - `2026-06-30`: Completed GitHub issue `#82` with MekHQ source commit `b68bc1b8ca`, adding `GET /campaign/personnel/detail?personId=<uuid>` to expose explicit selected-person/character-sheet detail through the read-only local API. V1 returns identity, role/status/prisoner/fatigue/XP/salary facts, assignment context, skills, active options/special abilities, award summary, injury summary, and bounded personal/assignment/performance/scenario logs; medical and patient logs require explicit `includeMedical=true` / `includePatient=true`. Docs updated in `MEK_RPG_LIVE_MEKHQ_PERSONNEL_DETAIL_API.md` and `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`. Verified targeted service tests plus `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`; source push remains blocked by upstream `MegaMek/mekhq` 403. Archived handoff: `docs/handoffs/archive/expose-personnel-tab-character-details-api.md`.
 - `2026-06-29`: Completed GitHub issue `#81` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` map firing unit switching through `FiringDisplay.selectEntity(...)`, `refreshAll()`, `ClientGUI.updateFiringArc(...)`, `FiringSolutionSpriteHandler.showFiringSolutions(...)`, target clicks/cycling through `chooseTarget(...)`, `target(...)`, and `updateTarget()`, plus BoardView ECM/redraw work. Highest-value first check is disabling default-on View > Firing Solutions; recommended first source fix, if approved later, is to remove duplicate/debounce firing-solution rebuilds before broader issue `#80` work. Archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`.
 - `2026-06-29`: Completed GitHub issue `#73` with MekHQ source commit `53741cd082`, which adds pilot assignment and TO&E read selectors. `/campaign/state` now exposes a `forces` section plus richer personnel/unit assignment guards, crew slot facts, and blockers. `/campaign/commands` now exposes `person_assignment_candidates`, `unit_crew_candidates`, `forces`, and blocked readiness rows for `units.assign_pilot`, `units.unassign_pilot`, `units.swap_pilots`, `toe.move_unit`, `toe.create_force`, `toe.rename_force`, `toe.delete_empty_force`, and `toe.batch_update`. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest --tests mekhq.service.LocalCommandReadinessExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because upstream `MegaMek/mekhq` denied permission with 403. Archived handoff: `docs/handoffs/archive/implement-pilot-toe-read-selectors.md`.
