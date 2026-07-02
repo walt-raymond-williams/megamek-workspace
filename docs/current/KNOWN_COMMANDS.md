@@ -275,6 +275,14 @@ Skip the build when the assembled install is already current:
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-api.ps1 -NoBuild
 ```
 
+Taskbar-friendly wrapper:
+
+```powershell
+tools\start-mekhq-control-api.cmd
+```
+
+`Confirmed locally`: on `2026-07-01`, `tools\start-mekhq-control-api.cmd` detected an already-running API on port `32180` and returned the `/status` payload cleanly. A local desktop shortcut named `Start MekHQ API.lnk` points at this wrapper and uses the source-built MekHQ icon.
+
 ```powershell
 -Dmekhq.controlApi.enabled=true
 ```
