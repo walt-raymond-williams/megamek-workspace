@@ -59,7 +59,14 @@ Use this shape for active and queued work:
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-3. Design read-only MekHQ activity-history API.
+3. Audit docs for Sarna-backed BattleTech research integration.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Identify the cleanest places to add Sarna.net/BattleTechWiki guidance so agents use it for richer BattleTech lore and MEK-RPG immersion without blurring local MekHQ source/campaign authority.
+   - Output: Audit note or tracking update listing docs/templates to change and design inputs for issue `#90`.
+   - Notes: GitHub issue `#89`; child of epic `#88`; active checklist `docs/handoffs/active/audit-sarna-research-integration.md`; tracking doc `docs/current/SARNA_IMMERSION_WORKFLOW_TRACKING.md`.
+
+4. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.

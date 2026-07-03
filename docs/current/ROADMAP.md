@@ -486,6 +486,25 @@ Use this shape for entries that may become GitHub issues:
 - Recommended sequence: Complete source audit `#84` first, then design `#85`. Start implementation `#86` only after the design settles name matching, ambiguity handling, date behavior, and response shape. Use `#87` after implementation exists, or earlier only to draft fixture/smoke expectations.
 - Open questions: Should V1 accept only planet names, or also system ids/planet ids for exact disambiguation? Should ambiguous names return candidate rows or a hard refusal with candidate metadata? Should a request be locked to the loaded campaign date, or allow an explicit date for historical/future planetary event views?
 
+### Epic: Add Sarna-backed BattleTech immersion research workflow
+
+- Status: `In progress`
+- Priority: `High`
+- Issue: `#88`
+- Owner: `Mixed`
+- Goal: Make Sarna.net/BattleTechWiki a first-class research source in this workspace so agents can enrich MEK-RPG and MekHQ campaign play with stronger BattleTech lore, faction, planet, unit, technology, manufacturer, timeline, and character context.
+- Why it matters: Local MekHQ/MegaMek source answers how the install behaves, but immersive campaign play also needs setting texture: what a planet is known for, why a faction matters, what a 'Mech or manufacturer implies, and what historical context surrounds a contract, travel stop, salvage find, or character origin.
+- Expected output: A decomposed workflow/documentation workstream that adds practical Sarna lookup triggers, source-priority guidance, campaign-facing output patterns, and example/template support for MEK-RPG play.
+- Handoff notes: This is an epic, not a direct implementation task. Active tracking doc: `docs/current/SARNA_IMMERSION_WORKFLOW_TRACKING.md`. Active handoffs exist for child issues `#89` through `#92`. Keep the work focused on gameplay value and do not turn the docs into a legal treatise.
+- Dependencies: Existing docs under `docs/current/` define source priority, evidence labels, help/source routing, and campaign analysis sequence. Network access is needed when an agent performs live Sarna lookups.
+- Child issues:
+  - `#89`: Audit docs for Sarna-backed BattleTech research integration. Active handoff: `docs/handoffs/active/audit-sarna-research-integration.md`.
+  - `#90`: Design Sarna-backed immersion research workflow. Active handoff: `docs/handoffs/active/design-sarna-immersion-research-workflow.md`.
+  - `#91`: Update project docs with Sarna-backed immersion workflow. Active handoff: `docs/handoffs/active/update-docs-sarna-immersion-workflow.md`.
+  - `#92`: Validate Sarna workflow with campaign immersion examples. Active handoff: `docs/handoffs/active/validate-sarna-campaign-immersion-examples.md`.
+- Recommended sequence: Complete audit `#89` first, then design `#90`. Use `#91` to apply the guidance once the workflow is designed, and `#92` to make sure the pattern works in real campaign-facing answers.
+- Open questions: Should Sarna context appear by default in campaign reports, or only when it adds meaningful texture? Which template or report format should carry the first reusable "lore/context" slot? How concise should Sarna context be during live tactical support?
+
 ### Harden live API trust envelope, dirty state, and location labels
 
 - Status: `Done`
