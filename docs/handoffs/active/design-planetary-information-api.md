@@ -8,7 +8,7 @@
 
 ## Goal
 
-Design a read-only local API endpoint that accepts a planet name and returns Navigation-tab-style planetary and parent-system facts for the loaded campaign date.
+Design a read-only local API endpoint that returns Navigation-tab-style planetary and parent-system facts for the loaded campaign date, with exact id/name selector behavior grounded in the issue `#84` source audit.
 
 ## Required Context
 
@@ -19,7 +19,7 @@ Read these first:
 - `docs/current/TASKS.md`
 - `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`
-- `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md` after issue `#84` creates it
+- `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`
 
 ## Expected Output
 
@@ -56,7 +56,7 @@ rg -n "campaign/personnel/detail|campaign/pending-deployments|campaign/state" ex
 
 ## Acceptance Criteria
 
-- Endpoint path and query parameters are specified, including `planetName` and any optional exact/id/date controls.
+- Endpoint path and query parameters are specified, including exact system id/name selectors, optional planet id/position selectors, and any date controls.
 - Response shape includes campaign/API metadata, resolved planet/system identity, current-date facts, warnings, unsupported entries, and timing.
 - Not found, ambiguous name, duplicate planet/system names, and no-loaded-campaign behavior are specified.
 - Expected tests/fixtures are listed for issue `#86`.

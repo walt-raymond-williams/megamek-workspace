@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Audit MekHQ Navigation tab planetary data sources.
+1. Design read-only MekHQ planetary information API.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Map the planetary/system data shown in MekHQ's Navigation side tab to source methods so the new planetary information API can return source-backed fields by planet name.
-   - Output: Source audit note under `docs/current/`, updated roadmap/tracking docs, and design inputs for issue `#85`.
-   - Notes: GitHub issue `#84`; child of epic `#83`; active checklist `docs/handoffs/active/audit-navigation-planetary-data-sources.md`; tracking doc `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`.
+   - Goal: Turn the issue `#84` source audit into a concrete read-only endpoint contract for Navigation-tab-style planetary/system information.
+   - Output: API design note under `docs/current/`, updated contract/tracking docs, and implementation-ready guidance for issue `#86`.
+   - Notes: GitHub issue `#85`; child of epic `#83`; active checklist `docs/handoffs/active/design-planetary-information-api.md`; source input `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`; tracking doc `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`.
 
 2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
@@ -131,6 +131,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-07-03`: Completed GitHub issue `#84` source audit for the planetary information API epic. Findings in `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md` map the Navigation-tab planetary/system side panel to `NavigationTab`, `MapTab`, `PlanetViewPanel`, `Planet`, `PlanetarySystem`, `Systems`, `SourceableValue`, academy filtering, and disease helpers. The audit recommends designing issue `#85` around exact id/name selectors, campaign-date effective reads, sourceable value metadata, and explicit handling for computed hiring hall, recharge, academies, diseases, and UI HTML/Markdown fields. Archived handoff: `docs/handoffs/archive/audit-navigation-planetary-data-sources.md`.
 - `2026-07-01`: Completed GitHub issue `#80` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` separate firing-solution/UI redraw work from minimap and Princess/pathing profiling. Recommended first player check remains disabling View > Firing Solutions, followed by targeted timing around firing-solution rebuilds, `BoardView.updateEcmList()`, minimap redraw, and Princess path enumeration/ranking. No MegaMek source patch was approved or committed; the existing uncommitted `BoardView.java` redraw-coalescing experiment remains an experiment. Archived handoff: `docs/handoffs/archive/investigate-megamek-tactical-performance.md`.
 - `2026-06-30`: Completed GitHub issue `#82` with MekHQ source commit `b68bc1b8ca`, adding `GET /campaign/personnel/detail?personId=<uuid>` to expose explicit selected-person/character-sheet detail through the read-only local API. V1 returns identity, role/status/prisoner/fatigue/XP/salary facts, assignment context, skills, active options/special abilities, award summary, injury summary, and bounded personal/assignment/performance/scenario logs; medical and patient logs require explicit `includeMedical=true` / `includePatient=true`. Docs updated in `MEK_RPG_LIVE_MEKHQ_PERSONNEL_DETAIL_API.md` and `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`. Verified targeted service tests plus `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`; source push remains blocked by upstream `MegaMek/mekhq` 403. Archived handoff: `docs/handoffs/archive/expose-personnel-tab-character-details-api.md`.
 - `2026-06-29`: Completed GitHub issue `#81` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` map firing unit switching through `FiringDisplay.selectEntity(...)`, `refreshAll()`, `ClientGUI.updateFiringArc(...)`, `FiringSolutionSpriteHandler.showFiringSolutions(...)`, target clicks/cycling through `chooseTarget(...)`, `target(...)`, and `updateTarget()`, plus BoardView ECM/redraw work. Highest-value first check is disabling default-on View > Firing Solutions; recommended first source fix, if approved later, is to remove duplicate/debounce firing-solution rebuilds before broader issue `#80` work. Archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`.

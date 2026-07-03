@@ -10,6 +10,13 @@
 
 Identify exactly which fields MekHQ displays in the Navigation side tab for a selected planet/system and map each field to source methods, date dependencies, localization/display formatting, and unsupported/API-risk notes.
 
+## Close-Out
+
+- Status: `Done`
+- Completed: `2026-07-03`
+- Output: `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`
+- Next issue: `#85` Design read-only MekHQ planetary information API.
+
 ## Required Context
 
 Read these first:
