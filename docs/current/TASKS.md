@@ -45,7 +45,14 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate All Reports UI warning dependency in MekHQ API.
+1. Audit MekHQ Navigation tab planetary data sources.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Map the planetary/system data shown in MekHQ's Navigation side tab to source methods so the new planetary information API can return source-backed fields by planet name.
+   - Output: Source audit note under `docs/current/`, updated roadmap/tracking docs, and design inputs for issue `#85`.
+   - Notes: GitHub issue `#84`; child of epic `#83`; active checklist `docs/handoffs/active/audit-navigation-planetary-data-sources.md`; tracking doc `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`.
+
+2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.

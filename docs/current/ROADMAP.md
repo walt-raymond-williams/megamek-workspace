@@ -467,6 +467,25 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: Existing MEK-RPG live MekHQ read/command work for campaign context; local MegaMek source under `external/src/megamek`; local MekHQ source under `external/src/mekhq` for launch/entity identity mapping; a future running MegaMek scenario for live smoke validation.
 - Open questions: Can an observer client receive enough event/report detail without violating double-blind expectations? Can MegaMek entities be reliably mapped back to MekHQ campaign units and pilots during a launched scenario? Should V1 write narration into MegaMek chat only, an external stream/log/API only, or both? Should V1 be a general narrator before per-pilot dialogue?
 
+### Epic: Expose planetary information in the MekHQ API
+
+- Status: `In progress`
+- Priority: `High`
+- Issue: `#83`
+- Owner: `Mixed`
+- Goal: Expose MekHQ planetary information through the local control API so a client can provide a planet name and receive the source-backed planetary/system data a user would inspect from MekHQ's Navigation side tab.
+- Why it matters: MEK-RPG and future campaign-assistant workflows need planet facts without scraping UI state or asking the user to manually transcribe Navigation-tab information. Planet owner, atmosphere, gravity, water, population, HPG, hiring hall, academies, diseases, socio-industrial state, and jump-point/travel facts can matter for contract interpretation, logistics, acquisition, scenario setup, and RPG narration.
+- Expected output: A decomposed read-only API workstream covering source audit, endpoint design, implementation, consumer-facing docs, fixtures, and a safe live smoke checklist or result.
+- Handoff notes: This is an epic, not a direct implementation task. Active tracking doc: `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`. Active handoffs exist for child issues `#84` through `#87`. Initial source orientation found likely owners in `NavigationTab`, `PlanetViewPanel`, `Planet`, `PlanetarySystem`, `Systems`, and existing local API service/exporter classes.
+- Dependencies: Existing local MekHQ control API branch/work in `external/src/mekhq`; source checkout under `external/src/mekhq`; safe loaded campaign for live smoke. Source pushes from `external/src/mekhq` may still need a writable fork/remote.
+- Child issues:
+  - `#84`: Audit MekHQ Navigation tab planetary data sources. Active handoff: `docs/handoffs/active/audit-navigation-planetary-data-sources.md`.
+  - `#85`: Design read-only MekHQ planetary information API. Active handoff: `docs/handoffs/active/design-planetary-information-api.md`.
+  - `#86`: Implement read-only MekHQ planetary information endpoint. Active handoff: `docs/handoffs/active/implement-planetary-information-endpoint.md`.
+  - `#87`: Add planetary API docs, fixtures, and live smoke checklist. Active handoff: `docs/handoffs/active/add-planetary-api-fixtures-smoke.md`.
+- Recommended sequence: Complete source audit `#84` first, then design `#85`. Start implementation `#86` only after the design settles name matching, ambiguity handling, date behavior, and response shape. Use `#87` after implementation exists, or earlier only to draft fixture/smoke expectations.
+- Open questions: Should V1 accept only planet names, or also system ids/planet ids for exact disambiguation? Should ambiguous names return candidate rows or a hard refusal with candidate metadata? Should a request be locked to the loaded campaign date, or allow an explicit date for historical/future planetary event views?
+
 ### Harden live API trust envelope, dirty state, and location labels
 
 - Status: `Done`
