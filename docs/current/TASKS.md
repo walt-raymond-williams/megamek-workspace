@@ -45,12 +45,12 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Design read-only MekHQ planetary information API.
+1. Implement read-only MekHQ planetary information endpoint.
    - Status: `Not started`
    - Owner: `Codex`
-   - Goal: Turn the issue `#84` source audit into a concrete read-only endpoint contract for Navigation-tab-style planetary/system information.
-   - Output: API design note under `docs/current/`, updated contract/tracking docs, and implementation-ready guidance for issue `#86`.
-   - Notes: GitHub issue `#85`; child of epic `#83`; active checklist `docs/handoffs/active/design-planetary-information-api.md`; source input `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`; tracking doc `docs/current/PLANETARY_INFORMATION_API_TRACKING.md`.
+   - Goal: Implement the `GET /campaign/planetary/detail` design from issue `#85` in MekHQ source.
+   - Output: MekHQ source endpoint and tests, plus workspace docs updated with source commit and verification.
+   - Notes: GitHub issue `#86`; child of epic `#83`; active checklist `docs/handoffs/active/implement-planetary-information-endpoint.md`; design note `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`; source audit `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`.
 
 2. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
@@ -131,6 +131,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-07-04`: Completed GitHub issue `#85` by adding `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`. The design chooses `GET /campaign/planetary/detail`, loaded-campaign-date-only V1 behavior, exact selector and guard rules for `systemId`, `systemName`, `planetId`, `planetPosition`, and `planetName`, structured ambiguity/not-found/refusal responses, sourceable value envelopes, Navigation-tab field groups, unsupported boundaries, and implementation/test expectations for issue `#86`. Archived handoff: `docs/handoffs/archive/design-planetary-information-api.md`.
 - `2026-07-03`: Completed GitHub issue `#84` source audit for the planetary information API epic. Findings in `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md` map the Navigation-tab planetary/system side panel to `NavigationTab`, `MapTab`, `PlanetViewPanel`, `Planet`, `PlanetarySystem`, `Systems`, `SourceableValue`, academy filtering, and disease helpers. The audit recommends designing issue `#85` around exact id/name selectors, campaign-date effective reads, sourceable value metadata, and explicit handling for computed hiring hall, recharge, academies, diseases, and UI HTML/Markdown fields. Archived handoff: `docs/handoffs/archive/audit-navigation-planetary-data-sources.md`.
 - `2026-07-01`: Completed GitHub issue `#80` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` separate firing-solution/UI redraw work from minimap and Princess/pathing profiling. Recommended first player check remains disabling View > Firing Solutions, followed by targeted timing around firing-solution rebuilds, `BoardView.updateEcmList()`, minimap redraw, and Princess path enumeration/ranking. No MegaMek source patch was approved or committed; the existing uncommitted `BoardView.java` redraw-coalescing experiment remains an experiment. Archived handoff: `docs/handoffs/archive/investigate-megamek-tactical-performance.md`.
 - `2026-06-30`: Completed GitHub issue `#82` with MekHQ source commit `b68bc1b8ca`, adding `GET /campaign/personnel/detail?personId=<uuid>` to expose explicit selected-person/character-sheet detail through the read-only local API. V1 returns identity, role/status/prisoner/fatigue/XP/salary facts, assignment context, skills, active options/special abilities, award summary, injury summary, and bounded personal/assignment/performance/scenario logs; medical and patient logs require explicit `includeMedical=true` / `includePatient=true`. Docs updated in `MEK_RPG_LIVE_MEKHQ_PERSONNEL_DETAIL_API.md` and `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`. Verified targeted service tests plus `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`; source push remains blocked by upstream `MegaMek/mekhq` 403. Archived handoff: `docs/handoffs/archive/expose-personnel-tab-character-details-api.md`.

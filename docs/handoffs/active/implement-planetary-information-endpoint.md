@@ -8,7 +8,7 @@
 
 ## Goal
 
-Implement the designed read-only endpoint in MekHQ source so a local client can request planetary information by planet name and receive Navigation-tab-style data.
+Implement the designed read-only endpoint in MekHQ source so a local client can request planetary information by exact system/planet selectors and receive Navigation-tab-style data.
 
 ## Required Context
 
@@ -34,9 +34,10 @@ Read these first:
 Likely files to read or edit:
 
 - `external/src/mekhq/MekHQ/src/mekhq/service/LocalControlService.java`
-- `external/src/mekhq/MekHQ/src/mekhq/service/LocalCampaignStateExporter.java` or a new focused exporter class if the design calls for it
-- `external/src/mekhq/MekHQ/src/mekhq/service/LocalControlServiceHttpTest.java`
-- `external/src/mekhq/MekHQ/src/test/java/mekhq/service/LocalCampaignStateExporterTest.java` or new focused tests
+- `external/src/mekhq/MekHQ/src/mekhq/service/LocalPlanetaryDetailExporter.java` or another new focused exporter class
+- `external/src/mekhq/MekHQ/src/mekhq/service/LocalCampaignStateExporter.java` only for reusable envelope patterns
+- `external/src/mekhq/MekHQ/unittests/mekhq/service/LocalControlServiceHttpTest.java`
+- `external/src/mekhq/MekHQ/unittests/mekhq/service/LocalCampaignStateExporterTest.java` or new focused tests
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`
 
 ## Commands
@@ -60,8 +61,8 @@ cd external/src/mekhq
 
 ## Acceptance Criteria
 
-- Endpoint is registered in `LocalControlService` and supports GET only.
-- Request accepts planet name and follows the design issue matching/ambiguity rules.
+- Endpoint `GET /campaign/planetary/detail` is registered in `LocalControlService` and supports GET only.
+- Request accepts exact selector combinations from the design: `systemId`, `systemName`, `planetId`, `planetPosition`, and `planetName`.
 - Response is read-only and includes campaign metadata plus planet/system data from source-owned methods.
 - Tests cover success, not found, ambiguous match if applicable, bad/missing query, no loaded campaign, and method-not-allowed behavior.
 - Relevant Gradle compile/test/checkstyle commands pass or exact blockers are recorded.
