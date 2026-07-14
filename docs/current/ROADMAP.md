@@ -149,6 +149,19 @@ Use this shape for entries that may become GitHub issues:
   - Child/focused issues:
     - `#81`: Investigate firing-phase unit switching and targeting lag. Completed on `2026-06-29`; archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`. Recommended first check is disabling View > Firing Solutions, because source confirms the default-on overlay scans all entities and runs `WeaponAttackAction.toHit(...)` for viable targets on unit/arc updates.
 
+### Investigate MegaMek round report repaint duplication on tactical map
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#93`
+- Owner: `Codex`
+- Goal: Reproduce and investigate the MegaMek UI/rendering bug where the Round Report modal contents appear duplicated onto the underlying tactical board/map.
+- Why it matters: The tactical UI must keep modal/report rendering isolated from the board view. Report text or component buffers leaking onto the map makes firing-report review confusing and may indicate a broader Swing repaint, layered-pane, transparency, or board-canvas cache bug.
+- Expected output: Reproduction notes, source-backed root-cause analysis, a minimal MegaMek source fix if identified and low-risk, verification commands or manual smoke checklist, and durable workspace notes if the investigation teaches reusable MegaMek UI/rendering context.
+- Handoff notes: GitHub issue `#93`; active handoff: `docs/handoffs/active/investigate-megamek-round-report-map-duplication.md`. The initial screenshot showed `Sharpe's Strikers - Round 7 - Firing Report phase - MegaMek` with the `Round Report` dialog in front and similar report text/unit-icon content visible on the map behind it.
+- Dependencies: Local MegaMek source under `external/src/megamek`; may need a disposable scenario or user-assisted live reproduction if the artifact depends on Java/Swing runtime state, display scaling, theme/look-and-feel, or window manager behavior.
+- Open questions: Is the duplicate content caused by the report dialog component itself, a shared report-rendering component, board view repaint/double-buffer behavior, translucent/modal window composition, stale image caching, or another overlay layer?
+
 ### Epic: Robust tabletop battle result MUL workflow
 
 - Status: `In progress`
