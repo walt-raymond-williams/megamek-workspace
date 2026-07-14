@@ -8,7 +8,7 @@
 
 ## Goal
 
-Investigate and, if feasible, fix the MegaMek UI/rendering bug where the Round Report modal contents appear duplicated onto the underlying tactical board/map.
+Investigate and, if feasible, fix the MegaMek UI/rendering bug where the floating Round Report window contents appear duplicated onto the underlying tactical board/map.
 
 ## Required Context
 
@@ -24,7 +24,7 @@ Read these first:
 Initial observed symptom:
 
 - `Observed in user screenshot`: MegaMek window title was `Sharpe's Strikers - Round 7 - Firing Report phase - MegaMek`.
-- `Observed in user screenshot`: A foreground `Round Report` modal was open with tabs `Round 1` through `Round 7` and `Phase`.
+- `Observed in user screenshot`: A foreground `Round Report` window was open with tabs `Round 1` through `Round 7` and `Phase`.
 - `Observed in user screenshot`: Report entries included `Weapons fire for Shadow Hawk SHD-2H`, attacks on `Flashman FLS-7K`, and `Weapons fire for Light Shredder Gun Emplacement`.
 - `Observed in user screenshot`: Similar report text fragments and unit-icon content appeared behind the modal on the tactical board/map layer, especially along the left side and lower map area.
 - `Inference`: This looks less like intentional transparency and more like stale or duplicated painting of report UI content onto the board canvas or an overlay/backing buffer.
@@ -39,6 +39,10 @@ Do not rely on the original temp screenshot path remaining available. Reproduce 
 - Verification notes from relevant compile/test commands, or a clear blocker if verification cannot run.
 - Manual smoke checklist for opening the Round Report during firing report phase and confirming the board background is not contaminated by modal report content.
 - Workspace documentation update if the investigation teaches durable MegaMek UI/rendering context.
+
+Investigation note:
+
+- `2026-07-14`: Source-only investigation findings are recorded in `docs/current/MEGAMEK_ROUND_REPORT_REPAINT_INVESTIGATION.md`. Per user request, no source fix has been made yet; next step is user review and approval of a reproduction/source-experiment path.
 
 ## Files And Areas
 
@@ -92,3 +96,4 @@ Check `docs/current/KNOWN_COMMANDS.md` for the currently verified MegaMek build/
 - Is the duplicate content caused by the report dialog component itself, a shared report-rendering component, board view repaint/double-buffer behavior, translucent/modal window composition, stale image caching, or another overlay layer?
 - Does the bug reproduce only with specific display scaling, Java version, UI theme, graphics pipeline, map size, or report content length?
 - Is this related to the earlier firing-phase redraw/performance investigation around board repaint churn, or an independent modal/window composition issue?
+- Should the first approved experiment be report-local opacity/background hardening, focusability/window behavior, or board repaint clearing?

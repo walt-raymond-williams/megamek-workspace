@@ -151,14 +151,14 @@ Use this shape for entries that may become GitHub issues:
 
 ### Investigate MegaMek round report repaint duplication on tactical map
 
-- Status: `Issue created`
+- Status: `In progress`
 - Priority: `High`
 - Issue: `#93`
 - Owner: `Codex`
-- Goal: Reproduce and investigate the MegaMek UI/rendering bug where the Round Report modal contents appear duplicated onto the underlying tactical board/map.
+- Goal: Reproduce and investigate the MegaMek UI/rendering bug where the floating Round Report window contents appear duplicated onto the underlying tactical board/map.
 - Why it matters: The tactical UI must keep modal/report rendering isolated from the board view. Report text or component buffers leaking onto the map makes firing-report review confusing and may indicate a broader Swing repaint, layered-pane, transparency, or board-canvas cache bug.
-- Expected output: Reproduction notes, source-backed root-cause analysis, a minimal MegaMek source fix if identified and low-risk, verification commands or manual smoke checklist, and durable workspace notes if the investigation teaches reusable MegaMek UI/rendering context.
-- Handoff notes: GitHub issue `#93`; active handoff: `docs/handoffs/active/investigate-megamek-round-report-map-duplication.md`. The initial screenshot showed `Sharpe's Strikers - Round 7 - Firing Report phase - MegaMek` with the `Round Report` dialog in front and similar report text/unit-icon content visible on the map behind it.
+- Expected output: Reproduction notes, source-backed root-cause analysis or clearly separated leading hypotheses, verification commands or manual smoke checklist, and durable workspace notes if the investigation teaches reusable MegaMek UI/rendering context. Per user request on `2026-07-14`, do not make source fixes until the investigation is reviewed.
+- Handoff notes: GitHub issue `#93`; active handoff: `docs/handoffs/active/investigate-megamek-round-report-map-duplication.md`. The initial screenshot showed `Sharpe's Strikers - Round 7 - Firing Report phase - MegaMek` with the `Round Report` dialog in front and similar report text/unit-icon content visible on the map behind it. Investigation started on `2026-07-14`; source findings are in `docs/current/MEGAMEK_ROUND_REPORT_REPAINT_INVESTIGATION.md`.
 - Dependencies: Local MegaMek source under `external/src/megamek`; may need a disposable scenario or user-assisted live reproduction if the artifact depends on Java/Swing runtime state, display scaling, theme/look-and-feel, or window manager behavior.
 - Open questions: Is the duplicate content caused by the report dialog component itself, a shared report-rendering component, board view repaint/double-buffer behavior, translucent/modal window composition, stale image caching, or another overlay layer?
 
