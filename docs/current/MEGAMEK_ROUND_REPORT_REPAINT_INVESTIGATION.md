@@ -74,6 +74,36 @@ User request: investigation only. Do not make source fixes until the findings ar
 5. `Inferred`: the floating Round Report may still be an exposure trigger if opening/moving it changes repaint timing, but it is no longer the leading root cause for the visible mech ghosts.
 6. `Inferred`: report font/rendering issues are now a lower-priority branch unless reproduction shows text/report-image artifacts in addition to the stale unit ghosts.
 
+## Data Flow Review
+
+`Confirmed from source`: the movement update path is:
+
+1. Server movement processing records a `Vector<UnitLocation>` path and sends it with `ENTITY_UPDATE`.
+   - Source: `external/src/megamek/megamek/src/megamek/server/totalWarfare/MovePathHandler.java`
+   - Source: `external/src/megamek/megamek/src/megamek/server/totalWarfare/TWGameManager.java`
+2. Client packet handling runs on the Swing event dispatch thread, then `Client#receiveEntityUpdate(...)` reads the entity and movement path.
+   - Source: `external/src/megamek/megamek/src/megamek/client/AbstractClient.java`
+   - Source: `external/src/megamek/megamek/src/megamek/client/Client.java`
+3. `Game#setEntity(...)` replaces the entity and fires `GameEntityChangeEvent` with the same `movePath` reference.
+   - Source: `external/src/megamek/megamek/src/megamek/common/game/Game.java`
+4. `BoardView#gameEntityChange(...)` calls `redrawAllEntities()` first, then, if step-by-step movement display is enabled, calls `addMovingUnit(entity, movePath)`.
+   - Source: `external/src/megamek/megamek/src/megamek/client/ui/clientGUI/boardview/BoardView.java`
+5. `BoardView#addMovingUnit(...)` stores the event `movePath` directly in `MovingUnit`, adds it to `movingUnits`, and appends a `GhostEntitySprite`.
+6. `RedrawWorker` repeatedly calls `doMoveUnits(...)`; `doMoveUnits(...)` destructively consumes `MovingUnit.path` with `removeFirst()`, swaps `MovingEntitySprite` objects, and clears `movingEntitySprites` plus `ghostEntitySprites` only when all queued `movingUnits` are spent.
+
+`Confirmed from source`: obvious weak points in that flow:
+
+- `MovingUnit` stores the event path directly and `doMoveUnits(...)` mutates it. This couples event data to view animation state instead of copying the path for the view.
+- `addMovingUnit(...)` does not de-duplicate an existing moving unit for the same entity before appending another `MovingUnit` and another `GhostEntitySprite`.
+- `movingEntitySprites` and `ghostEntitySprites` are not part of the normal `addSprites(...)` / `removeSprites(...)` lifecycle. They are drawn manually and cleared manually.
+- `redrawEntity(...)` and `redrawAllEntities(...)` carefully remove and re-add normal entity/isometric sprites, including backing `overTerrainSprites` / `behindTerrainHexSprites` cleanup. The movement sprite path does not use the same lifecycle.
+- `clearSprites()` does not clear `movingUnits`, `movingEntitySpriteIds`, `movingEntitySprites`, or `ghostEntitySprites`. Those are only cleared by the natural completion path inside `doMoveUnits(...)`.
+- Phase changes to report phases call `redrawAllEntities()` but do not flush pending movement animation state. A report/firing phase can therefore redraw final unit sprites while stale moving/ghost sprites remain eligible to draw afterward.
+- `ClientGUI#clearTemporarySprites()` clears movement envelope/modifier/sensor/collapse/firing helper sprites, but not movement playback sprites or ghost entity sprites.
+- `redrawMovingEntity(...)` removes an old `MovingEntitySprite` from the movement collection but does not repaint that old sprite's bounds directly. Cleanup relies on the broader `RedrawWorker` repaint.
+
+`Inferred`: these are implementation quality problems even if only one is the immediate trigger. The most suspicious root-cause shape is "movement playback state survives a board/entity/phase refresh that rebuilds normal unit sprites." That would produce the screenshot's effect: real units in current positions plus translucent unit ghosts in old or stale positions.
+
 ## Reproduction Matrix
 
 Run these against the installed `0.51.00` suite first, because that is the likely user-observed runtime:
