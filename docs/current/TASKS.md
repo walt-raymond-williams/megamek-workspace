@@ -52,42 +52,49 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Implement read-only MekHQ planetary information endpoint.
+1. Design bounded live-play gap API contract.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Turn MEK-RPG's playtest API gap request into a producer-side MekHQ local API design with endpoint shapes, query parameters, bounded defaults, source ownership, and unsupported/unknown/withheld behavior.
+   - Output: A design note under `docs/current/`, roadmap/task updates if sequencing changes, and clear implementation guidance for issues `#96`, `#100`, `#97`, `#98`, and `#99`.
+   - Notes: GitHub issue `#95`; child of epic `#94`; active handoff `docs/handoffs/active/design-bounded-live-play-gap-api-contract.md`; producer plan `docs/current/MEK_RPG_LIVE_PLAY_API_GAP_PRODUCER_PLAN.md`; coordinate with activity-history issue `#58`.
+
+2. Implement read-only MekHQ planetary information endpoint.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Implement the `GET /campaign/planetary/detail` design from issue `#85` in MekHQ source.
    - Output: MekHQ source endpoint and tests, plus workspace docs updated with source commit and verification.
    - Notes: GitHub issue `#86`; child of epic `#83`; active checklist `docs/handoffs/active/implement-planetary-information-endpoint.md`; design note `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`; source audit `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`.
 
-2. Investigate All Reports UI warning dependency in MekHQ API.
+3. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-3. Design read-only MekHQ activity-history API.
+4. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-4. Investigate MegaMek live combat narration bridge.
+5. Investigate MegaMek live combat narration bridge.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
    - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
    - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
 
-5. Run MekHQ quickstart roster UI validation.
+6. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-6. Turn this repo into an AI-ready project workflow demo.
+7. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
@@ -138,6 +145,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-07-16`: Planned the producer-side response to MEK-RPG's live-play API gap change request. Added `MEK_RPG_LIVE_PLAY_API_GAP_PRODUCER_PLAN.md`, created GitHub epic `#94` and child issues `#95`, `#96`, `#97`, `#98`, `#99`, and `#100`, added active handoffs for each, and queued design issue `#95` as the next producer-side step.
 - `2026-07-04`: Completed GitHub issue `#85` by adding `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`. The design chooses `GET /campaign/planetary/detail`, loaded-campaign-date-only V1 behavior, exact selector and guard rules for `systemId`, `systemName`, `planetId`, `planetPosition`, and `planetName`, structured ambiguity/not-found/refusal responses, sourceable value envelopes, Navigation-tab field groups, unsupported boundaries, and implementation/test expectations for issue `#86`. Archived handoff: `docs/handoffs/archive/design-planetary-information-api.md`.
 - `2026-07-03`: Completed GitHub issue `#84` source audit for the planetary information API epic. Findings in `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md` map the Navigation-tab planetary/system side panel to `NavigationTab`, `MapTab`, `PlanetViewPanel`, `Planet`, `PlanetarySystem`, `Systems`, `SourceableValue`, academy filtering, and disease helpers. The audit recommends designing issue `#85` around exact id/name selectors, campaign-date effective reads, sourceable value metadata, and explicit handling for computed hiring hall, recharge, academies, diseases, and UI HTML/Markdown fields. Archived handoff: `docs/handoffs/archive/audit-navigation-planetary-data-sources.md`.
 - `2026-07-01`: Completed GitHub issue `#80` as a source investigation only. Findings in `docs/current/MEGAMEK_TACTICAL_PERFORMANCE_INVESTIGATION.md` separate firing-solution/UI redraw work from minimap and Princess/pathing profiling. Recommended first player check remains disabling View > Firing Solutions, followed by targeted timing around firing-solution rebuilds, `BoardView.updateEcmList()`, minimap redraw, and Princess path enumeration/ranking. No MegaMek source patch was approved or committed; the existing uncommitted `BoardView.java` redraw-coalescing experiment remains an experiment. Archived handoff: `docs/handoffs/archive/investigate-megamek-tactical-performance.md`.

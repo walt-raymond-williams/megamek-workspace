@@ -467,6 +467,27 @@ Use this shape for entries that may become GitHub issues:
 - Recommended sequence: Complete. Issues `#64` and `#65` bounded command readiness and made narrowed state responses partial for section collector failures, issue `#66` added the purpose-built pending-deployment read path, issue `#67` locked in automated regression coverage and a smoke checklist, and issue `#68` confirmed the live loaded-campaign read path did not time out.
 - Open questions: Java-level per-section timeout cancellation remains deferred because timed-out background collectors could keep reading live campaign state concurrently. Source pushes from `external/src/mekhq` remain blocked until a writable fork/remote is configured.
 
+### Epic: Close MEK-RPG live-play MekHQ API gaps
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#94`
+- Owner: `Mixed`
+- Goal: Turn MEK-RPG's live play API gap request into bounded producer-side MekHQ local API work, prioritizing mission-planning facts, source-owned ledgers, logistics capacity, personnel turnover, and verification without accepting unbounded or unsourceable endpoint requests.
+- Why it matters: MEK-RPG should keep using the live local API during play and should not fall back to routine active `.cpnx`, `.cpnx.gz`, XML, or raw save parsing. The producer side should expose exact source-owned facts where possible and explicit `unknown`, `withheld`, or `unsupported` markers where MekHQ does not own or should not reveal a fact.
+- Expected output: A source-backed design contract, implemented high-priority endpoint slices, updated API docs, sanitized fixtures, regression tests, and smoke checks for the supported shapes.
+- Handoff notes: Producer plan: `docs/current/MEK_RPG_LIVE_PLAY_API_GAP_PRODUCER_PLAN.md`. Active epic handoff: `docs/handoffs/active/close-mek-rpg-live-play-api-gaps-epic.md`. MEK-RPG request source: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_PLAYTEST_API_GAP_CHANGE_REQUEST_2026_07_16.md`. Review note: MEK-RPG should commit the cited gap-report entries and add the reinforcement-arrival gap to its request package, but that is not a producer planning blocker.
+- Dependencies: Completed live API epic `#38`; completed reliability epic `#62`; existing activity-history epic `#56` and design issue `#58`; personnel detail issue `#82`; local MekHQ source under `external/src/mekhq`; source pushes from `external/src/mekhq` may still need a writable fork/remote.
+- Child issues:
+  - `#95`: Design bounded live-play gap API contract. Active handoff: `docs/handoffs/active/design-bounded-live-play-gap-api-contract.md`.
+  - `#96`: Implement scenario intel, deployment, BV, and reinforcement export. Active handoff: `docs/handoffs/active/implement-scenario-intel-deployment-api.md`.
+  - `#100`: Implement bounded salvage, finance, reputation, and XP ledger reads. Active handoff: `docs/handoffs/active/implement-bounded-ledger-history-api.md`.
+  - `#97`: Implement inventory, cargo, transport, and recovery capacity export. Active handoff: `docs/handoffs/active/implement-inventory-transport-capacity-api.md`.
+  - `#98`: Implement personnel turnover and HR/admin pressure export. Active handoff: `docs/handoffs/active/implement-personnel-turnover-hr-pressure-api.md`.
+  - `#99`: Add live-play gap API docs, fixtures, regression tests, and smoke checklist. Active handoff: `docs/handoffs/active/add-live-play-gap-api-fixtures-smoke.md`.
+- Recommended sequence: Start with design issue `#95`; then implement scenario intel `#96` because it has the highest live-play impact. Run bounded ledger issue `#100` alongside or after activity-history design `#58`. Run inventory/transport `#97` before personnel turnover `#98` unless source audit shows HR/turnover is cheaper. Use docs/fixtures/smoke issue `#99` after the first implementation slices land.
+- Open questions: Should scenario intel become a dedicated endpoint or stay in `/campaign/pending-deployments` and scenario state DTOs? Which salvage/reputation/XP histories are durable source data rather than report text? Does MekHQ track exact transport/recovery capacity and HR/admin pressure, or should V1 return partial facts with explicit unsupported entries?
+
 ### Investigate MegaMek live combat narration bridge
 
 - Status: `Issue created`
