@@ -24,6 +24,7 @@ User request: investigation only. Do not make source fixes until the findings ar
 - `Observed in first user screenshot`: report entries included `Weapons fire for Shadow Hawk SHD-2H`, attacks on `Flashman FLS-7K`, and `Weapons fire for Light Shredder Gun Emplacement`.
 - `Observed in first user screenshot`: similar report text fragments and unit-icon content appeared on or over the tactical board behind/around the foreground report window.
 - `Observed in follow-up user screenshot`: the tactical map itself contains multiple translucent unit images in previous hexes. The user described these as ghost images from previous turns.
+- `Observed from user report`: the bug did not happen consistently in a fresh session. It appeared after several accumulated matches without restarting MegaMek and worsened until the game eventually crashed from running out of memory.
 - `Correction`: the follow-up screenshot changes the leading interpretation. The most specific visible artifact is stale translucent movement/ghost entity sprites, not Round Report HTML content.
 
 ## Source Map
@@ -73,6 +74,7 @@ User request: investigation only. Do not make source fixes until the findings ar
 4. `Inferred`: `BoardViewPanel#paintComponent(...)` not calling `super.paintComponent(g)` is a plausible amplifier. The board draw path normally fills and redraws the visible area, but partial repaints depend on the board code fully covering every dirty pixel.
 5. `Inferred`: the floating Round Report may still be an exposure trigger if opening/moving it changes repaint timing, but it is no longer the leading root cause for the visible mech ghosts.
 6. `Inferred`: report font/rendering issues are now a lower-priority branch unless reproduction shows text/report-image artifacts in addition to the stale unit ghosts.
+7. `Inferred`: the long-session/OOM report raises the likelihood of retained UI/game state across match boundaries. Treat this as a possible lifecycle leak, not just a transient repaint artifact.
 
 ## Data Flow Review
 
@@ -104,6 +106,8 @@ User request: investigation only. Do not make source fixes until the findings ar
 
 `Inferred`: these are implementation quality problems even if only one is the immediate trigger. The most suspicious root-cause shape is "movement playback state survives a board/entity/phase refresh that rebuilds normal unit sprites." That would produce the screenshot's effect: real units in current positions plus translucent unit ghosts in old or stale positions.
 
+`Inferred from user report`: the intermittent nature and eventual out-of-memory crash suggest compounding retained state. The fix investigation should include match/session lifecycle cleanup, especially whether old `BoardView`, report dialog, sprite image, movement animation, timer, listener, or cached image objects remain reachable after each match.
+
 ## Reproduction Matrix
 
 Run these against the installed `0.51.00` suite first, because that is the likely user-observed runtime:
@@ -119,6 +123,8 @@ Run these against the installed `0.51.00` suite first, because that is the likel
 9. During reproduction, watch whether the stale images disappear after resizing the window, scrolling the map, toggling zoom, switching phases, or forcing a full repaint. If they disappear after a full repaint, the state may already be cleared and only stale pixels remain; if they persist across full repaints, stale sprites remain in a live sprite collection.
 10. If safe source experiments are approved later, test one variable at a time:
    - instrument `addMovingUnit(...)`, `doMoveUnits(...)`, and the `movingEntitySprites`/`ghostEntitySprites` collection sizes;
+   - instrument creation/disposal counts for `BoardView`, `MiniReportDisplayDialog`, report panels, game listeners, and redraw timers across multiple matches;
+   - collect heap snapshots after each match and compare retained `BoardView`, `Sprite`, `Image`, report dialog/panel, and listener instances;
    - force a `boardPanel.repaint()` immediately after clearing `movingEntitySprites` and `ghostEntitySprites`;
    - force full-board repaint bounds while movement animation is active;
    - make the Round Report dialog focusable again or remove `setFocusableWindowState(false)`;
@@ -147,3 +153,5 @@ Run these against the installed `0.51.00` suite first, because that is the likel
 ## Current Recommendation
 
 Do not patch yet. First reproduce with the matrix above and determine whether the artifact is stale live sprites or stale pixels after sprites have already been cleared. After the follow-up screenshot, prioritize the movement ghost sprite path and the local redraw-worker coalescing experiment before report-pane opacity or focus experiments.
+
+Given the user report that this compounded over several matches and ended in an out-of-memory crash, also prioritize lifecycle leak checks. A robust fix may need both movement ghost cleanup and disposal/listener/timer/cache cleanup across match boundaries.
