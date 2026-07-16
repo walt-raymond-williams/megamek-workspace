@@ -98,6 +98,13 @@ Use this shape for active and queued work:
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
+8. Remove RL bomb pods from automatic aerospace bot loadouts.
+   - Status: `Not started`
+   - Owner: `Codex`
+   - Goal: Modify MegaMek/MekHQ source so AI-controlled aerospace units are never automatically assigned Rocket Launcher bomb pods while preserving manual RL use and existing scenario compatibility.
+   - Output: Source changes, focused tests, normal Gradle verification/build results, rebuilt launchable/distributable package path, and workspace close-out notes.
+   - Notes: GitHub issue `#101`; roadmap entry `Remove RL bomb pods from automatic aerospace bot loadouts`; active handoff `docs/handoffs/active/remove-rl-bomb-pods-from-auto-loadouts.md`; likely starting point `external/src/megamek/megamek/src/megamek/client/generator/TeamLoadOutGenerator.java`.
+
 ## Backlog
 
 - Decide a report naming convention for campaign reports.

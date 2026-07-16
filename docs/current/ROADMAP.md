@@ -162,6 +162,19 @@ Use this shape for entries that may become GitHub issues:
 - Dependencies: Local MegaMek source under `external/src/megamek`; may need a disposable scenario or user-assisted live reproduction if the artifact depends on Java/Swing runtime state, display scaling, theme/look-and-feel, or window manager behavior.
 - Open questions: Is the duplicate content caused by the report dialog component itself, a shared report-rendering component, board view repaint/double-buffer behavior, translucent/modal window composition, stale image caching, or another overlay layer?
 
+### Remove RL bomb pods from automatic aerospace bot loadouts
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#101`
+- Owner: `Codex`
+- Goal: Modify the local MegaMek/MekHQ source tree so AI-controlled aerospace units are never automatically assigned Rocket Launcher bomb pods.
+- Why it matters: Rocket Launcher bomb pods should remain valid equipment for manual/player use and existing scenario compatibility, but automatic bot/OpFor loadouts should not choose them for generated aerospace units.
+- Expected output: Focused MegaMek/MekHQ source changes, tests for ground-map and aerospace automatic generation, no-crash behavior when no valid bombs remain, manual RL loadability preservation, discovered Gradle verification/build commands, and a rebuilt launchable/distributable package path.
+- Handoff notes: GitHub issue `#101`; active handoff: `docs/handoffs/active/remove-rl-bomb-pods-from-auto-loadouts.md`. Likely starting file is `external/src/megamek/megamek/src/megamek/client/generator/TeamLoadOutGenerator.java`, but the agent must confirm the active implementation and search both `external/src/megamek` and `external/src/mekhq` for other automatic bomb-loadout paths.
+- Dependencies: Local MegaMek and MekHQ source checkouts under `external/src`; source-change workflow and project Gradle files must be inspected before tests/builds are chosen.
+- Open questions: Which Gradle task produces the launchable/distributable package for this checkout, and are there existing tests close enough to extend for `TeamLoadOutGenerator` behavior?
+
 ### Epic: Robust tabletop battle result MUL workflow
 
 - Status: `In progress`
