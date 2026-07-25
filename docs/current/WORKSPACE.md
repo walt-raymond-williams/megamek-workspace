@@ -33,6 +33,7 @@ Primary outcomes:
 - `MEK_RPG_CHECKPOINT_EXPORT_REVIEW_MEMO.md`: shareable review memo and response record for the read-only checkpoint export, including MEK-RPG consumer-side issue queue `#84` through `#89`.
 - `MEK_RPG_LIVE_MEKHQ_API_FEEDBACK_MEMO.md`: shareable feedback memo asking whether MEK-RPG wants the save/checkpoint import contract to move toward a live localhost MekHQ read-only state API.
 - `MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`: consumer-facing live MekHQ API contract for MEK-RPG, including endpoints, read response conventions, command envelope, selectors, warnings/unsupported semantics, and reliability expectations.
+- `MEKHQ_LAM_TRANSPORT_NOTES.md`: source-backed Land-Air Mek transport and starting-mode behavior, including ASF/Mek bay compatibility and Leopard CV implications.
 - `MEK_RPG_CONTRACT_PROFITABILITY_SESSION_PROMPT.md`: copyable MEK-RPG staff-conference prompt and source-backed guidance for organizing TO&E, support, transport, negotiation, and contract shopping around campaign profitability.
 - `MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`: issue `#85` design for a read-only `GET /campaign/planetary/detail` endpoint that exposes Navigation-tab-style planetary/system facts.
 - `MEK_RPG_LIVE_MEKHQ_API_IMPLEMENTATION_PLAN.md`: source implementation plan for adding read-only live campaign-state endpoints to the local MekHQ control API after MEK-RPG accepted the direction.
