@@ -40,6 +40,7 @@ Primary outcomes:
 - `MEK_RPG_LIVE_MEKHQ_PERSONNEL_STATUS_COMMAND_DESIGN.md`: source-backed V1 design for guarded MEK-RPG personnel status changes through MekHQ's live command API.
 - `MEK_RPG_MEKHQ_CHECKPOINT_EXPORTER_OWNERSHIP_DECISION.md`: decision note keeping the checkpoint exporter as a workspace experimental helper for now, with triggers for a future MekHQ source-owned exporter issue.
 - `MEGAMEK_ROUND_REPORT_REPAINT_INVESTIGATION.md`: issue `#93` source investigation of Round Report content appearing on or over the tactical board.
+- `MEGAMEK_PRINCESS_AI_SOURCE_AUDIT.md`: source-backed audit of the Princess bot's behavior settings, movement rankers, firing utility, phase flow, and practical change targets.
 - `HELP_FILE_WORKFLOW.md`: routing guidance for using campaign data, local help/glossary/docs, source code, user confirmation, and external sources.
 - `docs/current/<FEATURE>_TRACKING.md`: optional compact state snapshots for multi-issue integration branches.
 - `docs/handoffs/active/`: open issue handoff documents for agent-executed work.
