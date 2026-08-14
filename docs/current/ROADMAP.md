@@ -149,6 +149,27 @@ Use this shape for entries that may become GitHub issues:
   - Child/focused issues:
     - `#81`: Investigate firing-phase unit switching and targeting lag. Completed on `2026-06-29`; archived handoff: `docs/handoffs/archive/investigate-firing-phase-targeting-lag.md`. Recommended first check is disabling View > Firing Solutions, because source confirms the default-on overlay scans all entities and runs `WeaponAttackAction.toHit(...)` for viable targets on unit/arc updates.
 
+### Epic: Improve Princess tactical cohesion and anti-bait movement
+
+- Status: `Issue created`
+- Priority: `High`
+- Issue: `#102`
+- Owner: `Codex`
+- Goal: Improve Princess movement so it avoids baited single-unit overextension while still advancing when the tactical situation justifies it. The target behavior is: hold when holding is sensible, advance when advancing is justified, and prefer mutually supporting advances over sequentially feeding isolated units into concentrated enemy fire.
+- Why it matters: The user-observed failure is not simple over-aggression. Princess can establish a reasonable defensive position, then a human feint makes one target attractive enough that one Princess unit breaks support, enters a local fight the enemy force can focus, dies, and the pattern repeats. Fixing only the defensive side risks creating a passive bot, so anti-isolation and anti-stagnation are both part of the initiative.
+- Expected output: A source-guided multi-issue implementation slice covering experimental ranker hardening/diagnostics, local support and combat-power scoring, formation-aware supported advance behavior, tactical posture hysteresis, anti-stagnation engagement pressure, and validation scenarios for defensive and offensive behavior.
+- Handoff notes: GitHub epic `#102`; active epic handoff: `docs/handoffs/active/princess-tactical-cohesion-epic.md`; feature tracking: `docs/current/PRINCESS_TACTICAL_COHESION_TRACKING.md`; source audit: `docs/current/MEGAMEK_PRINCESS_AI_SOURCE_AUDIT.md`. Implementation should proceed through child issues, not directly through the epic.
+- Dependencies: Local MegaMek source under `external/src/megamek`; `docs/current/SOURCE_CHANGE_WORKFLOW.md`; recommended implementation branch `codex/princess-tactical-cohesion-dev`. Source recheck on `2026-08-14` confirmed normal ground movement uses `BasicPathRanker`, experimental movement uses `UtilityPathRanker`, `UtilityPathRanker#rankPath(...)` has an unguarded `enemies.getFirst()` fallback check, `RankedPath#getScores()` already supports BotLogger diagnostics, and the experimental `SwarmContext`/`EnemyTracker`/`CoverageValidator` classes are lightweight extension points rather than complete formation systems.
+- Child issues:
+  - `#103`: Harden experimental Princess utility movement and diagnostics. Active handoff: `docs/handoffs/active/harden-princess-utility-ranker-diagnostics.md`.
+  - `#104`: Add Princess local support and combat-power movement scoring. Active handoff: `docs/handoffs/active/add-princess-local-support-combat-power-scoring.md`.
+  - `#105`: Add Princess formation-aware supported advance scoring. Active handoff: `docs/handoffs/active/add-princess-supported-advance-scoring.md`.
+  - `#106`: Add Princess tactical posture hysteresis against baiting. Active handoff: `docs/handoffs/active/add-princess-posture-hysteresis.md`.
+  - `#107`: Add Princess anti-stagnation engagement pressure. Active handoff: `docs/handoffs/active/add-princess-anti-stagnation-pressure.md`.
+  - `#108`: Add Princess tactical cohesion regression scenarios and validation harness. Active handoff: `docs/handoffs/active/add-princess-tactical-cohesion-validation.md`.
+- Recommended sequence: Start with hardening/diagnostics `#103`. Then add local support/combat-power scoring `#104`, formation-aware supported-advance scoring `#105`, posture hysteresis `#106`, and anti-stagnation pressure `#107`. Validation `#108` can begin with harness discovery after `#103`, but final acceptance depends on the behavior issues landing.
+- Open questions: What exact inexpensive local combat-power heuristic is most predictive without slowing Princess turns? Should posture memory live in `Princess`, `PathRankerState`, `SwarmContext`, or path-ranker-local state? What source signal best defines "meaningful engagement" for anti-stagnation reset/decay? After experimental validation, which parts should graduate into default Princess movement and in what smaller follow-up issue?
+
 ### Investigate MegaMek round report repaint duplication on tactical map
 
 - Status: `In progress`

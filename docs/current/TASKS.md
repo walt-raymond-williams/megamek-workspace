@@ -152,6 +152,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-08-14`: Planned the Princess tactical cohesion improvement initiative. Created GitHub epic `#102` and child issues `#103` through `#108`, added active handoffs for each issue, updated `ROADMAP.md`, and added `PRINCESS_TACTICAL_COHESION_TRACKING.md`. Planning only; no MegaMek source changes.
 - `2026-08-14`: Completed a source-backed Princess AI audit in `MEGAMEK_PRINCESS_AI_SOURCE_AUDIT.md`, covering phase flow, behavior settings, movement/path ranking, firing utility, forced withdrawal, morale, artillery, infantry combat, chat commands, limitations, and practical change targets. Documentation-only; no MegaMek source changes.
 - `2026-07-19`: Added `MEK_RPG_CONTRACT_PROFITABILITY_SESSION_PROMPT.md`, a copyable MEK-RPG staff-conference prompt plus source-backed notes on AtB contract profitability, TO&E effects, transport/support reputation, negotiation priorities, and next-action briefing structure.
 - `2026-07-16`: Planned the producer-side response to MEK-RPG's live-play API gap change request. Added `MEK_RPG_LIVE_PLAY_API_GAP_PRODUCER_PLAN.md`, created GitHub epic `#94` and child issues `#95`, `#96`, `#97`, `#98`, `#99`, and `#100`, added active handoffs for each, and queued design issue `#95` as the next producer-side step.
