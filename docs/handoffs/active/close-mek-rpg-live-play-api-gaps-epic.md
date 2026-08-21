@@ -22,10 +22,12 @@ Read these first:
 - `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`
 - `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_PLAYTEST_API_GAP_CHANGE_REQUEST_2026_07_16.md`
 - `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_PLAYTEST_API_GAP_REPORT.md`
+- `C:\Users\waltr\Documents\mek-rpg\docs\handoffs\active\megamek-education-api-gap-handoff.md`
 
 ## Expected Output
 
 - Child issues are executed in priority order.
+- P1 education/school/graduation gap issue `#109` is treated as the next user-blocking roster-management slice unless a newer user priority supersedes it.
 - Durable source-backed decisions are recorded in `docs/current/`.
 - Implemented source changes are verified and documented.
 - MEK-RPG-facing contract docs explain actual supported shapes, limits, unknown markers, withheld data, and unsupported facts.
@@ -38,6 +40,7 @@ Likely files to read or edit:
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
+- `docs/handoffs/active/investigate-education-school-api-gap.md`
 - `external/src/mekhq/MekHQ/src/mekhq/service/`
 
 ## Commands
@@ -46,7 +49,7 @@ Useful commands or checks:
 
 ```powershell
 git status --short --branch
-rg -n "pending-deployments|LocalCampaignStateExporter|LocalControlService|Transaction|getTransactions|salvage|reinforce|battle value" external/src/mekhq/MekHQ/src
+rg -n "pending-deployments|LocalCampaignStateExporter|LocalControlService|Transaction|getTransactions|salvage|reinforce|battle value|education|school|academy|student|graduation" external/src/mekhq/MekHQ/src
 ```
 
 ## Constraints
@@ -66,4 +69,5 @@ rg -n "pending-deployments|LocalCampaignStateExporter|LocalControlService|Transa
 ## Open Questions
 
 - Which source branch or writable remote should be used for MekHQ implementation commits?
+- Does MekHQ store source-owned school/enrollment/graduation records, or only status/log/report evidence for student personnel?
 - Should scenario intel become a dedicated endpoint after the design issue, or remain an extension of existing pending-deployment/state reads?

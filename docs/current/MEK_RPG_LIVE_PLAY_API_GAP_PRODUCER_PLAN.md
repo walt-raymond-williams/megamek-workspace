@@ -4,6 +4,8 @@ Status: producer-side plan for turning MEK-RPG live play gaps into bounded MekHQ
 
 Source request: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_PLAYTEST_API_GAP_CHANGE_REQUEST_2026_07_16.md`
 
+P1 education handoff: `C:\Users\waltr\Documents\mek-rpg\docs\handoffs\active\megamek-education-api-gap-handoff.md`
+
 Source gap report: `C:\Users\waltr\Documents\mek-rpg\docs\current\MEKHQ_PLAYTEST_API_GAP_REPORT.md`
 
 ## Position
@@ -12,11 +14,12 @@ MEK-RPG is right to keep live play on the MekHQ local API and away from routine 
 
 This plan prioritizes live play needs that change table decisions:
 
-1. Scenario intel, deployment requirements, player-force BV, reinforcement details, and visible/estimated OpFor summaries.
-2. Bounded finance, salvage, reputation, and XP histories that can answer "what changed and why?"
-3. Inventory mass, cargo, transport, and recovery capacity where MekHQ has reliable source-owned calculations.
-4. Personnel turnover and HR/admin pressure only where MekHQ tracks the needed history or capacity signals.
-5. Fixtures, docs, and smoke checks that prove the endpoints stay bounded and preserve partial-response behavior.
+1. P1 education/school enrollment and graduation facts needed for immediate Sharpe's Strikers roster management.
+2. Scenario intel, deployment requirements, player-force BV, reinforcement details, and visible/estimated OpFor summaries.
+3. Bounded finance, salvage, reputation, and XP histories that can answer "what changed and why?"
+4. Inventory mass, cargo, transport, and recovery capacity where MekHQ has reliable source-owned calculations.
+5. Personnel turnover and HR/admin pressure only where MekHQ tracks the needed history or capacity signals.
+6. Fixtures, docs, and smoke checks that prove the endpoints stay bounded and preserve partial-response behavior.
 
 ## Producer Rules
 
@@ -43,7 +46,7 @@ Those are consumer-package traceability fixes, not blockers for producer-side pl
 - Issue: `#94`
 - Goal: Coordinate the producer-side MekHQ API work needed to address the open MEK-RPG playtest gaps without accepting unbounded or unsourceable endpoint requests.
 - Output: Source-backed design decisions, implemented high-priority endpoint slices, fixtures/docs, and smoke checks.
-- Recommended sequence: design contract first, scenario intel second, ledger/history and logistics next, personnel turnover after the history contract is settled, fixtures/smoke last.
+- Recommended sequence: education gap first because it is a P1 user-blocking roster-management need, design contract next where shared endpoint policy is still unsettled, scenario intel after that, ledger/history and logistics next, personnel turnover after the history contract is settled, fixtures/smoke last.
 
 ### Design bounded live-play gap API contract
 
@@ -51,6 +54,14 @@ Those are consumer-package traceability fixes, not blockers for producer-side pl
 - Goal: Audit the MEK-RPG request against existing MekHQ local API source, existing completed epics, and open activity-history work.
 - Expected output: A design note that chooses exact endpoint paths, query parameters, default limits, unknown/unsupported markers, and source-owner boundaries for every requested gap.
 - Key decision: Finance/reputation/XP/personnel history should build on the existing activity-history design path instead of introducing unrestricted history endpoints.
+
+### Education enrollment and graduation API gap
+
+- Issue: `#109`
+- Goal: Investigate MekHQ's internal education, school, training, graduation, and personnel skill/trait model, then implement or design the local API support needed by MEK-RPG's P1 education tracker.
+- Expected output: Compact education summaries in whole-roster personnel state plus richer person-detail education, skills, traits/options, abilities, awards, and XP summaries if source-safe; otherwise a producer-side design with exact source owners and blockers.
+- Highest-value fields: current education status, school name, program/course/track, enrolled date, expected graduation date, days remaining, actual graduation date/history, credential or target role, assignment-review flag, relevant skill summary, and trait/option/ability/award/XP summary.
+- Constraints: Do not expose sensitive logs, medical/patient details, hidden GM data, or long raw history by default. Use explicit `unknown` / not-applicable fields rather than silent omission. Keep whole-roster output bounded for 1000+ personnel campaigns.
 
 ### Scenario intel, deployment, BV, and reinforcement export
 
@@ -94,3 +105,4 @@ Those are consumer-package traceability fixes, not blockers for producer-side pl
 - Which salvage and reputation histories are durable source data versus only report text?
 - Does MekHQ track enough transport/recovery capacity to expose exact values, or should V1 intentionally expose partial capacity facts with unsupported entries?
 - Does MekHQ have a real HR/admin pressure model tied to turnover, or only personnel logs and current role counts?
+- Does MekHQ store education/school/graduation as structured personnel state, academy/training records, logs/reports, or a combination of those?
