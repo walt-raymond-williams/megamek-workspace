@@ -42,7 +42,7 @@ if (-not $NoBuild) {
     Write-Step "Building MekHQ source install with Gradle."
     Push-Location $SourceRoot
     try {
-        & .\gradlew.bat :MekHQ:assemble
+        & .\gradlew.bat :MekHQ:installDist
     } finally {
         Pop-Location
     }

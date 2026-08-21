@@ -219,6 +219,7 @@ MekHQ:
 cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 .\gradlew.bat :MekHQ:compileJava
 .\gradlew.bat :MekHQ:assemble
+.\gradlew.bat :MekHQ:installDist
 .\gradlew.bat :MekHQ:test
 .\gradlew.bat :MekHQ:testAll
 .\gradlew.bat :MekHQ:run
@@ -228,6 +229,8 @@ cd C:\Users\waltr\Documents\megamek-workspace\external\src\mekhq
 `Confirmed locally`: `.\gradlew.bat :MekHQ:compileJava` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch with the local Advance Day control API prototype.
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:assemble` passed on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch. It produced `MekHQ\build\distributions\MekHQ-0.51.01.tar.gz` and `MekHQ\build\libs\MekHQ.jar`. The build emitted non-fatal image-atlas/logging errors and warnings, but Gradle returned `BUILD SUCCESSFUL`.
+
+`Confirmed locally`: `.\gradlew.bat --no-daemon :MekHQ:installDist --console=plain` passed on `2026-08-20` from the `codex/mekhq-advance-day-control-api` source branch. Use `installDist`, not only `assemble`, before launching from `MekHQ\build\install\MekHQ`; `assemble` can leave that runtime tree stale while updating archives and `build\libs`.
 
 `Confirmed locally`: `.\gradlew.bat :MekHQ:run` launched MekHQ on `2026-06-22` from the `codex/mekhq-advance-day-control-api` source branch when started with `JAVA_TOOL_OPTIONS='-Dmekhq.controlApi.enabled=true -Dmekhq.controlApi.port=32180'`. The local control API reported `ready` at `http://127.0.0.1:32180/status` with no campaign loaded.
 
@@ -269,7 +272,7 @@ Build and start the current local source-built MekHQ with the control API enable
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-api.ps1
 ```
 
-Skip the build when the assembled install is already current:
+Skip the build when the `installDist` runtime is already current:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\start-mekhq-control-api.ps1 -NoBuild
