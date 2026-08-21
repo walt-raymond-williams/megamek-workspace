@@ -58,8 +58,9 @@ Those are consumer-package traceability fixes, not blockers for producer-side pl
 ### Education enrollment and graduation API gap
 
 - Issue: `#109`
+- Status: implemented locally in MekHQ source commit `b9f42710a9`; source push is blocked by upstream `MegaMek/mekhq` 403.
 - Goal: Investigate MekHQ's internal education, school, training, graduation, and personnel skill/trait model, then implement or design the local API support needed by MEK-RPG's P1 education tracker.
-- Expected output: Compact education summaries in whole-roster personnel state plus richer person-detail education, skills, traits/options, abilities, awards, and XP summaries if source-safe; otherwise a producer-side design with exact source owners and blockers.
+- Output: Compact education summaries in whole-roster personnel state plus richer person-detail education, skills, traits/options, abilities, awards, and XP summaries.
 - Highest-value fields: current education status, school name, program/course/track, enrolled date, expected graduation date, days remaining, actual graduation date/history, credential or target role, assignment-review flag, relevant skill summary, and trait/option/ability/award/XP summary.
 - Constraints: Do not expose sensitive logs, medical/patient details, hidden GM data, or long raw history by default. Use explicit `unknown` / not-applicable fields rather than silent omission. Keep whole-roster output bounded for 1000+ personnel campaigns.
 

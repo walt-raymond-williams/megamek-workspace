@@ -89,6 +89,66 @@
       "formation_name": "Unknown",
       "source_owner": "Person#getUnit(); Unit assignment getters; Campaign#getFormation(int)"
     },
+    "education": {
+      "highest_education": {
+        "raw_code": "COLLEGE",
+        "label": "College",
+        "source_owner": "Person#getEduHighestEducation()"
+      },
+      "current_record": {
+        "education_record_id": "00000000-0000-0000-0000-000000000468:education:Prestigious Academies:Capella War College:0",
+        "education_status": "enrolled",
+        "stage": {
+          "raw_code": "EDUCATION",
+          "label": "Undergoing Education",
+          "source_owner": "Person#getEduEducationStage()"
+        },
+        "school_id": "Prestigious Academies:Capella War College",
+        "school_name": "Capella War College",
+        "academy_set": "Prestigious Academies",
+        "academy_name_in_set": "Capella War College",
+        "academy_faction": "CC",
+        "academy_system_id": "Sian",
+        "program_id": "Prestigious Academies:Capella War College:0",
+        "program_name": "MekWarrior Graduate",
+        "course_index": 0,
+        "credential_or_qualification": "MekWarrior Graduate",
+        "target_role": "MekWarrior Graduate",
+        "enrolled_on": "3025-04-01",
+        "expected_graduation_on": "3025-05-08",
+        "days_remaining": 30,
+        "education_days_remaining": 30,
+        "journey_time_days": 12,
+        "travel_days_elapsed": 12,
+        "actual_graduation_on": "Unknown",
+        "requires_assignment_review": false,
+        "source_owner": "Person education getters; Academy course metadata",
+        "warnings": []
+      },
+      "requires_assignment_review": false,
+      "latest_history_event": {
+        "date": "3025-04-01",
+        "event_type": "enrolled",
+        "school_name": "Capella War College",
+        "program_name": "MekWarrior Training",
+        "text": "Enrolled at Capella War College studying a MekWarrior Training course.",
+        "source_owner": "ServiceLogger education personal log entries"
+      },
+      "history": [
+        {
+          "date": "3025-04-01",
+          "event_type": "enrolled",
+          "school_name": "Capella War College",
+          "program_name": "MekWarrior Training",
+          "text": "Enrolled at Capella War College studying a MekWarrior Training course.",
+          "source_owner": "ServiceLogger education personal log entries"
+        }
+      ],
+      "source_owner": "Person education getters; EducationController#getAcademy(); ServiceLogger education personal log entries",
+      "warnings": [
+        "MekHQ stores current education progress on Person education fields; enrollment and graduation dates are reconstructed from bounded personal service log entries."
+      ]
+    },
     "skills": [
       {
         "name": "Gunnery/Mek",

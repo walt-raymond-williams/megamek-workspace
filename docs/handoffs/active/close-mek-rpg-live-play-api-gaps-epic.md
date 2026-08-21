@@ -27,7 +27,7 @@ Read these first:
 ## Expected Output
 
 - Child issues are executed in priority order.
-- P1 education/school/graduation gap issue `#109` is treated as the next user-blocking roster-management slice unless a newer user priority supersedes it.
+- P1 education/school/graduation gap issue `#109` is implemented locally in MekHQ source commit `b9f42710a9`; source push is blocked by upstream `MegaMek/mekhq` 403.
 - Durable source-backed decisions are recorded in `docs/current/`.
 - Implemented source changes are verified and documented.
 - MEK-RPG-facing contract docs explain actual supported shapes, limits, unknown markers, withheld data, and unsupported facts.
@@ -40,7 +40,7 @@ Likely files to read or edit:
 - `docs/current/MEK_RPG_LIVE_MEKHQ_API_CONTRACT.md`
 - `docs/current/ROADMAP.md`
 - `docs/current/TASKS.md`
-- `docs/handoffs/active/investigate-education-school-api-gap.md`
+- `docs/handoffs/archive/investigate-education-school-api-gap.md`
 - `external/src/mekhq/MekHQ/src/mekhq/service/`
 
 ## Commands

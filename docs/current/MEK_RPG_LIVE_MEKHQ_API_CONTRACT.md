@@ -254,6 +254,13 @@ Source-backed behavior:
 
 Known limitation: the API does not expose a source-confirmed currently selected MekHQ UI person. MEK-RPG should send `personId` or `personName`.
 
+Personnel section education support:
+
+- `Confirmed from source`: source commit `b9f42710a9` adds compact `education_summary`, `skill_summary`, and `traits_or_options_summary` fields to each whole-roster `personnel[]` row.
+- `education_summary.current_record` exposes `education_status`, `stage`, `school_name`, academy ids/names, `program_name`, `enrolled_on`, `expected_graduation_on`, `days_remaining`, `actual_graduation_on`, and `requires_assignment_review`.
+- Current school/progress fields come from `Person` education getters and `Academy` course metadata. Enrollment/graduation dates are reconstructed from bounded `ServiceLogger` education personal-log entries because MekHQ clears current education fields when a student returns to active status.
+- Whole-roster history is intentionally compact: `latest_history_event` is included, while full bounded education history belongs to `/campaign/personnel/detail`.
+
 ## GET /campaign/personnel/detail
 
 Purpose: expose Personnel tab selected-character detail data through a read-only, explicit-person endpoint.
@@ -281,6 +288,7 @@ Important fields:
 - `person.identity`
 - `person.status`
 - `person.assignment_context`
+- `person.education`
 - `person.skills`
 - `person.options_and_abilities`
 - `person.awards`
@@ -297,12 +305,14 @@ Source-backed behavior:
 - A person UUID that is not in the loaded campaign returns HTTP `404`.
 - Default log output includes bounded personal, assignment, performance, and scenario log families.
 - Medical and patient log families are excluded by default and require explicit `includeMedical=true` or `includePatient=true` on the same explicit person request.
+- Education exposes current `Person` education fields, resolved `Academy` metadata when available, bounded education history parsed from `ServiceLogger` personal-log entries, and an assignment-review flag for pending/returned graduates.
 - Skills expose source ids/display labels, subtype, roleplay flag, level, bonus, XP progress, natural aptitude, final value, and experience level.
 - Traits/options/special abilities expose stable option ids plus display labels and values. Display labels are presentation text, not selectors.
 
 Known limitations:
 
 - V1 exposes award summary flags/counts, not individual award tooltip/icon/tier metadata.
+- Historical education dates depend on personal service-log entries and may be `Unknown` for saves that lack those entries or use older/localized text that cannot be parsed.
 - V1 does not expose full injury/treatment objects, family-tree panels, or kill-log rows.
 - Broader roster-wide or cross-domain activity history remains deferred to the activity-history design workstream.
 

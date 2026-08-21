@@ -235,6 +235,53 @@
         "rank_numeric": 5,
         "source_owner": "Person leadership flags; Campaign#getCommander(); Person#getRankNumeric()"
       },
+      "education_summary": {
+        "highest_education": {
+          "raw_code": "COLLEGE",
+          "label": "College",
+          "source_owner": "Person#getEduHighestEducation()"
+        },
+        "current_record": {
+          "education_record_id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:education:Prestigious Academies:Capella War College:0",
+          "education_status": "enrolled",
+          "school_name": "Capella War College",
+          "program_name": "MekWarrior Graduate",
+          "enrolled_on": "3025-04-01",
+          "expected_graduation_on": "3025-05-08",
+          "days_remaining": 30,
+          "actual_graduation_on": "Unknown",
+          "requires_assignment_review": false,
+          "source_owner": "Person education getters; Academy course metadata"
+        },
+        "requires_assignment_review": false,
+        "latest_history_event": {
+          "date": "3025-04-01",
+          "event_type": "enrolled",
+          "school_name": "Capella War College",
+          "program_name": "MekWarrior Training",
+          "source_owner": "ServiceLogger education personal log entries"
+        },
+        "history": [],
+        "source_owner": "Person education getters; EducationController#getAcademy(); ServiceLogger education personal log entries"
+      },
+      "skill_summary": [
+        {
+          "skill_name": "Gunnery/Mek",
+          "level": 4,
+          "final_value": 4,
+          "experience_level": 2,
+          "source_owner": "Person#getSkills(); Skill getters"
+        }
+      ],
+      "traits_or_options_summary": [
+        {
+          "name": "Example Trait",
+          "id": "example_option_id",
+          "kind": "option_or_ability",
+          "group": "example_group",
+          "source_owner": "PersonnelOptions"
+        }
+      ],
       "market_membership": {
         "is_current_personnel": true,
         "is_personnel_market_applicant": false,

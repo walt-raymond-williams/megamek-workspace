@@ -52,60 +52,53 @@ Use this shape for active and queued work:
 
 ## Next
 
-1. Investigate education enrollment and graduation API gap.
-   - Status: `Not started`
-   - Owner: `Codex`
-   - Goal: Investigate MekHQ's education/school/training/personnel data model and either implement or design local-control API support for school enrollment, graduation history, assignment-review needs, and skills/traits/options useful for Sharpe's Strikers roster management.
-   - Output: Source-backed implementation with tests/fixtures/docs if safe, or a producer-side design/ticket with exact source owners, blockers, and recommended endpoint shape.
-   - Notes: GitHub issue `#109`; child of epic `#94`; active handoff `docs/handoffs/active/investigate-education-school-api-gap.md`; source prompt came from MEK-RPG handoff `C:\Users\waltr\Documents\mek-rpg\docs\handoffs\active\megamek-education-api-gap-handoff.md` and top gap report entry `2026-08-20 - Priority 1 education enrollment and graduation fields unavailable`.
-
-2. Design bounded live-play gap API contract.
+1. Design bounded live-play gap API contract.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn MEK-RPG's playtest API gap request into a producer-side MekHQ local API design with endpoint shapes, query parameters, bounded defaults, source ownership, and unsupported/unknown/withheld behavior.
-   - Output: A design note under `docs/current/`, roadmap/task updates if sequencing changes, and clear implementation guidance for issues `#109`, `#96`, `#100`, `#97`, `#98`, and `#99`.
+   - Output: A design note under `docs/current/`, roadmap/task updates if sequencing changes, and clear implementation guidance for issues `#96`, `#100`, `#97`, `#98`, and `#99`.
    - Notes: GitHub issue `#95`; child of epic `#94`; active handoff `docs/handoffs/active/design-bounded-live-play-gap-api-contract.md`; producer plan `docs/current/MEK_RPG_LIVE_PLAY_API_GAP_PRODUCER_PLAN.md`; coordinate with activity-history issue `#58`.
 
-3. Implement read-only MekHQ planetary information endpoint.
+2. Implement read-only MekHQ planetary information endpoint.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Implement the `GET /campaign/planetary/detail` design from issue `#85` in MekHQ source.
    - Output: MekHQ source endpoint and tests, plus workspace docs updated with source commit and verification.
    - Notes: GitHub issue `#86`; child of epic `#83`; active checklist `docs/handoffs/active/implement-planetary-information-endpoint.md`; design note `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_DESIGN.md`; source audit `docs/current/MEK_RPG_LIVE_MEKHQ_PLANETARY_API_SOURCE_AUDIT.md`.
 
-4. Investigate All Reports UI warning dependency in MekHQ API.
+3. Investigate All Reports UI warning dependency in MekHQ API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether the local MekHQ API relies on MekHQ's UI-facing "All Reports" path and whether the user-observed warning overlay/button behavior indicates an inefficient or inappropriate dependency.
    - Output: A source-backed note under `docs/current/`, updates to relevant API docs/handoffs, and follow-up implementation issue(s) if a source change is needed.
    - Notes: GitHub issue `#69`; related to epic `#56`; active checklist `docs/handoffs/active/investigate-all-reports-ui-warning-api-dependency.md`; created without source exploration per user request.
 
-5. Design read-only MekHQ activity-history API.
+4. Design read-only MekHQ activity-history API.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Turn the issue `#57` source audit into a concrete local API shape for richer campaign activity history.
    - Output: A design note under `docs/current/` covering endpoint shape, query parameters, response envelope, default limits, date windows, category/type filters, target filters, sanitization, privacy defaults, unsupported entries, and fixture/test expectations.
    - Notes: GitHub issue `#58`; child of epic `#56`; active checklist `docs/handoffs/active/design-mekhq-activity-history-api.md`; audit note `docs/current/MEK_RPG_LIVE_MEKHQ_ACTIVITY_HISTORY_SOURCE_AUDIT.md`.
 
-6. Investigate MegaMek live combat narration bridge.
+5. Investigate MegaMek live combat narration bridge.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Determine whether a MegaMek observer/client/bot/server hook can watch live tactical events and publish concise narration or pilot dialogue to chat or an external MEK-RPG consumer.
    - Output: A source-backed feasibility/design note under `docs/current/`, plus follow-up issue candidates if an implementation path is ready.
    - Notes: GitHub issue `#78`; active handoff `docs/handoffs/active/investigate-megamek-combat-narration-bridge.md`; duplicate check on `2026-06-28` found no existing issue or roadmap entry specifically for live MegaMek combat narration.
 
-7. Run MekHQ quickstart roster UI validation.
+6. Run MekHQ quickstart roster UI validation.
    - Status: `Not started`
    - Owner: `User`
    - Goal: Manually validate that a disposable New Player Quickstart campaign can have one unit added and one original unit removed through MekHQ GM controls.
    - Output: Report the disposable save path, exact GM mode/add/remove UI paths, units added/removed, prompts/errors, and any pilot/TO&E/transport follow-up so Codex can finish issue `#17`.
    - Notes: GitHub issue `#21`; user task that unblocks agent issue `#17`; active checklist `docs/handoffs/active/user-quickstart-roster-ui-validation.md`; do not overwrite the bundled quickstart save.
 
-8. Turn this repo into an AI-ready project workflow demo.
+7. Turn this repo into an AI-ready project workflow demo.
    - Goal: Evolve this workspace into a reusable AI-ready project pattern with MegaMek/MekHQ as the worked example: source investigation, requirements discovery, verified commands, contributor handoff, campaign/save-file analysis, and agent memory.
    - Output: Clear repo positioning, generic workflow docs, MegaMek project profile, issue/requirement/PR templates, demo campaign fixture, and a decision on whether GitHub Projects should be used.
 
-9. Remove RL bomb pods from automatic aerospace bot loadouts.
+8. Remove RL bomb pods from automatic aerospace bot loadouts.
    - Status: `Not started`
    - Owner: `Codex`
    - Goal: Modify MegaMek/MekHQ source so AI-controlled aerospace units are never automatically assigned Rocket Launcher bomb pods while preserving manual RL use and existing scenario compatibility.
@@ -159,6 +152,7 @@ Use this shape for active and queued work:
 
 ## Done
 
+- `2026-08-21`: Completed GitHub issue `#109` locally with MekHQ source commit `b9f42710a9`, adding student/education support to the read-only local API. Whole-roster personnel rows now include compact `education_summary`, `skill_summary`, and `traits_or_options_summary`; person detail now includes richer `education` with current school/program/stage/time remaining, bounded education history, and assignment-review flag. Updated API docs and fixtures. Verified `.\gradlew.bat --no-daemon :MekHQ:test --tests mekhq.service.LocalCampaignStateExporterTest` and `.\gradlew.bat --no-daemon :MekHQ:compileJava :MekHQ:checkstyleMain :MekHQ:checkstyleTest`. Source push remains blocked because `external/src/mekhq` points to upstream `MegaMek/mekhq` and GitHub returned 403. Archived handoff: `docs/handoffs/archive/investigate-education-school-api-gap.md`.
 - `2026-08-14`: Planned the Princess tactical cohesion improvement initiative. Created GitHub epic `#102` and child issues `#103` through `#108`, added active handoffs for each issue, updated `ROADMAP.md`, and added `PRINCESS_TACTICAL_COHESION_TRACKING.md`. Planning only; no MegaMek source changes.
 - `2026-08-14`: Completed a source-backed Princess AI audit in `MEGAMEK_PRINCESS_AI_SOURCE_AUDIT.md`, covering phase flow, behavior settings, movement/path ranking, firing utility, forced withdrawal, morale, artillery, infantry combat, chat commands, limitations, and practical change targets. Documentation-only; no MegaMek source changes.
 - `2026-07-19`: Added `MEK_RPG_CONTRACT_PROFITABILITY_SESSION_PROMPT.md`, a copyable MEK-RPG staff-conference prompt plus source-backed notes on AtB contract profitability, TO&E effects, transport/support reputation, negotiation priorities, and next-action briefing structure.
